@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第二階段｜Studio 畫面設計與 Runtime 監看</title>
+  <link rel="stylesheet" href="assets/training.css">
+</head>
+<body>
+  <header class="deck-header">
+    <a class="brand" href="index.html"><img src="../logos/D_Logo.svg" alt="VisoLink"></a>
+    <div class="deck-title">Studio 畫面設計與 Runtime 監看</div>
+    <span class="deck-stage">第二階段｜設計與使用</span>
+    <div class="deck-actions"><a href="index.html">課程目錄</a><button type="button" data-action="fullscreen">全螢幕</button><button type="button" class="print-action" data-action="print">列印 / PDF</button></div>
+  </header>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <main class="deck">
+    <section class="slide cover dark" id="s1" data-title="課程封面">
+      <div class="eyebrow">VISOLINK EDUCATION &amp; TRAINING</div>
+      <h1>Studio 畫面設計<br>與 Runtime 監看</h1>
+      <p class="lead">從正確使用監看畫面，到建立可理解、可分析的操作情境。</p>
+      <div class="cover-meta"><span>第二階段</span><span>一般監看人員＋Studio 設計人員</span><span>建議時間：3 小時</span></div>
+    </section>
+
+    <section class="slide" id="s2" data-title="課程路徑">
+      <div class="slide-kicker">TWO LEARNING PATHS</div>
+      <h2>共同理解 Runtime，再依角色深入學習</h2>
+      <div class="path-map">
+        <div class="path common"><b>共同課程</b><h3>Runtime 監看與分析</h3><p>所有學員｜第 3–9 單元</p></div>
+        <div class="path designer"><b>設計路徑</b><h3>Studio 畫面製作</h3><p>設計人員｜第 10–17 單元</p></div>
+        <div class="path practice"><b>整合演練</b><h3>從需求到驗證</h3><p>角色協作｜第 18 單元</p></div>
+      </div>
+      <p class="note">一般監看人員可在 Runtime 單元完成後進行操作檢核；設計人員需完成全課程。</p>
+    </section>
+
+    <section class="slide" id="s3" data-title="角色合作方式">
+      <div class="slide-kicker">ROLE COLLABORATION</div>
+      <h2>一張好用的畫面，來自使用者與設計者共同驗證</h2>
+      <div class="grid-2">
+        <article class="card"><span class="big-icon">👁</span><h3>一般監看人員</h3><ul class="check-list"><li>依作業情境選擇 Display</li><li>確認時間與資料更新狀態</li><li>使用分析工具釐清異常</li><li>回報實際操作需求與問題</li></ul></article>
+        <article class="card"><span class="big-icon">✦</span><h3>Studio 設計人員</h3><ul class="check-list"><li>將需求轉成清楚的資訊層次</li><li>正確配置元件與資料綁定</li><li>處理載入、無資料及無權限狀態</li><li>以 Runtime 實際情境完成驗證</li></ul></article>
+      </div>
+    </section>
+
+    <section class="slide" id="s4" data-title="Runtime 畫面導覽">
+      <div class="slide-kicker">RUNTIME OVERVIEW</div>
+      <h2>先掌握畫面、時間與分析工具的位置</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/01_hero_dashboard.png" alt="Runtime 操作畫面"><figcaption>實際介面依 Display 設計與使用權限呈現。</figcaption></figure>
+        <ol class="number-list"><li><b>內容畫布</b><span>查看設備、指標、圖表與狀態。</span></li><li><b>導覽與顯示控制</b><span>切換畫面、固定畫布或全畫面。</span></li><li><b>時間控制</b><span>設定整體畫面的觀察範圍。</span></li><li><b>Data Analysis</b><span>開啟趨勢與時間標記分析。</span></li></ol>
+      </div>
+    </section>
+
+    <section class="slide" id="s5" data-title="統一時間情境">
+      <div class="slide-kicker">GLOBAL TIME CONTEXT</div>
+      <h2>調整一次時間，讓整張畫面在同一情境下解讀</h2>
+      <div class="flow four">
+        <div><b>1</b><strong>選擇時間模式</strong><span>即時或歷史範圍</span></div>
+        <div><b>2</b><strong>設定時間窗</strong><span>指定起訖或持續區間</span></div>
+        <div><b>3</b><strong>同步畫面</strong><span>元件依設定取得資料</span></div>
+        <div><b>4</b><strong>確認情境</strong><span>再進行判讀與比較</span></div>
+      </div>
+      <div class="callout"><b>操作提醒</b><br>分析完成後若要回到即時監看，應確認時間模式已切回目前狀態，避免把歷史畫面誤認為即時資料。</div>
+    </section>
+
+    <section class="slide" id="s6" data-title="快速趨勢分析">
+      <div class="slide-kicker">QUICK TREND</div>
+      <h2>Popup Trend 已整合進 Data Analysis</h2>
+      <div class="split">
+        <div>
+          <p class="lead">在監看情境中選取資料，即可快速查看一段時間內的變化，不必離開 Runtime。</p>
+          <ul class="check-list"><li>選擇要觀察的 Tag</li><li>依全域時間呈現趨勢</li><li>同時比較多個序列</li><li>放大至全畫面持續查看</li></ul>
+        </div>
+        <figure class="shot"><img src="../ProductIntroduction/img/09_popup_trend_fullscreen.png" alt="Data Analysis 趨勢畫面"><figcaption>原 Popup Trend 能力成為 Data Analysis 中的快速趨勢工具。</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="slide" id="s7" data-title="時間標記分析">
+      <div class="slide-kicker">TIME MARKER ANALYSIS</div>
+      <h2>分析點不只是游標，而是可操作、可比較的物件</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/16_data_analysis_time_markers.png" alt="時間標記分析功能"><figcaption>在 Runtime 中保留時間點，選擇資料並比較結果。</figcaption></figure>
+        <div class="steps compact"><article><b>01</b><div><h3>建立標記</h3><p>在 Runtime 情境中點選值得關注的時間。</p></div></article><article><b>02</b><div><h3>整理標記</h3><p>可保留、拖曳與排序多個分析時間點。</p></div></article><article><b>03</b><div><h3>選擇資料</h3><p>加入需要比較的 Tag 或觀察項目。</p></div></article><article><b>04</b><div><h3>比較結果</h3><p>在相同情境下檢視不同時間的差異。</p></div></article></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s8" data-title="時間範圍彙整與顯示">
+      <div class="slide-kicker">AGGREGATE &amp; DISPLAY</div>
+      <h2>依問題選擇彙整方式，不只看原始資料點</h2>
+      <div class="grid-4">
+        <article class="card metric"><span>Σ</span><h3>加總</h3><p>觀察期間累積量。</p></article>
+        <article class="card metric"><span>μ</span><h3>平均</h3><p>理解區間典型水準。</p></article>
+        <article class="card metric"><span>↑↓</span><h3>最大 / 最小</h3><p>找出區間極值。</p></article>
+        <article class="card metric"><span>#</span><h3>筆數</h3><p>確認事件或資料量。</p></article>
+      </div>
+      <p class="statement">彙整結果可依判讀目的選擇適合的圖表；先定義問題，再決定計算與呈現方式。</p>
+    </section>
+
+    <section class="slide" id="s9" data-title="Runtime 監看標準流程">
+      <div class="slide-kicker">MONITORING SOP</div>
+      <h2>一般監看人員的標準操作循環</h2>
+      <div class="flow five">
+        <div><b>1</b><strong>進入</strong><span>確認 Display 與身分</span></div>
+        <div><b>2</b><strong>檢查</strong><span>資料更新與時間模式</span></div>
+        <div><b>3</b><strong>判讀</strong><span>狀態、數值與趨勢</span></div>
+        <div><b>4</b><strong>分析</strong><span>時間標記與比較</span></div>
+        <div><b>5</b><strong>回報</strong><span>保留時間、對象與畫面</span></div>
+      </div>
+      <div class="completion"><strong>Runtime 檢核點</strong><span>能切換時間、加入分析資料、建立兩個時間標記並說明比較結果。</span></div>
+    </section>
+
+    <section class="slide" id="s10" data-title="Studio 編輯環境">
+      <div class="slide-kicker">STUDIO OVERVIEW</div>
+      <h2>設計人員的工作台：畫布、元件、屬性與資料</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/02_studio_editor_overview.png" alt="Studio 編輯器畫面"><figcaption>使用工具區、畫布與設定面板完成 Display。</figcaption></figure>
+        <ol class="number-list"><li><b>Display 與畫布</b><span>決定設計範圍與顯示尺寸。</span></li><li><b>Symbol 工具</b><span>放入文字、形狀、儀表及趨勢。</span></li><li><b>屬性設定</b><span>調整外觀、位置與行為。</span></li><li><b>資料瀏覽與綁定</b><span>讓畫面由實際資料驅動。</span></li></ol>
+      </div>
+    </section>
+
+    <section class="slide" id="s11" data-title="建立 Display">
+      <div class="slide-kicker">DISPLAY SETUP</div>
+      <h2>先定義使用情境，再決定畫面尺寸與內容</h2>
+      <div class="steps">
+        <article><b>01</b><div><h3>釐清用途</h3><p>中控大屏、桌面操作或行動瀏覽？使用者要回答什麼問題？</p></div></article>
+        <article><b>02</b><div><h3>建立 Display</h3><p>使用可辨識的名稱與分類，設定目標畫布尺寸。</p></div></article>
+        <article><b>03</b><div><h3>規劃資訊層次</h3><p>優先呈現狀態與異常，再配置細節與分析資訊。</p></div></article>
+        <article><b>04</b><div><h3>確認顯示模式</h3><p>驗證固定畫布、全畫面及不同尺寸設備的呈現。</p></div></article>
+      </div>
+    </section>
+
+    <section class="slide" id="s12" data-title="畫布編排原則">
+      <div class="slide-kicker">CANVAS &amp; LAYOUT</div>
+      <h2>一致的對齊、間距與分組，讓資訊更快被讀懂</h2>
+      <div class="grid-3">
+        <article class="card"><h3>層次</h3><p>重要狀態先被看見，相關資訊靠近排列，輔助內容降低視覺權重。</p></article>
+        <article class="card"><h3>一致</h3><p>相同意義使用一致的顏色、字級、單位、元件與互動方式。</p></article>
+        <article class="card"><h3>留白</h3><p>不要用元件填滿每個角落；適度留白能區隔資訊並降低誤判。</p></article>
+      </div>
+      <div class="callout"><b>設計檢查</b><br>縮小畫面後，使用者是否仍能在數秒內指出目前狀態、異常位置與下一步操作？</div>
+    </section>
+
+    <section class="slide" id="s13" data-title="Symbol 與視覺元件">
+      <div class="slide-kicker">SYMBOL LIBRARY</div>
+      <h2>選擇能回答問題的元件，不以裝飾為目的</h2>
+      <div class="split">
+        <figure class="shot"><img src="../ProductIntroduction/img/04_shapes_showcase.png" alt="Studio 圖形元件"><figcaption>圖形與元件可組合成符合現場語意的視覺畫面。</figcaption></figure>
+        <div class="term-grid small"><article><h3>狀態</h3><p>文字、圖示、形狀、顏色</p></article><article><h3>量值</h3><p>數值、儀表、進度</p></article><article><h3>趨勢</h3><p>時間序列與多資料比較</p></article><article><h3>操作</h3><p>按鈕、導覽及互動控制</p></article></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s14" data-title="資料瀏覽">
+      <div class="slide-kicker">DATA BROWSER</div>
+      <h2>沿著資料結構找到正確的 View、Tag 與欄位</h2>
+      <div class="split">
+        <div class="tree">
+          <div>▾ 資料來源</div><div class="l1">▾ 生產設備</div><div class="l2">▾ Line_A</div><div class="l3">◆ Temperature</div><div class="l3">◆ Pressure</div><div class="l3">◆ RunningStatus</div><div class="l2">▸ Line_B</div>
+        </div>
+        <div>
+          <ul class="check-list"><li>先以設備、區域或業務用途縮小範圍</li><li>確認名稱、資料型別與單位</li><li>辨認即時值、歷史序列或計算結果</li><li>綁定前向資料管理人員確認語意</li></ul>
+          <p class="note">名稱相似不代表用途相同。無法確認資料語意時，不應先綁定再猜測。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="s15" data-title="資料綁定">
+      <div class="slide-kicker">DATA BINDING</div>
+      <h2>將資料拖放到元件，建立正確而清楚的反應</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/03_smart_connector.png" alt="資料連接與綁定"><figcaption>從資料瀏覽到元件屬性，建立可追蹤的綁定關係。</figcaption></figure>
+        <div class="steps compact"><article><b>01</b><div><h3>選取元件</h3><p>確認要由資料控制的目標。</p></div></article><article><b>02</b><div><h3>選擇資料</h3><p>確認 Tag、欄位、型別及單位。</p></div></article><article><b>03</b><div><h3>設定屬性</h3><p>綁定文字、數值、顏色或其他行為。</p></div></article><article><b>04</b><div><h3>實際驗證</h3><p>檢查正常、無資料及無權限狀態。</p></div></article></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s16" data-title="計算與顯示邏輯">
+      <div class="slide-kicker">CALCULATION &amp; LOGIC</div>
+      <h2>把原始資料轉成使用者能立即判讀的資訊</h2>
+      <div class="formula-board horizontal">
+        <div><span>原始資料</span><strong>Temperature = 82.4</strong></div><i>→</i><div><span>條件判斷</span><strong>值 ≥ 80</strong></div><i>→</i><div><span>畫面表達</span><strong>高溫｜警示色</strong></div>
+      </div>
+      <div class="grid-3 compact-grid"><article class="card"><h3>單位與格式</h3><p>設定小數、單位與空值顯示。</p></article><article class="card"><h3>門檻與狀態</h3><p>使用可驗證的條件區分狀態。</p></article><article class="card"><h3>計算結果</h3><p>保留公式定義與業務意義。</p></article></div>
+    </section>
+
+    <section class="slide" id="s17" data-title="儲存與發布前驗證">
+      <div class="slide-kicker">SAVE, PREVIEW, VERIFY</div>
+      <h2>完成編輯不等於完成交付</h2>
+      <div class="steps">
+        <article><b>01</b><div><h3>儲存</h3><p>確認 Display 名稱、內容與縮圖可辨識。</p></div></article>
+        <article><b>02</b><div><h3>預覽</h3><p>從 Runtime 使用者角度檢查操作流程。</p></div></article>
+        <article><b>03</b><div><h3>情境測試</h3><p>驗證不同時間、資料值、畫面尺寸與權限。</p></div></article>
+        <article><b>04</b><div><h3>交叉確認</h3><p>請實際監看人員以工作任務進行驗收。</p></div></article>
+      </div>
+      <p class="note">畫面更新前應先說明影響範圍；關鍵監看畫面應保留可回復的版本與變更紀錄。</p>
+    </section>
+
+    <section class="slide" id="s18" data-title="實作與課後檢核">
+      <div class="slide-kicker">HANDS-ON ASSESSMENT</div>
+      <h2>第二階段實作任務</h2>
+      <div class="grid-2">
+        <article class="card accent"><h3>Runtime 任務｜全體</h3><ol><li>開啟指定 Display 並確認時間模式</li><li>加入兩個觀察 Tag</li><li>建立兩個時間標記並比較結果</li><li>記錄一份包含情境資訊的異常回報</li></ol></article>
+        <article class="card accent"><h3>Studio 任務｜設計人員</h3><ol><li>建立指定尺寸的 Display</li><li>配置狀態、數值與趨勢元件</li><li>完成三項資料綁定與狀態邏輯</li><li>於 Runtime 驗證並由同學操作驗收</li></ol></article>
+      </div>
+      <div class="completion"><strong>完成標準</strong><span>監看人員能獨立完成分析；設計人員能交付一張資料正確、層次清楚且經 Runtime 驗證的畫面。</span></div>
+      <a class="next-course" href="03_system_administration.html">下一階段：系統管理與維運 →</a>
+    </section>
+  </main>
+
+  <footer class="deck-footer"><button type="button" data-nav="prev" aria-label="上一頁">←</button><span class="page-indicator"></span><button type="button" data-nav="next" aria-label="下一頁">→</button></footer>
+  <script src="assets/training.js"></script>
+</body>
+</html>

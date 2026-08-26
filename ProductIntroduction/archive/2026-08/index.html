@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VisoLink — 工業視覺化平台 產品介紹</title>
+<style>
+:root {
+  --blue-dark: #1e3a5f;
+  --blue:      #1a56db;
+  --blue-light:#dbeafe;
+  --teal:      #0d9488;
+  --green:     #16a34a;
+  --amber:     #d97706;
+  --red:       #dc2626;
+  --bg:        #f8fafc;
+  --bg2:       #f1f5f9;
+  --border:    #e2e8f0;
+  --text:      #1e293b;
+  --text-muted:#64748b;
+  --white:     #ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Microsoft JhengHei","Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;}
+a{color:var(--blue);text-decoration:none;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--blue-dark);padding:0 24px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:48px;}
+nav a{color:#cbd5e1;font-size:12px;padding:6px 8px;border-radius:4px;white-space:nowrap;}
+nav a:hover{background:rgba(255,255,255,.12);color:#fff;}
+nav .brand{color:#fff;font-weight:700;font-size:15px;margin-right:12px;white-space:nowrap;}
+
+/* SECTIONS */
+section{padding:60px 0;border-bottom:1px solid var(--border);}
+section.alt{background:var(--bg2);}
+.container{max-width:1100px;margin:0 auto;padding:0 28px;}
+
+/* HEADINGS */
+.section-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px;}
+h1{font-size:2.6rem;font-weight:800;line-height:1.2;}
+h2{font-size:1.8rem;font-weight:700;margin-bottom:8px;}
+h3{font-size:1.2rem;font-weight:700;margin-bottom:6px;color:var(--blue-dark);}
+h4{font-size:1rem;font-weight:700;margin-bottom:4px;}
+.lead{font-size:1.1rem;color:var(--text-muted);margin-bottom:24px;}
+p{margin-bottom:12px;}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:768px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;}
+.card-icon{font-size:28px;margin-bottom:10px;}
+.card.highlight{border-left:4px solid var(--blue);}
+.card.teal{border-left:4px solid var(--teal);}
+.card.green{border-left:4px solid var(--green);}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;}
+th{background:var(--blue-dark);color:#fff;padding:10px 14px;text-align:left;font-weight:600;}
+td{padding:9px 14px;border-bottom:1px solid var(--border);}
+tr:nth-child(even) td{background:var(--bg2);}
+.check{color:var(--green);font-weight:700;}
+.cross{color:var(--red);}
+.partial{color:var(--amber);}
+
+/* IMAGE PLACEHOLDER */
+.img-frame{background:#e8f4fd;border:2px dashed #3b82f6;border-radius:10px;overflow:hidden;margin:20px 0;position:relative;min-height:220px;display:flex;align-items:center;justify-content:center;}
+.img-frame img{width:100%;height:auto;display:block;}
+.img-frame img[src=""],
+.img-frame img:not([src]){display:none;}
+.ph{text-align:center;padding:28px;pointer-events:none;}
+.ph-icon{font-size:36px;display:block;margin-bottom:8px;opacity:.5;}
+.ph-file{display:block;font-family:monospace;font-size:13px;color:var(--blue);font-weight:600;margin-bottom:4px;}
+.ph-label{display:block;font-size:13px;color:var(--text-muted);}
+/* hide placeholder when real img loads */
+.img-frame.loaded .ph{display:none;}
+
+/* CALLOUT */
+.callout{background:#fef9c3;border-left:4px solid #f59e0b;border-radius:6px;padding:16px 20px;margin:16px 0;}
+.callout.blue{background:#eff6ff;border-color:var(--blue);}
+.callout.green{background:#f0fdf4;border-color:var(--green);}
+
+/* BADGES */
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;margin:2px;}
+.badge.blue{background:var(--blue-light);color:var(--blue);}
+.badge.green{background:#dcfce7;color:var(--green);}
+.badge.teal{background:#ccfbf1;color:var(--teal);}
+.badge.amber{background:#fef3c7;color:var(--amber);}
+
+/* CODE */
+pre{background:#1e293b;color:#e2e8f0;padding:16px 20px;border-radius:8px;font-size:13px;overflow-x:auto;margin:12px 0;line-height:1.6;}
+code{font-family:"Cascadia Code",Consolas,monospace;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,#0f2444 0%,#1a3a6b 50%,#1e3a5f 100%);color:#fff;padding:80px 0;}
+#hero h1{color:#fff;margin-bottom:16px;}
+#hero .lead{color:#93c5fd;font-size:1.2rem;}
+.hero-chips{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0;}
+.hero-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:6px 16px;font-size:13px;color:#e2e8f0;}
+.vs-bar{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap;}
+.vs-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:16px 22px;flex:1;min-width:200px;}
+.vs-card .label{font-size:11px;color:#93c5fd;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.vs-card .value{font-size:1rem;font-weight:600;color:#fff;}
+
+/* PROBLEM */
+.problem-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px;text-align:center;}
+.problem-box .num{font-size:2.5rem;font-weight:800;color:var(--blue);display:block;}
+.arrows-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:20px 0;}
+.flow-node{background:var(--blue-dark);color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;}
+.flow-arrow{color:var(--text-muted);font-size:18px;}
+
+/* ARCH */
+.arch-layer{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.arch-label{background:var(--blue-dark);color:#fff;padding:8px 16px;font-weight:700;font-size:13px;}
+.arch-body{padding:12px 16px;display:flex;gap:12px;flex-wrap:wrap;background:var(--white);}
+.arch-item{background:var(--blue-light);color:var(--blue);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;}
+
+/* CONNECTOR GRID */
+.conn-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;}
+.conn-type{display:inline-block;background:var(--blue-dark);color:#fff;border-radius:4px;font-size:11px;font-weight:700;padding:2px 8px;margin-bottom:8px;font-family:monospace;}
+
+/* SYMBOL GRID */
+.sym-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.sym-card .sym-icon{font-size:32px;margin-bottom:8px;}
+.sym-card h4{font-size:13px;}
+
+/* SPEC TABLE */
+.spec-table{font-size:13px;}
+.spec-table th{background:var(--blue);font-size:12px;}
+
+/* FEATURE LIST */
+.feat-list{list-style:none;padding:0;}
+.feat-list li{padding:6px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;font-size:14px;}
+.feat-list li::before{content:"▸";color:var(--blue);flex-shrink:0;margin-top:2px;}
+.feat-list li:last-child{border-bottom:none;}
+
+/* API TABLE */
+.api-method{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:monospace;}
+.api-method.get{background:#dcfce7;color:#15803d;}
+.api-method.post{background:#dbeafe;color:#1d4ed8;}
+.api-method.put{background:#fef9c3;color:#92400e;}
+.api-method.del{background:#fee2e2;color:#b91c1c;}
+
+/* PORT TABLE */
+.port-row td:last-child{font-family:monospace;font-weight:700;color:var(--blue);}
+
+/* PRINT */
+@media print{
+  nav{display:none;}
+  section{page-break-inside:avoid;padding:30px 0;}
+  .img-frame{border:1px solid #ccc;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="brand">VisoLink</span>
+  <a href="#hero">首頁</a>
+  <a href="#problem">為何選擇</a>
+  <a href="#comparison">競品對比</a>
+  <a href="#architecture">系統架構</a>
+  <a href="#editor">畫布編輯器</a>
+  <a href="#symbols">Symbol 元件</a>
+  <a href="#connectors">資料來源</a>
+  <a href="#databinding">DataBinding</a>
+  <a href="#calculations">計算引擎</a>
+  <a href="#graphic-library">圖形符號庫</a>
+  <a href="#time-system">即時時間</a>
+  <a href="#popup-trend">Popup Trend</a>
+  <a href="#admin">Admin 後台</a>
+  <a href="#localization">多語系</a>
+  <a href="#security">認證安全</a>
+  <a href="#database">資料庫</a>
+  <a href="#api">REST API</a>
+  <a href="#deployment">部署架構</a>
+  <a href="#techstack">技術選型</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════ HERO -->
+<section id="hero">
+<div class="container">
+  <div class="section-tag">工業 SCADA 視覺化平台</div>
+  <h1>VisoLink</h1>
+  <p class="lead">同時具備 PI Vision 的自由畫布設計能力，以及 Grafana 的多資料庫整合彈性<br>讓真正懂現場的工程師，能夠自己設計、即時修改監控畫面。</p>
+  <div class="hero-chips">
+    <span class="hero-chip">🎨 自由畫布編輯</span>
+    <span class="hero-chip">🔌 6 種資料來源 Connector</span>
+    <span class="hero-chip">📐 226+ 工業 SVG 符號</span>
+    <span class="hero-chip">🧮 跨來源計算引擎</span>
+    <span class="hero-chip">🌐 多語系 Admin 線上維護</span>
+    <span class="hero-chip">🐳 Docker 自行部署</span>
+  </div>
+  <div class="vs-bar">
+    <div class="vs-card"><div class="label">Symbol 元件類型</div><div class="value">12 種</div></div>
+    <div class="vs-card"><div class="label">資料來源 Connector</div><div class="value">6 種（含 PI / InfluxDB / SQL）</div></div>
+    <div class="vs-card"><div class="label">工業 SVG 符號</div><div class="value">21 類 / 226+ 符號</div></div>
+    <div class="vs-card"><div class="label">部署方式</div><div class="value">Docker 三容器，自行維運</div></div>
+  </div>
+  <div class="img-frame" style="margin-top:32px;" id="img-hero">
+    <img src="img/01_hero_dashboard.png" alt="系統主畫面" onload="document.getElementById('img-hero').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/01_hero_dashboard.png</span><span class="ph-label">Runtime 監看主畫面截圖</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ PROBLEM -->
+<section id="problem" class="alt">
+<div class="container">
+  <div class="section-tag">Why VisoLink</div>
+  <h2>工業現場不缺數據，缺的是讓數據變成資訊的工具</h2>
+  <p class="lead">現代工廠普遍已擁有大量資訊系統，每天持續產生海量數據。</p>
+
+  <div class="arrows-flow">
+    <span class="flow-node">PLC / DCS</span><span class="flow-arrow">→</span>
+    <span class="flow-node">SCADA</span><span class="flow-arrow">→</span>
+    <span class="flow-node">Historian / PI</span><span class="flow-arrow">→</span>
+    <span class="flow-node">MES / ERP</span><span class="flow-arrow">→</span>
+    <span class="flow-node">IoT / AI 分析</span>
+  </div>
+
+  <div class="grid2" style="margin-top:28px;">
+    <div>
+      <div class="callout">
+        <h3 style="color:#92400e;margin-bottom:8px;">❗ 真正的問題</h3>
+        <p>問題不是沒有數據，而是：數據分散在不同系統、不同格式，<strong>無法快速組合成現場需要的資訊畫面</strong>。改一張監控畫面，需要排工單、等廠商、等上線視窗，費時數週。</p>
+      </div>
+      <div class="callout">
+        <h3 style="color:#92400e;margin-bottom:8px;">👷 最懂現場的人，反而最難改善現場</h3>
+        <ul style="padding-left:18px;font-size:14px;">
+          <li>製程工程師</li>
+          <li>中控室工程師</li>
+          <li>設備工程師</li>
+          <li>生產主管</li>
+        </ul>
+        <p style="margin-top:8px;">他們知道「要看什麼」，卻沒有工具可以自己動手。</p>
+      </div>
+    </div>
+    <div>
+      <div class="callout blue" style="height:100%;">
+        <h3 style="color:#1d4ed8;margin-bottom:12px;">✅ VisoLink 的解法</h3>
+        <ul class="feat-list">
+          <li>直覺的自由畫布編輯器，學習曲線低，工程師自行操作</li>
+          <li>連接現場已有的各類資料庫，不需重建資料架構</li>
+          <li>修改畫面當場即時生效，不需重新部署或停機</li>
+          <li>IT 與 OT 各自關心的需求，同一平台全部涵蓋</li>
+          <li>Web-based，任何瀏覽器開啟，無需安裝 Client 端軟體</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ COMPARISON -->
+<section id="comparison">
+<div class="container">
+  <div class="section-tag">競品對比</div>
+  <h2>PI Vision × Grafana × VisoLink</h2>
+  <p class="lead">VisoLink 同時解決了競品各自的核心限制。</p>
+
+  <table>
+    <thead>
+      <tr><th>能力</th><th>PI Vision</th><th>Grafana</th><th>VisoLink</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>自由畫布（像 Visio 一樣拖放元件）</td><td class="check">✅ 支援</td><td class="cross">❌ 版面固定</td><td class="check">✅ 支援</td></tr>
+      <tr><td>多資料庫支援（SQL / InfluxDB / PI）</td><td class="cross">❌ 僅 PI Server</td><td class="check">✅ 廣泛支援</td><td class="check">✅ 支援</td></tr>
+      <tr><td>工業 SVG 符號庫（ISA-101）</td><td class="check">✅ 有限</td><td class="cross">❌ 無</td><td class="check">✅ 21類/226+</td></tr>
+      <tr><td>跨來源計算引擎</td><td class="partial">⚠️ 有限</td><td class="partial">⚠️ 有限</td><td class="check">✅ 完整支援</td></tr>
+      <tr><td>Web-based，無需安裝 Client</td><td class="cross">❌ 需安裝</td><td class="check">✅</td><td class="check">✅</td></tr>
+      <tr><td>自行部署 / 無外部授權費</td><td class="cross">❌</td><td class="check">✅（OSS）</td><td class="check">✅</td></tr>
+      <tr><td>多語系 Admin 線上維護（免重新部署）</td><td class="cross">❌</td><td class="partial">⚠️ 有限</td><td class="check">✅</td></tr>
+      <tr><td>Popup Trend 累積比較器</td><td class="partial">⚠️ 有限</td><td class="cross">❌</td><td class="check">✅</td></tr>
+      <tr><td>Docker 容器化部署</td><td class="cross">❌</td><td class="check">✅</td><td class="check">✅</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ ARCHITECTURE -->
+<section id="architecture" class="alt">
+<div class="container">
+  <div class="section-tag">系統架構</div>
+  <h2>Clean Architecture — 分層清晰，模組可獨立擴充</h2>
+
+  <div class="grid2" style="margin-bottom:28px;">
+    <div>
+      <h3>Solution 分層</h3>
+      <div class="arch-layer">
+        <div class="arch-label">前端層</div>
+        <div class="arch-body">
+          <span class="arch-item">VisoLink.Client（Blazor WASM）</span>
+          <span class="arch-item">VisoLink.Admin（Razor Pages）</span>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-label">API 層</div>
+        <div class="arch-body"><span class="arch-item">VisoLink.Server（ASP.NET Core Web API）</span></div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-label">應用層</div>
+        <div class="arch-body">
+          <span class="arch-item">VisoLink.Application（業務邏輯介面）</span>
+          <span class="arch-item">VisoLink.Shared（共用 DTO）</span>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-label">領域層</div>
+        <div class="arch-body"><span class="arch-item">VisoLink.Domain（純 C# 實體）</span></div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-label">基礎設施層</div>
+        <div class="arch-body">
+          <span class="arch-item">VisoLink.Infrastructure</span>
+          <span class="arch-item">EF Core + Connectors</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>前端三大入口</h3>
+      <div class="card highlight" style="margin-bottom:12px;">
+        <h4>Studio（工程師設計）</h4>
+        <p style="font-size:13px;color:var(--text-muted);">路徑：<code>/displays</code>、<code>/editor</code><br>功能：建立與編輯 Display、設定 DataBinding</p>
+      </div>
+      <div class="card teal" style="margin-bottom:12px;">
+        <h4>Runtime（操作員監看）</h4>
+        <p style="font-size:13px;color:var(--text-muted);">路徑：<code>/runtime</code><br>功能：只讀即時監看、Popup Trend</p>
+      </div>
+      <div class="card green">
+        <h4>Admin（系統管理員）</h4>
+        <p style="font-size:13px;color:var(--text-muted);">獨立部署 port 6002<br>功能：DataSource / 使用者 / 多語系管理</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>資料流程</h3>
+  <pre><code>① Admin 設定 DataSource（連線資訊 AES 加密儲存）
+         ↓
+② Studio 工程師建立 Display → 設定 DataBinding（DataSource → View → Fields）
+         ↓
+③ 儲存 DisplayJson（PostgreSQL jsonb）
+         ↓
+④ Runtime 載入 → RuntimeQueryScheduler 排程執行查詢
+         ↓
+⑤ IDataSourceDriver.QueryAsync → 外部 DB / PI Server / InfluxDB
+         ↓
+⑥ VisoDataFrame { Columns[], Rows[][] } → RuntimeDataStore
+         ↓
+⑦ Symbol 訂閱更新 → 畫面即時刷新</code></pre>
+
+  <h3 style="margin-top:24px;">服務端口</h3>
+  <table class="port-row" style="max-width:500px;">
+    <thead><tr><th>服務</th><th>說明</th><th>Port</th></tr></thead>
+    <tbody>
+      <tr><td>API Server</td><td>ASP.NET Core Web API</td><td>6000</td></tr>
+      <tr><td>Blazor Client</td><td>Studio + Runtime 前端</td><td>6001</td></tr>
+      <tr><td>Admin</td><td>Razor Pages 後台</td><td>6002</td></tr>
+      <tr><td>pgAdmin</td><td>PostgreSQL Web 管理</td><td>6050</td></tr>
+      <tr><td>PostgreSQL</td><td>資料庫（容器外部）</td><td>15432</td></tr>
+    </tbody>
+  </table>
+
+  <div class="img-frame" id="img-arch">
+    <img src="img/14_system_architecture.png" alt="系統架構圖" onload="document.getElementById('img-arch').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/14_system_architecture.png</span><span class="ph-label">系統整體架構圖（可使用 draw.io 或截圖補入）</span></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ EDITOR -->
+<section id="editor">
+<div class="container">
+  <div class="section-tag">Studio 畫布編輯器</div>
+  <h2>自由畫布 — 像 PowerPoint 一樣直覺操作</h2>
+  <p class="lead">工程師無需程式能力，拖放即可設計任意佈局的監控畫面。</p>
+
+  <div class="img-frame" id="img-editor">
+    <img src="img/02_studio_editor_overview.png" alt="Studio 編輯器全覽" onload="document.getElementById('img-editor').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/02_studio_editor_overview.png</span><span class="ph-label">Studio 編輯器全覽（畫布 + 左側面板 + 右側屬性面板）</span></div>
+  </div>
+
+  <div class="grid2" style="margin-top:28px;">
+    <div>
+      <h3>介面布局</h3>
+      <table class="spec-table">
+        <thead><tr><th>區域</th><th>位置</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td>工具列</td><td>頂部</td><td>模式切換、縮放、Grid、Undo/Redo、儲存</td></tr>
+          <tr><td>Symbol 面板</td><td>左側 Elements Tab</td><td>所有可放置的元件清單</td></tr>
+          <tr><td>Graphic Library</td><td>左側 Graphics Tab</td><td>工業 SVG 符號庫</td></tr>
+          <tr><td>Data Panel</td><td>左側 Data Tab</td><td>DataBinding 管理、欄位拖曳</td></tr>
+          <tr><td>畫布 Canvas</td><td>中央</td><td>自由拖放工作區</td></tr>
+          <tr><td>屬性面板</td><td>右側</td><td>5 大類 Accordion 設定</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>畫布操作能力</h3>
+      <ul class="feat-list">
+        <li>拖曳放置任意位置、單擊/框選，多選群組移動</li>
+        <li>拖曳控制點縮放；方向鍵 1px 微調位置</li>
+        <li>屬性面板直接輸入 X / Y / Width / Height 精確數值</li>
+        <li>拖曳旋轉控制點自由旋轉；水平/垂直翻轉</li>
+        <li>Z 層管理（最前/最後/上移一層/下移一層）</li>
+        <li>重疊物件依視覺最上層（ZIndex）優先選取</li>
+        <li>Ctrl+C / Ctrl+V / Delete；完整 Undo/Redo 命令堆疊</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <div>
+      <h3>Shift 約束系統</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">按住 Shift 鍵時所有操作套用對齊約束：</p>
+      <table class="spec-table">
+        <thead><tr><th>操作</th><th>Shift 效果</th></tr></thead>
+        <tbody>
+          <tr><td>移動物件</td><td>鎖定水平或垂直方向</td></tr>
+          <tr><td>縮放物件</td><td>等比例縮放（長寬比不變）</td></tr>
+          <tr><td>繪製 Shape</td><td>矩形→正方形；橢圓→正圓；Line→0°/45°/90°</td></tr>
+          <tr><td>旋轉物件</td><td>鎖定 15° 倍數角度</td></tr>
+          <tr><td>Connector 端點</td><td>鎖定水平或垂直吸附</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Smart Connector Line</h3>
+      <ul class="feat-list">
+        <li><strong>Orthogonal（直角折線）</strong>：自動計算直角路徑，可拖曳中間線段調整走向</li>
+        <li><strong>Bezier（貝茲曲線）</strong>：平滑曲線，控制點以比例保存</li>
+        <li><strong>Direct（直線）</strong>：傳統端點對端點</li>
+        <li>端點可吸附到其他 Symbol 的 Connection Points（上/下/左/右/中心）</li>
+        <li>被連接 Symbol 移動時，端點自動跟隨更新</li>
+        <li>線條顏色、粗細、實線/虛線、起/終點箭頭樣式</li>
+      </ul>
+      <div class="img-frame" id="img-conn" style="min-height:140px;">
+        <img src="img/03_smart_connector.png" alt="Smart Connector" onload="document.getElementById('img-conn').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/03_smart_connector.png</span><span class="ph-label">Smart Connector 直角折線 + 吸附示意</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">屬性面板 — 5 大類 Accordion</h3>
+  <div class="grid4">
+    <div class="card"><h4>Position &amp; Size</h4><p style="font-size:13px;">X、Y、Width、Height、Rotation、Lock</p></div>
+    <div class="card"><h4>Appearance</h4><p style="font-size:13px;">Fill Color、Stroke、Opacity、Corner Radius、Shadow</p></div>
+    <div class="card"><h4>Data</h4><p style="font-size:13px;">DataBinding 指派、Field Mapping、Calculation 指派</p></div>
+    <div class="card"><h4>Behavior</h4><p style="font-size:13px;">URL Link、Double-Click 行為</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SYMBOLS -->
+<section id="symbols" class="alt">
+<div class="container">
+  <div class="section-tag">Symbol 元件庫</div>
+  <h2>12 種 Symbol，涵蓋工業監控所有顯示需求</h2>
+
+  <div class="grid3" style="margin-bottom:28px;">
+    <!-- SHAPES -->
+    <div class="card">
+      <div class="section-tag" style="background:#fce7f3;color:#9d174d;">SHAPES 類</div>
+      <ul class="feat-list" style="margin-top:8px;">
+        <li><strong>Rect</strong> — 四角各自獨立 Radius</li>
+        <li><strong>Ellipse</strong> — 橢圓/正圓</li>
+        <li><strong>Line</strong> — 頭尾箭頭樣式</li>
+        <li><strong>Arc</strong> — 起始/結束角度自由設定</li>
+        <li><strong>Polygon</strong> — 邊數自訂（3～N）</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">所有 Shape 均支援：Stroke 樣式（實線/虛線/點線）、Stroke 流動動畫、透明度（Opacity）</p>
+    </div>
+    <!-- TEXT MEDIA -->
+    <div class="card">
+      <div class="section-tag" style="background:#e0e7ff;color:#3730a3;">TEXT &amp; MEDIA 類</div>
+      <ul class="feat-list" style="margin-top:8px;">
+        <li><strong>Text</strong> — 靜態或綁定動態資料</li>
+        <li><strong>Image / SVG</strong> — 上傳自訂圖片（含 Inline SVG）</li>
+        <li><strong>URL Link</strong> — 外部 URL 或跳轉其他 Display（新分頁/當前分頁）</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">支援 Stroke 外框設定與 Stroke 流動動畫</p>
+    </div>
+    <!-- DATA -->
+    <div class="card">
+      <div class="section-tag">DATA 類</div>
+      <ul class="feat-list" style="margin-top:8px;">
+        <li><strong>Value</strong> — 純量數值/文字顯示</li>
+        <li><strong>Multi-State</strong> — 值→狀態映射（顏色/Label/SVG）</li>
+        <li><strong>Gauge</strong> — 6 種樣式 Preset</li>
+        <li><strong>Trend</strong> — 時間序列趨勢圖（ECharts）</li>
+        <li><strong>Table</strong> — 表格式資料呈現</li>
+        <li><strong>Bar Chart</strong> — 柱狀/橫條圖（ECharts）</li>
+        <li><strong>ProgressBar</strong> — 水平/垂直進度條</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="img-frame" id="img-shapes">
+    <img src="img/04_shapes_showcase.png" alt="Shapes 展示" onload="document.getElementById('img-shapes').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/04_shapes_showcase.png</span><span class="ph-label">SHAPES 類別各元件展示（含 Stroke 流動動畫效果）</span></div>
+  </div>
+
+  <!-- GAUGE -->
+  <h3 style="margin-top:32px;">Gauge Symbol — 6 種樣式 Preset</h3>
+  <div class="grid3">
+    <div class="card"><h4>Basic Needle</h4><p style="font-size:13px;">經典圓形儀表盤 + 指針</p></div>
+    <div class="card"><h4>Progress Needle</h4><p style="font-size:13px;">弧形進度背景 + 指針</p></div>
+    <div class="card"><h4>Progress Clean</h4><p style="font-size:13px;">純弧形進度條（無指針）</p></div>
+    <div class="card"><h4>Stage / Color Zone</h4><p style="font-size:13px;">分色區段（正常/警戒/危險）</p></div>
+    <div class="card"><h4>Temperature</h4><p style="font-size:13px;">溫度計風格垂直進度</p></div>
+    <div class="card"><h4>Barometer 雙刻度</h4><p style="font-size:13px;">同一儀表顯示內外兩組刻度</p></div>
+  </div>
+  <p style="font-size:13px;color:var(--text-muted);margin-top:8px;">通用設定：量程 Min/Max、大/小刻度密度、進度條寬度、中心點偏移、色區百分比與顏色、指針/文字/刻度顏色。Resize 後自動重新套用 option。</p>
+
+  <div class="img-frame" id="img-gauge">
+    <img src="img/05_gauge_6presets.png" alt="Gauge 6種 Preset" onload="document.getElementById('img-gauge').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/05_gauge_6presets.png</span><span class="ph-label">6 種 Gauge Preset 並排展示</span></div>
+  </div>
+
+  <!-- TREND -->
+  <h3 style="margin-top:32px;">Trend Symbol — 工業級時間序列趨勢圖</h3>
+  <div class="grid2">
+    <div>
+      <table class="spec-table">
+        <thead><tr><th>功能</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>顯示模式</td><td>LINE / POINT / BAR / AREA（四種切換）</td></tr>
+          <tr><td>多系列</td><td>每個 Trend 可設定多組 Series，各自綁定不同 DataBinding</td></tr>
+          <tr><td>雙 Y 軸</td><td>左 Y / 右 Y 各自設定量程，Series 可指派到任一軸</td></tr>
+          <tr><td>Threshold Band</td><td>警戒色帶（如正常綠/警戒黃/危險紅半透明背景）</td></tr>
+          <tr><td>Reference Line</td><td>水平參考線（目標值/上下限）</td></tr>
+          <tr><td>Series Rule</td><td>從資料行自動生成多條系列線</td></tr>
+          <tr><td>Zoom</td><td>Runtime 框選縮放時間區間</td></tr>
+          <tr><td>Crosshair</td><td>垂直準線 + Tooltip 同時顯示各系列值</td></tr>
+          <tr><td>Editor Preview</td><td>編輯模式下一次性快照預覽，確認樣式</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="img-frame" id="img-trend">
+      <img src="img/06_trend_multiseries.png" alt="Trend 多系列" onload="document.getElementById('img-trend').classList.add('loaded')">
+      <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/06_trend_multiseries.png</span><span class="ph-label">Trend 多系列 + 雙 Y 軸 + Threshold Band 效果</span></div>
+    </div>
+  </div>
+
+  <!-- PROGRESSBAR & TABLE -->
+  <div class="grid2" style="margin-top:24px;">
+    <div class="card">
+      <h3>ProgressBar Symbol</h3>
+      <ul class="feat-list">
+        <li>方向：水平 / 垂直</li>
+        <li>刻度：顯示/隱藏刻度線與數值</li>
+        <li>多段顏色（0-50% 綠 / 50-80% 黃 / 80-100% 紅）</li>
+        <li>值計算模式：Last / First / Median / Average</li>
+        <li>量程：Min / Max 自由設定</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Table Symbol</h3>
+      <ul class="feat-list">
+        <li>欄位設定：Field 名稱、顯示 Header、欄寬</li>
+        <li>排序：點擊 Header 升/降排序</li>
+        <li>分頁：設定每頁筆數</li>
+        <li>數值格式化（小數位數）</li>
+        <li>條件樣式：結合 Multi-State 規則套用欄位顏色</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CONNECTORS -->
+<section id="connectors">
+<div class="container">
+  <div class="section-tag">資料來源 Connector</div>
+  <h2>6 種 Connector，連接現場所有主流資料系統</h2>
+  <p class="lead">每個 Symbol 可獨立綁定不同 DataSource，同一 Display 可同時混用多種資料來源。</p>
+
+  <div class="callout blue" style="margin-bottom:24px;">
+    <strong>Connector 統一介面：</strong>所有 Driver 實作 <code>IDataSourceDriver.QueryAsync()</code>，回傳 <code>VisoDataFrame { Columns[], Rows[][] }</code>。查詢由 RuntimeQueryScheduler 統一排程，Driver 只負責取得資料並正規化格式。
+  </div>
+
+  <div class="grid3">
+    <div class="conn-card">
+      <span class="conn-type">SqlServer</span>
+      <h4>SQL Server</h4>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>自訂時間序列 SQL 查詢</li>
+        <li>Schema Browser（Table → Column → 點擊插入）</li>
+        <li>一鍵生成 SELECT 模板</li>
+        <li>DiscoverFields：SELECT TOP 0 取欄位不載資料</li>
+      </ul>
+    </div>
+    <div class="conn-card">
+      <span class="conn-type">MySQL</span>
+      <h4>MySQL</h4>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>自訂 SQL 查詢</li>
+        <li>Schema Browser（同 SQL Server）</li>
+        <li>預設 Port 3306（切換類型自動填入）</li>
+      </ul>
+    </div>
+    <div class="conn-card">
+      <span class="conn-type">PostgreSQL</span>
+      <h4>PostgreSQL</h4>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>自訂 SQL 查詢</li>
+        <li>Schema Browser（同 SQL Server）</li>
+        <li>預設 Port 5432</li>
+        <li>可直接連 VisoLink 自身應用資料庫</li>
+      </ul>
+    </div>
+    <div class="conn-card" style="grid-column:span 1;">
+      <span class="conn-type">InfluxDB</span>
+      <h4>InfluxDB（三種獨立類型）</h4>
+      <table class="spec-table" style="font-size:12px;margin:8px 0;">
+        <thead><tr><th>類型</th><th>語言</th><th>版本</th></tr></thead>
+        <tbody>
+          <tr><td>InfluxDB_InfluxQL</td><td>InfluxQL（類 SQL）</td><td>1.x / 2.x</td></tr>
+          <tr><td>InfluxDB_Flux</td><td>Flux（函數式管線）</td><td>2.x</td></tr>
+          <tr><td>InfluxDB_SQL</td><td>Arrow Flight SQL</td><td>3.x</td></tr>
+        </tbody>
+      </table>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>簡易模式：選 Measurement / Bucket，勾選 Fields</li>
+        <li>腳本模式：直接撰寫完整查詢</li>
+        <li>TestConnection 按鈕即時驗證</li>
+      </ul>
+      <div class="img-frame" id="img-influx" style="min-height:120px;">
+        <img src="img/12_influxdb_config.png" alt="InfluxDB 設定" onload="document.getElementById('img-influx').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/12_influxdb_config.png</span><span class="ph-label">InfluxDB Admin 設定面板</span></div>
+      </div>
+    </div>
+    <div class="conn-card">
+      <span class="conn-type">easypi</span>
+      <h4>easyPI / PIBridge（OSIsoft PI）</h4>
+      <table class="spec-table" style="font-size:12px;margin:8px 0;">
+        <thead><tr><th>資料模式</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>PI Tag - Recorded</td><td>歷史記錄值（實際存檔點）</td></tr>
+          <tr><td>PI Tag - Interpolated</td><td>補插值（等間隔時間點）</td></tr>
+          <tr><td>PI AF - Recorded</td><td>AF Attribute 歷史記錄值</td></tr>
+          <tr><td>PI AF - Interpolated</td><td>AF Attribute 補插值</td></tr>
+        </tbody>
+      </table>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>Tag 名稱搜尋（支援萬用字元），顯示描述與工程單位</li>
+        <li>AF 樹狀瀏覽器（逐層展開 Element / Attribute）</li>
+        <li>Bulk Selection：一次選取多個 Tag / AF Attribute</li>
+        <li>DisplayName：設定友善顯示名稱</li>
+        <li>Runtime 時間範圍跟隨全域 Filter</li>
+      </ul>
+      <div class="img-frame" id="img-easypi" style="min-height:120px;">
+        <img src="img/11_easypi_af_browser.png" alt="easyPI AF 瀏覽器" onload="document.getElementById('img-easypi').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/11_easypi_af_browser.png</span><span class="ph-label">easyPI AF 瀏覽器 + Tag 搜尋介面</span></div>
+      </div>
+    </div>
+    <div class="conn-card">
+      <span class="conn-type" style="background:#6b7280;">Mock</span>
+      <h4>Mock Connector</h4>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>9 種預設情境 View（Trend.Multi / Gauge / Table…）</li>
+        <li>回傳固定或隨機模擬資料</li>
+        <li>用於開發測試與 Display 設計時的資料預覽</li>
+        <li>無需外部 DB 連線</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ DATABINDING -->
+<section id="databinding" class="alt">
+<div class="container">
+  <div class="section-tag">DataBinding 資料綁定系統</div>
+  <h2>靈活的多層資料綁定架構</h2>
+
+  <div class="grid2">
+    <div>
+      <h3>核心概念</h3>
+      <pre><code>Symbol
+  └── DataBinding（可多個）
+        ├── DataSource（連哪個 DB / API）
+        ├── View（查哪張表 / 哪個查詢）
+        ├── Fields（用哪些欄位）
+        └── bindingType</code></pre>
+      <p style="font-size:13px;margin-top:8px;">一個 Symbol 可同時擁有<strong>多個 DataBinding</strong>，每個可連接不同 DataSource。</p>
+
+      <h3 style="margin-top:20px;">bindingType 類型</h3>
+      <table class="spec-table">
+        <thead><tr><th>類型</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><code>tag_ref</code></td><td>直接引用 PI Tag 名稱</td></tr>
+          <tr><td><code>af_ref</code></td><td>PI AF Attribute 絕對路徑</td></tr>
+          <tr><td><code>af_relative</code></td><td>相對路徑（Collection Symbol 用，Phase 4）</td></tr>
+          <tr><td><code>query</code></td><td>SQL / 查詢腳本，標準欄位映射</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>DataSource View</h3>
+      <ul class="feat-list">
+        <li>每個 DataSource 可定義多個 View（查詢單元）</li>
+        <li>每個欄位有：FieldName（真實名）、DisplayName（友善名）、Unit（工程單位）</li>
+        <li><strong>View 預覽</strong>：「眼睛」按鈕，顯示前 5 筆資料確認查詢結果</li>
+      </ul>
+
+      <h3 style="margin-top:16px;">Schema Browser（Admin）</h3>
+      <ul class="feat-list">
+        <li>瀏覽資料庫完整結構（Table → Column 樹狀）</li>
+        <li>點擊 Column 名稱 → 自動插入到 SQL 編輯器光標位置</li>
+        <li>一鍵生成 <code>SELECT * FROM TableName</code> 模板</li>
+        <li>適用：SQL Server / MySQL / PostgreSQL</li>
+      </ul>
+
+      <h3 style="margin-top:16px;">Data Panel（Studio 左側）</h3>
+      <ul class="feat-list">
+        <li>所有 DataBinding 樹狀清單，支援搜尋（Binding / Field / DisplayName / Calc 名稱）</li>
+        <li>從 Data Panel <strong>拖曳 Field 到畫布 Symbol</strong>，自動完成 Field Mapping</li>
+        <li>Field 下拉選單顯示：<code>DisplayName（FieldName）[Unit]</code></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CALCULATIONS -->
+<section id="calculations">
+<div class="container">
+  <div class="section-tag">計算引擎 Calculations</div>
+  <h2>跨資料來源公式計算，產生虛擬欄位</h2>
+  <p class="lead">Symbol 層級計算欄位，無需在資料庫或後端預先處理，直接在設定面板定義公式。</p>
+
+  <div class="grid2">
+    <div>
+      <h3>使用範例</h3>
+      <pre><code>Symbol DataBinding：
+  DB1 = Pump_Flow    （每 1 分鐘）
+  DB2 = Pump_Status  （每 5 分鐘）
+
+Calculations：
+  Calc.EfficiencyPct
+    = DB1.FlowRate / DB1.MaxFlow * 100
+
+  Calc.TempF
+    = DB1.TempC * 1.8 + 32
+
+  Calc.StatusLabel
+    = IF(DB2.Status==1,"Running","Stopped")
+
+Symbol valueField = Calc.EfficiencyPct</code></pre>
+    </div>
+    <div>
+      <h3>支援公式類型</h3>
+      <table class="spec-table">
+        <thead><tr><th>類型</th><th>功能</th></tr></thead>
+        <tbody>
+          <tr><td>數學運算</td><td><code>+ - * / ^</code>、<code>sqrt()</code>、<code>abs()</code>、<code>round()</code>、<code>floor()</code>、<code>ceil()</code></td></tr>
+          <tr><td>條件式</td><td><code>IF(condition, true_val, false_val)</code>，可巢狀</td></tr>
+          <tr><td>字串</td><td>字串連接、<code>substring()</code>、<code>format()</code></td></tr>
+          <tr><td>比較</td><td><code>== != &gt; &gt;= &lt; &lt;=</code></td></tr>
+          <tr><td>邏輯</td><td><code>AND</code>、<code>OR</code>、<code>NOT</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">跨來源時間對齊</h3>
+      <ul class="feat-list">
+        <li>指定一個 <strong>Primary DataBinding</strong> 作為時間軸基準</li>
+        <li>其他 DataBinding 以「最近已知值」（Last-Known-Value）對齊</li>
+        <li>支援來自不同資料庫（如 InfluxDB + PostgreSQL）的欄位混合計算</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ GRAPHIC LIBRARY -->
+<section id="graphic-library" class="alt">
+<div class="container">
+  <div class="section-tag">工業 SVG 圖形符號庫</div>
+  <h2>21 類 / 226+ 工業 SVG 符號，ISA-101 標準</h2>
+  <p class="lead">內建完整工業製程符號，拖曳即用，向量格式縮放無失真。</p>
+
+  <div class="grid2" style="margin-bottom:24px;">
+    <div>
+      <div class="grid2" style="gap:12px;">
+        <div class="card" style="padding:12px;"><span class="badge blue">Pumps</span> 各式泵浦</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Valves</span> 閥門（蝶/球/截止/安全）</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Tanks &amp; Vessels</span> 儲槽、壓力容器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Instruments</span> 流/壓/溫/液位計</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Motors &amp; Drives</span> 馬達、變頻器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Heat Exchangers</span> 熱交換器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Filters</span> 過濾器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Compressors</span> 壓縮機、鼓風機</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Sensors</span> 感測器、傳送器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Process Lines</span> 管線、流向箭頭</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Electrical</span> 斷路器、接觸器</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Control</span> PLC、DCS、調節閥</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Safety</span> 緊急停止、洩壓</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Water &amp; Wastewater</span> 水處理設備</div>
+        <div class="card" style="padding:12px;"><span class="badge blue">Operator Interface</span> 操作面板、HMI</div>
+        <div class="card" style="padding:12px;"><span class="badge teal">+ 6 其他類別</span> 攪拌機、分離器、輸送帶…</div>
+      </div>
+    </div>
+    <div>
+      <h3>使用方式</h3>
+      <ul class="feat-list">
+        <li>Studio 左側 Graphics Tab 瀏覽類別或搜尋符號名稱</li>
+        <li>拖曳符號到畫布，自動依 SVG 內容比例縮放</li>
+        <li>放置後可調整尺寸、旋轉、顏色覆蓋</li>
+      </ul>
+      <h3 style="margin-top:16px;">SVG 技術規格</h3>
+      <ul class="feat-list">
+        <li>純 SVG 向量格式，無外部字型依賴</li>
+        <li>ISA-101 高對比 HMI 配色（非 3D 裝飾風格）</li>
+        <li>從縮圖到大型顯示板皆清晰無鋸齒</li>
+        <li>nginx 快取控制：manifest no-store、SVG no-cache</li>
+      </ul>
+      <div class="img-frame" id="img-glib">
+        <img src="img/08_graphic_library_panel.png" alt="Graphic Library 面板" onload="document.getElementById('img-glib').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/08_graphic_library_panel.png</span><span class="ph-label">Graphic Library 面板（類別瀏覽 + 搜尋 + 拖曳示意）</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ TIME SYSTEM -->
+<section id="time-system">
+<div class="container">
+  <div class="section-tag">即時資料與時間系統</div>
+  <h2>統一時間軸，全站 Symbol 同步聯動</h2>
+
+  <div class="grid3">
+    <div class="card highlight">
+      <h3>全域時間 Filter</h3>
+      <p>設定「開始時間」與「結束時間」後，Display 內<strong>所有 Symbol 的查詢同步套用</strong>相同時間範圍，無需逐一設定。</p>
+    </div>
+    <div class="card teal">
+      <h3>時間表達式語法</h3>
+      <table style="font-size:13px;width:100%;border-collapse:collapse;">
+        <tr><td style="padding:4px 0;"><code>*</code></td><td>當前時間（Now）</td></tr>
+        <tr><td style="padding:4px 0;"><code>-1h</code></td><td>前 1 小時</td></tr>
+        <tr><td style="padding:4px 0;"><code>-8h</code></td><td>前 8 小時（一個班別）</td></tr>
+        <tr><td style="padding:4px 0;"><code>t</code></td><td>今天 00:00:00</td></tr>
+        <tr><td style="padding:4px 0;"><code>y</code></td><td>昨天 00:00:00</td></tr>
+      </table>
+    </div>
+    <div class="card green">
+      <h3>Auto-Refresh</h3>
+      <p>設定自動刷新間隔（30 秒 / 1 分鐘 / 5 分鐘），系統自動重新查詢所有 Symbol 的 DataBinding，適合中控室長期監看。</p>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <div>
+      <h3>常見時間範圍組合</h3>
+      <table class="spec-table">
+        <thead><tr><th>使用情境</th><th>開始時間</th><th>結束時間</th></tr></thead>
+        <tbody>
+          <tr><td>當班即時監看</td><td><code>-8h</code></td><td><code>*</code></td></tr>
+          <tr><td>今日趨勢</td><td><code>t</code></td><td><code>*</code></td></tr>
+          <tr><td>昨日班別分析</td><td><code>y</code></td><td><code>t</code></td></tr>
+          <tr><td>前 1 小時快看</td><td><code>-1h</code></td><td><code>*</code></td></tr>
+          <tr><td>指定時段回顧</td><td>絕對時間</td><td>絕對時間</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>RuntimeQueryScheduler</h3>
+      <ul class="feat-list">
+        <li>根據全域時間範圍，對每個 DataBinding 呼叫對應 Connector</li>
+        <li>回傳 VisoDataFrame（統一格式），Symbol 訂閱並更新渲染</li>
+        <li>各 DataBinding 查詢獨立容錯，單一失敗不影響其他</li>
+        <li>easyPI Runtime Trend 查詢時間範圍同步跟隨全域 Filter</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ POPUP TREND -->
+<section id="popup-trend" class="alt">
+<div class="container">
+  <div class="section-tag">Popup Trend</div>
+  <h2>累積趨勢比較器 — 不離開監控畫面即可多點比對</h2>
+
+  <div class="grid2">
+    <div>
+      <h3>操作流程</h3>
+      <pre><code>在 Runtime 對任意 Symbol 雙擊
+  → 資料點加入「比較清單」
+  → 自動開啟全螢幕趨勢圖
+
+按「返回」→ 回到 Display，清單保留
+
+再次雙擊另一 Symbol
+  → 加入第二個資料點
+  → Popup 顯示兩條趨勢線（累積）
+
+按「清除」→ 清空清單，回到 Display</code></pre>
+
+      <h3 style="margin-top:16px;">技術特性</h3>
+      <ul class="feat-list">
+        <li>雙擊觸發，<strong>無需額外設定</strong>，所有 Symbol 自動支援</li>
+        <li>同一資料點重複雙擊：略過，不重複加入</li>
+        <li>時間範圍跟隨全域 Filter（調整時間同步影響比較圖）</li>
+        <li>支援 LINE / POINT / BAR / AREA 四種模式切換</li>
+        <li>可單獨移除清單中特定資料點</li>
+        <li>僅 Runtime 模式有效；Editor 模式下雙擊無此效果</li>
+      </ul>
+    </div>
+    <div>
+      <h3>支援觸發的 Symbol</h3>
+      <table class="spec-table">
+        <thead><tr><th>Symbol 類型</th><th>加入的資料</th></tr></thead>
+        <tbody>
+          <tr><td>Value</td><td>valueField 欄位</td></tr>
+          <tr><td>Gauge</td><td>valueField 欄位</td></tr>
+          <tr><td>Multi-State</td><td>valueField 欄位</td></tr>
+          <tr><td>ProgressBar</td><td>valueField 欄位</td></tr>
+        </tbody>
+      </table>
+      <div class="img-frame" id="img-popup" style="margin-top:12px;">
+        <img src="img/09_popup_trend_fullscreen.png" alt="Popup Trend 全螢幕" onload="document.getElementById('img-popup').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/09_popup_trend_fullscreen.png</span><span class="ph-label">Popup Trend 全螢幕覆蓋（三條趨勢線累積比較）</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════ ADMIN -->
+<section id="admin">
+<div class="container">
+  <div class="section-tag">Admin 管理後台</div>
+  <h2>獨立部署的系統管理中心（port 6002）</h2>
+  <p class="lead">Razor Pages + Metronic UI，系統管理員專用，與主應用完全分離。</p>
+
+  <div class="img-frame" id="img-admin">
+    <img src="img/10_admin_datasource.png" alt="Admin DataSource" onload="document.getElementById('img-admin').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/10_admin_datasource.png</span><span class="ph-label">Admin DataSource 設定面板示意</span></div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <div>
+      <h3>DataSource 管理</h3>
+      <table class="spec-table">
+        <thead><tr><th>功能</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>DataSource CRUD</td><td>新增 / 編輯 / 刪除 / 停用</td></tr>
+          <tr><td>類型感知面板</td><td>切換類型自動顯示專屬設定欄位與 Port 預設值</td></tr>
+          <tr><td>TestConnection</td><td>即時驗證連線可用性與認證</td></tr>
+          <tr><td>安全儲存</td><td>密碼以 DataProtection AES 加密，不回傳前端</td></tr>
+          <tr><td>View 管理</td><td>每個 DataSource 下管理多個 View</td></tr>
+          <tr><td>View 預覽</td><td>「眼睛」按鈕：前 5 筆資料預覽</td></tr>
+          <tr><td>Schema Browser</td><td>Table → Column 樹狀，點擊插入到 SQL 編輯器</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>使用者與角色管理</h3>
+      <ul class="feat-list">
+        <li>使用者 CRUD（名稱、Email、密碼重設）</li>
+        <li>角色指派（一個使用者可多個 Role）</li>
+        <li>Soft Delete：停用帳號，保留歷史記錄</li>
+      </ul>
+      <h3 style="margin-top:16px;">資料夾與 Display 管理</h3>
+      <ul class="feat-list">
+        <li>資料夾 CRUD（名稱、父層位置）</li>
+        <li>Display 列表（標題、擁有者、建立/更新時間）</li>
+        <li>Display 轉移擁有者</li>
+        <li>Display 版本歷史快照（最近 5 個版本）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:24px;">
+    <div class="card">
+      <h3>圖片上傳管理</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>支援 JPG / PNG / GIF / SVG / WebP</li>
+        <li>大型圖片支援（nginx client_max_body_size）</li>
+        <li>nginx <code>/uploads</code> 反向代理提供存取</li>
+        <li>圖片列表：檔名、大小、上傳時間、縮圖</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>稽核日誌（Audit Log）</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>記錄所有管理操作</li>
+        <li>每筆：操作時間、操作者、操作類型、資源 ID、變更前後值</li>
+        <li>篩選：時間範圍 / 操作者 / 操作類型</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>系統設定</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>Key/Value 格式儲存全系統參數</li>
+        <li>Token 有效期限、查詢逾時、預設刷新間隔</li>
+        <li>Admin 介面線上修改，部分設定免重啟服務</li>
+        <li>來源標記：db / config / default 優先級</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ LOCALIZATION -->
+<section id="localization" class="alt">
+<div class="container">
+  <div class="section-tag">多語系支援 Localization</div>
+  <h2>資料庫驅動的多語系，Admin 線上維護不停機</h2>
+
+  <div class="callout blue" style="margin-bottom:24px;">
+    不使用 <code>.resx</code> 編譯期資源。語言字典儲存於資料庫，Admin 可線上新增翻譯、匯入/匯出，<strong>修改後不需重新建置或重新部署應用程式</strong>。
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h3>Culture 語言管理</h3>
+      <table class="spec-table">
+        <thead><tr><th>欄位</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>language_code</td><td><code>zh-TW</code>、<code>zh-CN</code>、<code>en-US</code>…</td></tr>
+          <tr><td>display_name</td><td>繁體中文</td></tr>
+          <tr><td>native_name</td><td>繁體中文（台灣）</td></tr>
+          <tr><td>is_default</td><td>系統默認語言</td></tr>
+          <tr><td>is_enabled</td><td>是否顯示給使用者</td></tr>
+          <tr><td>sort_order</td><td>語言切換選單排序</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">Dictionary Entry</h3>
+      <table class="spec-table">
+        <thead><tr><th>欄位</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>namespace</td><td><code>editor</code>、<code>runtime</code>、<code>admin</code>、<code>common</code></td></tr>
+          <tr><td>key</td><td><code>save_button</code>、<code>connection_failed</code>…</td></tr>
+          <tr><td>default_text</td><td>原始（默認語言）文字</td></tr>
+          <tr><td>translated_text</td><td>目標語言翻譯結果</td></tr>
+          <tr><td>description</td><td>翻譯人員說明上下文</td></tr>
+          <tr><td>status</td><td><code>missing</code> / <code>translated</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Admin 多語系管理介面</h3>
+      <ul class="feat-list">
+        <li>語言列表：管理所有啟用的語言</li>
+        <li>字典 Grid：分頁顯示所有字串條目</li>
+        <li>篩選：依 namespace / culture / 翻譯狀態 / 關鍵字搜尋</li>
+        <li>Inline Edit：直接在 Grid 點擊編輯翻譯，即時儲存</li>
+        <li>匯入 / 匯出：支援 JSON / CSV 格式</li>
+      </ul>
+
+      <h3 style="margin-top:16px;">Translation Memory（翻譯記憶）</h3>
+      <ul class="feat-list">
+        <li>重複使用相同來源文字的翻譯</li>
+        <li>重複語句偵測，推薦翻譯建議</li>
+        <li>批次建議工作流程</li>
+        <li>可選接入 AI / 機器翻譯 Provider（可設定）</li>
+        <li><strong>所有建議均需人工審核後才套用</strong>，不自動發佈</li>
+      </ul>
+
+      <div class="img-frame" id="img-loc">
+        <img src="img/13_admin_localization.png" alt="Admin 多語系管理" onload="document.getElementById('img-loc').classList.add('loaded')">
+        <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/13_admin_localization.png</span><span class="ph-label">Admin 多語系字典管理介面（Grid + Inline 編輯）</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ SECURITY -->
+<section id="security">
+<div class="container">
+  <div class="section-tag">認證與安全機制</div>
+  <h2>企業級安全設計</h2>
+
+  <div class="grid3">
+    <div class="card highlight">
+      <div class="card-icon">🔐</div>
+      <h3>JWT 認證</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>JWT（JSON Web Token）Bearer 認證</li>
+        <li>Refresh Token：長效 Token，Silent Renewal，不強迫重新登入</li>
+        <li>登出即時 Revoke RefreshToken（伺服器端）</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <div class="card-icon">🔒</div>
+      <h3>連線資訊加密</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>DataSource 密碼、API Key 以 <strong>ASP.NET Core DataProtection（AES-256）</strong> 加密</li>
+        <li>加密後存入 PostgreSQL <code>secure_config</code> 欄位</li>
+        <li>不以明文傳輸至前端</li>
+        <li>DataProtection Key 寫入 Docker Volume，跨容器重啟保留</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <div class="card-icon">📋</div>
+      <h3>資料保護</h3>
+      <ul class="feat-list" style="font-size:13px;">
+        <li>Soft Delete：刪除操作設定 <code>deleted_at</code>，不實際移除資料</li>
+        <li>完整 Audit Log：所有管理操作均記錄操作者、時間、變更內容</li>
+        <li>顯示版本歷史快照（最近 5 版本，可查看或復原）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px;">權限系統架構（Permission Phase，規格已定義）</h3>
+  <div class="callout" style="margin-top:8px;">
+    目前系統運作於<strong>開放模式</strong>（所有已登入使用者均可存取）。Permission Phase 功能全部完善後實作，架構已定義：
+  </div>
+  <table class="spec-table" style="max-width:700px;margin-top:12px;">
+    <thead><tr><th>資源類型</th><th>主體類型</th><th>存取層級</th></tr></thead>
+    <tbody>
+      <tr><td>Folder</td><td>User / Role</td><td>Read / Write / Manage</td></tr>
+      <tr><td>Display</td><td>User / Role</td><td>Read / Write / Manage</td></tr>
+      <tr><td>DataSource</td><td>User / Role</td><td>Read / Write</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ DATABASE -->
+<section id="database" class="alt">
+<div class="container">
+  <div class="section-tag">資料庫 Schema</div>
+  <h2>PostgreSQL — 16 張資料表，完整業務覆蓋</h2>
+
+  <div class="grid2">
+    <div>
+      <h3>技術規格</h3>
+      <ul class="feat-list">
+        <li>資料庫引擎：<strong>PostgreSQL</strong></li>
+        <li>ORM：EF Core + Npgsql，snake_case 命名慣例</li>
+        <li>Display 結構以 <strong>JSONB</strong> 格式儲存（Schema 彈性 + 查詢效能）</li>
+        <li>所有主要資料表均使用 UUID PK</li>
+        <li>Soft Delete 欄位：<code>deleted_at TIMESTAMPTZ</code></li>
+      </ul>
+    </div>
+    <div>
+      <h3>核心欄位說明</h3>
+      <pre style="font-size:12px;"><code>displays.display_json → JSONB
+  （整份 Display 結構：Symbols +
+    DataBindings + Layouts）
+
+data_sources.secure_config → TEXT
+  （AES 加密的密碼、API Key）
+
+data_sources.connection_config → JSONB
+  （非敏感連線設定：Host、Port、DB）</code></pre>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">資料表清單</h3>
+  <table class="spec-table">
+    <thead><tr><th>資料表</th><th>用途</th><th>Soft Delete</th></tr></thead>
+    <tbody>
+      <tr><td><code>users</code></td><td>使用者帳號</td><td>✅</td></tr>
+      <tr><td><code>roles</code> / <code>user_roles</code></td><td>角色與使用者角色對應（多對多）</td><td>—</td></tr>
+      <tr><td><code>folders</code></td><td>資料夾（支援巢狀樹狀）</td><td>✅</td></tr>
+      <tr><td><code>displays</code></td><td>Display 定義（含 display_json JSONB）</td><td>✅</td></tr>
+      <tr><td><code>data_sources</code></td><td>DataSource 設定（含 secure_config 加密欄位）</td><td>✅</td></tr>
+      <tr><td><code>data_source_views</code></td><td>DataSource 下的 View 定義</td><td>—</td></tr>
+      <tr><td><code>permissions</code></td><td>資源層級授權（Folder / Display / DataSource）</td><td>—</td></tr>
+      <tr><td><code>audit_logs</code></td><td>所有管理操作稽核記錄</td><td>—</td></tr>
+      <tr><td><code>uploaded_files</code></td><td>上傳圖片檔案記錄</td><td>✅</td></tr>
+      <tr><td><code>display_snapshots</code></td><td>Display 版本歷史快照（最近 5 筆）</td><td>—</td></tr>
+      <tr><td><code>user_favorites</code></td><td>使用者 Display 收藏</td><td>—</td></tr>
+      <tr><td><code>display_views</code></td><td>Display 瀏覽紀錄（Recent 功能）</td><td>—</td></tr>
+      <tr><td><code>refresh_tokens</code></td><td>JWT Refresh Token</td><td>—</td></tr>
+      <tr><td><code>system_settings</code></td><td>系統參數 Key/Value</td><td>—</td></tr>
+      <tr><td><code>localization_cultures</code></td><td>語言文化設定清單</td><td>—</td></tr>
+      <tr><td><code>localization_entries</code></td><td>多語系字典條目</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ API -->
+<section id="api">
+<div class="container">
+  <div class="section-tag">REST API</div>
+  <h2>RESTful API 端點清單</h2>
+
+  <div class="grid2">
+    <div>
+      <h3>認證（Auth）</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/auth/login</code></td><td>登入，回傳 JWT + RefreshToken</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/auth/logout</code></td><td>登出（Revoke RefreshToken）</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/auth/refresh</code></td><td>刷新 JWT</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/auth/me</code></td><td>取得當前使用者資訊</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">Displays</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/displays</code></td><td>Display 列表</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/displays</code></td><td>建立 Display</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/displays/{id}</code></td><td>取得單筆（含 DisplayJson）</td></tr>
+          <tr><td><span class="api-method put">PUT</span></td><td><code>/api/displays/{id}</code></td><td>儲存 DisplayJson</td></tr>
+          <tr><td><span class="api-method del">DEL</span></td><td><code>/api/displays/{id}</code></td><td>刪除（Soft Delete）</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/displays/favorites</code></td><td>個人收藏清單</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/displays/recent</code></td><td>最近瀏覽清單</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">Studio（Editor 前端專用）</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/studio/datasources</code></td><td>已授權 DataSource 清單</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/studio/datasources/{id}/views</code></td><td>View 清單</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/studio/datasources/{id}/views/{vid}/fields</code></td><td>View 欄位（含 DisplayName / Unit）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>DataSource（Admin）</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/datasources</code></td><td>DataSource 列表</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/datasources</code></td><td>新增 DataSource</td></tr>
+          <tr><td><span class="api-method put">PUT</span></td><td><code>/api/datasources/{id}</code></td><td>更新 DataSource</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/datasources/{id}/test-connection</code></td><td>測試連線</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/datasources/{id}/views/{vid}/preview</code></td><td>View 前 5 筆預覽</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/datasources/{id}/schema</code></td><td>Schema Browser</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">Query</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/query/preview</code></td><td>預覽查詢（Admin 用）</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/query/execute</code></td><td>執行查詢（Runtime 用）</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px;">Localization</h3>
+      <table class="spec-table">
+        <thead><tr><th>Method</th><th>路徑</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/localization/cultures</code></td><td>啟用語言清單</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/localization/bundle/{code}</code></td><td>完整語言包（JSON）</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/localization/entries</code></td><td>字典條目列表（含篩選）</td></tr>
+          <tr><td><span class="api-method put">PUT</span></td><td><code>/api/localization/entries/{id}</code></td><td>更新翻譯文字</td></tr>
+          <tr><td><span class="api-method post">POST</span></td><td><code>/api/localization/import</code></td><td>匯入 JSON / CSV</td></tr>
+          <tr><td><span class="api-method get">GET</span></td><td><code>/api/localization/export</code></td><td>匯出 JSON / CSV</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ DEPLOYMENT -->
+<section id="deployment" class="alt">
+<div class="container">
+  <div class="section-tag">部署架構</div>
+  <h2>Docker Compose 三容器，一鍵啟動</h2>
+
+  <div class="grid2">
+    <div>
+      <h3>Docker Compose 服務</h3>
+      <pre><code>services:
+  api:      # VisoLink.Server     port 6000
+  client:   # Blazor WASM         port 6001
+  admin:    # Razor Pages Admin   port 6002
+  postgres: # PostgreSQL          port 15432
+  pgadmin:  # pgAdmin Web UI      port 6050</code></pre>
+      <ul class="feat-list" style="margin-top:12px;">
+        <li>三個應用容器均設定 <code>restart: unless-stopped</code>（Docker 重啟後自動恢復）</li>
+        <li><code>docker_rebuild.bat</code>：一鍵停容器 → 重建 Image → 啟動 → 自動 Migration → Seed</li>
+        <li><code>MigrateAsync()</code>：啟動時自動套用所有 EF Core Migration</li>
+      </ul>
+    </div>
+    <div>
+      <h3>資料持久化（Docker Volume）</h3>
+      <table class="spec-table">
+        <thead><tr><th>資料</th><th>儲存位置</th></tr></thead>
+        <tbody>
+          <tr><td>Display 結構</td><td>PostgreSQL <code>displays.display_json</code></td></tr>
+          <tr><td>DataSource 設定</td><td>PostgreSQL <code>data_sources</code></td></tr>
+          <tr><td>上傳圖片</td><td>Docker Volume <code>/app/uploads</code></td></tr>
+          <tr><td>DataProtection Key</td><td>Docker Volume <code>/app/dp-keys</code></td></tr>
+          <tr><td>Graphic Library SVG</td><td>Docker Volume <code>/app/wwwroot/graphics</code></td></tr>
+          <tr><td>語言字典</td><td>PostgreSQL <code>localization_entries</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px;">nginx 反向代理設定</h3>
+  <div class="grid3">
+    <div class="card"><h4>圖片服務</h4><p style="font-size:13px;"><code>/uploads</code> 反向代理至 <code>/app/uploads</code>，支援大型圖片（<code>client_max_body_size</code>）</p></div>
+    <div class="card"><h4>SVG 快取控制</h4><p style="font-size:13px;">Graphic Library SVG：<code>no-cache</code><br>manifest：<code>no-store</code><br>確保更新後立即生效</p></div>
+    <div class="card"><h4>Redis（預備）</h4><p style="font-size:13px;">快取層已預備（雙實例），目前尚未啟用，Phase 4 活化使用</p></div>
+  </div>
+
+  <div class="img-frame" id="img-deploy">
+    <img src="img/15_deployment_diagram.png" alt="部署架構圖" onload="document.getElementById('img-deploy').classList.add('loaded')">
+    <div class="ph"><span class="ph-icon">🖼️</span><span class="ph-file">img/15_deployment_diagram.png</span><span class="ph-label">Docker Compose 部署架構圖</span></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ TECH STACK -->
+<section id="techstack">
+<div class="container">
+  <div class="section-tag">技術選型</div>
+  <h2>完整技術堆疊</h2>
+
+  <table class="spec-table">
+    <thead><tr><th>層</th><th>技術</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>前端框架</td><td><strong>Blazor WebAssembly</strong></td><td>.NET 8，C# 前端，無 JavaScript 框架依賴</td></tr>
+      <tr><td>畫布渲染</td><td><strong>SVG（原生 Blazor）</strong></td><td>不依賴第三方 Canvas 函式庫</td></tr>
+      <tr><td>圖表引擎</td><td><strong>Apache ECharts</strong>（via JS Interop）</td><td>Gauge / Trend / Bar Chart；2026-05 取代 amCharts</td></tr>
+      <tr><td>UI 元件庫</td><td><strong>Radzen</strong>（主應用）</td><td>Blazor 元件套件</td></tr>
+      <tr><td>狀態管理</td><td><strong>自訂 EditorStateService</strong></td><td>DI 單例，不使用 Redux/Flux</td></tr>
+      <tr><td>後端框架</td><td><strong>ASP.NET Core Web API</strong></td><td>.NET 8，RESTful</td></tr>
+      <tr><td>Admin 框架</td><td><strong>ASP.NET Core Razor Pages + Metronic</strong></td><td>.NET 8，獨立部署</td></tr>
+      <tr><td>ORM</td><td><strong>EF Core + Npgsql</strong></td><td>snake_case 命名慣例</td></tr>
+      <tr><td>資料庫</td><td><strong>PostgreSQL</strong></td><td>JSONB 儲存 DisplayJson</td></tr>
+      <tr><td>快取層</td><td><strong>Redis</strong></td><td>雙實例，已預備，Phase 4 啟用</td></tr>
+      <tr><td>認證</td><td><strong>JWT + Refresh Token</strong></td><td>ASP.NET Core JWT Bearer</td></tr>
+      <tr><td>加密</td><td><strong>ASP.NET Core DataProtection</strong></td><td>AES-256，連線資訊保護</td></tr>
+      <tr><td>即時資料</td><td><strong>HTTP Polling</strong>（RuntimeQueryScheduler）</td><td>輪詢設計，無 WebSocket 依賴</td></tr>
+      <tr><td>容器化</td><td><strong>Docker / Docker Compose</strong></td><td>三服務容器</td></tr>
+      <tr><td>Web Server</td><td><strong>nginx</strong></td><td>反向代理 + 靜態資源 + 快取控制</td></tr>
+      <tr><td>圖形符號</td><td><strong>ISA-101 SVG 自製圖庫</strong></td><td>226+ 工業符號，manifest v3.2</td></tr>
+      <tr><td>多語系</td><td><strong>DB-backed localization（自製）</strong></td><td>不依賴 .resx，Admin 線上維護</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════ FOOTER -->
+<footer style="background:var(--blue-dark);color:#94a3b8;padding:32px 28px;text-align:center;font-size:13px;">
+  <div style="font-weight:700;color:#fff;font-size:18px;margin-bottom:6px;">VisoLink</div>
+  <div>工業 SCADA 視覺化平台 — 產品功能全覽</div>
+  <div style="margin-top:8px;font-size:12px;color:#64748b;">
+    版本 v1.0 | 建立日期 2026-06-21 | 截圖請依 <code style="color:#93c5fd;">img/XX_filename.png</code> 標示位置補入
+  </div>
+</footer>
+
+</body>
+</html>

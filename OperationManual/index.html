@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VisoLink 正式操作手冊入口，依前台與後台功能分類說明。">
+  <title>VisoLink 操作手冊</title>
+  <link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="回到 VisoLink 操作手冊首頁">
+      <img src="../logos/D_Logo.svg" alt="VisoLink">
+      <span class="brand-label">操作手冊</span>
+    </a>
+    <nav class="top-actions" aria-label="主要導覽">
+      <a class="top-link" href="frontend/index.html">前台</a>
+      <a class="top-link" href="backend/index.html">後台</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">VisoLink Operation Manual</span>
+    <h1>從功能位置到操作結果，一步一步完成工作</h1>
+    <p>本手冊依前台與後台分類，說明功能在哪裡、如何設定，以及完成操作後應該看到什麼結果。</p>
+    <div class="hero-meta">
+      <span class="meta-chip">文件狀態：前台／後台正式版</span>
+      <span class="meta-chip">適用版本：正式發行版</span>
+      <span class="meta-chip">更新日期：2026-08-18</span>
+    </div>
+  </section>
+
+  <main class="home-main" id="main">
+    <div class="section-heading">
+      <h2>選擇操作範圍</h2>
+      <p>依照目前使用的系統介面，進入對應手冊。</p>
+    </div>
+
+    <div class="manual-grid">
+      <article class="manual-card">
+        <span class="card-number">MANUAL 01</span>
+        <h2>前台操作手冊</h2>
+        <p>提供圖面監看、資料分析與圖面製作人員使用。</p>
+        <ul>
+          <li>Display Library 與 Runtime</li>
+          <li>Data Analysis 與時間分析</li>
+          <li>Studio、Symbol 與 Data Binding</li>
+          <li>變數、計算與圖庫</li>
+        </ul>
+        <a class="button" href="frontend/index.html">進入前台手冊 <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="manual-card">
+        <span class="card-number">MANUAL 02</span>
+        <h2>後台操作手冊</h2>
+        <p>提供系統、資料來源與使用權限管理人員使用。</p>
+        <ul>
+          <li>DataSource、View 與資料分類</li>
+          <li>使用者、群組、角色與權限</li>
+          <li>Cache 與系統狀態</li>
+          <li>多語系、稽核與備份還原</li>
+        </ul>
+        <a class="button" href="backend/index.html">進入後台手冊 <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+
+    <section class="workflow" aria-labelledby="workflow-title">
+      <div class="section-heading">
+        <h2 id="workflow-title">前後台工作關係</h2>
+        <p>後台準備資料與權限，前台將資料轉換成可監看、可分析的圖面。</p>
+      </div>
+      <ol>
+        <li><strong>後台準備</strong><br>建立資料來源、View、分類與使用權限。</li>
+        <li><strong>前台製作</strong><br>在 Studio 建立圖面並完成資料綁定。</li>
+        <li><strong>前台應用</strong><br>透過 Runtime 監看，並使用 Data Analysis 分析。</li>
+      </ol>
+    </section>
+
+    <section class="index-section" aria-labelledby="function-index-title">
+      <div class="section-heading">
+        <h2 id="function-index-title">功能階層索引</h2>
+        <p>前台 43 項、後台 16 章 102 項功能均已完成正式內容；點選名稱可直達對應操作位置。</p>
+      </div>
+      <div class="index-columns">
+        <article class="index-panel">
+          <h3>前台功能</h3>
+          <ol class="function-tree">
+            <li><strong><a href="frontend/display-library.html">1. Display Library 圖面庫</a></strong>
+              <ul>
+                <li><a href="frontend/display-library.html#display-library-overview">瀏覽圖面庫</a></li>
+                <li><a href="frontend/display-library.html#display-search-filter">搜尋與篩選圖面</a></li>
+                <li><a href="frontend/display-library.html#folder-create-edit">建立與編輯 Folder</a></li>
+                <li><a href="frontend/display-library.html#folder-organize-display">整理 Folder 與 Display</a></li>
+                <li><a href="frontend/display-library.html#folder-delete">刪除 Folder</a></li>
+                <li><a href="frontend/display-library.html#display-create">建立 Display</a></li>
+                <li><a href="frontend/display-library.html#display-open">開啟 Display</a></li>
+                <li><a href="frontend/display-library.html#display-copy">複製 Display</a></li>
+                <li><a href="frontend/display-library.html#display-metadata">編輯圖面基本資料</a></li>
+                <li><a href="frontend/display-library.html#display-delete">刪除 Display</a></li>
+                <li><a href="frontend/display-library.html#display-permission">Display 授權設定</a></li>
+                <li><a href="frontend/display-library.html#folder-permission">Folder 授權設定</a></li>
+                <li><a href="frontend/display-library.html#permission-validation">驗證授權結果</a></li>
+              </ul>
+            </li>
+            <li><strong><a href="frontend/studio.html">2. Studio 圖面編輯</a></strong>
+              <ul>
+                <li><a href="frontend/studio.html#studio-overview">認識 Studio 介面</a></li>
+                <li><a href="frontend/studio.html#canvas-settings">畫布設定</a></li>
+                <li><a href="frontend/studio.html#object-editing">選取與編輯物件</a></li>
+                <li><a href="frontend/studio.html#alignment-layers">排列與圖層</a></li>
+                <li><a href="frontend/studio.html#undo-redo">復原與重做</a></li>
+                <li><a href="frontend/studio.html#symbol-add">加入 Symbol</a></li>
+                <li><a href="frontend/studio.html#symbol-common-properties">Symbol 共通屬性</a></li>
+                <li><a href="frontend/studio.html#symbol-data-display">資料顯示元件</a></li>
+                <li><a href="frontend/studio.html#symbol-chart-indicator">圖表與指示元件</a></li>
+                <li><a href="frontend/studio.html#graphics-browse-search">瀏覽與搜尋圖形</a></li>
+                <li><a href="frontend/studio.html#graphics-add-canvas">將圖形加入畫布</a></li>
+                <li><a href="frontend/studio.html#data-browser">瀏覽與搜尋資料</a></li>
+                <li><a href="frontend/studio.html#data-drag-bind">拖曳套用資料</a></li>
+                <li><a href="frontend/studio.html#symbol-data-binding">Symbol 資料綁定</a></li>
+                <li><a href="frontend/studio.html#display-format-null">格式、單位與空值</a></li>
+                <li><a href="frontend/studio.html#variables">Variable</a></li>
+                <li><a href="frontend/studio.html#calculations">Calculation</a></li>
+                <li><a href="frontend/studio.html#display-save">儲存圖面</a></li>
+                <li><a href="frontend/studio.html#display-preview">預覽圖面</a></li>
+              </ul>
+            </li>
+            <li><strong><a href="frontend/runtime.html">3. Runtime 即時監看</a></strong>
+              <ul>
+                <li><a href="frontend/runtime.html#runtime-open">開啟 Runtime</a></li>
+                <li><a href="frontend/runtime.html#runtime-overview">認識 Runtime 畫面</a></li>
+                <li><a href="frontend/runtime.html#runtime-display-mode">顯示模式</a></li>
+                <li><a href="frontend/runtime.html#global-time-filter">全域時間 Filter</a></li>
+                <li><a href="frontend/runtime.html#interactive-time-window">互動式時間窗</a></li>
+                <li><a href="frontend/runtime.html#data-analysis-open">開啟 Data Analysis</a></li>
+                <li><a href="frontend/runtime.html#quick-trend">Quick Trend</a></li>
+                <li><a href="frontend/runtime.html#time-marker-create">建立時間標記</a></li>
+                <li><a href="frontend/runtime.html#time-marker-manage-compare">管理與比較時間標記</a></li>
+                <li><a href="frontend/runtime.html#time-range-aggregation">時間範圍彙整</a></li>
+                <li><a href="frontend/runtime.html#analysis-settings">分析設定</a></li>
+              </ul>
+            </li>
+          </ol>
+          <a class="index-jump" href="frontend/index.html">查看前台章節 →</a>
+        </article>
+
+        <article class="index-panel">
+          <h3>後台功能</h3>
+          <ol class="function-tree">
+            <li><strong><a href="backend/dashboard.html">1. Dashboard</a></strong><ul><li><a href="backend/dashboard.html#admin-login">登入後台</a></li><li><a href="backend/dashboard.html#admin-navigation">認識後台導覽</a></li><li><a href="backend/dashboard.html#dashboard-overview">查看 Dashboard</a></li><li><a href="backend/dashboard.html#dashboard-recent-audit">查看近期稽核</a></li></ul></li>
+            <li><strong><a href="backend/users.html">2. Users 使用者</a></strong><ul><li><a href="backend/users.html#users-overview">瀏覽使用者清單</a></li><li><a href="backend/users.html#user-create">建立使用者</a></li><li><a href="backend/users.html#user-edit">編輯使用者資料</a></li><li><a href="backend/users.html#user-enable-disable">啟用與停用使用者</a></li><li><a href="backend/users.html#user-role-assignment">指派使用者角色</a></li><li><a href="backend/users.html#user-delete">刪除使用者</a></li></ul></li>
+            <li><strong><a href="backend/groups.html">3. Groups 群組</a></strong><ul><li><a href="backend/groups.html#groups-overview">瀏覽群組清單</a></li><li><a href="backend/groups.html#group-create-edit">建立與編輯群組</a></li><li><a href="backend/groups.html#group-enable-disable">啟用與停用群組</a></li><li><a href="backend/groups.html#group-members">管理群組成員</a></li><li><a href="backend/groups.html#group-delete">刪除群組</a></li></ul></li>
+            <li><strong><a href="backend/roles.html">4. Roles 角色</a></strong><ul><li><a href="backend/roles.html#roles-overview">瀏覽角色清單</a></li><li><a href="backend/roles.html#role-create">建立自訂角色</a></li><li><a href="backend/roles.html#role-types">辨識系統與自訂角色</a></li><li><a href="backend/roles.html#role-delete">刪除自訂角色</a></li></ul></li>
+            <li><strong><a href="backend/datasources.html">5. DataSource 資料來源與 View</a></strong><ul><li><a href="backend/datasources.html#datasource-overview">瀏覽 DataSource 清單</a></li><li><a href="backend/datasources.html#datasource-create-type">建立 DataSource 與選擇類型</a></li><li><a href="backend/datasources.html#datasource-settings">設定 DataSource 連線</a></li><li><a href="backend/datasources.html#datasource-test">測試 DataSource 連線</a></li><li><a href="backend/datasources.html#datasource-enable-disable">啟用與停用 DataSource</a></li><li><a href="backend/datasources.html#datasource-edit-delete">編輯與刪除 DataSource</a></li><li><a href="backend/datasources.html#views-overview">瀏覽 View 清單</a></li><li><a href="backend/datasources.html#view-create-edit">建立與編輯 View</a></li><li><a href="backend/datasources.html#view-source-selection">選擇 View 資料來源</a></li><li><a href="backend/datasources.html#view-query-settings">設定 View 查詢</a></li><li><a href="backend/datasources.html#view-field-mapping">設定 View 欄位映射</a></li><li><a href="backend/datasources.html#view-preview">預覽與驗證 View</a></li></ul></li>
+            <li><strong><a href="backend/data-bindings.html">6. DataBindings</a></strong><ul><li><a href="backend/data-bindings.html#bindings-overview">瀏覽 DataBindings 清單</a></li><li><a href="backend/data-bindings.html#binding-create-edit">建立與編輯 DataBinding</a></li><li><a href="backend/data-bindings.html#binding-basic">設定 DataBinding 基本資料</a></li><li><a href="backend/data-bindings.html#binding-sources-fields">設定資料來源與輸出欄位</a></li><li><a href="backend/data-bindings.html#binding-result-preview">預覽 DataBinding 結果</a></li><li><a href="backend/data-bindings.html#binding-access">設定 DataBinding 使用權限</a></li><li><a href="backend/data-bindings.html#binding-cache">設定 Runtime Cache</a></li><li><a href="backend/data-bindings.html#binding-delete">刪除 DataBinding</a></li><li><a href="backend/data-bindings.html#nodes-manage">管理 DataBinding 節點</a></li><li><a href="backend/data-bindings.html#nodes-assign">將 DataBinding 歸類至節點</a></li></ul></li>
+            <li><strong><a href="backend/data-permissions.html">7. Data Permissions 資料權限</a></strong><ul><li><a href="backend/data-permissions.html#permissions-overview">瀏覽資料權限清單</a></li><li><a href="backend/data-permissions.html#permission-create">新增資料權限規則</a></li><li><a href="backend/data-permissions.html#permission-filter">篩選資料權限規則</a></li><li><a href="backend/data-permissions.html#permission-update">更新資料權限規則</a></li><li><a href="backend/data-permissions.html#permission-delete">刪除資料權限規則</a></li></ul></li>
+            <li><strong><a href="backend/folders.html">8. Folders</a></strong><ul><li><a href="backend/folders.html#admin-folders-overview">瀏覽資料夾階層</a></li><li><a href="backend/folders.html#admin-folder-create">建立資料夾</a></li><li><a href="backend/folders.html#admin-folder-edit-move">編輯與移動資料夾</a></li><li><a href="backend/folders.html#admin-folder-permissions">管理資料夾權限</a></li><li><a href="backend/folders.html#admin-folder-delete">刪除資料夾</a></li></ul></li>
+            <li><strong><a href="backend/media-library.html">9. Media Library</a></strong><ul><li><a href="backend/media-library.html#media-overview">瀏覽媒體清單</a></li><li><a href="backend/media-library.html#media-search">搜尋與篩選媒體</a></li><li><a href="backend/media-library.html#media-upload">上傳媒體</a></li><li><a href="backend/media-library.html#media-move-copy">移動媒體與複製位置</a></li><li><a href="backend/media-library.html#media-delete">刪除媒體</a></li></ul></li>
+            <li><strong><a href="backend/localization.html">10. Localization 多語系</a></strong><ul><li><a href="backend/localization.html#localization-dashboard">查看語系總覽</a></li><li><a href="backend/localization.html#dictionary-filter">搜尋與篩選字典</a></li><li><a href="backend/localization.html#dictionary-entry">新增、編輯與刪除字典項目</a></li><li><a href="backend/localization.html#dictionary-batch">執行字典批次作業</a></li><li><a href="backend/localization.html#culture-add">新增語系</a></li><li><a href="backend/localization.html#culture-enable">啟用與停用語系</a></li><li><a href="backend/localization.html#culture-delete">刪除語系</a></li><li><a href="backend/localization.html#localization-export">匯出語系字典</a></li><li><a href="backend/localization.html#localization-import-validate">驗證字典匯入內容</a></li><li><a href="backend/localization.html#localization-import-apply">套用字典匯入</a></li></ul></li>
+            <li><strong><a href="backend/license-management.html">11. License Management</a></strong><ul><li><a href="backend/license-management.html#license-overview">查看授權總覽</a></li><li><a href="backend/license-management.html#license-filter-details">篩選授權與查看詳細資料</a></li><li><a href="backend/license-management.html#license-add">新增 License Key</a></li><li><a href="backend/license-management.html#license-offline">執行離線授權啟用</a></li><li><a href="backend/license-management.html#license-delete">刪除 License</a></li><li><a href="backend/license-management.html#license-usage">查看 License 點數使用</a></li><li><a href="backend/license-management.html#license-force-release">強制釋放 License 點數</a></li><li><a href="backend/license-management.html#license-history">查看 License 使用歷程</a></li></ul></li>
+            <li><strong><a href="backend/audit-logs.html">12. Audit Logs</a></strong><ul><li><a href="backend/audit-logs.html#audit-overview">瀏覽稽核紀錄</a></li><li><a href="backend/audit-logs.html#audit-pagination">設定稽核分頁與筆數</a></li><li><a href="backend/audit-logs.html#audit-detail">查看稽核詳細資料</a></li></ul></li>
+            <li><strong><a href="backend/backup-restore.html">13. Backup &amp; Restore</a></strong><ul><li><a href="backend/backup-restore.html#backup-create">建立備份</a></li><li><a href="backend/backup-restore.html#backup-list-download">查看與下載備份</a></li><li><a href="backend/backup-restore.html#backup-import">匯入備份檔案</a></li><li><a href="backend/backup-restore.html#restore-run">執行資料還原</a></li><li><a href="backend/backup-restore.html#backup-delete">刪除備份</a></li><li><a href="backend/backup-restore.html#backup-schedule-guide">查看備份排程引導</a></li></ul></li>
+            <li><strong><a href="backend/api-tokens.html">14. API Token Management</a></strong><ul><li><a href="backend/api-tokens.html#token-overview">瀏覽 API Token 清單</a></li><li><a href="backend/api-tokens.html#token-create">建立 API Token</a></li><li><a href="backend/api-tokens.html#token-copy">複製新建立的 API Token</a></li><li><a href="backend/api-tokens.html#token-revoke">撤銷 API Token</a></li></ul></li>
+            <li><strong><a href="backend/system-settings.html">15. System Settings</a></strong><ul><li><a href="backend/system-settings.html#system-overview">查看系統總覽</a></li><li><a href="backend/system-settings.html#service-health">查看應用服務狀態</a></li><li><a href="backend/system-settings.html#runtime-environment">查看執行環境</a></li><li><a href="backend/system-settings.html#storage-persistence">查看儲存與持久化狀態</a></li><li><a href="backend/system-settings.html#runtime-settings">管理系統執行限制</a></li><li><a href="backend/system-settings.html#deployment-info">查看部署資訊</a></li><li><a href="backend/system-settings.html#changelog">查看產品更新紀錄</a></li></ul></li>
+            <li><strong><a href="backend/cache-management.html">16. Cache Management</a></strong><ul><li><a href="backend/cache-management.html#cache-overview">查看 Cache 管理總覽</a></li><li><a href="backend/cache-management.html#cache-server-registry">新增、編輯與刪除 Cache Server</a></li><li><a href="backend/cache-management.html#cache-server-test">測試 Cache Server 連線</a></li><li><a href="backend/cache-management.html#cache-health-topology">查看 Cache 狀態與拓樸</a></li><li><a href="backend/cache-management.html#cache-key-filter">搜尋與篩選 Runtime Cache Key</a></li><li><a href="backend/cache-management.html#cache-delete-selected">刪除選取的 Runtime Cache Key</a></li><li><a href="backend/cache-management.html#cache-ttl-policy">設定與套用 Cache TTL Policy</a></li><li><a href="backend/cache-management.html#cache-clear">清除 Runtime Cache</a></li></ul></li>
+          </ol>
+          <a class="index-jump" href="backend/index.html">查看後台章節 →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">VisoLink 操作手冊 · 本文件將隨正式功能持續更新</footer>
+</body>
+</html>

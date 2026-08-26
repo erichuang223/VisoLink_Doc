@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VisoLink Runtime 即時監看與 Data Analysis 操作手冊。"><title>Runtime 即時監看｜VisoLink 操作手冊</title>
+  <link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <header class="topbar"><a class="brand" href="../index.html"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">前台操作手冊</span></a><nav class="top-actions"><a class="top-link" href="index.html">前台首頁</a><a class="top-link" href="studio.html">上一章</a></nav></header>
+  <div class="manual-shell">
+    <aside class="sidebar"><p class="sidebar-title">CHAPTER 03</p><nav class="manual-nav" aria-label="Runtime 功能目錄">
+      <a href="#runtime-open">3.1.1 開啟 Runtime</a><a href="#runtime-overview">3.1.2 Runtime 畫面</a><a href="#runtime-display-mode">3.1.3 顯示模式</a>
+      <a href="#global-time-filter">3.2.1 全域時間 Filter</a><a href="#interactive-time-window">3.2.2 互動式時間窗</a>
+      <a href="#data-analysis-open">3.3.1 開啟 Data Analysis</a><a href="#quick-trend">3.3.2 Quick Trend</a><a href="#time-marker-create">3.3.3 建立時間標記</a><a href="#time-marker-manage-compare">3.3.4 管理與比較</a><a href="#time-range-aggregation">3.3.5 時間範圍彙整</a><a href="#analysis-settings">3.3.6 分析設定</a>
+    </nav></aside>
+    <main class="manual-content" id="main">
+      <nav class="breadcrumb" aria-label="階層導覽"><a href="../index.html">操作手冊</a><span>›</span><a href="index.html">前台</a><span>›</span><strong>Runtime</strong></nav>
+      <header class="manual-header"><span class="eyebrow">CHAPTER 03</span><h1>Runtime 即時監看</h1><p>Runtime 將 Display 轉換為持續更新的監看畫面，並以同一個時間情境串連圖面、時間標記、Quick Trend 與 Data Analysis。</p></header>
+
+      <section class="manual-function" id="runtime-open"><span class="function-number">3.1.1</span><h2>開啟 Runtime</h2><p>從 Display Library 或 Studio 進入 Runtime，查看已儲存圖面的即時資料與互動功能。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>監看與分析使用者</strong></div><div class="meta-item"><span>所需權限</span><strong>Display 檢視及相關資料權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → Runtime</strong></div></div>
+        <ol class="steps"><li>進入 Display Library，找到要監看的 Display。</li><li>點選 Display 卡片或操作選單中的 Runtime。</li><li>也可以在 Studio 上方點選「▶ Runtime」。</li><li>等待畫布與資料載入完成。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/runtime-overview.png" alt="Runtime 即時監看畫面"><figcaption>Runtime 會顯示已儲存的圖面、目前資料與時間視窗。</figcaption></figure>
+        <p class="note-box"><strong>看不到圖面或資料：</strong>先確認 Display 檢視權限、資料權限、圖面是否已儲存，以及所選時間範圍是否有資料。</p>
+      </section>
+
+      <section class="manual-function" id="runtime-overview"><span class="function-number">3.1.2</span><h2>認識 Runtime 畫面</h2><p>Runtime 由上方導覽、中央圖面、浮動工具列與下方時間視窗組成。</p>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>區域</th><th>用途</th></tr></thead><tbody><tr><td>上方導覽</td><td>切換介面語系、返回 Editor 或 Displays 清單，並查看授權使用狀況。</td></tr><tr><td>中央圖面</td><td>顯示 Value、Trend、Table、狀態及其他已配置元件。</td></tr><tr><td>浮動工具列</td><td>切換畫布操作、全畫面、Data Analysis、符合螢幕與符合物件。</td></tr><tr><td>時間視窗</td><td>控制全域時間範圍、即時／暫停、重新整理與自動更新頻率。</td></tr></tbody></table></div>
+        <p class="result-box"><strong>預期結果：</strong>所有使用全域時間情境的元件，會依下方同一個時間範圍取得資料。</p>
+      </section>
+
+      <section class="manual-function" id="runtime-display-mode"><span class="function-number">3.1.3</span><h2>顯示模式</h2><p>顯示模式用來適應中控大屏、一般桌面及不同尺寸的顯示設備。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/runtime-display-mode.png" alt="Runtime 全畫面顯示模式"><figcaption>全畫面模式集中顯示監看內容；移動、符合螢幕與符合物件可快速調整觀看範圍。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>工具</th><th>用途</th></tr></thead><tbody><tr><td>Fixed canvas</td><td>以固定畫布及捲動方式瀏覽內容。</td></tr><tr><td>Full mode</td><td>隱藏主要導覽區，讓圖面使用更多顯示空間；點選退出區或再次切換即可離開。</td></tr><tr><td>移動畫布</td><td>拖曳觀看目前未顯示的畫布區域。</td></tr><tr><td>符合螢幕</td><td>縮放整張畫布以符合可用視窗。</td></tr><tr><td>符合物件</td><td>依圖面中實際物件範圍調整縮放。</td></tr></tbody></table></div>
+      </section>
+
+      <section class="manual-function" id="global-time-filter"><span class="function-number">3.2.1</span><h2>全域時間 Filter</h2><p>全域時間 Filter 決定 Runtime 圖面與分析功能使用的共同時間情境。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/global-time-filter.png" alt="Runtime 全域時間篩選選單"><figcaption>可使用最近時間快捷值，或切換日曆區間、自訂及擴充條件。</figcaption></figure>
+        <ol class="steps"><li>點選下方目前的時間範圍，例如「最近 1 小時」。</li><li>在「最近時間」選擇 5 分鐘至 30 天等快捷範圍。</li><li>需要固定起訖時間時，切換「日曆區間」。</li><li>需要相對時間運算時，切換「自訂」，輸入開始與結束條件，例如 <code>*-1h</code> 到 <code>*</code>。</li><li>套用後確認下方顯示的實際起訖時間。</li></ol>
+        <p class="note-box"><strong>注意：</strong>改變全域時間會重新查詢相關元件；範圍愈長，畫面需要處理的資料量通常愈大。</p>
+      </section>
+
+      <section class="manual-function" id="interactive-time-window"><span class="function-number">3.2.2</span><h2>互動式時間窗</h2><p>時間視窗除了選擇範圍，也能控制目前情境是否持續跟隨現在時間。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/interactive-time-window.png" alt="Runtime 互動式時間視窗"><figcaption>時間視窗顯示範圍、即時／暫停狀態、手動重新整理、自動更新頻率及最後更新時間。</figcaption></figure>
+        <ol class="steps"><li>確認目前範圍與實際起訖時間。</li><li>點選「現在」可切換即時跟隨或暫停，保留目前時間情境進行查看。</li><li>點選「↻」立即重新載入目前範圍。</li><li>開啟更新頻率選單，選擇自動更新間隔。</li><li>從右側狀態確認是否正在即時更新，以及最近完成時間。</li></ol>
+        <p class="result-box"><strong>預期結果：</strong>暫停時，時間範圍不再向前移動；恢復即時後，範圍重新跟隨現在時間。</p>
+      </section>
+
+      <section class="manual-function" id="data-analysis-open"><span class="function-number">3.3.1</span><h2>開啟 Data Analysis</h2><p>Data Analysis 整合時間點比較與原有 Quick Trend，讓使用者不離開 Runtime 就能分析目前情境。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/data-analysis-open.png" alt="Runtime Data Analysis 趨勢分析畫面"><figcaption>Data Analysis 的趨勢分析依序使用已選時間、已選標籤及比較結果。</figcaption></figure>
+        <ol class="steps"><li>點選浮動工具列的時鐘圖示；圖示數字代表目前已建立的時間標記數量。</li><li>在上方模式列選擇「趨勢分析」或「快速趨勢」。</li><li>完成分析後點選「← 返回」回到 Runtime 圖面。</li><li>需要重新開始時點選「清除分析」。</li></ol>
+      </section>
+
+      <section class="manual-function" id="quick-trend"><span class="function-number">3.3.2</span><h2>Quick Trend</h2><p>Quick Trend 延續 Popup Trend 的快速查圖能力，並納入 Data Analysis 的共同入口。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/quick-trend.png" alt="Data Analysis 快速趨勢模式"><figcaption>Quick Trend 可加入畫面使用中的標籤，並切換折線、點、長條或面積圖。</figcaption></figure>
+        <ol class="steps"><li>開啟 Data Analysis，點選「快速趨勢」。</li><li>點選「＋加入標籤」，搜尋並選擇要觀察的標籤。</li><li>選擇折線、點、長條或面積呈現方式。</li><li>使用下方全域時間 Filter 改變分析範圍。</li><li>不需要標籤時移除個別項目，或點選「清除」。</li></ol>
+        <p class="note-box"><strong>資料範圍：</strong>標籤清單以目前 Display 已使用且帳號有權限的資料為基礎。</p>
+      </section>
+
+      <section class="manual-function" id="time-marker-create"><span class="function-number">3.3.3</span><h2>建立時間標記</h2><p>時間標記把圖表或表格上的某一個時間保存為可操作的分析物件。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/time-marker-create.png" alt="Runtime 已建立兩個時間標記"><figcaption>點選可互動的時間後，工具列時鐘圖示會顯示已選時間數量。</figcaption></figure>
+        <ol class="steps"><li>在 Runtime 找到可互動的 Trend 或 Table 時間位置。</li><li>點選要保留的時間點。</li><li>依需要繼續點選其他時間點。</li><li>確認 Data Analysis 圖示的數量同步增加。</li><li>點選該圖示進入趨勢分析。</li></ol>
+        <p class="note-box"><strong>注意：</strong>時間標記是目前分析工作的選取內容，不會改寫原始資料。</p>
+      </section>
+
+      <section class="manual-function" id="time-marker-manage-compare"><span class="function-number">3.3.4</span><h2>管理與比較時間標記</h2><p>已選時間可保留多個分析點，再搭配一個或多個標籤形成比較表。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/time-marker-manage-compare.png" alt="Data Analysis 已選兩個時間標記"><figcaption>已選時間依序編號並保留來源元件；可移除個別項目或清除全部時間。</figcaption></figure>
+        <ol class="steps"><li>在「已選時間」檢查時間、順序及來源元件。</li><li>點選項目右側「×」移除個別時間，或點選「清除時間」。</li><li>在「已選標籤」點選「＋加入標籤」。</li><li>從目前畫面使用中的標籤選擇一個或多個項目，點選「完成」。</li><li>在「比較結果」檢查各時間點的原始值與變化。</li></ol>
+        <p class="result-box"><strong>預期結果：</strong>比較表依所選時間、標籤、基準與比較模式顯示結果。</p>
+      </section>
+
+      <section class="manual-function" id="time-range-aggregation"><span class="function-number">3.3.5</span><h2>時間範圍彙整</h2><p>Runtime 依全域時間範圍與 Display 中元件的設定，將長時間序列整理為可閱讀的區間結果。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/time-range-aggregation.png" alt="Runtime 每十分鐘彙整資料表"><figcaption>範例表格依每10分鐘呈現彙整結果；實際區間與方法由圖面設計決定。</figcaption></figure>
+        <ol class="steps"><li>在全域時間 Filter 選擇要分析的起訖範圍。</li><li>查看已設定時間分組的 Table、Trend、Bar 或其他元件。</li><li>確認元件顯示的時間區間與單位。</li><li>切換較短或較長範圍，確認結果隨共同時間情境更新。</li></ol>
+        <p class="note-box"><strong>設定責任：</strong>平均、加總、最大值、最小值、筆數及時間分組等彙整方式在 Studio 的元件屬性中設定；Runtime 使用者主要調整分析時間範圍。</p>
+      </section>
+
+      <section class="manual-function" id="analysis-settings"><span class="function-number">3.3.6</span><h2>分析設定</h2><p>分析設定控制數值如何對齊到時間標記，以及各時間點如何與基準比較。</p>
+        <figure class="manual-shot"><img src="../img/frontend/runtime/analysis-settings.png" alt="Data Analysis 分析設定與比較結果"><figcaption>選取時間與標籤後，可設定顯示內容、時間對齊、最大時間差、比較模式及基準。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>設定</th><th>選項與用途</th></tr></thead><tbody><tr><td>顯示</td><td>原始值、比較值或兩者。</td></tr><tr><td>時間對齊</td><td>最近值、上一筆、下一筆、內插或精確。</td></tr><tr><td>最大時間差</td><td>自動、1分鐘、5分鐘、30分鐘、1小時或無限制；限制可接受資料與標記時間的距離。</td></tr><tr><td>比較模式</td><td>差值、百分比變化、比率、指數或與前值差異。</td></tr><tr><td>基準</td><td>指定哪一個已選時間作為比較基準。</td></tr></tbody></table></div>
+        <ol class="steps"><li>先建立至少一個時間標記並加入至少一個標籤。</li><li>選擇顯示原始值、比較值或兩者。</li><li>依資料頻率選擇時間對齊方式與最大時間差。</li><li>選擇比較模式及基準時間。</li><li>確認表格數值、缺值與變化方向符合預期。</li></ol>
+        <p class="note-box"><strong>判讀原則：</strong>資料更新頻率不一致時，不宜直接使用過小的最大時間差；需要逐筆完全相符時才選擇「精確」。</p>
+      </section>
+
+      <nav class="chapter-end-nav"><a href="studio.html">← 上一章：Studio</a><a href="index.html">返回前台首頁 →</a></nav>
+    </main>
+  </div>
+  <footer class="page-footer">VisoLink Runtime 操作手冊 · 2026-08-18</footer>
+</body>
+</html>

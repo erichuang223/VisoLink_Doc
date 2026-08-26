@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第三階段｜VisoLink 系統管理與維運</title>
+  <link rel="stylesheet" href="assets/training.css">
+</head>
+<body>
+  <header class="deck-header">
+    <a class="brand" href="index.html"><img src="../logos/D_Logo.svg" alt="VisoLink"></a>
+    <div class="deck-title">系統管理與維運</div>
+    <span class="deck-stage">第三階段｜系統管理員</span>
+    <div class="deck-actions"><a href="index.html">課程目錄</a><button type="button" data-action="fullscreen">全螢幕</button><button type="button" class="print-action" data-action="print">列印 / PDF</button></div>
+  </header>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <main class="deck">
+    <section class="slide cover dark" id="s1" data-title="課程封面">
+      <div class="eyebrow">VISOLINK EDUCATION &amp; TRAINING</div>
+      <h1>系統管理與維運</h1>
+      <p class="lead">用可控、可追溯的方式管理資料、人員、權限與平台運作。</p>
+      <div class="cover-meta"><span>第三階段</span><span>適用：系統管理員</span><span>建議時間：3 小時</span></div>
+    </section>
+
+    <section class="slide" id="s2" data-title="學習目標與前提">
+      <div class="slide-kicker">ADMIN OBJECTIVES</div>
+      <h2>管理員的工作，是讓平台安全且持續可用</h2>
+      <div class="grid-4">
+        <article class="card"><span class="number">01</span><h3>資料治理</h3><p>正確建立來源、組織 View 並確認資料可用性。</p></article>
+        <article class="card"><span class="number">02</span><h3>身分治理</h3><p>以人員、群組和職責管理存取範圍。</p></article>
+        <article class="card"><span class="number">03</span><h3>效能治理</h3><p>理解 Cache 的負荷分流與管理原則。</p></article>
+        <article class="card"><span class="number">04</span><h3>維運治理</h3><p>監看狀態、處理異常並保留變更紀錄。</p></article>
+      </div>
+      <p class="note">建議先完成第一階段，並理解 Studio 與 Runtime 的實際使用流程。</p>
+    </section>
+
+    <section class="slide" id="s3" data-title="管理邊界與原則">
+      <div class="slide-kicker">ADMIN GUARDRAILS</div>
+      <h2>先確保影響範圍可知，再進行管理操作</h2>
+      <div class="steps">
+        <article><b>01</b><div><h3>最小權限</h3><p>只授予完成工作所需的資料與功能權限。</p></div></article>
+        <article><b>02</b><div><h3>變更可追溯</h3><p>記錄變更目的、時間、執行者與影響對象。</p></div></article>
+        <article><b>03</b><div><h3>先驗證後擴大</h3><p>先於有限範圍確認結果，再套用至正式使用範圍。</p></div></article>
+        <article><b>04</b><div><h3>保留回復方式</h3><p>高影響操作前，先確認備份與回復程序可執行。</p></div></article>
+      </div>
+    </section>
+
+    <section class="slide" id="s4" data-title="資料來源管理流程">
+      <div class="slide-kicker">DATA SOURCE WORKFLOW</div>
+      <h2>連得上只是第一步，還要確認資料能被正確使用</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/10_admin_datasource.png" alt="資料來源管理畫面"><figcaption>集中管理連線設定、狀態與資料來源生命週期。</figcaption></figure>
+        <div class="steps compact"><article><b>01</b><div><h3>確認需求</h3><p>釐清來源、用途、負責人及使用範圍。</p></div></article><article><b>02</b><div><h3>建立連接</h3><p>使用合適的連接類型與安全設定。</p></div></article><article><b>03</b><div><h3>測試資料</h3><p>確認連線、欄位、時間及更新狀態。</p></div></article><article><b>04</b><div><h3>授權使用</h3><p>依角色開放資料與後續管理權責。</p></div></article></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s5" data-title="連接類型與安全">
+      <div class="slide-kicker">CONNECTOR GOVERNANCE</div>
+      <h2>依資料特性選擇連接方式，連線資訊需受控管理</h2>
+      <div class="term-grid">
+        <article><h3>關聯式資料</h3><p>適用結構化查詢與營運資料。</p></article>
+        <article><h3>時序資料</h3><p>適用設備量測與時間序列。</p></article>
+        <article><h3>工業資料</h3><p>適用現場設備及控制系統整合。</p></article>
+        <article><h3>服務介面</h3><p>適用以標準介面提供的系統資料。</p></article>
+      </div>
+      <div class="callout"><b>安全原則</b><br>連線帳號不得與個人帳號混用；憑證、密碼與端點資訊只提供給必要的管理角色，並依組織規範定期檢視。</div>
+    </section>
+
+    <section class="slide" id="s6" data-title="View 與資料結構">
+      <div class="slide-kicker">VIEW &amp; DATA MODEL</div>
+      <h2>把來源資料整理成設計者看得懂、用得對的結構</h2>
+      <div class="split">
+        <figure class="shot"><img src="../ProductIntroduction/img/11_easypi_af_browser.png" alt="階層式資料瀏覽"><figcaption>以設備、區域或業務語意組織資料瀏覽結構。</figcaption></figure>
+        <ul class="check-list"><li>名稱應能辨識設備、區域與用途</li><li>欄位應標示資料型別與單位</li><li>時間欄位與更新頻率需有明確定義</li><li>避免讓設計人員直接猜測原始代碼</li><li>結構異動前先盤點受影響的 Display</li></ul>
+      </div>
+    </section>
+
+    <section class="slide" id="s7" data-title="人員與群組管理">
+      <div class="slide-kicker">IDENTITY MANAGEMENT</div>
+      <h2>以職責群組管理權限，避免逐人堆疊例外</h2>
+      <div class="permission-map simplified">
+        <article><span class="big-icon">👤</span><h3>人員</h3><p>可辨識的個別使用者身分。</p></article><div class="arrow">→</div><article><span class="big-icon">👥</span><h3>群組</h3><p>依部門、職務或工作任務集合。</p></article><div class="arrow">→</div><article class="result"><span class="big-icon">✓</span><h3>授權</h3><p>將功能、圖面與資料範圍授予群組。</p></article>
+      </div>
+      <div class="grid-3 compact-grid"><article class="card"><h3>到職</h3><p>加入正確群組並完成初始驗證。</p></article><article class="card"><h3>調職</h3><p>移除舊職責權限，再加入新群組。</p></article><article class="card"><h3>離職</h3><p>依流程停用身分並保留必要紀錄。</p></article></div>
+    </section>
+
+    <section class="slide" id="s8" data-title="圖面與資料權限">
+      <div class="slide-kicker">TWO-LAYER PERMISSION</div>
+      <h2>授權要同時回答：「能進哪裡」與「能看什麼」</h2>
+      <div class="grid-2">
+        <article class="card accent"><span class="big-icon">▧</span><h3>圖面權限</h3><p>控制 Display 的瀏覽、設計或管理範圍。</p><ul class="check-list"><li>依工作情境分配</li><li>避免用單一畫面繞過角色界線</li><li>異動時確認導覽與入口</li></ul></article>
+        <article class="card accent"><span class="big-icon">⌁</span><h3>資料權限</h3><p>控制資料來源、View、Tag 或相關內容的使用範圍。</p><ul class="check-list"><li>依資料責任與敏感度分配</li><li>確保 Studio 與 Runtime 結果一致</li><li>驗證拒絕存取時的安全呈現</li></ul></article>
+      </div>
+      <p class="note">權限驗證必須使用實際角色帳號；管理員本身看得到，不代表一般使用者也能正確使用。</p>
+    </section>
+
+    <section class="slide" id="s9" data-title="語系與顯示文字管理">
+      <div class="slide-kicker">LOCALIZATION</div>
+      <h2>讓相同畫面以一致術語服務不同語系使用者</h2>
+      <div class="split wide-image">
+        <figure class="shot"><img src="../ProductIntroduction/img/13_admin_localization.png" alt="語系管理畫面"><figcaption>集中維護顯示文字與多語系對應內容。</figcaption></figure>
+        <div><ul class="check-list"><li>先定義組織共用的產品與設備術語</li><li>使用穩定的文字識別，不以顯示文字當代碼</li><li>新增語系時確認長文字與版面空間</li><li>更新後抽查 Studio 與 Runtime 實際呈現</li></ul><div class="callout"><b>管理重點</b><br>翻譯正確之外，也要確保不同畫面對同一事物使用相同名稱。</div></div>
+      </div>
+    </section>
+
+    <section class="slide" id="s10" data-title="Cache 的角色">
+      <div class="slide-kicker">CACHE CONCEPT</div>
+      <h2>Cache 是平台的資料服務緩衝與分流能力</h2>
+      <div class="cache-flow">
+        <div class="source">資料來源<br><small>設備與系統</small></div><div class="line">→</div><div class="cache">Cache<br><small>暫存・共用・分流</small></div><div class="fan"><span>↗ Runtime A</span><span>→ Runtime B</span><span>↘ Runtime C</span></div>
+      </div>
+      <div class="grid-3 compact-grid"><article class="card"><h3>降低重複負荷</h3><p>減少多個使用端對來源進行相同資料請求。</p></article><article class="card"><h3>提升回應效率</h3><p>讓常用資料能以一致方式提供給平台功能。</p></article><article class="card"><h3>支援多設備分流</h3><p>依系統規模配置多個服務節點分擔負荷。</p></article></div>
+    </section>
+
+    <section class="slide" id="s11" data-title="多節點負荷分流">
+      <div class="slide-kicker">LOAD DISTRIBUTION</div>
+      <h2>Cache 可分流至多台設備，支援服務規模擴充</h2>
+      <div class="architecture">
+        <div class="arch-users"><span>中控大屏</span><span>操作工作站</span><span>行動瀏覽</span></div>
+        <div class="arch-arrow">↓</div><div class="arch-platform">VisoLink 平台服務</div><div class="arch-arrow">↓</div>
+        <div class="arch-cache"><span>Cache 節點 1</span><span>Cache 節點 2</span><span>Cache 節點 N</span></div>
+        <div class="arch-arrow">↓</div><div class="arch-source">企業與現場資料來源</div>
+      </div>
+      <p class="note">規模配置應依同時使用量、資料頻率與可用性需求規劃；管理員關注的是服務狀態、容量與負荷是否均衡。</p>
+    </section>
+
+    <section class="slide" id="s12" data-title="Cache 管理作業">
+      <div class="slide-kicker">CACHE OPERATIONS</div>
+      <h2>管理操作前，先判斷影響範圍與恢復方式</h2>
+      <div class="steps">
+        <article><b>01</b><div><h3>查看狀態</h3><p>確認節點可用性、容量、負荷與資料更新情形。</p></div></article>
+        <article><b>02</b><div><h3>辨識範圍</h3><p>確認問題屬於單一資料、來源、節點或整體服務。</p></div></article>
+        <article><b>03</b><div><h3>選擇性處理</h3><p>優先採用影響最小的更新或清除範圍。</p></div></article>
+        <article><b>04</b><div><h3>持續驗證</h3><p>確認 Runtime 資料恢復、負荷穩定並記錄結果。</p></div></article>
+      </div>
+      <div class="callout warning"><b>注意</b><br>全面清除可能造成短時間重新載入與來源負荷上升，不應把它當作所有問題的第一個處理步驟。</div>
+    </section>
+
+    <section class="slide" id="s13" data-title="系統狀態監看">
+      <div class="slide-kicker">SYSTEM HEALTH</div>
+      <h2>從服務、資料與使用情境三個層次判斷健康狀態</h2>
+      <div class="grid-3">
+        <article class="card"><span class="status-dot good"></span><h3>平台服務</h3><p>服務是否可用、回應是否正常、各節點是否一致。</p></article>
+        <article class="card"><span class="status-dot warn"></span><h3>資料管線</h3><p>來源連線、更新時間、錯誤與 Cache 狀態是否正常。</p></article>
+        <article class="card"><span class="status-dot info"></span><h3>使用者情境</h3><p>特定角色、Display、時間查詢或裝置是否受到影響。</p></article>
+      </div>
+      <p class="statement">先界定影響範圍，再找共同原因：一個人、單一畫面、單一資料來源，還是整體服務？</p>
+    </section>
+
+    <section class="slide" id="s14" data-title="備份與回復">
+      <div class="slide-kicker">BACKUP &amp; RECOVERY</div>
+      <h2>備份的價值，要用「能否成功回復」來驗證</h2>
+      <div class="flow five">
+        <div><b>1</b><strong>定義範圍</strong><span>設定、圖面與必要資料</span></div>
+        <div><b>2</b><strong>安排週期</strong><span>依重要性與變更頻率</span></div>
+        <div><b>3</b><strong>保護備份</strong><span>權限、位置與保留期限</span></div>
+        <div><b>4</b><strong>定期測試</strong><span>於受控環境演練回復</span></div>
+        <div><b>5</b><strong>記錄結果</strong><span>時間、版本與驗證項目</span></div>
+      </div>
+      <div class="completion"><strong>最低要求</strong><span>管理團隊知道備份在哪裡、由誰負責、多久執行一次，以及最近一次回復測試何時成功。</span></div>
+    </section>
+
+    <section class="slide" id="s15" data-title="稽核與問題紀錄">
+      <div class="slide-kicker">AUDIT &amp; TRACEABILITY</div>
+      <h2>留下足以還原事件的紀錄，不只寫「系統異常」</h2>
+      <div class="record-grid">
+        <div><b>何時</b><span>發生時間與持續期間</span></div><div><b>何人</b><span>使用者、角色或執行者</span></div><div><b>何處</b><span>環境、Display、資料來源</span></div><div><b>何事</b><span>症狀、訊息與影響範圍</span></div><div><b>做了什麼</b><span>操作步驟與變更內容</span></div><div><b>結果</b><span>恢復時間與後續追蹤</span></div>
+      </div>
+      <p class="note">記錄中避免直接暴露密碼、憑證或不必要的敏感資料。</p>
+    </section>
+
+    <section class="slide" id="s16" data-title="管理變更標準流程">
+      <div class="slide-kicker">CHANGE MANAGEMENT SOP</div>
+      <h2>每一次正式變更都應有完整閉環</h2>
+      <div class="flow six">
+        <div><b>1</b><strong>提出</strong><span>目的與需求</span></div><div><b>2</b><strong>評估</strong><span>影響與風險</span></div><div><b>3</b><strong>備妥</strong><span>備份與回復</span></div><div><b>4</b><strong>執行</strong><span>限定範圍操作</span></div><div><b>5</b><strong>驗證</strong><span>資料與使用情境</span></div><div><b>6</b><strong>記錄</strong><span>結果與交接</span></div>
+      </div>
+      <div class="grid-2 compact-grid"><article class="card"><h3>技術驗證</h3><p>服務、資料連線、Cache 與錯誤狀態正常。</p></article><article class="card"><h3>使用驗證</h3><p>以實際角色進入 Runtime，確認 Display 與資料均可用。</p></article></div>
+    </section>
+
+    <section class="slide" id="s17" data-title="實作與管理員檢核">
+      <div class="slide-kicker">ADMIN ASSESSMENT</div>
+      <h2>第三階段實作任務</h2>
+      <div class="quiz admin-quiz">
+        <div><span>任務 1</span><p>建立測試資料來源，完成連線與欄位驗證。</p></div>
+        <div><span>任務 2</span><p>建立測試群組，分別設定圖面與資料權限並以角色帳號驗證。</p></div>
+        <div><span>任務 3</span><p>說明 Cache 節點狀態，示範如何判斷影響範圍與選擇處理方式。</p></div>
+        <div><span>任務 4</span><p>依標準格式完成一次模擬異常的處理與變更紀錄。</p></div>
+      </div>
+      <div class="completion"><strong>完成標準</strong><span>能獨立執行低風險日常管理，並在高影響操作前完成評估、備份、驗證與紀錄。</span></div>
+      <a class="next-course" href="index.html">返回課程系列目錄 →</a>
+    </section>
+  </main>
+
+  <footer class="deck-footer"><button type="button" data-nav="prev" aria-label="上一頁">←</button><span class="page-indicator"></span><button type="button" data-nav="next" aria-label="下一頁">→</button></footer>
+  <script src="assets/training.js"></script>
+</body>
+</html>

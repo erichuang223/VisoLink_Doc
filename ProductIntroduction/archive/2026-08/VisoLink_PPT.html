@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VisoLink 決策者簡報｜降低工業視覺化的長期成本</title>
+<style>
+:root{--navy:#102a43;--blue:#2563eb;--teal:#0f766e;--green:#15803d;--amber:#b45309;--red:#b42318;--ink:#182230;--muted:#667085;--line:#d7e0ea;--soft:#f5f8fb;--soft-blue:#edf4ff;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e8eef5;color:var(--ink);font-family:"Microsoft JhengHei","Noto Sans TC","Segoe UI",Arial,sans-serif;line-height:1.55}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap;padding:10px 20px;background:var(--navy);color:#fff}
+nav strong{font-size:14px;margin-right:10px}nav a{color:#dbe7f3;text-decoration:none;font-size:12px;padding:5px 8px;border-radius:4px}nav a:hover{background:rgba(255,255,255,.12)}
+.deck{max-width:1240px;margin:0 auto;padding:24px}.slide{position:relative;width:100%;min-height:700px;margin:0 0 28px;padding:42px 54px 52px;background:#fff;border:1px solid #ccd7e3;box-shadow:0 18px 46px rgba(16,42,67,.12);overflow:hidden}
+.slide:before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(90deg,var(--navy),var(--blue),var(--teal))}
+.cover{background:linear-gradient(135deg,#0b1f34 0%,#123b63 60%,#0f766e 100%);color:#fff}.cover:before{display:none}
+.kicker{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}.cover .kicker{color:#93c5fd}
+h1,h2,h3,p{margin-top:0}h1{font-size:54px;line-height:1.12;margin-bottom:18px;color:#fff}h2{max-width:1050px;font-size:30px;line-height:1.28;color:var(--navy);margin-bottom:18px}h3{font-size:18px;line-height:1.35;color:var(--navy);margin-bottom:8px}.cover h3{color:#fff}
+.lead{font-size:21px;color:#dbeafe;max-width:900px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}.card.blue{border-top:4px solid var(--blue)}.card.teal{border-top:4px solid var(--teal)}.card.green{border-top:4px solid var(--green)}.card.amber{border-top:4px solid var(--amber)}.card.soft{background:var(--soft)}.card.dark{background:var(--navy);color:#fff;border:none}.card.dark h3{color:#fff}
+.big{font-size:39px;font-weight:900;line-height:1;color:var(--blue);margin-bottom:8px}.label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+ul{list-style:none;padding:0;margin:8px 0 0}li{position:relative;padding:6px 0 6px 18px}li:before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.flow{display:flex;align-items:stretch;gap:12px;margin:24px 0}.node{flex:1;min-height:120px;padding:18px;border:1px solid var(--line);border-radius:8px;background:#fff}.arrow{display:flex;align-items:center;font-size:28px;color:#98a2b3}
+.statement{margin:20px 0 28px;padding:16px 20px;border-left:5px solid var(--blue);background:var(--soft-blue);font-size:19px;color:#344054}.quote{font-size:31px;line-height:1.35;font-weight:850;color:var(--navy);max-width:1040px}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th{background:var(--navy);color:#fff;text-align:left;padding:11px 13px}td{padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}tr:nth-child(even) td{background:#f8fafc}
+.good{color:var(--green);font-weight:800}.mid{color:var(--amber);font-weight:800}.bad{color:var(--red);font-weight:800}
+.metric{border:1px solid var(--line);border-radius:8px;background:#fff;padding:18px}.metric .value{font-size:34px;font-weight:900;color:var(--blue);line-height:1.1}
+.formula{background:#111827;color:#e5e7eb;border-radius:8px;padding:20px;font-family:Consolas,"Cascadia Code",monospace;font-size:14px;line-height:1.75;white-space:pre-wrap}
+.waterfall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}.waterfall div{min-height:115px;padding:16px;border-radius:8px;border:1px solid var(--line);background:#fff}.waterfall div:nth-child(2){margin-top:28px}.waterfall div:nth-child(3){margin-top:56px}.waterfall div:nth-child(4){margin-top:84px;background:var(--navy);color:#fff}.waterfall div:nth-child(4) h3{color:#fff}
+.footer{position:absolute;left:54px;right:54px;bottom:17px;display:flex;justify-content:space-between;color:#98a2b3;font-size:11px}.note{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.deck{padding:10px}.slide{padding:32px 24px;min-height:auto}.grid2,.grid3,.grid4,.waterfall{grid-template-columns:1fr}.flow{flex-direction:column}.arrow{justify-content:center;transform:rotate(90deg)}.waterfall div{margin-top:0!important}.footer{position:static;margin-top:28px}}
+@media print{body{background:#fff}nav{display:none}.deck{padding:0;max-width:none}.slide{height:100vh;page-break-after:always;border:none;box-shadow:none;margin:0}}
+</style>
+</head>
+<body>
+<nav><strong>VisoLink｜決策者版</strong><a href="#p1">封面</a><a href="#p2">決策摘要</a><a href="#p3">現況</a><a href="#p4">隱性成本</a><a href="#p5">根本原因</a><a href="#p6">策略選擇</a><a href="#p7">解法</a><a href="#p8">效益</a><a href="#p9">ROI</a><a href="#p10">風險</a><a href="#p11">導入</a><a href="#p12">建議</a></nav>
+<div class="deck">
+
+<section class="slide cover" id="p1">
+<div class="kicker">Industrial Visualization Platform</div>
+<h1>讓監控畫面的每一次變更，<br>不再重新變成一個專案</h1>
+<p class="lead">VisoLink 將工業資料視覺化從一次性客製開發，轉為可持續使用、可自行調整的平台能力。</p>
+<div class="grid3" style="margin-top:48px">
+<div class="card dark"><h3>降低重複成本</h3><p>減少畫面新增、修改與維護時反覆投入的開發費用。</p></div>
+<div class="card dark"><h3>縮短需求週期</h3><p>現場需求不再等待排工、外包與重新部署。</p></div>
+<div class="card dark"><h3>提高資料效益</h3><p>讓 PI、SQL、InfluxDB 等既有資料更快形成可用資訊。</p></div>
+</div>
+<div class="footer"><span>VisoLink Executive Deck</span><span>1</span></div>
+</section>
+
+<section class="slide" id="p2">
+<div class="kicker">Executive Summary</div>
+<h2>建議將 VisoLink 定位為「工業資料視覺化平台」，以降低監控畫面的長期總持有成本。</h2>
+<div class="grid3" style="margin-top:26px">
+<div class="card blue"><div class="big">成本</div><h3>把重複客製轉成平台能力</h3><p>常見的畫面新增、欄位調整、資料來源切換與趨勢需求，不必每次重新委外開發。</p></div>
+<div class="card teal"><div class="big">成效</div><h3>縮短資料到決策的距離</h3><p>既有資料可透過統一 Connector、DataBinding 與 Runtime 快速形成監控畫面。</p></div>
+<div class="card green"><div class="big">效益</div><h3>建立可持續擴展的資產</h3><p>完成的 Display、Symbol、資料綁定與模板可重複使用，而不是專案結束即停止累積。</p></div>
+</div>
+<div class="statement">決策重點不是再買一套顯示工具，而是是否繼續用「每張畫面個別開發」的方式處理長期需求。</div>
+<div class="footer"><span>先給結論，再提供證據</span><span>2</span></div>
+</section>
+
+<section class="slide" id="p3">
+<div class="kicker">Current State</div>
+<h2>企業已投入大量成本建置資料系統，但最後一哩的資訊呈現仍經常依賴專案式開發。</h2>
+<div class="flow">
+<div class="node"><h3>既有資料資產</h3><p>PLC、DCS、SCADA、PI Historian、MES、ERP、SQL、InfluxDB。</p></div><div class="arrow">→</div>
+<div class="node"><h3>現場提出需求</h3><p>新增設備畫面、修改欄位、增加趨勢、比較不同資料來源。</p></div><div class="arrow">→</div>
+<div class="node"><h3>等待技術資源</h3><p>確認規格、排程、開發、測試、部署與後續修正。</p></div><div class="arrow">→</div>
+<div class="node"><h3>需求再次改變</h3><p>製程、設備與管理需求持續演進，循環重新開始。</p></div>
+</div>
+<div class="quote" style="margin-top:34px">資料系統已經存在，但每次把資料組成「現場真正要看的畫面」，仍要重新付出時間與成本。</div>
+<div class="footer"><span>Situation</span><span>3</span></div>
+</section>
+
+<section class="slide" id="p4">
+<div class="kicker">Cost of the Status Quo</div>
+<h2>目前模式的主要成本，不只在開發費，而在等待、溝通與機會損失。</h2>
+<div class="grid4">
+<div class="card blue"><h3>直接成本</h3><p>委外開發、內部工時、測試、部署與後續維護。</p></div>
+<div class="card amber"><h3>等待成本</h3><p>需求排隊期間，現場仍以舊畫面、Excel 或人工方式判斷。</p></div>
+<div class="card teal"><h3>溝通成本</h3><p>懂現場的人與做系統的人來回轉譯需求，增加誤差與重工。</p></div>
+<div class="card green"><h3>機會成本</h3><p>異常、能耗、品質與產能資訊無法及時呈現，改善速度受限。</p></div>
+</div>
+<div class="waterfall">
+<div><h3>一次需求</h3><p>看似只是一張畫面或一個欄位。</p></div>
+<div><h3>形成專案</h3><p>需求確認、報價、排程、開發與驗收。</p></div>
+<div><h3>反覆修改</h3><p>現場需求改變後，再次進入相同流程。</p></div>
+<div><h3>長期總成本</h3><p>多次小需求累積，往往高於一次平台化投入。</p></div>
+</div>
+<div class="footer"><span>Complication</span><span>4</span></div>
+</section>
+
+<section class="slide" id="p5">
+<div class="kicker">Root Cause</div>
+<h2>根本原因不是技術能力不足，而是「畫面控制權」與「現場知識」分離。</h2>
+<div class="grid2">
+<div class="card soft"><h3>最懂需求的人</h3><ul><li>製程工程師知道哪些變數要一起看</li><li>設備工程師知道異常前兆與設備狀態</li><li>中控人員知道畫面如何配置才容易操作</li><li>生產主管知道哪些資訊影響管理決策</li></ul></div>
+<div class="card soft"><h3>真正能修改畫面的人</h3><ul><li>IT 開發人員</li><li>系統整合商</li><li>原廠顧問或授權工具使用者</li><li>排程有限的外部技術資源</li></ul></div>
+</div>
+<div class="statement">只要每次修改都必須跨越組織邊界，需求再小，也會產生排程、溝通與驗收成本。</div>
+<div class="footer"><span>Root-cause diagnosis</span><span>5</span></div>
+</section>
+
+<section class="slide" id="p6">
+<div class="kicker">Strategic Choice</div>
+<h2>企業有三種選擇；只有平台化能同時兼顧速度、治理與長期成本。</h2>
+<table>
+<thead><tr><th>選擇</th><th>短期速度</th><th>長期成本</th><th>現場自主</th><th>企業治理</th></tr></thead>
+<tbody>
+<tr><td>持續個別委外開發</td><td class="mid">視排程而定</td><td class="bad">需求越多越高</td><td class="bad">低</td><td class="mid">分散</td></tr>
+<tr><td>讓各單位自行使用通用工具</td><td class="good">初期快</td><td class="mid">中</td><td class="good">高</td><td class="bad">資料與權限難統一</td></tr>
+<tr><td><strong>建立 VisoLink 平台能力</strong></td><td class="good">可快速迭代</td><td class="good">重複需求邊際成本下降</td><td class="good">高</td><td class="good">集中管理</td></tr>
+</tbody>
+</table>
+<div class="statement">平台化不是取消 IT 管理，而是把 IT 從「每張畫面都要代做」轉為「管理資料來源、安全與平台規則」。</div>
+<div class="footer"><span>Strategic alternatives</span><span>6</span></div>
+</section>
+
+<section class="slide" id="p7">
+<div class="kicker">Proposed Solution</div>
+<h2>VisoLink 以「連接、綁定、設計、運行」四個步驟，把既有資料轉成可持續維護的監控畫面。</h2>
+<div class="flow">
+<div class="node"><div class="label">01 Connect</div><h3>連接既有資料</h3><p>SQL Server、MySQL、PostgreSQL、InfluxDB、easyPI / PIBridge。</p></div><div class="arrow">→</div>
+<div class="node"><div class="label">02 Bind</div><h3>統一資料綁定</h3><p>以 DataSource、View、Field 組成可管理的 DataBinding。</p></div><div class="arrow">→</div>
+<div class="node"><div class="label">03 Design</div><h3>現場自行設計</h3><p>自由畫布、12 種 Symbol、226+ 工業 SVG 符號。</p></div><div class="arrow">→</div>
+<div class="node"><div class="label">04 Run</div><h3>瀏覽器即時監看</h3><p>Runtime、全域時間篩選、自動刷新與 Popup Trend。</p></div>
+</div>
+<div class="grid3">
+<div class="metric"><div class="value">6 類</div><div>資料來源 Connector</div></div>
+<div class="metric"><div class="value">12 種</div><div>主要 Symbol 元件</div></div>
+<div class="metric"><div class="value">226+</div><div>工業 SVG 符號</div></div>
+</div>
+<div class="footer"><span>VisoLink solution</span><span>7</span></div>
+</section>
+
+<section class="slide" id="p8">
+<div class="kicker">Expected Benefits</div>
+<h2>VisoLink 的效益可從成本、速度、資產與治理四個面向驗證。</h2>
+<div class="grid2">
+<div class="card blue"><h3>1. 降低重複建置成本</h3><p>同類畫面、資料綁定與元件可複製重用，新增需求不再從零開始。</p></div>
+<div class="card teal"><h3>2. 縮短需求完成時間</h3><p>具權限的工程師可直接調整畫面，減少需求排隊與跨單位往返。</p></div>
+<div class="card green"><h3>3. 累積企業視覺化資產</h3><p>Display、Symbol、Connector 與設定持續累積，擴展到其他設備與產線。</p></div>
+<div class="card amber"><h3>4. 保持集中治理</h3><p>DataSource、帳號、語言、稽核、版本與部署仍由平台集中管理。</p></div>
+</div>
+<div class="statement">效益的核心不是「做畫面比較快」而已，而是後續每一次需求的邊際成本都能逐步下降。</div>
+<div class="footer"><span>Value realization</span><span>8</span></div>
+</section>
+
+<section class="slide" id="p9">
+<div class="kicker">ROI Framework</div>
+<h2>投資回收應以「目前年度總成本」與「導入後可避免成本」計算，而不是只比較軟體售價。</h2>
+<div class="grid2">
+<div>
+<div class="formula">目前年度成本 =
+  年度新增/修改需求數
+× 每次平均投入成本
++ 內部溝通與驗收工時
++ 延遲造成的機會成本
+
+VisoLink 年度淨效益 =
+  可避免的外包/開發成本
++ 可節省的內部工時
++ 改善提早發生的效益
+- 平台年度維運成本
+
+投資回收期 =
+  一次性導入成本
+÷ 年度淨效益</div>
+<p class="note" style="margin-top:10px">此頁刻意不虛構金額；取得客戶真實需求量、平均單次成本與等待天數後，即可完成正式 ROI。</p>
+</div>
+<div>
+<table>
+<thead><tr><th>需補入的實際數據</th><th>數值</th></tr></thead>
+<tbody>
+<tr><td>每年新增或修改監控畫面的次數</td><td>＿＿ 次</td></tr>
+<tr><td>每次平均外包／內部開發成本</td><td>NT$ ＿＿</td></tr>
+<tr><td>每次需求平均等待時間</td><td>＿＿ 天</td></tr>
+<tr><td>需求、測試、驗收平均投入工時</td><td>＿＿ 小時</td></tr>
+<tr><td>VisoLink 導入與教育訓練成本</td><td>NT$ ＿＿</td></tr>
+<tr><td>預計第一年可自主完成的需求比例</td><td>＿＿ %</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="footer"><span>Decision-grade ROI model</span><span>9</span></div>
+</section>
+
+<section class="slide" id="p10">
+<div class="kicker">Risk Management</div>
+<h2>導入風險可透過小範圍 PoC、角色分工與治理規則控制，不必一次承擔整廠轉換風險。</h2>
+<table>
+<thead><tr><th>風險</th><th>可能影響</th><th>控制方式</th></tr></thead>
+<tbody>
+<tr><td>使用者不熟悉新工具</td><td>初期採用率低</td><td>從熟悉設備與現有畫面重製開始，搭配角色式教育訓練</td></tr>
+<tr><td>資料來源品質不一致</td><td>畫面結果不穩定</td><td>PoC 先驗證 Connector、View 與欄位定義，再逐步擴充</td></tr>
+<tr><td>畫面缺乏治理</td><td>各單位自行建立後失去一致性</td><td>建立模板、命名規則、權限與發布流程</td></tr>
+<tr><td>一次導入範圍過大</td><td>時程與成本失控</td><td>先選一條產線、一台設備或一個管理主題驗證</td></tr>
+</tbody>
+</table>
+<div class="footer"><span>Risk-controlled adoption</span><span>10</span></div>
+</section>
+
+<section class="slide" id="p11">
+<div class="kicker">Implementation Roadmap</div>
+<h2>建議以 4 個階段建立成果證據，再決定擴展範圍。</h2>
+<div class="grid4">
+<div class="card blue"><div class="big">01</div><h3>選定場景</h3><p>挑選變更頻繁、價值明確且資料已存在的設備或產線。</p></div>
+<div class="card teal"><div class="big">02</div><h3>建立 PoC</h3><p>完成資料連接、1–2 張核心畫面與 Runtime 展示。</p></div>
+<div class="card green"><div class="big">03</div><h3>量化效益</h3><p>比較建置時間、需求等待、投入工時與使用者採用情況。</p></div>
+<div class="card amber"><div class="big">04</div><h3>模板化擴展</h3><p>將成功畫面與規則複製到更多設備、產線與部門。</p></div>
+</div>
+<div class="statement">PoC 的目的不是證明功能可以運作，而是證明「相同需求以平台方式完成，能比既有流程更快、更低成本」。</div>
+<div class="footer"><span>Phased roadmap</span><span>11</span></div>
+</section>
+
+<section class="slide" id="p12">
+<div class="kicker">Recommendation</div>
+<h2>建議啟動一個具明確成本基準的 VisoLink PoC，作為是否全面平台化的決策依據。</h2>
+<div class="grid3" style="margin-top:28px">
+<div class="card blue"><h3>選一個真實痛點</h3><p>不是挑最簡單的 Demo，而是挑目前確實需要等待或反覆改版的場景。</p></div>
+<div class="card teal"><h3>先建立成本基線</h3><p>記錄現行做法所需的時間、工時、外包費與需求往返次數。</p></div>
+<div class="card green"><h3>用結果決定擴展</h3><p>若 PoC 證明交付速度、成本與使用便利性改善，再逐步擴大。</p></div>
+</div>
+<div class="quote" style="margin-top:44px">下一個決策，不是是否一次導入整廠；而是是否值得用一個真實場景，驗證平台化能否降低長期成本。</div>
+<div class="footer"><span>Decision requested: approve a measured PoC</span><span>12</span></div>
+</section>
+
+</div>
+</body>
+</html>

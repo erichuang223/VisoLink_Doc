@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VisoLink Display Library 圖面庫操作手冊。">
+  <title>Display Library 圖面庫｜VisoLink 操作手冊</title>
+  <link rel="stylesheet" href="../assets/manual.css">
+  <script src="../assets/manual.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">前台操作手冊</span></a>
+    <nav class="top-actions"><a class="top-link" href="index.html">前台首頁</a><a class="top-link" href="studio.html">下一章</a></nav>
+  </header>
+
+  <div class="manual-shell">
+    <aside class="sidebar">
+      <p class="sidebar-title">CHAPTER 01</p>
+      <nav class="manual-nav" aria-label="Display Library 功能目錄">
+        <a href="#display-library-overview">1.1.1 瀏覽圖面庫</a>
+        <a href="#display-search-filter">1.1.2 搜尋與篩選</a>
+        <a href="#folder-create-edit">1.2.1 建立與編輯 Folder</a>
+        <a href="#folder-organize-display">1.2.2 整理 Folder 與 Display</a>
+        <a href="#folder-delete">1.2.3 刪除 Folder</a>
+        <a href="#display-create">1.3.1 建立 Display</a>
+        <a href="#display-open">1.3.2 開啟 Display</a>
+        <a href="#display-copy">1.3.3 複製 Display</a>
+        <a href="#display-metadata">1.3.4 編輯基本資料</a>
+        <a href="#display-delete">1.3.5 刪除 Display</a>
+        <a href="#display-permission">1.4.1 Display 授權</a>
+        <a href="#folder-permission">1.4.2 Folder 授權</a>
+        <a href="#permission-validation">1.4.3 驗證授權結果</a>
+      </nav>
+    </aside>
+
+    <main class="manual-content" id="main">
+      <nav class="breadcrumb" aria-label="階層導覽"><a href="../index.html">操作手冊</a><span>›</span><a href="index.html">前台</a><span>›</span><strong>Display Library</strong></nav>
+      <header class="manual-header">
+        <span class="eyebrow">CHAPTER 01</span>
+        <h1>Display Library 圖面庫</h1>
+        <p>Display Library 是前台圖面的管理入口。使用者可以依權限瀏覽、搜尋及整理 Display，並從圖面卡片進入 Runtime、Studio 或設定視窗。</p>
+      </header>
+
+      <section class="manual-function" id="display-library-overview">
+        <span class="function-number">1.1.1</span><h2>瀏覽圖面庫</h2>
+        <p>圖面庫由左側瀏覽區、Folder 樹狀結構、上方操作列及 Display 顯示區組成。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>所有前台使用者</strong></div><div class="meta-item"><span>所需權限</span><strong>至少具有可檢視的 Display</strong></div><div class="meta-item"><span>功能位置</span><strong>登入後 → Display Library</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-library-overview.png" alt="Display Library 圖面庫總覽"><figcaption>圖面庫總覽：左側可切換檢視範圍與 Folder，右側顯示目前範圍內的 Display。</figcaption></figure>
+        <h3>畫面區域</h3>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>區域</th><th>用途</th></tr></thead><tbody>
+          <tr><td>搜尋 Display</td><td>依 Display 名稱縮小目前結果。</td></tr>
+          <tr><td>全部 Display</td><td>顯示目前帳號可以讀取的全部 Display。</td></tr>
+          <tr><td>我的最愛</td><td>顯示已加入最愛且目前仍可讀取的 Display。</td></tr>
+          <tr><td>我的 Display</td><td>顯示目前帳號擁有的 Display。</td></tr>
+          <tr><td>最近使用</td><td>顯示最近開啟過的 Display。</td></tr>
+          <tr><td>資料夾</td><td>依 Folder 階層瀏覽 Display。</td></tr>
+          <tr><td>私有</td><td>切換是否顯示目前帳號有權限查看的私有 Display。</td></tr>
+          <tr><td>格狀／表格</td><td>切換圖面卡片或表格檢視。</td></tr>
+        </tbody></table></div>
+        <p class="result-box"><strong>預期結果：</strong>右側顯示目前帳號在所選範圍內可以讀取的 Display。</p>
+      </section>
+
+      <section class="manual-function" id="display-search-filter">
+        <span class="function-number">1.1.2</span><h2>搜尋與篩選圖面</h2>
+        <p>使用左側搜尋欄、功能檢視、Folder、私有切換及排序控制，快速縮小 Display 範圍。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>所有前台使用者</strong></div><div class="meta-item"><span>所需權限</span><strong>Display 檢視權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library</strong></div></div>
+        <ol class="steps"><li>先在左側選擇「全部 Display」、「我的最愛」、「我的 Display」、「最近使用」或指定 Folder。</li><li>在「搜尋 Display」輸入名稱關鍵字。</li><li>需要查看私有圖面時，點選上方「私有」。</li><li>在格狀模式依名稱、修改時間、擁有者或建立時間排序，並使用 ▲／▼ 調整方向。</li><li>需要查看更多欄位時，切換成表格模式。</li></ol>
+        <p class="note-box"><strong>注意：</strong>搜尋及篩選只會從目前帳號有權限讀取的 Display 中產生結果，不會顯示未授權圖面。</p>
+        <p class="result-box"><strong>預期結果：</strong>Display 顯示區立即更新，只保留符合目前範圍與搜尋條件的圖面。</p>
+      </section>
+
+      <section class="manual-function" id="folder-create-edit">
+        <span class="function-number">1.2.1</span><h2>建立與編輯 Folder</h2>
+        <p>Folder 用來建立圖面分類階層。新 Folder 會建立在目前選取的 Folder 下方；選取「根目錄」時則建立於第一層。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者、圖面管理者</strong></div><div class="meta-item"><span>所需權限</span><strong>目的 Folder 至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 資料夾</strong></div></div>
+        <h3>建立 Folder</h3>
+        <ol class="steps"><li>在左側 Folder 樹狀結構選擇要建立子 Folder 的位置；建立第一層 Folder 時選擇「根目錄」。</li><li>點選「資料夾」標題右側的「＋」。</li><li>在「資料夾名稱」輸入名稱。</li><li>按下 Enter 建立；按下 Esc 或「×」則取消。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-create-edit_01.png" alt="在圖面庫左側輸入新 Folder 名稱"><figcaption>點選新增資料夾後，名稱輸入欄會出現在 Folder 樹狀結構上方。</figcaption></figure>
+        <h3>重新命名 Folder</h3>
+        <ol class="steps"><li>選取要調整的 Folder。</li><li>點選 Folder 工具列中的齒輪「Folder 設定」。</li><li>修改「Folder 名稱」。</li><li>點選「重新命名」。</li></ol>
+        <p class="result-box"><strong>預期結果：</strong>Folder 出現在指定階層中；重新命名後，左側 Folder 樹同步顯示新名稱。</p>
+      </section>
+
+      <section class="manual-function" id="folder-organize-display">
+        <span class="function-number">1.2.2</span><h2>整理 Folder 與 Display</h2>
+        <p>Folder 可以移動至其他 Folder；Display 則可透過選取功能批次移動至根目錄或指定 Folder。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面管理者</strong></div><div class="meta-item"><span>所需權限</span><strong>來源可移動、目的地至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 移動</strong></div></div>
+        <h3>移動 Folder</h3>
+        <ol class="steps"><li>在左側選取要移動的 Folder。</li><li>點選 Folder 工具列中的「⇄」。</li><li>在視窗中瀏覽 Folder 階層並選擇目的地。</li><li>確認「移動到」顯示正確位置後，點選「移動」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-organize-display_01.png" alt="移動 Folder 的目的地選擇視窗"><figcaption>移動前先確認視窗下方的目的 Folder。</figcaption></figure>
+        <h3>移動 Display</h3>
+        <ol class="steps"><li>在 Display 卡片左下角點選「✓」；表格模式則勾選左側核取方塊。</li><li>需要時一次選取多個 Display。</li><li>點選上方「移動已選取」。</li><li>選擇目的 Folder，確認後點選「移動」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-organize-display_02.png" alt="批次移動 Display 的目的地選擇視窗"><figcaption>視窗標題會顯示本次要移動的 Display 數量。</figcaption></figure>
+        <p class="note-box"><strong>權限規則：</strong>移動來源內容需要可移動權限，目的 Folder 需要 Editor 或更高權限。</p>
+        <p class="result-box"><strong>預期結果：</strong>Folder 或 Display 從原位置移至指定目的地，圖面內容本身不會因此改變。</p>
+      </section>
+
+      <section class="manual-function" id="folder-delete">
+        <span class="function-number">1.2.3</span><h2>刪除 Folder</h2>
+        <p>刪除 Folder 會一併處理其子 Folder 與內含 Display，執行前必須確認警告訊息中的數量。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Folder Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>Folder 刪除權限</strong></div><div class="meta-item"><span>功能位置</span><strong>資料夾 → 選取 Folder → 🗑</strong></div></div>
+        <ol class="steps"><li>在左側選取要刪除的 Folder。</li><li>確認 Folder 名稱與所在階層。</li><li>點選 Folder 工具列中的垃圾桶。</li><li>閱讀確認視窗；若 Folder 內含子 Folder 或 Display，系統會顯示影響數量。</li><li>確認確實要刪除時才點選紅色「刪除」；否則點選「取消」。</li></ol>
+        <p class="note-box"><strong>重要：</strong>確認視窗明確提示，Folder 內的子 Folder 與 Display 將一起永久刪除。建議先移動仍需保留的 Display，再執行刪除。</p>
+        <p class="result-box"><strong>預期結果：</strong>Folder 從樹狀結構移除；若包含子 Folder 或 Display，這些內容也不再出現在圖面庫。</p>
+      </section>
+
+      <section class="manual-function" id="display-create">
+        <span class="function-number">1.3.1</span><h2>建立 Display</h2>
+        <p>在目前選取的 Folder 中建立新的 Display，成功後系統會直接開啟 Studio。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>目的 Folder 至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → ＋新增 Display</strong></div></div>
+        <ol class="steps"><li>先選取新 Display 要放置的 Folder；若要建立在第一層則選擇「根目錄」。</li><li>點選頁面上方「＋新增 Display」。</li><li>輸入「Display 名稱」。</li><li>點選「建立」或按下 Enter；要中止則點選「取消」或按下 Esc。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-create_01.png" alt="新增 Display 的名稱輸入欄"><figcaption>輸入 Display 名稱後，「建立」按鈕才會啟用。</figcaption></figure>
+        <p class="result-box"><strong>預期結果：</strong>系統建立 Display，並直接進入該 Display 的 Studio 編輯畫面。</p>
+      </section>
+
+      <section class="manual-function" id="display-open">
+        <span class="function-number">1.3.2</span><h2>開啟 Display</h2>
+        <p>Display 可以開啟為 Runtime 監看畫面，也可以依權限進入 Studio 編輯。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>監看人員、圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>Runtime：Viewer；Studio：Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 卡片或表格</strong></div></div>
+        <h3>開啟 Runtime</h3><ol class="steps"><li>找到要查看的 Display。</li><li>在格狀模式點選縮圖或名稱；表格模式則點選 Display 名稱。</li></ol>
+        <h3>開啟 Studio</h3><ol class="steps"><li>找到要編輯的 Display。</li><li>點選卡片或表格操作區中的鉛筆「在 Editor 開啟」。</li></ol>
+        <p class="note-box"><strong>注意：</strong>若按鈕停用，代表目前帳號沒有對應權限。Viewer 可以開啟 Runtime，但不能進入 Studio 修改圖面。</p>
+        <p class="result-box"><strong>預期結果：</strong>系統依選擇進入 Runtime 或 Studio。</p>
+        <div class="related-links"><a href="studio.html#studio-overview">前往 Studio 操作</a><a href="runtime.html#runtime-open">前往 Runtime 操作</a></div>
+      </section>
+
+      <section class="manual-function" id="display-copy">
+        <span class="function-number">1.3.3</span><h2>複製 Display</h2>
+        <p>使用「另存為」建立一份內容相同、名稱不同的新 Display。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>Display 複製權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 設定 → 另存為</strong></div></div>
+        <ol class="steps"><li>在 Display 卡片或表格操作區點選齒輪。</li><li>在「另存為」輸入新 Display 名稱。</li><li>點選「複製」。</li><li>關閉設定視窗後，在圖面庫確認新 Display。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-permission_01.png" alt="Display 設定視窗中的另存為欄位"><figcaption>Display 設定上方可重新命名、轉換擁有者或另存為新 Display。</figcaption></figure>
+        <p class="result-box"><strong>預期結果：</strong>圖面庫出現使用新名稱建立的 Display，原 Display 保持不變。</p>
+      </section>
+
+      <section class="manual-function" id="display-metadata">
+        <span class="function-number">1.3.4</span><h2>編輯圖面基本資料</h2>
+        <p>目前可在 Display 設定中調整名稱及重新指派擁有者；圖面內容則需進入 Studio 編輯。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>重新命名或指派擁有者權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 卡片 → 齒輪</strong></div></div>
+        <h3>重新命名</h3><ol class="steps"><li>開啟「Display 設定」。</li><li>修改「Display 名稱」。</li><li>點選「重新命名」。</li></ol>
+        <h3>重新指派擁有者</h3><ol class="steps"><li>在「重新指派擁有者」選擇新的使用者。</li><li>確認指派對象後點選「轉換」。</li><li>確認設定視窗顯示成功訊息。</li></ol>
+        <p class="note-box"><strong>注意：</strong>重新指派擁有者會改變資源管理責任。執行前應先確認新擁有者及原管理者後續所需權限。</p>
+        <p class="result-box"><strong>預期結果：</strong>圖面庫顯示更新後的名稱或擁有者。</p>
+      </section>
+
+      <section class="manual-function" id="display-delete">
+        <span class="function-number">1.3.5</span><h2>刪除 Display</h2>
+        <p>Display 採選取後刪除的操作方式，可以一次刪除一個或多個具有刪除權限的圖面。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>每個 Display 都具有刪除權限</strong></div><div class="meta-item"><span>功能位置</span><strong>選取 Display → 刪除已選取</strong></div></div>
+        <ol class="steps"><li>在卡片左下角點選「✓」，或在表格模式勾選要刪除的 Display。</li><li>再次確認選取數量及圖面名稱。</li><li>點選上方「刪除已選取」。</li><li>在確認視窗中確認刪除；不確定時點選「取消」。</li></ol>
+        <p class="note-box"><strong>重要：</strong>只有所有已選取 Display 都具備刪除權限時，「刪除已選取」才會啟用。刪除前應確認圖面是否仍被監看人員使用。</p>
+        <p class="result-box"><strong>預期結果：</strong>已刪除的 Display 從目前圖面庫及我的最愛中移除。</p>
+      </section>
+
+      <section class="manual-function" id="display-permission">
+        <span class="function-number">1.4.1</span><h2>Display 授權設定</h2>
+        <p>可將使用者或群組加入 Display 存取清單，並分別設定 Viewer、Editor、Manager 或 Administrator。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>設定權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 設定 → 設定權限</strong></div></div>
+        <ol class="steps"><li>在 Display 卡片或表格操作區點選齒輪。</li><li>在左側搜尋使用者或群組，必要時使用「全部／使用者／群組」篩選。</li><li>選取 Identity，點選「›」加入右側存取清單。</li><li>在右側為該 Identity 選擇權限。</li><li>需要移除個別授權時，選取右側項目並點選「‹」。</li><li>完成後點選「儲存」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-permission_01.png" alt="Display 設定與授權視窗"><figcaption>左側選擇使用者或群組，加入右側後設定權限等級。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>權限</th><th>Display 可執行操作</th></tr></thead><tbody>
+          <tr><td>Viewer</td><td>開啟並檢視 Display。</td></tr>
+          <tr><td>Editor</td><td>包含 Viewer，並可編輯 Display 內容。</td></tr>
+          <tr><td>Manager</td><td>包含 Editor，並可複製、重新命名、移動及刪除 Display；移動目的 Folder 仍需 Editor 或更高權限。</td></tr>
+          <tr><td>Administrator</td><td>包含 Manager，並可設定權限及重新指派擁有者。</td></tr>
+        </tbody></table></div>
+        <p class="note-box"><strong>全域公開：</strong>勾選後，Display 會以公開方式提供讀取。此項目是獨立切換，應在確認公開範圍後再操作。</p>
+        <p class="result-box"><strong>預期結果：</strong>儲存後，指定使用者或群組依設定權限看見並操作 Display。</p>
+      </section>
+
+      <section class="manual-function" id="folder-permission">
+        <span class="function-number">1.4.2</span><h2>Folder 授權設定</h2>
+        <p>Folder 權限會向下影響子 Folder 及其 Display，適合用來統一管理一組圖面。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Folder Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>設定權限</strong></div><div class="meta-item"><span>功能位置</span><strong>選取 Folder → Folder 設定</strong></div></div>
+        <ol class="steps"><li>在左側選取要設定的 Folder。</li><li>點選 Folder 工具列中的齒輪。</li><li>在左側搜尋並選取使用者或群組，點選「›」加入存取清單。</li><li>在右側選擇 Viewer、Editor、Manager 或 Administrator。</li><li>完成後點選「儲存」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-permission_01.png" alt="Folder 設定與授權視窗"><figcaption>Folder 設定包含重新命名、重新指派擁有者及權限設定。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>權限</th><th>Folder 可執行操作</th></tr></thead><tbody>
+          <tr><td>Viewer</td><td>檢視此 Folder、所有子 Folder 及其中的 Display；權限向下套用，擁有者不受限制。</td></tr>
+          <tr><td>Editor</td><td>包含 Viewer，可建立 Display 與子 Folder，並編輯已授權 Display；不可重新命名、移動或刪除此 Folder。</td></tr>
+          <tr><td>Manager</td><td>包含 Editor，可重新命名、移動及刪除此 Folder 與子內容；移動目的 Folder 仍需 Editor 或更高權限。</td></tr>
+          <tr><td>Administrator</td><td>包含 Manager，可設定權限及重新指派擁有者；設定向下套用至子 Folder 與 Display。</td></tr>
+        </tbody></table></div>
+        <p class="note-box"><strong>注意：</strong>Folder 權限具有向下套用特性。調整上層 Folder 前，先確認其中所有子 Folder 與 Display 的使用者範圍。</p>
+        <p class="result-box"><strong>預期結果：</strong>儲存後，指定 Identity 依權限等級存取此 Folder、子 Folder 與相關 Display。</p>
+      </section>
+
+      <section class="manual-function" id="permission-validation">
+        <span class="function-number">1.4.3</span><h2>驗證授權結果</h2>
+        <p>權限設定完成後，應使用實際目標帳號確認「看得到什麼」與「能操作什麼」，不能只以管理者畫面判斷。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>權限管理者</strong></div><div class="meta-item"><span>所需條件</span><strong>可供驗證的使用者或角色</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library</strong></div></div>
+        <h3>建議驗證順序</h3>
+        <ol class="steps"><li>完成 Display 或 Folder 授權並儲存。</li><li>使用目標帳號重新進入 Display Library。</li><li>確認 Folder 是否出現在左側樹狀結構。</li><li>確認 Display 是否出現在正確 Folder、全部 Display 或私有檢視中。</li><li>測試是否可以開啟 Runtime。</li><li>若權限為 Editor，確認是否可以使用鉛筆進入 Studio。</li><li>若權限為 Manager，確認移動、重新命名及刪除控制是否依預期啟用。</li><li>若權限為 Administrator，確認設定權限與重新指派擁有者是否可用。</li></ol>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>驗證角色</th><th>至少應確認</th></tr></thead><tbody>
+          <tr><td>Viewer</td><td>可開啟 Runtime；不可進入 Studio 或管理資源。</td></tr>
+          <tr><td>Editor</td><td>可開啟 Studio；Folder 的管理按鈕仍依權限限制。</td></tr>
+          <tr><td>Manager</td><td>可移動、重新命名及刪除資源；不可設定權限或轉換擁有者。</td></tr>
+          <tr><td>Administrator</td><td>可進入設定視窗管理 Identity 權限及擁有者。</td></tr>
+        </tbody></table></div>
+        <p class="note-box"><strong>判讀方式：</strong>按鈕停用或不顯示不一定是系統異常，先比對目前帳號在 Folder 與 Display 上取得的最高權限。</p>
+        <p class="result-box"><strong>預期結果：</strong>目標帳號所見 Folder、Display 及可用按鈕，與規劃的權限等級一致。</p>
+      </section>
+
+      <nav class="chapter-end-nav" aria-label="章節導覽"><a href="index.html">← 返回前台目錄</a><a href="studio.html">下一章：Studio 圖面編輯 →</a></nav>
+    </main>
+  </div>
+  <footer class="page-footer">VisoLink Display Library 操作手冊 · 2026-08-18</footer>
+</body>
+</html>
