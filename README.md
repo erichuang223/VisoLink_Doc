@@ -4,15 +4,23 @@
 
 VisoLink 是可自行部署的工業資料視覺化平台，串接既有的資料來源、資料整理與綁定、衍生計算、自由畫布設計、Runtime 監看分析及企業治理。平台的目標是補足工業資料視覺化的最後一哩：讓具權限的現場人員能持續建立與改善監控畫面，同時保留企業對資料、權限、版本、稽核、備份及維運的治理能力。
 
-## 文件入口
+## 線上文件入口
 
-| 文件區 | 適用對象 | 內容 | 入口 |
+以下三個連結是 GitHub Pages 的主要入口，可從公開首頁直接開啟：
+
+| 文件區 | 適用對象 | 內容 | 開啟網站 |
 |---|---|---|---|
-| 產品介紹 | 決策者、業務、顧問、IT／OT 與導入人員 | 產品價值、核心能力、技術架構、部署與治理 | [產品介紹總覽](ProductIntroduction/README.md)｜[業務版](ProductIntroduction/business/index.html)｜[技術版](ProductIntroduction/technical/index.html) |
-| 操作手冊 | 一般使用者、Studio 設計人員、系統管理員 | Display Library、Studio、Runtime 與 Administration 的功能位置、操作步驟及注意事項 | [操作手冊](OperationManual/index.html)｜[前台手冊](OperationManual/frontend.html)｜[後台手冊](OperationManual/backend.html) |
-| 教育訓練 | 監看人員、Studio 設計人員、系統管理員與講師 | 依角色規劃的 Course 00–06 教材、實作與驗收標準 | [課程入口](Training/index.html)｜[教材說明](Training/README.md)｜[完整課綱](Training/CURRICULUM.md) |
+| 產品介紹 | 決策者、業務、顧問、IT／OT 與導入人員 | 產品價值、核心能力、技術架構、部署與治理 | **[開啟產品介紹](ProductIntroduction/)** |
+| 操作手冊 | 一般使用者、Studio 設計人員、系統管理員 | Display Library、Studio、Runtime 與 Administration 的功能位置、操作步驟及注意事項 | **[開啟操作手冊](OperationManual/)** |
+| 教育訓練 | 監看人員、Studio 設計人員、系統管理員與講師 | 依角色規劃的 Course 00–06 教材、實作與驗收標準 | **[開啟教育訓練](Training/)** |
 
-建議閱讀順序：初次認識產品先閱讀產品介紹；實際使用時查閱操作手冊；規劃授課、上線導入或角色交接時使用教育訓練教材。
+### 各區延伸頁面
+
+- 產品介紹：[業務版](ProductIntroduction/business/)｜[技術版](ProductIntroduction/technical/)
+- 操作手冊：[前台手冊](OperationManual/frontend.html)｜[後台手冊](OperationManual/backend.html)
+- 教育訓練：[完整課綱](Training/CURRICULUM.html)（各課程簡報請由教育訓練首頁進入）
+
+建議閱讀順序：初次認識產品先開啟「產品介紹」；實際使用時查閱「操作手冊」；規劃授課、上線導入或角色交接時使用「教育訓練」。
 
 ## 文件範圍
 
@@ -40,7 +48,9 @@ VisoLink_Doc/
 
 文件中的版號與日期代表內容核對基準，不表示所有文件永久只適用該版本。功能是否正式可用，應以產品版本、正式介面、操作手冊及發行紀錄的交叉核對結果為準。
 
-## 本機預覽
+## 本機預覽（僅供維護者使用）
+
+下列 `localhost` 網址只適用於已下載本 repository、並在自己的電腦啟動預覽伺服器時；它們不是 GitHub Pages 的公開網址。線上閱讀請使用上方「線上文件入口」。
 
 HTML 文件可直接以瀏覽器開啟各區的 `index.html`。若瀏覽器限制本機檔案載入，可在 repository 根目錄啟動簡易 HTTP Server：
 
@@ -48,11 +58,13 @@ HTML 文件可直接以瀏覽器開啟各區的 `index.html`。若瀏覽器限�
 python -m http.server 8080
 ```
 
-啟動後可瀏覽：
+啟動後，在本機瀏覽器輸入：
 
-- 產品介紹：<http://localhost:8080/ProductIntroduction/>
-- 操作手冊：<http://localhost:8080/OperationManual/>
-- 教育訓練：<http://localhost:8080/Training/>
+```text
+http://localhost:8080/ProductIntroduction/
+http://localhost:8080/OperationManual/
+http://localhost:8080/Training/
+```
 
 ## 維護原則
 
@@ -77,4 +89,3 @@ python -m http.server 8080
 
 - `VisoLink_V1`：VisoLink 主應用程式、版本資訊與發行紀錄。
 - `VisoLink_DataGateway`：資料閘道相關專案；其內容與版本由該 repository 獨立維護。
-
