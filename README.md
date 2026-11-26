@@ -39,6 +39,15 @@ VisoLink_Doc/
 
 本 repository 不包含 VisoLink 應用程式原始碼、開發環境、部署腳本或客戶環境設定。
 
+## 文件版本
+
+文件有文件的版本，系統有系統的版本，兩者分開管理：
+
+- **文件版本**：整個文件網站一個版本，記在根目錄 `VERSION`；每一版改了什麼、對應哪些系統版本，見 [`CHANGELOG.md`](CHANGELOG.md)。目前文件版本：**V1.0**。
+- **版號規則**（`主.次.修`）：主版＝新增產品或文件結構改版；次版＝跟著系統新版補充內容；修訂＝錯字、截圖、連結修正，或系統由預發行轉為正式版、內容不變只更新對應版本。
+- **對應系統版本**：每一頁在 `<head>` 以 `<meta name="doc-systems" content="VL 1.2.0">` 註明撰寫時核對的系統版本；頁尾會自動顯示「文件版本｜對應系統｜文件發行日期」。
+- **發行**：更新 `VERSION`、`assets/doc-version.js` 的版本與日期、`CHANGELOG.md`，提交後推送；版本標籤格式 `v1.0.0`。
+
 ## 產品與文件基準
 
 - 目前參考產品版本：`VisoLink v1.2.0`（2026-08-18）。
@@ -52,10 +61,12 @@ VisoLink_Doc/
 
 下列 `localhost` 網址只適用於已下載本 repository、並在自己的電腦啟動預覽伺服器時；它們不是 GitHub Pages 的公開網址。線上閱讀請使用上方「線上文件入口」。
 
-HTML 文件可直接以瀏覽器開啟各區的 `index.html`。若瀏覽器限制本機檔案載入，可在 repository 根目錄啟動簡易 HTTP Server：
+HTML 文件可直接以瀏覽器開啟各區的 `index.html`。若瀏覽器限制本機檔案載入，可在 repository 根目錄啟動簡易 HTTP Server（擇一）：
 
 ```powershell
 python -m http.server 8080
+# 或（沒有 Python、有 Docker 時）
+docker run --rm -d --name visolink-doc-preview -p 8080:80 -v "${PWD}:/usr/share/nginx/html:ro" nginx:alpine
 ```
 
 啟動後，在本機瀏覽器輸入：
