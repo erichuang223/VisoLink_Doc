@@ -30,7 +30,7 @@
 
 - 共用視覺樣式：`assets/training.css`
 - 翻頁與全螢幕功能：`assets/training.js`
-- 課程圖片目前引用 `../ProductIntroduction/img/` 的既有產品圖
+- 課程圖片放在 `img/`，部分沿用 `../ProductIntroduction/assets/img/` 的產品圖；早期版本簡報已移到 `archive/`
 - 新增投影片時請延續 `id="s數字"`，並填寫 `data-title`
 
 ## 授課建議

@@ -4,6 +4,15 @@
 
 VisoLink 是可自行部署的工業資料視覺化平台，串接既有的資料來源、資料整理與綁定、衍生計算、自由畫布設計、Runtime 監看分析及企業治理。平台的目標是補足工業資料視覺化的最後一哩：讓具權限的現場人員能持續建立與改善監控畫面，同時保留企業對資料、權限、版本、稽核、備份及維運的治理能力。
 
+VisoLink 產品家族包含四個可各自部署、各自運作的產品：
+
+| 產品 | 定位 |
+|---|---|
+| VisoLink | 工業資料視覺化平台（主軸） |
+| VisoLink DataGateway | 設備資料中樞：Tag 管理、歷史保存、即時與歷史查詢、設備回寫 |
+| DataGateway Agent | 現場資料取得：以 Modbus TCP、OPC UA 讀取設備資料並推送給 DataGateway |
+| VisoLink 備份中心（BackupCenter） | 中央排程備份與還原 VisoLink、DataGateway、Agent |
+
 ## 線上文件入口
 
 以下三個連結是 GitHub Pages 的主要入口，可從公開首頁直接開啟：
@@ -50,9 +59,10 @@ VisoLink_Doc/
 
 ## 產品與文件基準
 
-- 目前參考產品版本：`VisoLink v1.2.0`（2026-08-18）。
-- 目前產品事實基準日期：2026-08-19。
-- 主要應用程式由相鄰且獨立的 `VisoLink_V1` repository 維護。
+- 已發行的文件 V1.0 對應 `VisoLink v1.2.0`。
+- 改版中的內容對應：VisoLink `1.4.0-beta`、DataGateway／Agent `0.4.0-beta`、備份中心 `0.1.0`；每一頁實際對應的版本以頁尾標示為準。
+- 目前產品事實基準日期：2026-11-26（`ProductIntroduction/source/PRODUCT_FACTS.md`）。
+- 各產品由相鄰且獨立的 repository 維護（VisoLink、DataGateway 與 Agent、備份中心各一個）。
 - VisoLink 主要由 Client、Server API、Admin、PostgreSQL 與 Cache 服務構成，支援以 Docker Compose 在企業環境自行部署。
 
 文件中的版號與日期代表內容核對基準，不表示所有文件永久只適用該版本。功能是否正式可用，應以產品版本、正式介面、操作手冊及發行紀錄的交叉核對結果為準。
@@ -99,4 +109,5 @@ http://localhost:8080/Training/
 ## 相關專案
 
 - `VisoLink_V1`：VisoLink 主應用程式、版本資訊與發行紀錄。
-- `VisoLink_DataGateway`：資料閘道相關專案；其內容與版本由該 repository 獨立維護。
+- `VisoLink_DataGateway_V0.2`：DataGateway 與 Agent（共用版本），內容與版本由該 repository 獨立維護。
+- `VisoLink_BackupCenter`：VisoLink 備份中心。
