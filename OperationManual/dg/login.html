@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="DG 管理畫面可用 VisoLink 管理員帳號登入，也可只用 DG 自己的本機管理員帳號獨立運作。"><title>登入與本機帳號｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="overview.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 01</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-login">1.1 登入</a><a href="#dg-recovery-login">1.2 救援登入</a><a href="#dg-local-account">1.3 本機管理員</a><a href="#dg-logout">1.4 登出</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 01</span><h1>登入與本機帳號</h1><p>DG 管理畫面可用 VisoLink 管理員帳號登入，也可只用 DG 自己的本機管理員帳號獨立運作。</p></header>
+<section class="manual-function" id="dg-login"><span class="function-number">1.1</span><h2>登入 DG 管理畫面</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>瀏覽器開啟 DG 管理網址（安裝時設定的管理埠，預設 5180）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>管理員帳號；帳號種類依「DG 管理員登入方式」而定</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/overview/server-overview.jpg" alt="DG 登入後的 Server 總覽" loading="lazy"><figcaption>登入後進入「Server 總覽」，右上角顯示登入的名稱與來源（VisoLink 或 DG 本機）。</figcaption></figure>
+<ol class="steps"><li>開啟 DG 管理網址，畫面顯示「管理介面登入」。</li><li>帳號欄位的標題會依目前的登入方式顯示「VisoLink 帳號」或「DG 本機帳號」，輸入帳號與密碼。</li><li>按「登入」。</li></ol>
+<p class="result-box">進入「Server 總覽」，右上角顯示「名稱 · VisoLink」或「名稱 · DG 本機」，左側出現 DG 選單。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>帳號種類是否和登入方式相符：登入方式在「系統設定 › 登入與權限 › DG 管理員登入方式」（第 11 章）。</li><li>使用 VisoLink 帳號時，VisoLink 服務是否正常、帳號是否為管理員。</li><li>不是管理員的帳號看不到「歷史資料管理」「備份與還原」「授權管理」等管理員選單。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-recovery-login"><span class="function-number">1.2</span><h2>首次使用與救援登入</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>DG 登入頁「使用安裝時的救援帳號（建立／恢復 DG 本機登入）」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>安裝時建立的救援帳號（由部署機密管理）</strong></div></div>
+<ol class="steps"><li>登入方式為 DG 本機帳號但還沒有建立本機管理員時，登入頁會提示「首次使用請勾選救援登入，以安裝時的救援帳號建立 DG 本機管理員。」</li><li>勾選「使用安裝時的救援帳號（建立／恢復 DG 本機登入）」，帳號欄位變成「DG 救援帳號」。</li><li>輸入救援帳號與密碼，按「登入」。</li><li>系統直接帶到本機帳號頁，依 1.3 建立或重設 DG 本機管理員。</li><li>按右上「登出」，再用新的本機帳號登入。</li></ol>
+<p class="result-box">可以用 DG 本機帳號登入，之後不必再使用救援帳號。</p>
+<p class="note">救援登入只能用來建立或恢復本機帳號，不能操作其他頁面。忘記本機密碼時也是走這個流程。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>登入頁沒有救援選項：代表安裝時沒有配置救援帳號，請聯絡安裝人員。</li><li>救援帳號密碼請向保管安裝資料的人員取得，手冊與畫面不會顯示。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-local-account"><span class="function-number">1.3</span><h2>建立或變更 DG 本機管理員</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 › 系統設定 › 登入與權限 ›「DG 本機管理員」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員（或救援登入）</strong></div></div>
+<dl class="field-map"><dt>DG 本機帳號</dt><dd>本機管理員的帳號名稱。</dd><dt>目前 DG 本機密碼</dt><dd>已經有本機帳號時必填，用來確認是本人修改。</dd><dt>新密碼／確認新密碼</dt><dd>12–256 個字元，兩次輸入要相同。</dd></dl>
+<ol class="steps"><li>開啟「系統設定」，左側分類選「登入與權限」，往下捲到「DG 本機管理員」。</li><li>填寫帳號、目前密碼（第一次建立免填）與新密碼。</li><li>按「儲存本機帳號」。</li></ol>
+<p class="result-box">區塊顯示本機管理員已建立；之後切換成「DG 本機帳號」登入方式時可用這組帳密登入。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示目前密碼錯誤：確認大小寫；遺失時改用 1.2 救援登入重設。</li><li>新密碼少於 12 個字元會被拒絕。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-logout"><span class="function-number">1.4</span><h2>登出與切換明暗主題</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>畫面右上角「登出」與明暗主題按鈕</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>按右上角「登出」，回到登入頁。</li><li>按「登出」旁的半圓圖示可切換明亮／深色主題，只影響這台瀏覽器的顯示。</li></ol>
+<p class="result-box">登出後重新開啟任何 DG 頁面都會先要求登入。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>在共用電腦使用後務必登出。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="index.html">← 回到本手冊目錄</a><a href="overview.html">總覽與容器連線設定資訊 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 1 章 登入與本機帳號</footer></body></html>

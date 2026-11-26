@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Modbus TCP 為輪詢式讀取：先定義多久讀一次（Scan Group），再定義讀哪個位置（Read Block），最後從讀取結果建立 Tag。"><title>Modbus TCP 連線與 Tag｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="opc-ua.html">上一章</a><a class="top-link" href="write-policies.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 06</p><nav class="manual-nav" aria-label="本章功能"><a href="#modbus-connection">6.1 建立連線</a><a href="#modbus-scan-groups">6.2 Scan Group</a><a href="#modbus-read-blocks">6.3 Read Block</a><a href="#modbus-tags-from-read">6.4 從讀取建立</a><a href="#modbus-tags-manual">6.5 手動設定</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 06</span><h1>Modbus TCP 連線與 Tag</h1><p>Modbus TCP 為輪詢式讀取：先定義多久讀一次（Scan Group），再定義讀哪個位置（Read Block），最後從讀取結果建立 Tag。</p></header>
+<section class="manual-function" id="modbus-connection"><span class="function-number">6.1</span><h2>建立 Modbus TCP 連線</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Connections › 新增 Connection ›「新增 Modbus TCP Connection」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；DG 已核准</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/modbus-tcp/new-modbus.jpg" alt="新增 Modbus TCP Connection 表單" loading="lazy"><figcaption>Port 預設 502、Unit ID 預設 1；Byte Order 與 Word Order 依設備手冊設定。</figcaption></figure>
+<dl class="field-map"><dt>Host / IP、Port、Unit ID</dt><dd>設備位址、連接埠（預設 502）與站號（預設 1）。</dd><dt>連線逾時／讀取逾時（ms）、重試次數</dt><dd>預設 3000、3000、3 次。</dd><dt>Byte Order／Word Order</dt><dd>BigEndian／LittleEndian、HighLow／LowHigh，依設備手冊。</dd></dl>
+<ol class="steps"><li>填名稱、Host / IP、Port、Unit ID。</li><li>確認逾時、重試與位元組順序。</li><li>按「建立 Modbus TCP Connection」。</li></ol>
+<p class="result-box">進入新連線的設定頁，接著設定 Scan Group 與 Read Block。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>之後讀不到資料：確認 Agent 能連到設備的 Port，且 Unit ID 正確。</li></ul></div>
+</section>
+<section class="manual-function" id="modbus-scan-groups"><span class="function-number">6.2</span><h2>設定讀取週期（Scan Groups）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Modbus 連線 ›「資料讀取」分頁 ›「多久讀取一次（Scan Groups）」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent（可離線設定）</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/modbus-tcp/modbus-read-blocks.jpg" alt="資料讀取區塊：左側 Scan Groups、右側 Read Blocks" loading="lazy"><figcaption>這些設定不需要設備目前在線；「讀取一次」會在執行時直接確認設備狀態。</figcaption></figure>
+<ol class="steps"><li>在 Scan Groups 輸入名稱與毫秒數（例如「鍋爐每秒」、1000），勾選「啟用」。</li><li>按「新增」。</li></ol>
+<p class="result-box">清單出現新的 Scan Group，例如「1000 ms · Enabled」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>讀取週期太短可能讓設備負荷過高，依設備能力設定。</li></ul></div>
+</section>
+<section class="manual-function" id="modbus-read-blocks"><span class="function-number">6.3</span><h2>設定讀取位置（Read Blocks）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>資料讀取 ›「讀取哪個位置（Read Blocks）」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已建立 Scan Group</strong></div></div>
+<dl class="field-map"><dt>Function</dt><dd>01 Read Coils、02 Read Discrete Inputs、03 Read Holding Registers、04 Read Input Registers。</dd><dt>Scan Group</dt><dd>這個區塊依哪個讀取週期讀取。</dd><dt>Start Address（Base 0）／Quantity</dt><dd>起始位址（從 0 起算）與數量。</dd></dl>
+<ol class="steps"><li>填名稱，選 Function 與 Scan Group，輸入 Start Address 與 Quantity，勾選「啟用」。</li><li>按「新增 Read Block」。</li><li>設備在線時，按該區塊的「讀取一次」確認讀得到。</li></ol>
+<p class="result-box">清單出現區塊，例如「03 Read Holding Registers · 0–9 · 鍋爐每秒 · Enabled」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>讀取一次失敗：確認位址範圍在設備支援內，以及 Base 0／Base 1 的差異。</li></ul></div>
+</section>
+<section class="manual-function" id="modbus-tags-from-read"><span class="function-number">6.4</span><h2>從讀取結果建立 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Modbus 連線 ›「Tag 設定」›「從讀取結果建立」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已建立 Read Block；設備在線</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/modbus-tcp/modbus-tags.jpg" alt="Modbus Tag 設定：選擇建立方式與已建立的 Tags" loading="lazy"><figcaption>「從讀取結果建立」適合一般設定；「手動／進階設定」可離線指定。</figcaption></figure>
+<ol class="steps"><li>選「從讀取結果建立」，選擇 Read Block 與資料型別（例如 Float32 2 registers），按「讀取並預覽」。</li><li>表格列出每筆原始 Registers、HEX 與解碼值；在正確的那一列按「選取」。</li><li>右側顯示不同 Byte／Word Order 的解碼結果，可改選正確的組合。</li><li>填名稱、顯示名稱；可設定 Value Conversion、History interval（保存間隔）與是否保存重複值。</li><li>按「確認此值並建立 Tag」。</li></ol>
+<p class="result-box">「已建立的 Tags」出現新 Tag，例如「holding:0 · Float32 · 每 60 秒保存」；Coil 會自動存成 Bool。</p>
+<p class="note">保存間隔與是否保存重複值跟著 Agent 的點；但要不要保存、怎麼保存，由 DG「歷史保存設定」決定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>解碼值不合理：改選其他 Byte／Word Order，或確認資料型別。</li></ul></div>
+</section>
+<section class="manual-function" id="modbus-tags-manual"><span class="function-number">6.5</span><h2>手動／進階設定 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 設定 ›「手動／進階設定」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已建立 Read Block（可離線設定）</strong></div></div>
+<ol class="steps"><li>選「手動／進階設定」。</li><li>直接指定 Read Block、Offset、型別與位元組順序；修改既有 Tag 時按該列「編輯」。</li><li>需要回寫時把 Access Mode 改成 ReadWrite 並選 Write Policy。</li><li>按「儲存進階 Tag」。</li></ol>
+<p class="result-box">Tag 清單更新。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>要刪除 Tag 時按該列「刪除」；DG 上的 Tag 會變成無來源，歷史保留。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="opc-ua.html">← OPC UA 連線與 Tag</a><a href="write-policies.html">回寫與寫入安全規則 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 6 章 Modbus TCP 連線與 Tag</footer></body></html>

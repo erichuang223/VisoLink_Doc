@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="維護中會暫停 DG 的資料接收、寫入、回寫、設定修改與查詢，用於還原或主機維護。Agent 的資料會暫存在 Agent 本機，切回運作中後自動補傳。"><title>運作中／維護中｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="license.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 14</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-maintenance-switch">14.1 切換</a><a href="#dg-maintenance-effects">14.2 影響</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 14</span><h1>運作中／維護中</h1><p>維護中會暫停 DG 的資料接收、寫入、回寫、設定修改與查詢，用於還原或主機維護。Agent 的資料會暫存在 Agent 本機，切回運作中後自動補傳。</p></header>
+<section class="manual-function" id="dg-maintenance-switch"><span class="function-number">14.1</span><h2>切到維護中與切回運作中</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 › 系統概覽 ›「運作狀態」卡（備份與還原頁也有「到系統設定切換」）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/system-settings/system-overview.jpg" alt="系統總覽右上的運作狀態卡，顯示運作中與切到維護中按鈕" loading="lazy"><figcaption>「運作狀態」卡顯示目前模式與切換按鈕。</figcaption></figure>
+<ol class="steps"><li>開啟「系統設定」，在系統總覽找到「運作狀態」卡，按「切到維護中」。</li><li>確認視窗「切到維護中？」列出會暫停與仍可使用的功能，按「切到維護中」。</li><li>維護完成後，在同一張卡按「切回運作中」，確認視窗按「切回運作中」。</li></ol>
+<p class="result-box">維護中時每一頁上方顯示「系統維護中」提示，總覽右上顯示「DG 維護中」；切回後恢復正常，Agent 暫存的資料自動補傳。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Agent 與 VisoLink 不會跟著切換：需要時到各自的管理畫面切換（DG 不代切）。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-maintenance-effects"><span class="function-number">14.2</span><h2>維護中的影響</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>—</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>—</strong></div></div>
+<dl class="field-map"><dt>暫停</dt><dd>接收 Agent 資料、寫入資料庫、回寫、設定修改、即時與歷史查詢。</dd><dt>仍可</dt><dd>登入、查看狀態、切換總開關。</dd><dt>Agent 端</dt><dd>資料留在 Agent 本機暫存（受 Agent 暫存上限限制），DG 切回運作中後自動補傳。</dd></dl>
+<ol class="steps"><li>維護前先通知使用 VisoLink 即時畫面與回寫的人員。</li><li>維護時間較長時，確認 Agent 的暫存上限足夠（Agent 手冊第 8 章）。</li></ol>
+<p class="result-box">維護期間資料不遺失，切回後依序補齊。</p>
+<p class="warning">維護時間超過 Agent 暫存上限時，Agent 會刪除最舊的暫存資料。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>切回後資料沒有補齊：看 Agent Registry 的 BACKFILL 欄，以及「系統設定 › 診斷與補送」是否暫停補送。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="license.html">← 授權管理</a><a href="../index.html">返回操作手冊首頁 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 14 章 運作中／維護中</footer></body></html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份 Agent 的設定（連線、Tag、規則等），不包含暫存的待送資料，也不會取代目前的 Agent 身分。"><title>備份與還原｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="agent-identity.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 12</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-backup-download">12.1 下載備份</a><a href="#agent-restore">12.2 還原</a><a href="#agent-backup-center">12.3 備份中心</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 12</span><h1>備份與還原</h1><p>備份 Agent 的設定（連線、Tag、規則等），不包含暫存的待送資料，也不會取代目前的 Agent 身分。</p></header>
+<section class="manual-function" id="agent-backup-download"><span class="function-number">12.1</span><h2>下載設定備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「系統管理 › 備份與還原」›「建立一致性備份」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/backup-restore/backup-restore.jpg" alt="Agent 設定備份與還原頁" loading="lazy"><figcaption>上方下載設定備份；下方選擇備份檔並安全還原。</figcaption></figure>
+<ol class="steps"><li>按「下載設定備份」。</li></ol>
+<p class="result-box">瀏覽器下載一個 ZIP 設定備份檔，請妥善保存。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>下載失敗：確認 Agent 磁碟空間足夠。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-restore"><span class="function-number">12.2</span><h2>安全還原設定</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份與還原 ›「驗證與安全還原」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；建議先切到維護中</strong></div></div>
+<ol class="steps"><li>按「選擇檔案」選擇設定備份檔。</li><li>勾選「我了解系統會先建立現況 safety backup，再套用此設定並重啟受影響 Worker。」</li><li>按「安全還原」。</li></ol>
+<p class="result-box">系統先自動備份目前設定，再套用備份檔並重新啟動受影響的讀取工作。</p>
+<p class="note">損壞、遭修改或較新版本的備份會在覆蓋前被拒絕。跨機還原會保留目標機器的 Agent 身分；受機器保護的密碼類設定可能需要重新輸入。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>還原被拒絕：確認備份檔完整，且不是來自較新版本的 Agent。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-backup-center"><span class="function-number">12.3</span><h2>用 VisoLink 備份中心排程備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>VisoLink 備份中心（另一套系統）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已安裝 VisoLink 備份中心</strong></div></div>
+<ol class="steps"><li>在備份中心登錄這台 Agent 所連的 DG 與 Agent。</li><li>設定排程統一備份；換機時在新機器還原。</li></ol>
+<p class="result-box">換機還原後 Agent 不必改設定就會自動連回 DG；DG「點數使用狀況」中「等待還原」的權杖在還原後開始收集。</p>
+<p class="note">操作步驟請見 VisoLink 備份中心操作手冊。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>換機後沒有連回：確認新機器能連到 DG 的 7180 埠。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="agent-identity.html">← Agent 資訊</a><a href="../index.html">返回操作手冊首頁 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 12 章 備份與還原</footer></body></html>

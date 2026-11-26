@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="VisoLink DataGateway（DG）管理畫面操作手冊，依實際左側選單分章。"><title>DataGateway 操作手冊｜VisoLink</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊</a><a class="top-link" href="../agent/index.html">Agent 手冊</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<section class="hero chapter-hero"><span class="eyebrow">DataGateway Manual</span><h1>DataGateway 操作手冊</h1><p>DataGateway（DG）負責接收 Agent 送來的設備資料、依保存政策寫入歷史資料庫，並提供即時值、歷史查詢與設備回寫。本手冊依 DG 管理畫面的左側選單分章。</p><div class="hero-meta"><span class="meta-chip">14 個章節</span><span class="meta-chip">54 項操作功能</span><span class="meta-chip">對應系統：DataGateway／Agent 0.4.0-beta</span></div></section>
+<main class="home-main" id="main">
+<section class="workflow" aria-labelledby="dg-flow-title"><div class="section-heading"><h2 id="dg-flow-title">第一次使用的順序</h2><p>DG 與 Agent 分開安裝；資料由設備經 Agent 送到 DG，再保存與提供查詢。</p></div><ol><li><strong>連上 Agent</strong><br>在 Agent「DG 連線設定」填入 DG 的連線資訊並啟用，回到 DG「總覽」核准（第 2、3 章）。</li><li><strong>建立資料點</strong><br>在 Agent 建立設備連線與 Tag；DG「Tag 管理」會自動出現對應的 Tag（第 7 章）。</li><li><strong>設定保存</strong><br>在「歷史保存設定」調整額度、建立規則與分類並指派資料點；沒有保存政策的 Tag 不會保存（第 8 章）。</li></ol></section>
+<div class="section-heading"><h2>選擇功能章節</h2><p>章節順序：先登入與確認連線資訊，再依左側選單由上而下。每章都寫功能位置、前置條件、操作步驟、完成判斷與失敗時先查什麼。</p></div>
+<div class="chapter-card-grid"><article class="chapter-card"><span class="card-number">CHAPTER 01</span><h2>登入與本機帳號</h2><p>管理介面登入、首次使用與救援登入、DG 本機管理員。</p><a class="button" href="login.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 02</span><h2>總覽與容器連線設定資訊</h2><p>Server 總覽、服務狀態、Agent 連線、加值開發 WebAPI、VisoLink 配對碼。</p><a class="button" href="overview.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 03</span><h2>Agent Registry 核准與解除</h2><p>核准新 Agent、拒絕待核准、解除離線 Agent 的註冊。</p><a class="button" href="agent-registry.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 04</span><h2>資料查詢（Current Values／History）</h2><p>待查詢清單、即時值、歷史資料查詢與趨勢。</p><a class="button" href="data-query.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 05</span><h2>Data Flow Logs 資料流事件</h2><p>查詢資料接收、異常與紀錄缺口，追蹤來源 Agent 與連線。</p><a class="button" href="data-flow-logs.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 06</span><h2>回寫需求與結果</h2><p>從 DG 送出設備回寫，追蹤寫入與讀回結果。</p><a class="button" href="write-submissions.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 07</span><h2>Tag 管理</h2><p>Tag 清單、來源狀態、新增 Tag、改名與更換來源、刪除。</p><a class="button" href="tag-management.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 08</span><h2>歷史保存設定</h2><p>保存額度、保存規則、保存分類、資料點指派、保存目的端與總開關。</p><a class="button" href="history-routing.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 09</span><h2>歷史資料管理</h2><p>資料總覽、保留建議、查詢與刪除歷史資料、Tag 定義、操作紀錄。</p><a class="button" href="history-data.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 10</span><h2>快取管理</h2><p>Redis 負荷總覽、讀取快取與保存緩衝維護、快取設定。</p><a class="button" href="cache.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 11</span><h2>系統設定</h2><p>系統總覽、修改與套用設定、登入方式、補送控制、產品更新紀錄。</p><a class="button" href="system-settings.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 12</span><h2>備份與還原</h2><p>設定備份、還原、TagData 與 InfluxDB 備份、備份中心。</p><a class="button" href="backup-restore.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 13</span><h2>授權管理</h2><p>授權狀態、新增 License Key、離線啟用、點數使用與歷史。</p><a class="button" href="license.html">開啟章節 →</a></article>
+<article class="chapter-card"><span class="card-number">CHAPTER 14</span><h2>運作中／維護中</h2><p>切換維護中、維護期間的影響、切回運作中。</p><a class="button" href="operation-mode.html">開啟章節 →</a></article></div></main>
+<footer class="page-footer">VisoLink DataGateway 操作手冊</footer></body></html>

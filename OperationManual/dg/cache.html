@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="DG 用一台專屬 Redis 存放即時資料、待保存資料與歷史讀取快取。這頁掌握容量與負荷，並依用途清理。"><title>快取管理｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="history-data.html">上一章</a><a class="top-link" href="system-settings.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 10</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-cache-overview">10.1 負荷總覽</a><a href="#dg-cache-maintenance">10.2 維護清理</a><a href="#dg-cache-settings">10.3 快取設定</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 10</span><h1>快取管理</h1><p>DG 用一台專屬 Redis 存放即時資料、待保存資料與歷史讀取快取。這頁掌握容量與負荷，並依用途清理。</p></header>
+<section class="manual-function" id="dg-cache-overview"><span class="function-number">10.1</span><h2>查看負荷總覽</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「快取管理」›「負荷總覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/cache/cache-overview.jpg" alt="快取管理負荷總覽：整台 Redis 記憶體、資料讀取快取與政策分布" loading="lazy"><figcaption>右上角顯示 Redis 是否已連線；可按「重新整理／測試連線」。</figcaption></figure>
+<ol class="steps"><li>開啟「快取管理」，確認右上角顯示「Redis 已連線」。</li><li>看「整台 Redis 記憶體」「資料讀取快取」「較高閒置程度的讀取快取」。</li><li>看「讀取快取政策分布」：近期資料政策與較早資料政策各自的用量與 TTL。</li><li>看「Redis 設備與運作資訊」：延遲、淘汰政策、持久化狀態。</li></ol>
+<p class="result-box">知道 Redis 記憶體還有多少餘裕，以及讀取快取是否需要回收。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>記憶體接近上限：依 10.2 回收閒置的讀取快取。</li><li>Redis 未連線：到「系統設定 › 系統概覽」看服務健康狀態。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-cache-maintenance"><span class="function-number">10.2</span><h2>快取維護管理</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>快取管理 ›「快取維護管理」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>選「資料讀取快取」或「資料保存緩衝」。</li><li>讀取快取：在「1 選擇回收範圍」選資料政策與 TTL 剩餘比例；在「2 檢視明細與釋放」確認 Tag、資料時間與佔用空間。</li><li>按「預覽釋放所選區間」或「預覽釋放所有符合條件的區間」，確認後執行。</li><li>要一次清掉時按「清除全部讀取快取」並確認。</li><li>保存緩衝：可依資料點、時間篩選等待保存的資料；放棄尚未保存的資料前，畫面會要求明確確認。</li></ol>
+<p class="result-box">回收後讀取快取用量下降；之後查詢會重新從資料庫讀取並重建快取。</p>
+<p class="warning">放棄保存緩衝中的資料，等於這些資料不會寫入歷史資料庫，無法復原。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>回收後查詢變慢：屬正常現象，快取會隨查詢逐步重建。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-cache-settings"><span class="function-number">10.3</span><h2>快取設定</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>快取管理 ›「快取設定」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<dl class="field-map"><dt>Redis 歷史讀取快取</dt><dd>啟用／停用；停用時直接查歷史資料庫。</dd><dt>讀取快取 DB Number</dt><dd>預設 2，修改需重新啟動容器。</dd><dt>近期資料 TTL（秒）</dt><dd>24 小時內的資料，預設 86,400 秒。</dd><dt>較早資料 TTL（秒）</dt><dd>24 小時以前的資料，預設 900 秒。</dd><dt>快取區間數上限／內容上限</dt><dd>達上限時釋放較久未使用的區間。</dd></dl>
+<ol class="steps"><li>修改要調整的項目，畫面下方顯示「N 項未儲存」。</li><li>按「儲存快取設定」。</li><li>按「預覽套用影響」，確認影響的服務後套用。</li></ol>
+<p class="result-box">各項的「目前生效值」更新為新設定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示需重新啟動容器：到「系統設定 › 套用與重啟」完成套用（第 11 章）。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="history-data.html">← 歷史資料管理</a><a href="system-settings.html">系統設定 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 10 章 快取管理</footer></body></html>

@@ -6,7 +6,7 @@
   <meta name="description" content="VisoLink 正式操作手冊入口，依前台與後台功能分類說明。">
   <title>VisoLink 操作手冊</title>
   <link rel="stylesheet" href="assets/manual.css">
-<meta name="doc-systems" content="VL 1.2.0"><script src="../assets/doc-version.js" defer></script></head>
+<meta name="doc-systems" content="VL 1.2.0／DataGateway／Agent 0.4.0-beta"><script src="../assets/doc-version.js" defer></script></head>
 <body>
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="topbar">
@@ -17,6 +17,8 @@
     <nav class="top-actions" aria-label="主要導覽">
       <a class="top-link" href="frontend/index.html">前台</a>
       <a class="top-link" href="backend/index.html">後台</a>
+      <a class="top-link" href="dg/index.html">DataGateway</a>
+      <a class="top-link" href="agent/index.html">Agent</a>
     </nav>
   </header>
 
@@ -62,6 +64,31 @@
           <li>多語系、稽核與備份還原</li>
         </ul>
         <a class="button" href="backend/index.html">進入後台手冊 <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="manual-card">
+        <span class="card-number">MANUAL 03</span>
+        <h2>DataGateway 操作手冊</h2>
+        <p>提供 DataGateway（DG）管理員使用，對應 DataGateway 0.4.0-beta。</p>
+        <ul>
+          <li>Agent 核准與容器連線設定資訊</li>
+          <li>Tag 管理、即時值與歷史查詢</li>
+          <li>歷史保存設定與歷史資料管理</li>
+          <li>回寫、備份還原、授權與維護中</li>
+        </ul>
+        <a class="button" href="dg/index.html">進入 DataGateway 手冊 <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="manual-card">
+        <span class="card-number">MANUAL 04</span>
+        <h2>DataGateway Agent 操作手冊</h2>
+        <p>提供設備端 Agent 管理人員使用，對應 Agent 0.4.0-beta。</p>
+        <ul>
+          <li>DG 連線設定與註冊</li>
+          <li>OPC UA、Modbus TCP 連線與 Tag</li>
+          <li>回寫與寫入安全規則</li>
+          <li>暫存管理、Logs 與備份還原</li>
+        </ul>
+        <a class="button" href="agent/index.html">進入 Agent 手冊 <span aria-hidden="true">→</span></a>
       </article>
     </div>
 
@@ -166,6 +193,53 @@
             <li><strong><a href="backend/cache-management.html">16. Cache Management</a></strong><ul><li><a href="backend/cache-management.html#cache-overview">查看 Cache 管理總覽</a></li><li><a href="backend/cache-management.html#cache-server-registry">新增、編輯與刪除 Cache Server</a></li><li><a href="backend/cache-management.html#cache-server-test">測試 Cache Server 連線</a></li><li><a href="backend/cache-management.html#cache-health-topology">查看 Cache 狀態與拓樸</a></li><li><a href="backend/cache-management.html#cache-key-filter">搜尋與篩選 Runtime Cache Key</a></li><li><a href="backend/cache-management.html#cache-delete-selected">刪除選取的 Runtime Cache Key</a></li><li><a href="backend/cache-management.html#cache-ttl-policy">設定與套用 Cache TTL Policy</a></li><li><a href="backend/cache-management.html#cache-clear">清除 Runtime Cache</a></li></ul></li>
           </ol>
           <a class="index-jump" href="backend/index.html">查看後台章節 →</a>
+        </article>
+      </div>
+    </section>
+    <section class="index-section" aria-labelledby="dg-index-title">
+      <div class="section-heading">
+        <h2 id="dg-index-title">DataGateway／Agent 功能索引</h2>
+        <p>DataGateway 14 章、Agent 12 章，對應 DataGateway／Agent 0.4.0-beta；點選名稱可直達對應操作位置。</p>
+      </div>
+      <div class="index-columns">
+        <article class="index-panel">
+          <h3>DataGateway 功能</h3>
+          <ol class="function-tree">
+<li><strong><a href="dg/login.html">1. 登入與本機帳號</a></strong><ul><li><a href="dg/login.html#dg-login">登入 DG 管理畫面</a></li><li><a href="dg/login.html#dg-recovery-login">首次使用與救援登入</a></li><li><a href="dg/login.html#dg-local-account">建立或變更 DG 本機管理員</a></li><li><a href="dg/login.html#dg-logout">登出與切換明暗主題</a></li></ul></li>
+<li><strong><a href="dg/overview.html">2. 總覽與容器連線設定資訊</a></strong><ul><li><a href="dg/overview.html#dg-overview">查看 Server 總覽與服務狀態</a></li><li><a href="dg/overview.html#dg-connect-agent">Agent 連線資訊（給 Agent 用）</a></li><li><a href="dg/overview.html#dg-connect-webapi">加值開發 WebAPI（歷史資料讀取）</a></li><li><a href="dg/overview.html#dg-connect-visolink-pairing">VisoLink 即時與回寫配對碼</a></li></ul></li>
+<li><strong><a href="dg/agent-registry.html">3. Agent Registry 核准與解除</a></strong><ul><li><a href="dg/agent-registry.html#agent-registry-overview">查看 Agent Registry</a></li><li><a href="dg/agent-registry.html#agent-approve">核准 Agent</a></li><li><a href="dg/agent-registry.html#agent-reject">拒絕並刪除待核准的 Agent</a></li><li><a href="dg/agent-registry.html#agent-unregister">解除離線 Agent 的註冊</a></li></ul></li>
+<li><strong><a href="dg/data-query.html">4. 資料查詢（Current Values／History）</a></strong><ul><li><a href="dg/data-query.html#current-values">查看即時值（Current Values）</a></li><li><a href="dg/data-query.html#history-find-tag">歷史查詢步驟 1：找 Tag</a></li><li><a href="dg/data-query.html#history-query-settings">歷史查詢步驟 2：設定時間與取得方式</a></li><li><a href="dg/data-query.html#history-results">歷史查詢步驟 3：看趨勢與表格</a></li></ul></li>
+<li><strong><a href="dg/data-flow-logs.html">5. Data Flow Logs 資料流事件</a></strong><ul><li><a href="dg/data-flow-logs.html#dg-flow-logs-query">查詢資料流事件</a></li><li><a href="dg/data-flow-logs.html#dg-flow-logs-trace">追蹤識別碼與下載當日紀錄</a></li></ul></li>
+<li><strong><a href="dg/write-submissions.html">6. 回寫需求與結果</a></strong><ul><li><a href="dg/write-submissions.html#write-new">新增回寫需求</a></li><li><a href="dg/write-submissions.html#write-records">查詢需求紀錄與結果</a></li></ul></li>
+<li><strong><a href="dg/tag-management.html">7. Tag 管理</a></strong><ul><li><a href="dg/tag-management.html#tag-list">查看 Tag 與來源狀態</a></li><li><a href="dg/tag-management.html#tag-create">新增 Tag</a></li><li><a href="dg/tag-management.html#tag-edit-source">改名、更換或移除來源</a></li><li><a href="dg/tag-management.html#tag-delete">刪除 Tag</a></li></ul></li>
+<li><strong><a href="dg/history-routing.html">8. 歷史保存設定</a></strong><ul><li><a href="dg/history-routing.html#retention-overview">查看運作總覽</a></li><li><a href="dg/history-routing.html#retention-quota">調整保存額度</a></li><li><a href="dg/history-routing.html#retention-rules">建立保存規則</a></li><li><a href="dg/history-routing.html#retention-categories">建立保存分類</a></li><li><a href="dg/history-routing.html#retention-assign">指派資料點的保存分類或規則</a></li><li><a href="dg/history-routing.html#retention-destinations">保存目的端與資料保護</a></li><li><a href="dg/history-routing.html#retention-master-switch">歷史保存總開關</a></li></ul></li>
+<li><strong><a href="dg/history-data.html">9. 歷史資料管理</a></strong><ul><li><a href="dg/history-data.html#history-data-overview">查看資料總覽</a></li><li><a href="dg/history-data.html#history-data-suggestions">資料點與保留建議</a></li><li><a href="dg/history-data.html#history-data-delete">查詢與刪除歷史資料</a></li><li><a href="dg/history-data.html#history-data-tag-definitions">移除 Tag 定義與查看操作紀錄</a></li></ul></li>
+<li><strong><a href="dg/cache.html">10. 快取管理</a></strong><ul><li><a href="dg/cache.html#dg-cache-overview">查看負荷總覽</a></li><li><a href="dg/cache.html#dg-cache-maintenance">快取維護管理</a></li><li><a href="dg/cache.html#dg-cache-settings">快取設定</a></li></ul></li>
+<li><strong><a href="dg/system-settings.html">11. 系統設定</a></strong><ul><li><a href="dg/system-settings.html#dg-system-overview">查看系統總覽</a></li><li><a href="dg/system-settings.html#dg-settings-edit-apply">修改與套用設定</a></li><li><a href="dg/system-settings.html#dg-login-method">切換管理員登入方式</a></li><li><a href="dg/system-settings.html#dg-diagnostics-backfill">診斷追蹤與歷史補送</a></li><li><a href="dg/system-settings.html#dg-changelog">查看產品更新紀錄</a></li></ul></li>
+<li><strong><a href="dg/backup-restore.html">12. 備份與還原</a></strong><ul><li><a href="dg/backup-restore.html#dg-backup-config">建立設定備份</a></li><li><a href="dg/backup-restore.html#dg-restore-config">還原設定備份</a></li><li><a href="dg/backup-restore.html#dg-backup-tagdata">備份 TagData 與 InfluxDB 資料</a></li><li><a href="dg/backup-restore.html#dg-backup-center">用 VisoLink 備份中心排程備份</a></li></ul></li>
+<li><strong><a href="dg/license.html">13. 授權管理</a></strong><ul><li><a href="dg/license.html#dg-license-overview">查看授權狀態與 License Key</a></li><li><a href="dg/license.html#dg-license-add">新增 License Key</a></li><li><a href="dg/license.html#dg-license-offline">離線啟用</a></li><li><a href="dg/license.html#dg-license-usage">查看點數使用狀況</a></li><li><a href="dg/license.html#dg-license-history">查看授權使用歷史</a></li></ul></li>
+<li><strong><a href="dg/operation-mode.html">14. 運作中／維護中</a></strong><ul><li><a href="dg/operation-mode.html#dg-maintenance-switch">切到維護中與切回運作中</a></li><li><a href="dg/operation-mode.html#dg-maintenance-effects">維護中的影響</a></li></ul></li>
+          </ol>
+          <a class="index-jump" href="dg/index.html">查看 DataGateway 章節 →</a>
+        </article>
+
+        <article class="index-panel">
+          <h3>Agent 功能</h3>
+          <ol class="function-tree">
+<li><strong><a href="agent/login.html">1. 登入與本機帳號</a></strong><ul><li><a href="agent/login.html#agent-login">登入 Agent 管理畫面</a></li><li><a href="agent/login.html#agent-first-login">首次設定登入與救援登入</a></li><li><a href="agent/login.html#agent-logout">登出與切換明暗主題</a></li></ul></li>
+<li><strong><a href="agent/overview.html">2. 總覽與資訊診斷</a></strong><ul><li><a href="agent/overview.html#agent-overview">查看 Agent 總覽</a></li><li><a href="agent/overview.html#agent-diagnostics">資訊診斷</a></li><li><a href="agent/overview.html#agent-operation-mode">運作中／維護中</a></li></ul></li>
+<li><strong><a href="agent/uplink.html">3. DG 連線設定</a></strong><ul><li><a href="agent/uplink.html#agent-uplink-setup">設定並啟用 DG 連線</a></li><li><a href="agent/uplink.html#agent-uplink-approval">等待 DG 核准與重新申請註冊</a></li><li><a href="agent/uplink.html#agent-buffer-limits">設定本機暫存保存上限</a></li><li><a href="agent/uplink.html#agent-unregister">解除這個 DG（改連其他 DG）</a></li></ul></li>
+<li><strong><a href="agent/connections.html">4. Connections 設備連線</a></strong><ul><li><a href="agent/connections.html#connections-list">查看連線清單</a></li><li><a href="agent/connections.html#connection-create">新增設備連線</a></li><li><a href="agent/connections.html#connection-enable-delete">停用與刪除連線</a></li><li><a href="agent/connections.html#connection-writeback">開啟或關閉連線回寫</a></li></ul></li>
+<li><strong><a href="agent/opc-ua.html">5. OPC UA 連線與 Tag</a></strong><ul><li><a href="agent/opc-ua.html#opc-ua-connection">建立 OPC UA 連線</a></li><li><a href="agent/opc-ua.html#opc-ua-settings">修改連線設定與測試</a></li><li><a href="agent/opc-ua.html#opc-ua-data-groups">建立資料群組</a></li><li><a href="agent/opc-ua.html#opc-ua-tags-browse">從節點樹選取 Tag</a></li><li><a href="agent/opc-ua.html#opc-ua-tags-confirm">確認 Tag 異動與批次命名</a></li><li><a href="agent/opc-ua.html#opc-ua-tags-manual">手動／進階設定 Tag</a></li></ul></li>
+<li><strong><a href="agent/modbus-tcp.html">6. Modbus TCP 連線與 Tag</a></strong><ul><li><a href="agent/modbus-tcp.html#modbus-connection">建立 Modbus TCP 連線</a></li><li><a href="agent/modbus-tcp.html#modbus-scan-groups">設定讀取週期（Scan Groups）</a></li><li><a href="agent/modbus-tcp.html#modbus-read-blocks">設定讀取位置（Read Blocks）</a></li><li><a href="agent/modbus-tcp.html#modbus-tags-from-read">從讀取結果建立 Tag</a></li><li><a href="agent/modbus-tcp.html#modbus-tags-manual">手動／進階設定 Tag</a></li></ul></li>
+<li><strong><a href="agent/write-policies.html">7. 回寫與寫入安全規則</a></strong><ul><li><a href="agent/write-policies.html#write-policy-create">建立寫入安全規則</a></li><li><a href="agent/write-policies.html#write-policy-assign-tag">把 Tag 設為可寫並指定規則</a></li><li><a href="agent/write-policies.html#write-test">測試寫入</a></li><li><a href="agent/write-policies.html#writeback-verify">確認 DG 與 VisoLink 可回寫</a></li></ul></li>
+<li><strong><a href="agent/buffer.html">8. 暫存管理</a></strong><ul><li><a href="agent/buffer.html#buffer-overview">查看暫存狀態</a></li><li><a href="agent/buffer.html#buffer-delete">刪除暫存資料</a></li></ul></li>
+<li><strong><a href="agent/logs.html">9. Data Flow Logs 與 Write Logs</a></strong><ul><li><a href="agent/logs.html#agent-data-flow-logs">查詢 Agent 資料流事件</a></li><li><a href="agent/logs.html#agent-write-logs">查詢設備寫入紀錄</a></li></ul></li>
+<li><strong><a href="agent/account.html">10. 帳號設定</a></strong><ul><li><a href="agent/account.html#agent-account">修改本機帳號與密碼</a></li></ul></li>
+<li><strong><a href="agent/agent-identity.html">11. Agent 資訊</a></strong><ul><li><a href="agent/agent-identity.html#agent-name">修改 Agent 名稱</a></li><li><a href="agent/agent-identity.html#agent-version">查看版本資訊</a></li></ul></li>
+<li><strong><a href="agent/backup-restore.html">12. 備份與還原</a></strong><ul><li><a href="agent/backup-restore.html#agent-backup-download">下載設定備份</a></li><li><a href="agent/backup-restore.html#agent-restore">安全還原設定</a></li><li><a href="agent/backup-restore.html#agent-backup-center">用 VisoLink 備份中心排程備份</a></li></ul></li>
+          </ol>
+          <a class="index-jump" href="agent/index.html">查看 Agent 章節 →</a>
         </article>
       </div>
     </section>

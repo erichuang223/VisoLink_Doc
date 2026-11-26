@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Agent 端的工序紀錄：資料流事件記錄讀取與上傳過程，Write Logs 記錄設備寫入需求與結果。"><title>Data Flow Logs 與 Write Logs｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="buffer.html">上一章</a><a class="top-link" href="account.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 09</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-data-flow-logs">9.1 Data Flow Logs</a><a href="#agent-write-logs">9.2 Write Logs</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 09</span><h1>Data Flow Logs 與 Write Logs</h1><p>Agent 端的工序紀錄：資料流事件記錄讀取與上傳過程，Write Logs 記錄設備寫入需求與結果。</p></header>
+<section class="manual-function" id="agent-data-flow-logs"><span class="function-number">9.1</span><h2>查詢 Agent 資料流事件</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「Logs › Data Flow Logs」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/logs/data-flow-logs.jpg" alt="Agent Data Flow Logs 篩選條件與原始檔下載" loading="lazy"><figcaption>只顯示工序證據，不保存測值。</figcaption></figure>
+<ol class="steps"><li>設定開始、結束時間（本地時間）。</li><li>需要時輸入 Connection UUID，選 Event（R、E、G）、Result（OK、PARTIAL、ERR）或輸入 ErrorCode（例如 MODBUS_TIMEOUT）。</li><li>按「查詢」。</li><li>需要原始檔時，在下方「選定原始檔」選擇檔案，輸入下載授權金鑰後按「授權下載」。</li></ol>
+<p class="result-box">表格列出時間（UTC）、連線、事件、筆數、結果與錯誤代碼。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>持續出現 E 與相同錯誤代碼：依代碼檢查設備連線（例如逾時代表設備沒有回應）。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-write-logs"><span class="function-number">9.2</span><h2>查詢設備寫入紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「Logs › Write Logs」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/logs/write-logs.jpg" alt="Write Logs 篩選條件與結果欄位" loading="lazy"><figcaption>查詢目前登入帳號建立的設備寫入需求與執行結果。</figcaption></figure>
+<ol class="steps"><li>設定時間範圍，需要時輸入 RequestID、Tag ID，選 State（Accepted、Executing、Completed、Rejected、OutcomeUnknown）或 WriteStatus。</li><li>按「查詢」。</li><li>看要求值／讀回值、State、Write／Readback 與 Error。</li></ol>
+<p class="result-box">可確認每筆寫入是否成功、讀回是否相符。</p>
+<p class="note">從 DG 或 VisoLink 送出的回寫，請在 DG「回寫需求與結果 › 需求紀錄」查詢完整結果。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>State 為 OutcomeUnknown：寫入期間連線中斷，請以設備實際值為準並重新確認。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="buffer.html">← 暫存管理</a><a href="account.html">帳號設定 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 9 章 Data Flow Logs 與 Write Logs</footer></body></html>

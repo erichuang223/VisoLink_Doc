@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="DG 連不上時，Agent 先把資料存在本機，DG 恢復後依序補送。這頁一次看清楚設定與目前暫存了多少。"><title>暫存管理｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="write-policies.html">上一章</a><a class="top-link" href="logs.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 08</p><nav class="manual-nav" aria-label="本章功能"><a href="#buffer-overview">8.1 暫存狀態</a><a href="#buffer-delete">8.2 刪除暫存</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 08</span><h1>暫存管理</h1><p>DG 連不上時，Agent 先把資料存在本機，DG 恢復後依序補送。這頁一次看清楚設定與目前暫存了多少。</p></header>
+<section class="manual-function" id="buffer-overview"><span class="function-number">8.1</span><h2>查看暫存狀態</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「暫存管理」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/buffer/buffer.jpg" alt="暫存管理：容量、保存時間與暫存資料時間軸" loading="lazy"><figcaption>右上顯示「DG 已連線 · 沒有暫存」；容量與保存時間各有上限。</figcaption></figure>
+<ol class="steps"><li>點「暫存管理」，看右上狀態（例如「DG 已連線 · 沒有暫存」）。</li><li>看「容量」與「保存時間」的用量與上限。</li><li>看「暫存資料時間軸」的最舊資料、最新資料與資料涵蓋。</li><li>看「暫存明細」：待補送、補送中、超限已刪除（累計）、DG 拒收紀錄、暫存檔大小、可用磁碟。</li></ol>
+<p class="result-box">DG 正常時顯示沒有暫存；DG 中斷期間待補送筆數增加，恢復後逐步歸零。</p>
+<p class="note">上限在「DG 連線設定 › 本機暫存保存上限」調整（第 3 章）。兩個上限任一個先到，就從最舊的資料開始刪除，採集不會停止。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>超限已刪除持續增加：DG 中斷太久或上限太小，加大上限並儘快恢復 DG 連線。</li></ul></div>
+</section>
+<section class="manual-function" id="buffer-delete"><span class="function-number">8.2</span><h2>刪除暫存資料</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>暫存管理 ›「刪除暫存資料」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>只刪最舊一段（例如設備維修期間的錯誤資料）：按「選擇時間…」，設定「刪除採集時間早於」的時間，按「查看會刪除多少」。</li><li>確定不需要補送（例如 Agent 移到另一個現場）：按「清空全部…」。</li><li>畫面顯示將刪除的筆數與時間範圍，勾選「我了解這些資料會被刪除且不會補送」後執行。</li></ol>
+<p class="result-box">待補送筆數減少；被刪除的資料不會再補送到 DG。</p>
+<p class="warning">刪除後無法復原，這些資料不會出現在 DG 的歷史中。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>刪除按鈕不能按：還沒勾選確認。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="write-policies.html">← 回寫與寫入安全規則</a><a href="logs.html">Data Flow Logs 與 Write Logs →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 8 章 暫存管理</footer></body></html>

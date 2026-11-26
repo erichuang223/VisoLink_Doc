@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="總覽一眼看出 Agent、DG 連線與設備連線是否正常；資訊診斷提供給工程師的進階數據。"><title>總覽與資訊診斷｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="login.html">上一章</a><a class="top-link" href="uplink.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 02</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-overview">2.1 總覽</a><a href="#agent-diagnostics">2.2 資訊診斷</a><a href="#agent-operation-mode">2.3 維護中</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 02</span><h1>總覽與資訊診斷</h1><p>總覽一眼看出 Agent、DG 連線與設備連線是否正常；資訊診斷提供給工程師的進階數據。</p></header>
+<section class="manual-function" id="agent-overview"><span class="function-number">2.1</span><h2>查看 Agent 總覽</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「總覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/overview/agent-overview.jpg" alt="Agent 總覽：整體狀態、Server 連線、設備連線、資料安全與運作狀態" loading="lazy"><figcaption>上方整體狀態卡；下方「運作服務拓樸」顯示 DG → Agent → OT Connections。</figcaption></figure>
+<dl class="field-map"><dt>Agent Runtime</dt><dd>Agent 是否 Online 與已運作時間。</dd><dt>Server 連線</dt><dd>與 DG 的連線狀態與最後成功時間。</dd><dt>設備連線</dt><dd>正常的設備連線數，含警告與故障數。</dd><dt>資料安全</dt><dd>是否有待送積壓。</dd><dt>運作狀態</dt><dd>運作中或維護中。</dd></dl>
+<ol class="steps"><li>點左側「總覽」，看整體狀態（例如「Agent 運作正常」）。</li><li>往下看「運作服務拓樸」三層：DataGateway（Online · Trusted）、Agent、OT Connections（每條連線的協定、Endpoint、資料點數與最近活動）。</li><li>看「運作狀態」區的 Server Uplink、Connections／設備摘要。</li></ol>
+<p class="result-box">整體狀態為正常，DG 顯示 Online · Trusted，設備連線全部 Online。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Server 連線不是 Online：到「DG 連線設定」看註冊與 Uplink 狀態（第 3 章）。</li><li>設備連線有故障：點拓樸中的連線卡或「管理設備連線 →」進入該連線檢查。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-diagnostics"><span class="function-number">2.2</span><h2>資訊診斷</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「資訊診斷」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/diagnostics/diagnostics.jpg" alt="資訊診斷頁：整體狀態、設備連線、資料安全與需要人工處理" loading="lazy"><figcaption>需要更多細節時展開「工程師進階診斷」。</figcaption></figure>
+<ol class="steps"><li>點「資訊診斷」，看整體狀態、設備連線、資料安全、需要人工處理。</li><li>需要提供給技術支援時，按「工程師進階診斷」的「展開查看」，查看 Worker、Buffer、Protocol 與 Tag 原始數據。</li></ol>
+<p class="result-box">「需要人工處理」為「否」、資料安全為「未偵測到資料遺失」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>需要人工處理為「是」：依畫面說明處理，或截圖交給技術支援。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-operation-mode"><span class="function-number">2.3</span><h2>運作中／維護中</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>總覽 › 整體狀態卡 ›「運作狀態」›「切到維護中」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>在總覽的「運作狀態」按「切到維護中」。</li><li>確認視窗「切到維護中？」說明：會暫停所有連線的設備讀取、回寫、上傳到 DG、設定修改，維護期間不收集資料；仍可登入、查看狀態、切換總開關、備份與還原。按「切到維護中」。</li><li>完成後按「切回運作中」並確認。</li></ol>
+<p class="result-box">維護中時每頁上方顯示「系統維護中」與「已停止設備讀取、回寫與上傳，設定只能查看。」；切回後恢復讀取與上傳。</p>
+<p class="warning">Agent 自己切到維護中時，維護期間不收集資料。若只是 DG 維護，Agent 不必切換：DG 維護期間 Agent 會把資料暫存在本機，DG 恢復後自動補傳。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>還原 DG 設定前，DG 會要求連線的 Agent 也切到維護中。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="login.html">← 登入與本機帳號</a><a href="uplink.html">DG 連線設定 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 2 章 總覽與資訊診斷</footer></body></html>

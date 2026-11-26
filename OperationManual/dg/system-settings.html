@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="系統設定中心集中查看 DG 服務狀態與目前設定；調整前可預覽影響，套用後以服務實際回報確認生效。"><title>系統設定｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="cache.html">上一章</a><a class="top-link" href="backup-restore.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 11</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-system-overview">11.1 系統總覽</a><a href="#dg-settings-edit-apply">11.2 修改與套用</a><a href="#dg-login-method">11.3 登入方式</a><a href="#dg-diagnostics-backfill">11.4 診斷與補送</a><a href="#dg-changelog">11.5 更新紀錄</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 11</span><h1>系統設定</h1><p>系統設定中心集中查看 DG 服務狀態與目前設定；調整前可預覽影響，套用後以服務實際回報確認生效。</p></header>
+<section class="manual-function" id="dg-system-overview"><span class="function-number">11.1</span><h2>查看系統總覽</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「系統設定 › 系統設定」›「系統概覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/system-settings/system-overview.jpg" alt="系統設定中心的系統總覽：發行版、服務健康狀態、記憶體、資料庫與運作狀態" loading="lazy"><figcaption>左側是設定分類；右側上方顯示目前發行版與運作狀態。</figcaption></figure>
+<ol class="steps"><li>開啟「系統設定」，預設在「系統概覽」。</li><li>看「目前發行版」、服務健康狀態（例如 6 / 6 個服務正常）、Server 記憶體、資料庫大小、Redis 記憶體。</li><li>看「產品與建置」：發行版號、Agent 通訊契約、執行環境、管理員登入方式。</li></ol>
+<p class="result-box">能確認 DG 版本與所有服務是否正常。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>服務健康狀態少於 6：到「核心服務」分類看哪個服務異常。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-settings-edit-apply"><span class="function-number">11.2</span><h2>修改與套用設定</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 › 各分類 ›「儲存此分類」›「套用與重啟」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>在左側選分類（核心服務、查詢服務、登入與權限、應用整合、儲存與容量、診斷與補送），或用「快速尋找設定」搜尋。</li><li>每個項目都標示生效方式：「線上套用」「需重新啟動容器」或「系統自動管理／部署管理」（唯讀）。展開「套用影響與設定來源」可看目前生效值與影響服務。</li><li>修改後按該分類的「儲存此分類」。</li><li>到「套用與重啟」確認差異與受影響的服務，再執行套用。</li><li>套用後看右上角「已儲存版本 · 已套用版本」與各服務回報，確認已生效。</li></ol>
+<p class="result-box">已套用版本與已儲存版本相同，項目的「目前生效值」為新設定。</p>
+<p class="note">線上套用的項目立即生效；需重新啟動的項目只會重啟列出的服務。需要時可還原上次套用的設定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>左下「變更狀態」顯示有項目待生效：還沒到「套用與重啟」完成套用。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-login-method"><span class="function-number">11.3</span><h2>切換管理員登入方式</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 ›「登入與權限」›「DG 管理員登入方式」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>要切換成「DG 本機帳號」前，先依 1.3 建立 DG 本機管理員。</li><li>要切換成「VisoLink 整合登入」前，先確認「VisoLink 登入 API URL」正確，並用「驗證 VisoLink 管理員登入」驗證一次（有效 5 分鐘）。</li><li>在「DG 管理員登入方式」選「DG 本機帳號」或「VisoLink 整合登入」，按「儲存此分類」並套用。</li><li>依提示重新登入。</li></ol>
+<p class="result-box">登入頁的帳號欄位標題改為新的登入方式，可用新方式登入。</p>
+<p class="warning">切換前務必確認新方式的帳號可以登入，否則只能用救援帳號恢復（1.2）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>VisoLink 登入 API URL 修改屬於「需重新啟動容器」，要完成套用才生效。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-diagnostics-backfill"><span class="function-number">11.4</span><h2>診斷追蹤與歷史補送</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 ›「診斷與補送」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>「DG 處理追蹤」：保留抽樣追蹤，協助定位接收、交接與寫入問題（需重新啟動容器）。</li><li>「歷史積壓資料補送」：選「允許補送」或「暫停補送」，線上套用，不會停止即時採集。</li><li>按「儲存此分類」後套用。</li></ol>
+<p class="result-box">補送狀態依設定暫停或恢復；Agent Registry 的 BACKFILL 欄會反映。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>補送暫停太久會讓 Agent 暫存持續累積，記得恢復。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-changelog"><span class="function-number">11.5</span><h2>查看產品更新紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>系統設定 › 左側最下方「產品更新紀錄」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>在系統設定左側分類捲到最下方，點「產品更新紀錄」。</li><li>依版本查看新增功能、改善與問題修正。</li></ol>
+<p class="result-box">可確認目前版本包含哪些功能。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>版本與預期不同：對照「系統概覽」的發行版號。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="cache.html">← 快取管理</a><a href="backup-restore.html">備份與還原 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 11 章 系統設定</footer></body></html>

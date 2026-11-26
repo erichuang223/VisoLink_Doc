@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Data Flow Logs 記錄每一批資料何時被 DG 接收、處理是否異常，協助追查「資料有沒有進來」。"><title>Data Flow Logs 資料流事件｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="data-query.html">上一章</a><a class="top-link" href="write-submissions.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 05</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-flow-logs-query">5.1 查詢事件</a><a href="#dg-flow-logs-trace">5.2 追蹤與下載</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 05</span><h1>Data Flow Logs 資料流事件</h1><p>Data Flow Logs 記錄每一批資料何時被 DG 接收、處理是否異常，協助追查「資料有沒有進來」。</p></header>
+<section class="manual-function" id="dg-flow-logs-query"><span class="function-number">5.1</span><h2>查詢資料流事件</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「Logs › Data Flow Logs」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/data-flow-logs/data-flow-logs.jpg" alt="資料流事件紀錄頁的篩選條件與事件清單" loading="lazy"><figcaption>上方三張卡說明事件類型；篩選後按「查詢事件」。</figcaption></figure>
+<dl class="field-map"><dt>S · Server 接收</dt><dd>DG 已接收這批資料；歷史是否入庫要另外確認。</dd><dt>D · 目的端寫入完成</dt><dd>資料已寫入保存目的端。</dd><dt>E · 處理異常</dt><dd>處理過程發生錯誤，看錯誤代碼與來源定位問題。</dd><dt>G · 紀錄缺口</dt><dd>部分事件未完整寫入 Log；不能直接判定測值遺失。</dd></dl>
+<ol class="steps"><li>設定開始時間、結束時間（本地時間），或按「最近 15 分鐘」「最近 1 小時」「最近 24 小時」。</li><li>依需要選來源 Agent、來源連線、事件類型、處理結果（成功 OK／部分成功 PARTIAL／異常 ERR），或輸入錯誤代碼。</li><li>按「查詢事件」。</li></ol>
+<p class="result-box">表格列出發生時間、來源 Agent／連線、事件、處理結果與筆數。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>沒有任何 S 事件：Agent 沒有送資料，先看 Agent Registry 是否 Online（第 3 章）。</li><li>大量 E 事件：記下錯誤代碼，再到「系統設定」與「歷史保存設定」檢查服務狀態。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-flow-logs-trace"><span class="function-number">5.2</span><h2>追蹤識別碼與下載當日紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Data Flow Logs › 事件列「識別碼與序號」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<ol class="steps"><li>在事件列的「追蹤資訊」欄展開「識別碼與序號」，可看到 Agent ID、Connection ID、資料序號範圍與 Correlation ID。</li><li>需要提供給技術支援時，按「下載當日事件紀錄」，下載該 Agent／連線的 UTC 當日 Log。</li><li>要查較舊紀錄時，展開「進階來源篩選 · 以完整 ID 查詢舊紀錄」輸入完整 ID。</li></ol>
+<p class="result-box">取得可交給技術支援的事件紀錄檔。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>下載失敗：檔案可能已超過保存期間，改查較近日期。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="data-query.html">← 資料查詢（Current Values／History）</a><a href="write-submissions.html">回寫需求與結果 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 5 章 Data Flow Logs 資料流事件</footer></body></html>

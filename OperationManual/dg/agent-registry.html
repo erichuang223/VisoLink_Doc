@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Agent 送出註冊後，要由 DG 管理員在 Agent Registry 核准才會開始收資料。核准、Online 與資料入庫是三件分開確認的事。"><title>Agent Registry 核准與解除｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="overview.html">上一章</a><a class="top-link" href="data-query.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 03</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-registry-overview">3.1 清單</a><a href="#agent-approve">3.2 核准</a><a href="#agent-reject">3.3 拒絕</a><a href="#agent-unregister">3.4 解除註冊</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 03</span><h1>Agent Registry 核准與解除</h1><p>Agent 送出註冊後，要由 DG 管理員在 Agent Registry 核准才會開始收資料。核准、Online 與資料入庫是三件分開確認的事。</p></header>
+<section class="manual-function" id="agent-registry-overview"><span class="function-number">3.1</span><h2>查看 Agent Registry</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>總覽頁最下方「Agent Registry」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/overview/agent-registry.jpg" alt="Agent Registry 清單，AGENT01 顯示 Trusted 與 Online" loading="lazy"><figcaption>每台 Agent 一列；TRUST / STATE 同時顯示信任狀態與連線狀態。</figcaption></figure>
+<dl class="field-map"><dt>TRUST / STATE</dt><dd>Pending（待核准）／Trusted（已核准），下方是 Online／Offline。</dd><dt>CONNECTIONS / WORKERS</dt><dd>這台 Agent 的設備連線數與背景工作數，含故障數。</dd><dt>OUTBOX</dt><dd>Agent 尚未送達的資料筆數。</dd><dt>REALTIME / BACKFILL</dt><dd>等待中的即時資料與補送資料。</dd><dt>LAST ACTIVITY／ERROR</dt><dd>最後一次活動時間與最近錯誤代碼。</dd></dl>
+<ol class="steps"><li>開啟「總覽」，捲到最下方「Agent Registry」。</li><li>依需要在「操作」欄執行 3.2～3.4。</li></ol>
+<p class="result-box">能判斷每台 Agent 是否已核准、是否在線、有沒有資料積壓。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>清單是空的：Agent 端還沒啟用 DG 連線，或連不到 DG（Agent 手冊第 3 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-approve"><span class="function-number">3.2</span><h2>核准 Agent</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Agent Registry ›「核准」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員；Agent 已在 Agent 端啟用 DG 連線</strong></div></div>
+<ol class="steps"><li>Agent 端儲存並啟用 DG 連線後，總覽上方「PENDING TRUST」變成 1 以上。</li><li>在 Agent Registry 找到 TRUST 為 Pending 的那一列，按「核准」。</li><li>確認視窗「核准 Agent？」顯示 Agent 名稱與 ID，核對無誤後按「確認核准」。</li></ol>
+<p class="result-box">畫面顯示「已核准 …；清單已更新。」，該列變成 Trusted；Agent 重新連線後顯示 Online。</p>
+<p class="note">核准只改變信任狀態，不代表 Agent 已 Online 或資料已入庫；請到「Tag 管理」與「Current Values」確認資料有進來。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「此 Agent 已不在 Pending 狀態」：已被其他管理員處理，重新整理頁面。</li><li>核准後一直 Offline：到 Agent 端「DG 連線設定」查看 Uplink 狀態與錯誤。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-reject"><span class="function-number">3.3</span><h2>拒絕並刪除待核准的 Agent</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Agent Registry ›「拒絕並刪除」（只在 Pending 列出現）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>在 Pending 的那一列按「拒絕並刪除」。</li><li>確認視窗「拒絕並刪除待核准的 Agent？」說明待核准紀錄會從清單移除，按「拒絕並刪除」。</li></ol>
+<p class="result-box">該 Agent 從清單消失。這台 Agent 之後若再連上，會重新出現在待核准。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>不認得的 Agent 反覆出現：檢查 Enrollment token 是否外流，必要時請安裝人員更換。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-unregister"><span class="function-number">3.4</span><h2>解除離線 Agent 的註冊</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Agent Registry ›「解除註冊」（只在 Trusted 且 Offline 的列出現）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>確認要解除的 Agent 已離線（STATE 為 Offline）。</li><li>按該列的「解除註冊」。</li><li>確認視窗說明：歷史資料會保留；Agent 保留身分並把資料暫存在本機；DG 會收回這台 Agent 占用的授權權杖與點數。</li><li>按「確認解除註冊」。</li></ol>
+<p class="result-box">該 Agent 不再列為 Trusted。Agent 端可「重新申請註冊」（DG 核准後補傳暫存資料），或「解除這個 DG」。</p>
+<p class="note">Tag 屬於 DG，解除註冊不會刪除 Tag 與歷史資料；Tag 會變成來源離線或無來源。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「Agent 已恢復活動或不再為 Trusted」：Agent 又連上了，不能解除。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="overview.html">← 總覽與容器連線設定資訊</a><a href="data-query.html">資料查詢（Current Values／History） →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 3 章 Agent Registry 核准與解除</footer></body></html>

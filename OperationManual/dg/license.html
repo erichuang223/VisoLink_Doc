@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="查看 DataGateway 授權容量並管理多組 License Key，可隨時加入追加購買的授權。此頁只對管理員開放。"><title>授權管理｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="backup-restore.html">上一章</a><a class="top-link" href="operation-mode.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 13</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-license-overview">13.1 授權金鑰</a><a href="#dg-license-add">13.2 新增 Key</a><a href="#dg-license-offline">13.3 離線啟用</a><a href="#dg-license-usage">13.4 點數使用</a><a href="#dg-license-history">13.5 使用歷史</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 13</span><h1>授權管理</h1><p>查看 DataGateway 授權容量並管理多組 License Key，可隨時加入追加購買的授權。此頁只對管理員開放。</p></header>
+<p class="note-box">點數規則：每條 Agent 連線未開回寫用 1 點、開回寫用 2 點；保存額度 1 點換 100 個 Tag。停用中的連線照樣占點。</p>
+<section class="manual-function" id="dg-license-overview"><span class="function-number">13.1</span><h2>查看授權狀態與 License Key</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「授權管理」›「授權金鑰」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/license/license-keys.jpg" alt="授權管理：授權狀態、總點數、已使用與 License Key 清單（Key 與客戶已遮蔽）" loading="lazy"><figcaption>授權狀態「正常」表示授權有效、點數足夠；下方清單可依狀態篩選。</figcaption></figure>
+<ol class="steps"><li>開啟「授權管理」，看「授權狀態」與判斷時間。</li><li>看目前有效總點數、目前已使用、即將到期（30 天內）、已到期／異常。</li><li>在清單用「全部／生效中／尚未生效／已到期／異常」或搜尋框（授權編號、Key 或客戶）篩選，按列尾箭頭查看明細。</li></ol>
+<p class="result-box">知道目前可用多少點、哪些授權快到期。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>授權狀態不是正常：看狀態說明，常見是點數不足或授權過期。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-license-add"><span class="function-number">13.2</span><h2>新增 License Key</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>授權管理 ›「＋ 新增 License Key」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>按「＋ 新增 License Key」。</li><li>在「在此貼上 License Key」貼上 VisoLink 提供的 DataGateway 公開 Key。</li><li>按「驗證並新增」。</li></ol>
+<p class="result-box">清單出現新授權，總點數增加；「使用歷史」記錄一筆新增 Key。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>驗證失敗：確認 Key 完整複製、沒有多餘空白，且是 DataGateway 的 Key。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-license-offline"><span class="function-number">13.3</span><h2>離線啟用</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>授權管理 ›「離線啟用」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員；適用隔離網路</strong></div></div>
+<ol class="steps"><li>按「離線啟用」。</li><li>步驟 1：按「下載 .vlreq」下載啟用請求檔，交給 VisoLink 授權窗口（請求檔不含任何私鑰）。</li><li>步驟 2：收到授權窗口回傳的 .vllic 檔後，選擇檔案並「匯入並驗證」。</li></ol>
+<p class="result-box">DG 驗證簽章後安裝授權，清單出現新授權。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>匯入失敗：確認 .vllic 是針對這台 DG 的請求檔產生的。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-license-usage"><span class="function-number">13.4</span><h2>查看點數使用狀況</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>授權管理 ›「點數使用狀況」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/license/license-usage.jpg" alt="點數使用狀況：保存額度與每條 Agent 連線占用的點數" loading="lazy"><figcaption>每列是一個點數權杖：保存額度或 Agent 連線，顯示是否開回寫與占用點數。</figcaption></figure>
+<ol class="steps"><li>切到「點數使用狀況」。</li><li>用「全部／Agent 連線／保存額度／異常／等待還原」或 Agent 篩選。</li><li>需要把點數移到其他連線時，按「轉移權杖」依畫面操作。</li></ol>
+<p class="result-box">知道每條連線與保存額度各用了多少點。</p>
+<p class="note">「等待還原」的權杖在新 Agent 還原設定備份後才開始收集。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>點數不夠新增連線：停用連線仍占點，刪除不用的連線或追加授權。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-license-history"><span class="function-number">13.5</span><h2>查看授權使用歷史</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>授權管理 ›「使用歷史」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>切到「使用歷史」。</li><li>用「匯入授權／新增 Key／刪除授權／驗證失敗／狀態變化」篩選事件。</li><li>看每筆事件的時間、操作者與內容（例如權杖發出、兌換保存額度）。</li></ol>
+<p class="result-box">可追查授權與點數的每次變化。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>沒有預期的紀錄：按「重新整理」。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="backup-restore.html">← 備份與還原</a><a href="operation-mode.html">運作中／維護中 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 13 章 授權管理</footer></body></html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Current Values 看目前值，History 查指定時間的歷史資料；兩頁共用同一份「待查詢列表」，存在這台瀏覽器。"><title>資料查詢（Current Values／History）｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="agent-registry.html">上一章</a><a class="top-link" href="data-flow-logs.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 04</p><nav class="manual-nav" aria-label="本章功能"><a href="#current-values">4.1 Current Values</a><a href="#history-find-tag">4.2 找 Tag</a><a href="#history-query-settings">4.3 設定查詢</a><a href="#history-results">4.4 預覽結果</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 04</span><h1>資料查詢（Current Values／History）</h1><p>Current Values 看目前值，History 查指定時間的歷史資料；兩頁共用同一份「待查詢列表」，存在這台瀏覽器。</p></header>
+<section class="manual-function" id="current-values"><span class="function-number">4.1</span><h2>查看即時值（Current Values）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「資料查詢 › Current Values」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/data-query/current-values.jpg" alt="即時資料預覽頁，待查詢列表一個 Tag 及其目前值" loading="lazy"><figcaption>加入待查詢的 Tag 後，表格顯示目前值、品質、取樣與接收時間，以及是否逾時。</figcaption></figure>
+<dl class="field-map"><dt>CURRENT VALUE／TYPE</dt><dd>目前值與資料型別。</dd><dt>QUALITY</dt><dd>資料品質，例如 Good。</dd><dt>SAMPLE／RECEIVED</dt><dd>設備取樣時間與 DG 收到的時間。</dd><dt>STALE</dt><dd>Fresh 表示在逾時判定內；超過則標示逾時。</dd></dl>
+<ol class="steps"><li>按「找 Tag／加入清單」，在「從 Tag Config 找 Tag」輸入名稱後按「搜尋 Tag 目錄」。</li><li>在要看的 Tag 按「加入待查詢」。</li><li>按「查詢待查詢列表」。</li><li>需要時調整「每頁」與「逾時判定（秒）」，再按「重新整理清單測值」。</li></ol>
+<p class="result-box">表格列出每個 Tag 的目前值並持續即時更新；沒有值的 Tag 仍保留在清單中。</p>
+<p class="note">待查詢列表存在這台瀏覽器，移除或「清空清單」前會一直保留；測值本身不存在瀏覽器。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「DG 維護中，暫停查詢」：等 DG 切回運作中（第 14 章）。</li><li>Tag 的來源狀態不是「正常」：到「Tag 管理」查看來源（第 7 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="history-find-tag"><span class="function-number">4.2</span><h2>歷史查詢步驟 1：找 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「資料查詢 › History」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/data-query/history-find-tag.jpg" alt="歷史資料查詢第一步，搜尋 Tag 並加入右側待查詢列表" loading="lazy"><figcaption>直接輸入名稱即可搜尋所有來源，不必先選 Agent；右側是待查詢列表。</figcaption></figure>
+<ol class="steps"><li>在「你想找哪個 Tag？」輸入 Tag 名稱或說明，按「搜尋 Tag」；需要時展開「更多篩選條件」選資料型態或 Config。</li><li>也可以直接瀏覽 Tag 目錄，名稱支援 * 與 ? 萬用字元。</li><li>在要查的 Tag 按「＋ 加入」，或按「加入本頁 Tag」一次加入整頁。</li><li>右側「待查詢列表」確認後，按「設定時間與查詢方式 →」。</li></ol>
+<p class="result-box">待查詢列表列出要查的 Tag，進入步驟 2。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>找不到 Tag：確認該 Tag 已在「Tag 管理」中出現。</li></ul></div>
+</section>
+<section class="manual-function" id="history-query-settings"><span class="function-number">4.3</span><h2>歷史查詢步驟 2：設定時間與取得方式</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>History › 步驟 2「設定查詢」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已完成步驟 1</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/data-query/history-settings.jpg" alt="設定這次查詢：時間區間與實際資料或內插資料" loading="lazy"><figcaption>時間以本地時間顯示；實際資料保留原始取樣，內插資料以固定間隔產生時間點。</figcaption></figure>
+<ol class="steps"><li>在「什麼時間的資料？」按「最近 15 分鐘」「最近 1 小時」「最近 24 小時」，或自訂開始時間（含）與結束時間（不含）。</li><li>在「怎麼取得資料？」選「實際資料 Recorded」或「內插資料 Interpolated」（內插要再設定間隔）。</li><li>選「每批讀取紀錄」100、250 或 500 筆。</li><li>按「查詢 N 個正式 Tag →」。</li></ol>
+<p class="result-box">進入步驟 3 顯示查詢結果。</p>
+<p class="note">一次查詢最多 31 天；這個畫面最多載入 10,000 筆；內插最多 10,000 個時間點。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>時間區間超過 31 天會被拒絕，請縮短區間。</li></ul></div>
+</section>
+<section class="manual-function" id="history-results"><span class="function-number">4.4</span><h2>歷史查詢步驟 3：看趨勢與表格</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>History › 步驟 3「預覽結果」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已完成步驟 2</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/data-query/history-results.jpg" alt="兩個 Tag 的歷史資料查詢結果與趨勢圖" loading="lazy"><figcaption>上方摘要顯示已載入筆數、資料型態與品質異常；下方可切換趨勢圖與 Table。</figcaption></figure>
+<ol class="steps"><li>看上方狀態列，例如「已回傳資料 · 區間完整」。</li><li>在「趨勢圖」分頁看數值 Tag 的走勢；點圓點可看該筆明細。</li><li>切到「Table」看所有型態的紀錄；用「查看 Tag」只看單一 Tag。</li><li>畫面提示「尚有紀錄可載入」時，按「載入下一批」。</li><li>要改條件時按「調整查詢條件」。</li></ol>
+<p class="result-box">能看到指定時間內每個 Tag 的歷史紀錄。異常或缺值處趨勢線會斷開。</p>
+<p class="note">歷史以 Tag 為準：Agent 離線、解除註冊或 Tag 改名、更換來源後，歷史仍查得到且不會斷成兩段。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>查無資料：確認該 Tag 有設定保存政策（第 8 章）；沒有保存政策的 Tag 只有即時值。</li><li>顯示部分來源無法查詢：到「歷史保存設定 › 運作總覽」檢查資料庫寫入狀況。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="agent-registry.html">← Agent Registry 核准與解除</a><a href="data-flow-logs.html">Data Flow Logs 資料流事件 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 4 章 資料查詢（Current Values／History）</footer></body></html>

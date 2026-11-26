@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="查看各保存目的端保存了哪些資料，找出不再需要的資料並清除指定範圍。此頁只對管理員開放，所有刪除都會寫入操作紀錄。"><title>歷史資料管理｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="history-routing.html">上一章</a><a class="top-link" href="cache.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 09</p><nav class="manual-nav" aria-label="本章功能"><a href="#history-data-overview">9.1 資料總覽</a><a href="#history-data-suggestions">9.2 保留建議</a><a href="#history-data-delete">9.3 刪除資料</a><a href="#history-data-tag-definitions">9.4 Tag 定義與紀錄</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 09</span><h1>歷史資料管理</h1><p>查看各保存目的端保存了哪些資料，找出不再需要的資料並清除指定範圍。此頁只對管理員開放，所有刪除都會寫入操作紀錄。</p></header>
+<p class="note-box">資料時間在此頁一律以台北時間顯示。刪除前系統會引導先到「備份與還原」備份。</p>
+<section class="manual-function" id="history-data-overview"><span class="function-number">9.1</span><h2>查看資料總覽</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「歷史資料管理」›「資料總覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-data/overview.jpg" alt="歷史資料管理資料總覽：TimescaleDB 的 Tag 數、保存區間與主機磁碟" loading="lazy"><figcaption>每個保存目的端一張卡，顯示 Tag 數、資料保存區間與磁碟用量（略估）。</figcaption></figure>
+<ol class="steps"><li>開啟「歷史資料管理」，預設在「資料總覽」。</li><li>看每個目的端的 Tag 數、資料保存區間、已保存天數與主機磁碟。</li><li>按「查看資料點 →」進入 9.2。</li></ol>
+<p class="result-box">知道每個資料庫存了多久、還剩多少空間。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>磁碟剩餘偏低：依 9.2 找出可移除的資料，或調整保存規則。</li></ul></div>
+</section>
+<section class="manual-function" id="history-data-suggestions"><span class="function-number">9.2</span><h2>資料點與保留建議</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史資料管理 ›「資料點與保留建議」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>選目的端、保留建議（可移除／建議檢視／使用中）、Agent，或輸入 Tag 名稱（可用 * 模糊比對）。</li><li>按「查詢」。</li><li>看每一列的保存設定、資料區間、最後資料時間、筆數與保留建議原因。</li><li>要清除時按「以目前條件到「查詢與刪除資料」」。</li></ol>
+<p class="result-box">列出每個 Tag 在每個目的端的資料與保留建議。</p>
+<p class="note">展開「保留建議怎麼判斷」可看判斷依據。例如 Tag 定義已移除，或名稱對應不到現行 Tag 的資料，會建議可移除。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>沒有結果：放寬條件或清除條件後再查。</li></ul></div>
+</section>
+<section class="manual-function" id="history-data-delete"><span class="function-number">9.3</span><h2>查詢與刪除歷史資料</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史資料管理 ›「查詢與刪除資料」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員；建議先備份</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-data/query-delete.jpg" alt="查詢與刪除資料：目的端、分類、Agent、Tag 名稱、保留建議與資料時間條件" loading="lazy"><figcaption>先查出範圍、確認結果後再勾選刪除；只刪除歷史資料，不會移除 Tag 定義或保存設定。</figcaption></figure>
+<ol class="steps"><li>勾選目的端（可多選），設定分類（僅 TimescaleDB）、Agent、Tag 名稱、保留建議。</li><li>設定資料時間起、迄（台北時間，含迄日整天），按「查詢」。</li><li>核對結果，勾選要刪除的列，或按「選取全部查詢結果」。</li><li>按「刪除選取範圍的資料…」，依確認視窗核對範圍後確認。</li></ol>
+<p class="result-box">選取範圍的歷史資料被刪除，並記錄在「操作紀錄」。</p>
+<p class="warning">刪除後無法復原。請先到「備份與還原」備份 TagData 或 InfluxDB 資料（第 12 章）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>刪除鈕無法按：還沒有勾選任何查詢結果。</li></ul></div>
+</section>
+<section class="manual-function" id="history-data-tag-definitions"><span class="function-number">9.4</span><h2>移除 Tag 定義與查看操作紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史資料管理 ›「Tag 定義」「操作紀錄」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>在「Tag 定義」分頁選擇要移除的 Tag 定義。移除會連同該 Tag 在所有目的端的歷史資料一起刪除；Agent 仍在採集的 Tag 不能移除。</li><li>依確認視窗核對要刪除的目的端後確認。</li><li>切到「操作紀錄」查看所有刪除與 Tag 定義移除的紀錄。</li></ol>
+<p class="result-box">操作紀錄列出誰在何時刪除了哪些資料。</p>
+<p class="warning">移除 Tag 定義等同刪除該 Tag 的全部歷史，無法復原。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示無法移除：該 Tag 仍有 Agent 在採集，先到「Tag 管理」移除來源。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="history-routing.html">← 歷史保存設定</a><a href="cache.html">快取管理 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 9 章 歷史資料管理</footer></body></html>

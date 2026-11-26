@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Agent 依寫入安全規則（Write Policies）檢查每一筆回寫。可寫 Tag 沒有指定有效規則時一律拒絕。"><title>回寫與寫入安全規則｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="modbus-tcp.html">上一章</a><a class="top-link" href="buffer.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 07</p><nav class="manual-nav" aria-label="本章功能"><a href="#write-policy-create">7.1 建立規則</a><a href="#write-policy-assign-tag">7.2 指定給 Tag</a><a href="#write-test">7.3 測試寫入</a><a href="#writeback-verify">7.4 確認可回寫</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 07</span><h1>回寫與寫入安全規則</h1><p>Agent 依寫入安全規則（Write Policies）檢查每一筆回寫。可寫 Tag 沒有指定有效規則時一律拒絕。</p></header>
+<section class="manual-function" id="write-policy-create"><span class="function-number">7.1</span><h2>建立寫入安全規則</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>連線 ›「寫入安全規則（Write Policies）」分頁</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent（可離線設定）；連線回寫已開啟（第 4 章）</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/write-policies/write-policies.jpg" alt="寫入安全規則清單：範圍、寫入後讀回、逾時與冷卻" loading="lazy"><figcaption>每條規則顯示允許範圍、是否寫入後讀回、操作逾時與冷卻時間。</figcaption></figure>
+<dl class="field-map"><dt>最小值／最大值</dt><dd>允許寫入的範圍。</dd><dt>操作逾時（ms）</dt><dd>等待設備回應的時間。</dd><dt>Cooldown（秒）</dt><dd>同一規則兩次寫入之間的最短間隔。</dd><dt>寫入後讀回確認</dt><dd>寫入後再讀一次，確認設備值相符。</dd></dl>
+<ol class="steps"><li>在規則清單下方填名稱、最小值、最大值、操作逾時、Cooldown。</li><li>勾選「啟用」與「寫入後讀回確認」。</li><li>按「新增安全規則」。</li></ol>
+<p class="result-box">清單出現新規則，例如「已啟用 · 範圍 60.0 ～ 95.0」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>規則必須屬於同一條連線，才能指定給該連線的 Tag。</li></ul></div>
+</section>
+<section class="manual-function" id="write-policy-assign-tag"><span class="function-number">7.2</span><h2>把 Tag 設為可寫並指定規則</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>連線 ›「Tag 設定」›「手動／進階」› Tag「編輯」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已建立寫入安全規則</strong></div></div>
+<ol class="steps"><li>在 Tag 列按「編輯」。</li><li>Access Mode 改成 ReadWrite，出現「Write Policy」選單後選擇規則。</li><li>按「儲存 OPC UA Tag」（Modbus 為「儲存進階 Tag」）。</li></ol>
+<p class="result-box">Tag 顯示 ReadWrite；DG「回寫需求與結果」與 VisoLink 即時 View 會把這個 Tag 列為可寫。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>儲存失敗並提示「可寫 Tag 必須指定同一 Connection 中已啟用的 Write Policy」：先建立或啟用規則。</li></ul></div>
+</section>
+<section class="manual-function" id="write-test"><span class="function-number">7.3</span><h2>測試寫入</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>寫入安全規則分頁下方「測試寫入」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；設備在線</strong></div></div>
+<ol class="steps"><li>選 Tag，輸入 Value 與操作者代號，按「產生新 ID」取得 RequestID。</li><li>按「確認並送出」。</li><li>確認視窗「確認寫入？」顯示 Tag、位址、型別、值與 RequestID，核對後按「確認寫入」。</li><li>用「依 RequestID 查詢」查看結果。</li></ol>
+<p class="result-box">查詢結果顯示寫入成功；有勾讀回確認時顯示讀回值。</p>
+<p class="warning">測試寫入會真的寫到設備，請先確認現場狀態與數值安全。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>被拒絕：值超出規則範圍、還在 Cooldown，或 Tag 沒有指定規則。</li></ul></div>
+</section>
+<section class="manual-function" id="writeback-verify"><span class="function-number">7.4</span><h2>確認 DG 與 VisoLink 可回寫</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>DG「回寫需求與結果」；VisoLink 即時 View</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 與 VisoLink 管理員</strong></div></div>
+<ol class="steps"><li>到 DG「回寫需求與結果 › 新增回寫」，確認 Tag 選單中出現這個 Tag（DG 手冊第 6 章）。</li><li>到 VisoLink 即時 View，確認「DG 可寫」欄顯示「可提交」（VisoLink 後台手冊）。</li></ol>
+<p class="result-box">DG 與 VisoLink 都能對這個 Tag 送出回寫，結果記錄在 Agent「Write Logs」與 DG「需求紀錄」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>VisoLink 顯示不可提交：確認連線回寫已開啟、Tag 為 ReadWrite 並指定啟用中的規則。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="modbus-tcp.html">← Modbus TCP 連線與 Tag</a><a href="buffer.html">暫存管理 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 7 章 回寫與寫入安全規則</footer></body></html>

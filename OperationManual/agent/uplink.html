@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="設定這台 Agent 要連到哪一台 DG。尚未啟用時 Agent 可獨立運作；保存並啟用後才向 DG 註冊，並需 DG 管理員核准。"><title>DG 連線設定｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="overview.html">上一章</a><a class="top-link" href="connections.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 03</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-uplink-setup">3.1 啟用連線</a><a href="#agent-uplink-approval">3.2 核准與重新申請</a><a href="#agent-buffer-limits">3.3 暫存上限</a><a href="#agent-unregister">3.4 解除 DG</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 03</span><h1>DG 連線設定</h1><p>設定這台 Agent 要連到哪一台 DG。尚未啟用時 Agent 可獨立運作；保存並啟用後才向 DG 註冊，並需 DG 管理員核准。</p></header>
+<section class="manual-function" id="agent-uplink-setup"><span class="function-number">3.1</span><h2>設定並啟用 DG 連線</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「DG 連線設定」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；已從 DG 總覽取得連線 URL、Enrollment token 與 DG 公開憑證</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/uplink/uplink-settings.jpg" alt="DG 連線設定：DG gRPC HTTPS 位址、Site、Enrollment token、DG 公開憑證與啟用 DG 連線" loading="lazy"><figcaption>Token 留空可沿用已保存的值；憑證不選檔可沿用目前的憑證。</figcaption></figure>
+<dl class="field-map"><dt>DG gRPC HTTPS 位址</dt><dd>DG 總覽「Agent 連線」卡的 AGENT 連線 URL，例如 https://&lt;DG 位址&gt;:7180。必須是所有 Agent 都連得到的固定名稱或 IPv4，且與憑證名稱相同；跨設備不可使用 localhost。</dd><dt>Site（可留空）</dt><dd>現場名稱，方便辨識。</dd><dt>Enrollment token</dt><dd>DG 總覽複製的註冊 Token；已保存時留空可沿用。</dd><dt>DG 公開憑證（PEM .crt）</dt><dd>DG 的公開憑證檔；畫面顯示目前憑證的 SHA-256 指紋供核對。</dd></dl>
+<ol class="steps"><li>填入 DG gRPC HTTPS 位址與 Enrollment token，選擇 DG 公開憑證檔。</li><li>勾選「啟用 DG 連線」，按「儲存設定」。</li><li>確認視窗「啟用 DG 連線？」說明仍需 DG 管理員核准，按「啟用並註冊」。</li><li>畫面提示設定已保存、正在嘗試連線，請分別確認 Pending、Trusted 與 Online。</li></ol>
+<p class="result-box">下方「註冊狀態」顯示已註冊、等待 DG 核准；DG 管理員核准後顯示「已註冊，DG 已核准」，Uplink 為 Online、信任狀態 Trusted。</p>
+<p class="note">安裝 Agent 時若已帶入 DG 位址、Token 與憑證，只要勾選「啟用 DG 連線」並儲存即可。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Uplink 一直 Connecting：確認 Agent 主機能連到 DG 的 7180 埠，位址與憑證名稱相同。</li><li>顯示 Token 被拒絕：重新從 DG 總覽複製 Enrollment token。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-uplink-approval"><span class="function-number">3.2</span><h2>等待 DG 核准與重新申請註冊</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>DG 連線設定 › 註冊狀態；DG 總覽 › Agent Registry</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員核准</strong></div></div>
+<ol class="steps"><li>請 DG 管理員到 DG「總覽 › Agent Registry」按「核准」（DG 手冊第 3 章）。</li><li>核准前，Agent「Connections」頁會顯示「已註冊、等待 DG 核准」，新增連線按鈕停用。</li><li>若 DG 端解除了這台 Agent 的註冊，Agent 會保留身分與暫存資料；在 DG 連線設定按「重新申請註冊」並確認，等 DG 再次核准後補傳暫存資料。</li></ol>
+<p class="result-box">註冊狀態為「已註冊，DG 已核准」，可以新增設備連線。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>核准後仍 Offline：看總覽的 Server Uplink 最近錯誤。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-buffer-limits"><span class="function-number">3.3</span><h2>設定本機暫存保存上限</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>DG 連線設定 ›「本機暫存保存上限」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<dl class="field-map"><dt>最多保存時間</dt><dd>1 小時～30 天，預設 7 天，以資料採集時間計算。</dd><dt>最多保存容量</dt><dd>100 MB～50 GB，預設 2 GB。</dd></dl>
+<ol class="steps"><li>輸入最多保存時間（天／小時）與最多保存容量（GB／MB）。</li><li>按「儲存暫存設定」。</li></ol>
+<p class="result-box">立即生效，不需重新啟動；「暫存管理」頁顯示新的上限。</p>
+<p class="note">DG 正常時資料直接送出、不寫暫存；送不出去的資料才暫存在本機，DG 恢復後自動補送。超過任一上限時刪除最舊的待補送資料、保留最新資料，採集不會停止。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>可用磁碟不足：到「暫存管理」看暫存所在磁碟的可用空間。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-unregister"><span class="function-number">3.4</span><h2>解除這個 DG（改連其他 DG）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>DG 連線設定 ›「解除註冊」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>確認不再需要尚未送出的暫存資料。</li><li>在「解除註冊」區按「解除註冊」，確認視窗「解除這個 DG？」核對後確認。</li><li>之後可設定任何一台 DG 重新註冊（需該 DG 管理員核准）。</li></ol>
+<p class="result-box">Agent 改回未註冊；本機的 DG 位址、註冊碼、信任憑證與位址鎖定被清除。</p>
+<p class="warning">Agent 端解除註冊會刪除本機尚未送出的全部暫存資料，不會再送到 DG；重新註冊前採集的資料也不保存。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>只是 DG 暫時離線時不要解除註冊；資料會暫存並在 DG 恢復後補送。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="overview.html">← 總覽與資訊診斷</a><a href="connections.html">Connections 設備連線 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 3 章 DG 連線設定</footer></body></html>

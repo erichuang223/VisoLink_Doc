@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="設定 Agent 的顯示名稱，並查看 Agent 的版本資訊。"><title>Agent 資訊｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="account.html">上一章</a><a class="top-link" href="backup-restore.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 11</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-name">11.1 Agent 名稱</a><a href="#agent-version">11.2 版本</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 11</span><h1>Agent 資訊</h1><p>設定 Agent 的顯示名稱，並查看 Agent 的版本資訊。</p></header>
+<section class="manual-function" id="agent-name"><span class="function-number">11.1</span><h2>修改 Agent 名稱</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「系統管理 › Agent 資訊」›「Agent Name」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/agent-identity/agent-identity.jpg" alt="Agent 資訊：Agent Name 與產品與建置" loading="lazy"><figcaption>名稱會顯示在登入畫面、Agent 管理介面與 DG。</figcaption></figure>
+<ol class="steps"><li>在「Agent Name」輸入名稱（必填，最多 100 個字元）。</li><li>按「儲存 Agent Name」。</li></ol>
+<p class="result-box">Agent 自動重新連線一次，DG 的 Agent Registry 與 Tag 名稱來源顯示新名稱。</p>
+<p class="note">修改名稱不會改變 AgentId、登入帳密或連線設定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>DG 沒有更新名稱：確認 Agent 重新連線後為 Online。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-version"><span class="function-number">11.2</span><h2>查看版本資訊</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Agent 資訊 ›「產品與建置」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>看「發行版號」（隨 Agent 封裝的 VERSION）與「Contract」（與 DG 的通訊契約版本）。</li></ol>
+<p class="result-box">可確認 Agent 版本與 DG 相容（Contract 與 DG 總覽的 CONTRACT 相同）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Contract 不同：請升級 Agent 或 DG 到相容版本。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="account.html">← 帳號設定</a><a href="backup-restore.html">備份與還原 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 11 章 Agent 資訊</footer></body></html>

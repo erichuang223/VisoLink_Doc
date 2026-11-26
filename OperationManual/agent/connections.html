@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="一個 Agent 可管理多組獨立的設備連線。每條連線占 1 點授權，開啟回寫多用 1 點。"><title>Connections 設備連線｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="uplink.html">上一章</a><a class="top-link" href="opc-ua.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 04</p><nav class="manual-nav" aria-label="本章功能"><a href="#connections-list">4.1 連線清單</a><a href="#connection-create">4.2 新增連線</a><a href="#connection-enable-delete">4.3 停用與刪除</a><a href="#connection-writeback">4.4 回寫開關</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 04</span><h1>Connections 設備連線</h1><p>一個 Agent 可管理多組獨立的設備連線。每條連線占 1 點授權，開啟回寫多用 1 點。</p></header>
+<section class="manual-function" id="connections-list"><span class="function-number">4.1</span><h2>查看連線清單</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「Connections」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；已通過 DG 核准</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/connections/connection-list.jpg" alt="Connections 清單：名稱、協定、Endpoint、資料群組、Tags、狀態、點數與 DG 權杖" loading="lazy"><figcaption>每條連線顯示占用點數（含回寫）與 DG 權杖狀態。</figcaption></figure>
+<ol class="steps"><li>點「Connections」。</li><li>看每條連線的協定、Endpoint、讀取／資料群組數、Tags 數、狀態、點數與 DG 權杖。</li><li>按「開啟設定」進入連線設定頁。</li></ol>
+<p class="result-box">能確認每條連線已啟用且權杖正常。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>DG 權杖不是正常：到 DG「授權管理 › 點數使用狀況」確認點數（DG 手冊第 13 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="connection-create"><span class="function-number">4.2</span><h2>新增設備連線</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Connections ›「新增 Connection」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；DG 已核准；DG 有可用點數</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/connections/new-connection.jpg" alt="新增 Connection：選擇 Modbus TCP 或 OPC UA" loading="lazy"><figcaption>兩種協定使用完全獨立的設定頁面。</figcaption></figure>
+<ol class="steps"><li>按「新增 Connection」。</li><li>選「新增 Modbus TCP Connection」或「新增 OPC UA Connection」。</li><li>畫面提示「這條連線會使用 1 點，DG 目前可用 N 點。新連線預設不開回寫」。依第 5 章（OPC UA）或第 6 章（Modbus TCP）填寫並建立。</li></ol>
+<p class="result-box">清單出現新連線，DG「Tag 管理」在建立 Tag 後出現對應的 Tag。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>新增按鈕停用：Agent 還在等待 DG 核准（第 3 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="connection-enable-delete"><span class="function-number">4.3</span><h2>停用與刪除連線</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Connections › 該列「停用」「刪除」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>暫時不讀取時按「停用」；要恢復時按「啟用」。</li><li>確定不再使用時按「刪除」並確認。</li></ol>
+<p class="result-box">停用後該連線不再讀取設備；刪除後從清單移除並釋放授權點數。</p>
+<p class="note">停用中的連線照樣占用授權點數；要釋放點數請刪除連線。DG 上的 Tag 與歷史不會因刪除連線而消失，會變成無來源。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>刪除前確認沒有其他系統依賴這條連線回寫。</li></ul></div>
+</section>
+<section class="manual-function" id="connection-writeback"><span class="function-number">4.4</span><h2>開啟或關閉連線回寫</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>連線設定頁右上「回寫」開關</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；DG 有可用點數</strong></div></div>
+<ol class="steps"><li>在 Connections 按「開啟設定」進入連線。</li><li>切換右上「回寫」開關。</li><li>確認視窗「開啟回寫？」說明會多用 1 點，按「開啟回寫」。</li></ol>
+<p class="result-box">開關顯示「回寫：開啟」，授權點數變成 2 點（含回寫）。</p>
+<p class="note">回寫是這條連線的總閘：關閉時所有寫入安全規則都不會生效，DG 與 VisoLink 的回寫畫面也看不到這條連線。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>開啟後 DG 仍看不到可寫目標：還需要建立寫入安全規則並把 Tag 設為可寫（第 7 章）。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="uplink.html">← DG 連線設定</a><a href="opc-ua.html">OPC UA 連線與 Tag →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 4 章 Connections 設備連線</footer></body></html>

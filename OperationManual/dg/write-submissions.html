@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="DG 可直接對設備送出回寫，並查詢所有回寫需求（包含 VisoLink 送來的）的寫入與讀回結果。目前支援 Modbus TCP 與 OPC UA 單值。"><title>回寫需求與結果｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="data-flow-logs.html">上一章</a><a class="top-link" href="tag-management.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 06</p><nav class="manual-nav" aria-label="本章功能"><a href="#write-new">6.1 新增回寫</a><a href="#write-records">6.2 需求紀錄</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 06</span><h1>回寫需求與結果</h1><p>DG 可直接對設備送出回寫，並查詢所有回寫需求（包含 VisoLink 送來的）的寫入與讀回結果。目前支援 Modbus TCP 與 OPC UA 單值。</p></header>
+<p class="note-box">能不能回寫由 Agent 決定：連線的「回寫」要開啟、Tag 要設為可寫並指定寫入安全規則（Agent 手冊第 7 章）。沒有符合的 Tag 時，這頁會顯示「目前沒有Agent回報可寫目標」。</p>
+<section class="manual-function" id="write-new"><span class="function-number">6.1</span><h2>新增回寫需求</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「回寫需求與結果」›「新增回寫」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中；目標 Agent Online</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/write-submissions/new-write.jpg" alt="新增回寫畫面：選擇目標與待送清單" loading="lazy"><figcaption>先選目標並加入待送清單；加入清單不會送出設備寫入。</figcaption></figure>
+<ol class="steps"><li>在「1. 選擇目標」依序選 Agent、Connection，可用「搜尋Tag名稱／顯示名稱」縮小範圍，再選 Tag。選單會標示不能回寫的原因。</li><li>輸入要寫入的值，按「加入／更新待送清單」。</li><li>在「2. 編輯待送清單」核對目標、值／型別與政策，按「核對送出清單」。</li><li>出現「3. 確認送出」後逐項核對，勾選「我已核對每一項目標、值與政策限制」，按「確認並送出回寫需求」。</li></ol>
+<p class="result-box">需求被接受並產生需求識別碼，畫面顯示每一項的處理結果。</p>
+<p class="warning">多項需求逐項處理，不是跨設備的原子交易，也不會自動回復已完成的寫入。送出前請確認現場狀態。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Tag 選單沒有要的點：確認 Agent 連線已開啟回寫、該 Tag 為 ReadWrite 且指定了啟用中的寫入安全規則。</li><li>值被拒絕：超出寫入安全規則的最小／最大值，或還在 Cooldown 時間內。</li></ul></div>
+</section>
+<section class="manual-function" id="write-records"><span class="function-number">6.2</span><h2>查詢需求紀錄與結果</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>回寫需求與結果 ›「需求紀錄」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/write-submissions/records.jpg" alt="需求紀錄清單：接受時間、操作者、進度與結果統計" loading="lazy"><figcaption>每筆需求顯示操作者與來源（例如 VisoLink 送來的需求）、進度與成功／失敗／未知／讀回警告數。</figcaption></figure>
+<ol class="steps"><li>設定開始、結束時間與「每批」筆數，按「查詢紀錄」；已知識別碼時填入「按需求識別碼查詢」後按「查詢指定需求」。</li><li>在要看的需求按「明細」，下方顯示「需求結果」與每一項的寫入、讀回結果。</li><li>按「更新紀錄（只讀）」重新讀取；結果不明時按「向Agent查證原需求」。</li></ol>
+<p class="result-box">可確認每一項是否寫入成功、設備讀回值是否相符。</p>
+<p class="note">「已完成」只表示各項處理都已結束；成功與讀回警告可能重疊，不代表全部寫入成功。查證只查詢既有需求，不會再寫一次設備。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>結果顯示未知：Agent 可能在寫入期間斷線，用「向Agent查證原需求」確認。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="data-flow-logs.html">← Data Flow Logs 資料流事件</a><a href="tag-management.html">Tag 管理 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 6 章 回寫需求與結果</footer></body></html>

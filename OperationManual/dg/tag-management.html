@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Tag 屬於 DG，可以單獨存在；Agent 的點只是 Tag 的寫入來源。拿掉或更換來源不影響 Tag 與歷史。"><title>Tag 管理｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="write-submissions.html">上一章</a><a class="top-link" href="history-routing.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 07</p><nav class="manual-nav" aria-label="本章功能"><a href="#tag-list">7.1 Tag 清單</a><a href="#tag-create">7.2 新增 Tag</a><a href="#tag-edit-source">7.3 改名與來源</a><a href="#tag-delete">7.4 刪除 Tag</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 07</span><h1>Tag 管理</h1><p>Tag 屬於 DG，可以單獨存在；Agent 的點只是 Tag 的寫入來源。拿掉或更換來源不影響 Tag 與歷史。</p></header>
+<section class="manual-function" id="tag-list"><span class="function-number">7.1</span><h2>查看 Tag 與來源狀態</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「Tag 管理」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/tag-management/tag-list.jpg" alt="Tag 管理清單，顯示 Tag 名稱、型別、來源、來源狀態與最新值" loading="lazy"><figcaption>Agent 新增的點會自動建立 Tag，名稱為「Agent.連線.點」。</figcaption></figure>
+<dl class="field-map"><dt>來源（AGENT／連線／點）</dt><dd>目前寫入這個 Tag 的 Agent 點。</dd><dt>來源狀態</dt><dd>正常、來源離線、來源停用、無來源、型別不符。</dd><dt>最新值</dt><dd>最近一筆值與時間。</dd></dl>
+<ol class="steps"><li>用搜尋框輸入 Tag 名稱或顯示名稱。</li><li>用「全部來源狀態」「全部 Agent」篩選，例如只看「來源離線」或「（無來源）」。</li><li>按「重新整理」更新最新值。</li></ol>
+<p class="result-box">清單只留下符合條件的 Tag，可快速找到來源異常的點。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Agent 新增的點沒有出現：確認 Agent 已核准且 Online，再按「重新整理」。</li></ul></div>
+</section>
+<section class="manual-function" id="tag-create"><span class="function-number">7.2</span><h2>新增 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 管理 ›「＋新增 Tag」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
+<ol class="steps"><li>按「＋新增 Tag」。</li><li>填 Tag 名稱、顯示名稱（可空白），選資料型別。</li><li>按建立。</li></ol>
+<p class="result-box">畫面顯示「已新增 Tag「名稱」（無來源）」。之後可用 7.3「改連結」接上 Agent 的點。</p>
+<p class="note">先建立 Tag 再接來源，適合換設備時沿用同一個 Tag 與歷史。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>名稱重複會被拒絕，請改名。</li></ul></div>
+</section>
+<section class="manual-function" id="tag-edit-source"><span class="function-number">7.3</span><h2>改名、更換或移除來源</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 管理 › 該列「詳細」› Tag 詳細</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/tag-management/tag-detail.jpg" alt="Tag 詳細視窗：名稱、型別、寫入來源與改連結、移除來源按鈕" loading="lazy"><figcaption>保存間隔與是否保存重複值跟著來源點，在 Agent 畫面設定。</figcaption></figure>
+<ol class="steps"><li>按該 Tag 的「詳細」。</li><li>改名：修改 Tag 名稱或顯示名稱，按「儲存名稱」。InfluxDB 資料名稱是唯讀，改名不影響已保存的歷史。</li><li>更換來源：按「改連結」，依序選 Agent、連線與點（只列出相同資料型別的點）後確認。若該點已連到另一個 Tag，會跳出「這個點已連到另一個 Tag」，確認後原 Tag 變成「無來源」。</li><li>移除來源：按「移除來源」，確認視窗「移除來源？」後確認。Tag 變成「無來源」，該點之後不會再自動建立 Tag。</li><li>按「關閉」離開。</li></ol>
+<p class="result-box">清單的來源欄與來源狀態更新；歷史資料保留在同一個 Tag 下。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>點選單是空的：該 Agent 沒有相同資料型別的點。</li></ul></div>
+</section>
+<section class="manual-function" id="tag-delete"><span class="function-number">7.4</span><h2>刪除 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 詳細 ›「刪除 Tag」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
+<ol class="steps"><li>先到「備份與還原」備份（第 12 章）。</li><li>開啟該 Tag 的「詳細」，按左下「刪除 Tag」。</li><li>確認視窗「刪除 Tag？」說明會一併刪除來源連結、保存設定與所有歷史數值（TimescaleDB 與 InfluxDB），核對後確認。</li></ol>
+<p class="result-box">Tag 從清單消失，並寫入操作紀錄。</p>
+<p class="warning">刪除 Tag 會刪除它全部的歷史資料，無法復原。只想停止收資料時，請改用「移除來源」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>只想清掉部分時間的歷史：改用「歷史資料管理 › 查詢與刪除資料」（第 9 章）。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="write-submissions.html">← 回寫需求與結果</a><a href="history-routing.html">歷史保存設定 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 7 章 Tag 管理</footer></body></html>

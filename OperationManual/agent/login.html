@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Agent 使用自己的本機管理帳號登入，與 VisoLink 帳號無關。忘記帳密時可用安裝時的救援帳號重設。"><title>登入與本機帳號｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="overview.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 01</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-login">1.1 登入</a><a href="#agent-first-login">1.2 首次與救援</a><a href="#agent-logout">1.3 登出</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 01</span><h1>登入與本機帳號</h1><p>Agent 使用自己的本機管理帳號登入，與 VisoLink 帳號無關。忘記帳密時可用安裝時的救援帳號重設。</p></header>
+<section class="manual-function" id="agent-login"><span class="function-number">1.1</span><h2>登入 Agent 管理畫面</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>瀏覽器開啟 Agent 管理網址（安裝時設定的連接埠，預設 5181）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>Agent 本機帳號</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/overview/agent-overview.jpg" alt="Agent 登入後的總覽頁" loading="lazy"><figcaption>登入後進入「總覽」，右上角顯示「帳號 · 本機管理員」，左上角顯示 Agent 名稱。</figcaption></figure>
+<ol class="steps"><li>開啟 Agent 管理網址，畫面顯示「本機帳號登入」。</li><li>輸入帳號與密碼。</li><li>按「登入」。</li></ol>
+<p class="result-box">進入 Agent「總覽」，右上角顯示「帳號 · 本機管理員」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>密碼錯誤或忘記帳密：用 1.2 部署救援登入重設。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-first-login"><span class="function-number">1.2</span><h2>首次設定登入與救援登入</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Agent 登入頁「忘記帳密？使用部署救援登入」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>安裝時的初始或救援帳號</strong></div></div>
+<ol class="steps"><li>剛安裝、尚未建立本機帳號時，登入頁標題為「首次設定登入」，用安裝時的初始帳號登入。</li><li>已有本機帳號但忘記帳密時，按「忘記帳密？使用部署救援登入」，標題變成「部署救援登入」，輸入救援帳號與密碼後登入。</li><li>救援登入後左側只剩「總覽」「資訊診斷」與「帳號設定」，右上顯示「部署救援模式」；依第 10 章設定新的本機帳號與密碼。</li><li>登出後用新的本機帳號登入。</li></ol>
+<p class="result-box">可用新的本機帳號正常登入並看到完整選單。</p>
+<p class="note">救援登入只能重設本機帳密，不能修改連線或其他設定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>救援帳號由安裝人員保管，手冊與畫面不會顯示。</li></ul></div>
+</section>
+<section class="manual-function" id="agent-logout"><span class="function-number">1.3</span><h2>登出與切換明暗主題</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>畫面右上角「登出」與明暗主題按鈕</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>按右上角「登出」回到登入頁。</li><li>按半圓圖示切換明亮／深色主題。</li></ol>
+<p class="result-box">登出後重新開啟任何頁面都要先登入。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>共用電腦使用後務必登出。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="index.html">← 回到本手冊目錄</a><a href="overview.html">總覽與資訊診斷 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 1 章 登入與本機帳號</footer></body></html>

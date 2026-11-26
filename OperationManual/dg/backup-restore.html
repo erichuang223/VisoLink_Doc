@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="手動備份 DG 的設定與 TagData（Tag 設定與歷史值），下載檔案自行保管；需要時上傳還原。定時備份、集中存放請用 VisoLink 備份中心。"><title>備份與還原｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="system-settings.html">上一章</a><a class="top-link" href="license.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 12</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-backup-config">12.1 設定備份</a><a href="#dg-restore-config">12.2 還原</a><a href="#dg-backup-tagdata">12.3 TagData 與 Influx</a><a href="#dg-backup-center">12.4 備份中心</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 12</span><h1>備份與還原</h1><p>手動備份 DG 的設定與 TagData（Tag 設定與歷史值），下載檔案自行保管；需要時上傳還原。定時備份、集中存放請用 VisoLink 備份中心。</p></header>
+<section class="manual-function" id="dg-backup-config"><span class="function-number">12.1</span><h2>建立設定備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「系統設定 › 備份與還原」›「設定備份」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/backup-restore/backup-restore.jpg" alt="DG 備份與還原頁：建立備份的方式、資料類型與還原區" loading="lazy"><figcaption>左邊建立備份、右邊還原；還原前 DG 必須先切到維護中。</figcaption></figure>
+<dl class="field-map"><dt>完整</dt><dd>全部九類。</dd><dt>快速設定</dt><dd>只含設定、不含紀錄。</dd><dt>自訂</dt><dd>逐項勾選；所需的相依資料會自動包含。</dd><dt>九類資料</dt><dd>帳號與登入設定、系統設定、安裝設定與憑證、Agent 註冊與信任、與 VL 的配對、保存目的端與密碼、歷史保存設定、回寫需求與紀錄、稽核紀錄。</dd></dl>
+<ol class="steps"><li>選方式：完整、快速設定或自訂。</li><li>輸入備份密碼並再輸入一次。</li><li>按「建立並下載」，瀏覽器下載 .vlbk 備份檔。</li></ol>
+<p class="result-box">取得加密的 .vlbk 檔；設定備份不含歷史值。</p>
+<p class="warning">備份檔用這組密碼加密，DG 不保存密碼；忘記密碼就無法還原。授權（license）不在備份內。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「建立並下載」不能按：兩次密碼不一致或未填。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-restore-config"><span class="function-number">12.2</span><h2>還原設定備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份與還原 › 設定備份 ›「還原」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員；DG 已切到維護中</strong></div></div>
+<ol class="steps"><li>先到「系統設定」把 DG 切到維護中（第 14 章），也請把連到這台 DG 的 Agent 與 VisoLink 切到維護中。</li><li>選擇備份檔（.vlbk），輸入備份密碼，按「檢查」。</li><li>檢查通過後按「還原」，在確認視窗核對要還原的類別與方式後確認。</li></ol>
+<p class="result-box">DG 重新啟動，完成後頁面顯示每一類的還原結果；確認後切回運作中。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「還原」不能按：DG 還沒切到維護中。</li><li>檢查失敗：密碼錯誤或檔案損壞。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-backup-tagdata"><span class="function-number">12.3</span><h2>備份 TagData 與 InfluxDB 資料</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份與還原 ›「TagData（歷史資料）」「InfluxDB（保存目的端）」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>TagData：整個 DG 資料庫（Tag 設定、保存分類與歷史值），以完整／差異備份。資料庫需掛有備份區，否則頁面會顯示不能做 TagData 備份。</li><li>InfluxDB：每個位置一列；選位置、開始與結束日期（一次最多 7 天、一個檔），輸入備份密碼後按「建立並下載」。</li><li>還原 InfluxDB 時一次一個檔，多個檔請依日期先後逐一還原；同樣要先切到維護中。</li></ol>
+<p class="result-box">取得歷史資料的備份檔，可在刪除資料或換機前保存。</p>
+<p class="warning">TagData 還原會讓整個 DG 資料庫回到備份點，之後的資料會不見。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>沒有 InfluxDB 列：尚未建立 InfluxDB 保存目的端（第 8 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-backup-center"><span class="function-number">12.4</span><h2>用 VisoLink 備份中心排程備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>VisoLink 備份中心（另一套系統）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已安裝 VisoLink 備份中心</strong></div></div>
+<ol class="steps"><li>在備份中心登錄這台 DG 與連線的 Agent。</li><li>設定排程，統一備份 DG 與 Agent。</li><li>需要時還原到原機，或在新機器上換機還原。</li></ol>
+<p class="result-box">DG 與 Agent 依排程自動備份；換機後 Agent 不必改設定就會自動連回。</p>
+<p class="note">操作步驟請見 VisoLink 備份中心操作手冊。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>換機後 Agent 沒連回：確認新 DG 的位址與憑證與原機一致。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="system-settings.html">← 系統設定</a><a href="license.html">授權管理 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 12 章 備份與還原</footer></body></html>

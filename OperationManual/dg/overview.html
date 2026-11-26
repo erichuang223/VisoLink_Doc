@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="「總覽」一次看到 Agent 數量、六個 DG 服務的狀態，以及其他系統要連進 DG 時需要的連線資訊。"><title>總覽與容器連線設定資訊｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="login.html">上一章</a><a class="top-link" href="agent-registry.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 02</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-overview">2.1 Server 總覽</a><a href="#dg-connect-agent">2.2 Agent 連線</a><a href="#dg-connect-webapi">2.3 WebAPI</a><a href="#dg-connect-visolink-pairing">2.4 VisoLink 配對碼</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 02</span><h1>總覽與容器連線設定資訊</h1><p>「總覽」一次看到 Agent 數量、六個 DG 服務的狀態，以及其他系統要連進 DG 時需要的連線資訊。</p></header>
+<section class="manual-function" id="dg-overview"><span class="function-number">2.1</span><h2>查看 Server 總覽與服務狀態</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「總覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/overview/server-overview.jpg" alt="Server 總覽上方的統計卡與容器服務資訊狀態" loading="lazy"><figcaption>上方四張卡片是 Agent 數量與待核准數；下方「容器服務資訊狀態」每 10 秒更新。</figcaption></figure>
+<dl class="field-map"><dt>AGENTS</dt><dd>已註冊的 Agent 數量。</dd><dt>ONLINE</dt><dd>在 Heartbeat 期限內有回應的 Agent 數量。</dd><dt>PENDING TRUST</dt><dd>等待管理員核准的 Agent 數量；大於 0 時到第 3 章核准。</dd><dt>CONTRACT</dt><dd>Agent 與 DG 的通訊契約版本。</dd></dl>
+<ol class="steps"><li>點左側「總覽」，確認右上角顯示「Runtime online」。</li><li>看四張統計卡，確認 Agent 數量與 Online 數量一致。</li><li>在「容器服務資訊狀態」切換「服務狀態卡」或「運作服務拓樸」，檢查 DGSERVER、DGDB、DGREDIS、DGCACHE、DGHISTORY、DGDBWRITER 六個服務的狀態標籤。</li></ol>
+<p class="result-box">六個服務都顯示 Running、Connected、Healthy 或 Ready，Agent 數量與 Online 數量相同。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>卡片顯示「未取得」：該服務沒有回應，到「系統設定 › 系統概覽」確認服務健康狀態（第 11 章）。</li><li>右上角顯示「DG 維護中」：DG 已切到維護中，資料接收與查詢暫停（第 14 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-connect-agent"><span class="function-number">2.2</span><h2>Agent 連線資訊（給 Agent 用）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>總覽 › CONNECT &amp; BUILD 容器連線設定資訊 ›「Agent 連線」卡</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員才能顯示 Token</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/overview/connection-info.jpg" alt="容器連線設定資訊三張卡片，Token、密碼與配對碼保持隱藏" loading="lazy"><figcaption>三張卡片分別給 Agent、外部系統（WebAPI）與 VisoLink 即時回寫使用；Token、密碼與配對碼預設隱藏。</figcaption></figure>
+<dl class="field-map"><dt>AGENT 連線 URL</dt><dd>Agent 連到 DG 的位址，格式為 https://&lt;DG 位址&gt;:7180。</dd><dt>ENROLLMENT_TOKEN</dt><dd>Agent 第一次註冊時使用；按「顯示」才看得到，再按「複製」。</dd><dt>TLS 信任</dt><dd>Agent 端要匯入 DG 公開憑證（PEM／CRT），位址必須和憑證名稱相符。</dd><dt>Heartbeat</dt><dd>每 10 秒一次；超過 30 秒沒有活動判定為 Offline。</dd></dl>
+<ol class="steps"><li>往下捲到「容器連線設定資訊」的「Agent 連線」卡。</li><li>按 AGENT 連線 URL 旁的「複製」。</li><li>按 ENROLLMENT_TOKEN 的「顯示」，再按「複製」，貼到 Agent「DG 連線設定」（Agent 手冊第 3 章）。</li><li>複製完按「隱藏」。</li></ol>
+<p class="result-box">Agent 取得 DG 位址與註冊 Token，可以送出註冊；之後回到第 3 章核准。</p>
+<p class="warning">Enrollment token 等同密碼，不要貼在聊天群組或文件中。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Agent 連不上：確認 Agent 主機能連到 DG 的 7180 埠，且位址與憑證名稱相同（不可用 localhost）。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-connect-webapi"><span class="function-number">2.3</span><h2>加值開發 WebAPI（歷史資料讀取）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>容器連線設定資訊 ›「加值開發 WebAPI」卡</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員才能顯示密碼</strong></div></div>
+<dl class="field-map"><dt>API URL</dt><dd>DG 查詢服務位址，格式為 http://&lt;DG 位址&gt;:5282/。</dd><dt>帳號／密碼</dt><dd>PIES 相容介面的 HTTP Basic 帳密，供 VisoLink 建立 DataGateway 資料來源；密碼就是讀取金鑰。</dd><dt>一般 API</dt><dd>以 X-VisoLink-Api-Key 依角色驗證，使用另外配置的 API Key。</dd></dl>
+<ol class="steps"><li>在「加值開發 WebAPI」卡按 API URL 旁的「複製」。</li><li>按帳號旁的「複製」。</li><li>按密碼的「顯示」，再按「複製 WebAPI 密碼」。</li><li>到 VisoLink 後台「資料來源」新增「VisoLink DataGateway」類型，貼上 URL、帳號與密碼後按「測試連線」（VisoLink 後台手冊）。</li><li>複製完按「隱藏」。</li></ol>
+<p class="result-box">VisoLink 或外部系統可透過 WebAPI 讀取 DG 的歷史資料。</p>
+<p class="note">WebAPI 是 HTTP，用於歷史資料讀取；VisoLink 的即時畫面與回寫請用 2.4 的配對碼。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>測試連線失敗：確認對方主機能連到 DG 的 5282 埠、帳密沒有多貼空白。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-connect-visolink-pairing"><span class="function-number">2.4</span><h2>VisoLink 即時與回寫配對碼</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>容器連線設定資訊 ›「VisoLink 即時與回寫」卡</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<dl class="field-map"><dt>控制通道 URL</dt><dd>VisoLink 即時來源連到 DG 的 HTTPS 位址，格式為 https://&lt;DG 位址&gt;:7443。</dd><dt>VisoLink 配對碼</dt><dd>一次包含控制通道 URL、讀取帳密、回寫服務身分與 DG 公開憑證。</dd><dt>重新產生配對碼</dt><dd>配對碼外流或更換 VisoLink 時使用；舊配對碼立即失效。</dd></dl>
+<ol class="steps"><li>在「VisoLink 即時與回寫」卡按配對碼的「顯示」。</li><li>按「複製 VisoLink 配對碼」。</li><li>到 VisoLink 後台新增即時來源，貼上配對碼後按「測試連線」（VisoLink 後台手冊）。</li><li>按「隱藏」。</li></ol>
+<p class="result-box">VisoLink 即時來源能讀取 DG 的 Tag 目錄、接收即時推送；來源開放回寫時，VisoLink 的寫入要求經 DG 轉給 Agent。</p>
+<p class="warning">配對碼等同密碼。按「重新產生配對碼」後，所有已貼上舊配對碼的 VisoLink 都要重新貼上。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>VisoLink 測試連線失敗：確認 VisoLink 主機能連到 DG 的 7443 埠，並使用最新產生的配對碼。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="login.html">← 登入與本機帳號</a><a href="agent-registry.html">Agent Registry 核准與解除 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 2 章 總覽與容器連線設定資訊</footer></body></html>

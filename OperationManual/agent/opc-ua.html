@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="OPC UA 連線以 Subscription 接收設備變化。Publishing interval 屬於連線，Sampling interval 屬於每一個 Tag。"><title>OPC UA 連線與 Tag｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="connections.html">上一章</a><a class="top-link" href="modbus-tcp.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 05</p><nav class="manual-nav" aria-label="本章功能"><a href="#opc-ua-connection">5.1 建立連線</a><a href="#opc-ua-settings">5.2 連線設定</a><a href="#opc-ua-data-groups">5.3 資料群組</a><a href="#opc-ua-tags-browse">5.4 選取節點</a><a href="#opc-ua-tags-confirm">5.5 批次命名</a><a href="#opc-ua-tags-manual">5.6 手動設定</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 05</span><h1>OPC UA 連線與 Tag</h1><p>OPC UA 連線以 Subscription 接收設備變化。Publishing interval 屬於連線，Sampling interval 屬於每一個 Tag。</p></header>
+<section class="manual-function" id="opc-ua-connection"><span class="function-number">5.1</span><h2>建立 OPC UA 連線</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Connections › 新增 Connection ›「新增 OPC UA Connection」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；DG 已核准</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/opc-ua/new-opc-ua.jpg" alt="新增 OPC UA Connection 表單" loading="lazy"><figcaption>Security Mode／Policy、Authentication、逾時與 Publishing interval 可先用預設值。</figcaption></figure>
+<dl class="field-map"><dt>名稱／啟用</dt><dd>連線名稱，會成為 DG Tag 名稱的一部分。</dd><dt>Endpoint URL</dt><dd>例如 opc.tcp://&lt;設備位址&gt;:4840。</dd><dt>Security Mode／Security Policy</dt><dd>None、Sign、SignAndEncrypt；Policy 依設備支援選擇。</dd><dt>Authentication</dt><dd>Anonymous、Username 或 Certificate。</dd><dt>Trusted server certificate thumbprint</dt><dd>信任的設備憑證指紋（使用安全連線時）。</dd><dt>Publishing interval（ms）</dt><dd>Subscription 把通知送給 Agent 的週期，不改變各 Tag 的取樣頻率。</dd></dl>
+<ol class="steps"><li>填名稱與 Endpoint URL。</li><li>依設備要求設定安全性與登入方式；其他欄位可用預設值。</li><li>按「建立 OPC UA Connection」。</li></ol>
+<p class="result-box">進入新連線的設定頁，分頁有「連線設定」「資料讀取」「Tag 設定」「寫入安全規則（Write Policies）」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>之後連不上：在連線設定頁按「儲存並測試連線」，看測試結果；可用「Discover endpoints / certificates」查看設備提供的端點與憑證。</li></ul></div>
+</section>
+<section class="manual-function" id="opc-ua-settings"><span class="function-number">5.2</span><h2>修改連線設定與測試</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>OPC UA 連線 ›「連線設定」分頁</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/opc-ua/opc-ua-settings.jpg" alt="OPC UA 連線設定頁：授權點數、回寫開關與連線基礎設定" loading="lazy"><figcaption>上方顯示授權點數與回寫開關；下方依連線基礎、授權／安全性、取樣頻率分區。</figcaption></figure>
+<ol class="steps"><li>修改「連線基礎」「授權／安全性」「取樣頻率」中的欄位。</li><li>按「儲存連線設定」，或按「儲存並測試連線」同時測試。</li></ol>
+<p class="result-box">測試結果顯示連線成功；右上狀態標籤更新。</p>
+<p class="note">Sampling interval 是每個 Tag 的設定，不能在連線頁用單一數值覆蓋，請到「Tag 設定」逐筆或批次調整。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>測試失敗：確認 Endpoint、安全性與帳密設定與設備一致，且 Agent 能連到設備的連接埠。</li></ul></div>
+</section>
+<section class="manual-function" id="opc-ua-data-groups"><span class="function-number">5.3</span><h2>建立資料群組</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>OPC UA 連線 ›「資料讀取」分頁 ›「OPC UA 資料群組」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/opc-ua/opc-ua-data-groups.jpg" alt="OPC UA 資料群組：既有群組與新增欄位" loading="lazy"><figcaption>資料群組只做邏輯分組，供目前值、歷史資料與下游識別使用。</figcaption></figure>
+<ol class="steps"><li>在「群組名稱」輸入名稱（例如「反應區製程」），勾選「啟用」。</li><li>按「新增」。</li></ol>
+<p class="result-box">群組出現在清單中，之後建立 Tag 時可指定群組。</p>
+<p class="note">資料群組不會修改 Tag 的 Sampling interval，也不會修改連線的 Publishing interval。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>群組名稱重複會被拒絕。</li></ul></div>
+</section>
+<section class="manual-function" id="opc-ua-tags-browse"><span class="function-number">5.4</span><h2>從節點樹選取 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>OPC UA 連線 ›「Tag 設定」分頁 ›「節點維護」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent；設備可連線</strong></div></div>
+<figure class="manual-shot"><img src="../img/agent/opc-ua/opc-ua-tags.jpg" alt="OPC UA Tag 設定步驟 1：左側可用節點、右側已選擇節點" loading="lazy"><figcaption>右側是目前要保留的 Tag 節點；可從左側加入新節點，也可移除既有節點。</figcaption></figure>
+<ol class="steps"><li>按「重新載入樹」取得 OPC UA Objects 節點；也可輸入至少 2 個字搜尋名稱或 NodeId。</li><li>在左側勾選節點：「節點」可展開，勾「全選」會選取分支下所有值；「值」可直接選為 Tag。</li><li>按「加入左側勾選 >」，右側「已選擇節點」列出要建立的 Tag。</li><li>不要的節點在右側勾選「移除」或按「全選（移除）」再移除。</li><li>按「下一步：確認並設定 N 個 Tag」。</li></ol>
+<p class="result-box">進入步驟 2 確認 Tag 異動。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>樹是空的：設備未連線，先在「連線設定」測試連線。</li></ul></div>
+</section>
+<section class="manual-function" id="opc-ua-tags-confirm"><span class="function-number">5.5</span><h2>確認 Tag 異動與批次命名</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 設定 › 步驟 2 確認 Tag 異動</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已完成 5.4</strong></div></div>
+<ol class="steps"><li>檢查清單中的新增、修改與刪除。同名節點會自動加亂碼避免衝突。</li><li>批次命名：在搜尋框篩選（例如 R-101.），按「全選篩選結果」，輸入 TagName 前綴（例如 R101_），按「套用至選取」。</li><li>需要時用「尋找／取代為」逐一去除不要的文字。</li><li>按「儲存 Tag 異動」。</li></ol>
+<p class="result-box">顯示「Tag 維護完成：更新 0 個、新增 N 個、刪除 0 個」；DG「Tag 管理」出現對應的 Tag。</p>
+<p class="note">Agent 新增的點會自動成為 DG Tag，名稱為「Agent.連線.點」。之後在 DG 改名不影響歷史。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>DG 沒有出現新 Tag：確認 Agent 為 Online，再到 DG「Tag 管理」按「重新整理」。</li></ul></div>
+</section>
+<section class="manual-function" id="opc-ua-tags-manual"><span class="function-number">5.6</span><h2>手動／進階設定 Tag</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 設定 ›「手動／進階」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
+<ol class="steps"><li>切到「手動／進階」。</li><li>新增時直接輸入 NodeId 與名稱等欄位；修改時在 Tag 列按「編輯」。</li><li>可調整 Sampling interval、保存間隔、是否保存重複值，以及 Access Mode（ReadOnly／ReadWrite）。</li><li>按「儲存 OPC UA Tag」。</li></ol>
+<p class="result-box">Tag 清單更新；改成 ReadWrite 時需同時指定 Write Policy（第 7 章）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>儲存時提示「可寫 Tag 必須指定同一 Connection 中已啟用的 Write Policy」：先建立寫入安全規則。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="connections.html">← Connections 設備連線</a><a href="modbus-tcp.html">Modbus TCP 連線與 Tag →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 5 章 OPC UA 連線與 Tag</footer></body></html>

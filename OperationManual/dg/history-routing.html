@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="決定哪些 Tag 要保存、怎麼保存、存到哪個資料庫。沒有設定保存政策的 Tag 只更新即時值，不會保存。"><title>歷史保存設定｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="tag-management.html">上一章</a><a class="top-link" href="history-data.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 08</p><nav class="manual-nav" aria-label="本章功能"><a href="#retention-overview">8.1 運作總覽</a><a href="#retention-quota">8.2 保存額度</a><a href="#retention-rules">8.3 保存規則</a><a href="#retention-categories">8.4 保存分類</a><a href="#retention-assign">8.5 資料點指派</a><a href="#retention-destinations">8.6 保存目的端</a><a href="#retention-master-switch">8.7 總開關</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 08</span><h1>歷史保存設定</h1><p>決定哪些 Tag 要保存、怎麼保存、存到哪個資料庫。沒有設定保存政策的 Tag 只更新即時值，不會保存。</p></header>
+<p class="note-box">第一次設定建議順序：調整保存額度 → 建立保存規則 → 建立保存分類 → 在資料點管理指派分類 → 確認保存目的端寫入開關 → 確認歷史保存總開關為 ON。保存政策只有完整保存、變更時保存、趨勢壓縮、定期取樣四種。</p>
+<section class="manual-function" id="retention-overview"><span class="function-number">8.1</span><h2>查看運作總覽</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「歷史保存設定」›「運作總覽」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-routing/overview-quota.jpg" alt="歷史資料保存運作總覽：保存額度與歷史保存總開關" loading="lazy"><figcaption>上方是保存額度與使用率；下方顯示總開關、各資料庫開關與實際寫入結果。</figcaption></figure>
+<ol class="steps"><li>開啟「歷史保存設定」，預設在「運作總覽」分頁。</li><li>看「保存額度」：保存額度、生效保存政策、使用率、額度不足未保存。</li><li>看「歷史保存總開關」與各資料庫（例如 TimescaleDB）是否為 ON。</li><li>看「資料庫空間與保存區間」與「保存與寫入狀況」：等待寫入、最久等待、最近成功寫入。</li></ol>
+<p class="result-box">能確認保存功能在運作、資料庫有在寫入，以及額度是否足夠。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「額度不足未保存」大於 0：依 8.2 增加保存額度。</li><li>等待寫入持續增加：看「各資料庫的實際寫入結果」的問題說明，或按「詳細診斷 →」。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-quota"><span class="function-number">8.2</span><h2>調整保存額度</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>運作總覽 ›「調整保存額度」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員；授權有可用點數</strong></div></div>
+<ol class="steps"><li>按「調整保存額度」。</li><li>輸入要使用的授權點數（每 1 點可保存 100 個 Tag）。</li><li>按「確認調整」。</li></ol>
+<p class="result-box">「保存額度」顯示新的 Tag 數量，授權管理「點數使用狀況」出現對應的保存額度權杖。</p>
+<p class="note">個別指定或繼承分類預設政策的 Tag 都算在額度內。額度不足時，新進來的 Tag 只更新即時值、不保存。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>點數不足：到「授權管理」確認可用點數（第 13 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-rules"><span class="function-number">8.3</span><h2>建立保存規則</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史保存設定 ›「保存規則」›「＋ 建立保存規則」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-routing/rule-form.jpg" alt="建立保存規則抽屜：規則名稱、保存模式、保底保存方式、時間窗長度與逾時容許期" loading="lazy"><figcaption>儲存前可按「試算目前草稿」預覽哪些資料會保存或略過。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/dg/history-routing/rules.jpg" alt="保存規則清單與規則詳情" loading="lazy"><figcaption>規則詳情顯示使用此規則的分類、個別指定資料點與生效資料點數。</figcaption></figure>
+<dl class="field-map"><dt>規則名稱</dt><dd>例如「製程每分鐘取樣」。</dd><dt>保存模式</dt><dd>例如定期取樣（Sample）：依時間窗或資料筆數定期保留代表資料。</dd><dt>保底保存方式</dt><dd>例如依時間（Time）：即使數值沒有變化，也依固定時間窗保留代表資料。</dd><dt>時間窗長度（秒）</dt><dd>每個固定時間窗保留最後一筆候選資料。</dd><dt>逾時容許期（秒）</dt><dd>時間窗結束後再等待較晚抵達的資料。</dd></dl>
+<ol class="steps"><li>按「＋ 建立保存規則」。</li><li>填寫各欄位。</li><li>按「試算目前草稿」確認判定結果。</li><li>按「儲存規則」。</li></ol>
+<p class="result-box">顯示「已儲存，並從正式服務回讀確認」，清單出現新規則。</p>
+<p class="note">規則被分類或資料點使用中時不能刪除；未使用的規則可在詳情按「刪除未使用規則」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>儲存失敗：檢查時間窗與容許期是否為正整數。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-categories"><span class="function-number">8.4</span><h2>建立保存分類</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史保存設定 ›「保存分類」›「＋ 新增保存分類」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；已有保存規則</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-routing/categories.jpg" alt="保存分類清單與分類詳情" loading="lazy"><figcaption>未個別指定規則的資料點會繼承分類的預設規則。</figcaption></figure>
+<ol class="steps"><li>按「＋ 新增保存分類」。</li><li>填名稱、代碼，選預設保存規則。</li><li>按「建立分類」。</li><li>之後可在分類詳情按「編輯分類」，或按「到資料點管理 →」指派資料點。</li></ol>
+<p class="result-box">分類清單出現新分類，顯示綁定資料點數與預設規則。</p>
+<p class="note">停止新指派後，既有綁定仍維持保存。沒有資料點的分類可按「刪除未使用分類」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>代碼重複會被拒絕。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-assign"><span class="function-number">8.5</span><h2>指派資料點的保存分類或規則</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史保存設定 ›「資料點管理」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；已有保存分類</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-routing/data-points.jpg" alt="資料點管理：搜尋、篩選、選取與批次指派按鈕" loading="lazy"><figcaption>可逐筆、本頁或「選取所有符合條件的 N 筆」，再批次指派。</figcaption></figure>
+<ol class="steps"><li>用「搜尋資料點」、來源 Agent、保存分類篩選；需要時展開「更多篩選」。</li><li>勾選資料點，或按「將本頁 10 筆加入選取」「選取所有符合條件的 N 筆」。</li><li>按「指派保存分類」（或「指定保存規則」個別覆寫）。</li><li>抽屜顯示額度影響與逐筆預覽，標示將略過的資料點與原因；確認後按「確認指派」。</li><li>看逐筆結果：成功、略過或衝突原因。</li></ol>
+<p class="result-box">資料點的「保存分類」「生效保存規則」更新，「歷史參與」顯示已設定分類。</p>
+<p class="note">「取消指派」會讓資料點不再保存，但已保存的歷史仍查得到。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>結果顯示略過：通常是額度不足或資料點已有衝突設定，依原因處理後重新指派。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-destinations"><span class="function-number">8.6</span><h2>保存目的端與資料保護</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>歷史保存設定 ›「系統設定」分頁 ›「保存目的端」「資料保護」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/history-routing/destinations.jpg" alt="保存目的端：TimescaleDB 寫入開關與批次設定，右側可設定 InfluxDB" loading="lazy"><figcaption>TimescaleDB 固定一組；InfluxDB v1／v2 可建立多組。</figcaption></figure>
+<ol class="steps"><li>在「保存目的端」確認 TimescaleDB 的「寫入開關」為 ON；要關閉或開啟時切換開關並確認。</li><li>需要另存到 InfluxDB 時，按「＋ 新增 InfluxDB 目的端」或「設定 InfluxDB」建立連線。</li><li>在各目的端的「連線與批次設定」調整寫入間隔、每批上限、逾時／重試，以及「寫入失敗時」保留等待（含磁碟上限）或遺棄。</li><li>切到「資料保護」查看各資料庫寫入失敗時的處理方式與目前磁碟暫存。</li></ol>
+<p class="result-box">目的端狀態顯示待命或寫入中，「最近成功寫入」持續更新。</p>
+<p class="note">某個資料庫寫不進去時，「保留等待」會把資料暫存到寫入服務的磁碟，恢復後依序補寫；不影響其他資料庫。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>寫入錯誤不是「無」：檢查資料庫連線，或按「檢查結構」。</li></ul></div>
+</section>
+<section class="manual-function" id="retention-master-switch"><span class="function-number">8.7</span><h2>歷史保存總開關</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>運作總覽 ›「歷史保存總開關」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<ol class="steps"><li>在「運作總覽」找到「歷史保存總開關」。</li><li>切換開關，在確認視窗按「確認操作」。</li></ol>
+<p class="result-box">總開關顯示 ON（依保存政策分送新資料）或 OFF。</p>
+<p class="note">ON／OFF 是保存選擇；已排隊的工作仍會繼續處理。各資料庫的實際結果看下方寫入狀況。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>開了總開關仍沒有寫入：確認資料點已指派保存政策（8.5），且目的端寫入開關為 ON（8.6）。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="tag-management.html">← Tag 管理</a><a href="history-data.html">歷史資料管理 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 8 章 歷史保存設定</footer></body></html>

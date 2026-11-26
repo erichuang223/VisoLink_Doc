@@ -20,13 +20,13 @@ VisoLink 產品家族包含四個可各自部署、各自運作的產品：
 | 文件區 | 適用對象 | 內容 | 開啟網站 |
 |---|---|---|---|
 | 產品介紹 | 決策者、業務、顧問、IT／OT 與導入人員 | 產品價值、核心能力、技術架構、部署與治理 | **[開啟產品介紹](ProductIntroduction/)** |
-| 操作手冊 | 一般使用者、Studio 設計人員、系統管理員 | Display Library、Studio、Runtime 與 Administration 的功能位置、操作步驟及注意事項 | **[開啟操作手冊](OperationManual/)** |
+| 操作手冊 | 一般使用者、Studio 設計人員、系統管理員、DataGateway／Agent 管理員 | VisoLink 前台與後台、DataGateway、Agent 的功能位置、操作步驟及注意事項 | **[開啟操作手冊](OperationManual/)** |
 | 教育訓練 | 監看人員、Studio 設計人員、系統管理員與講師 | 依角色規劃的 Course 00–06 教材、實作與驗收標準 | **[開啟教育訓練](Training/)** |
 
 ### 各區延伸頁面
 
 - 產品介紹：[業務版](ProductIntroduction/business/)｜[技術版](ProductIntroduction/technical/)
-- 操作手冊：[前台手冊](OperationManual/frontend.html)｜[後台手冊](OperationManual/backend.html)
+- 操作手冊：[前台手冊](OperationManual/frontend.html)｜[後台手冊](OperationManual/backend.html)｜[DataGateway 手冊](OperationManual/dg/)｜[Agent 手冊](OperationManual/agent/)
 - 教育訓練：[完整課綱](Training/CURRICULUM.html)（各課程簡報請由教育訓練首頁進入）
 
 建議閱讀順序：初次認識產品先開啟「產品介紹」；實際使用時查閱「操作手冊」；規劃授課、上線導入或角色交接時使用「教育訓練」。
@@ -36,7 +36,7 @@ VisoLink 產品家族包含四個可各自部署、各自運作的產品：
 ```text
 VisoLink_Doc/
 ├── ProductIntroduction/   # 業務版、技術版產品介紹與共同事實來源
-├── OperationManual/       # 前台及管理後台操作手冊
+├── OperationManual/       # VisoLink 前台／後台、DataGateway、Agent 操作手冊
 └── Training/              # HTML 課程簡報、課綱與教學素材
 ```
 
