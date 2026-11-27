@@ -2,6 +2,9 @@
 
 本目錄以 HTML 簡報取代傳統 PPT。三類受訓對象形成學習路徑，教材則拆成 Course 00–06 七個可獨立授課的主題模組。
 
+- 對應系統版本：VisoLink 1.4.0-beta（Course 00 另含 DataGateway・Agent 0.4.0-beta、備份中心 0.1.0 的產品家族概觀）。
+- 每頁頁尾會自動顯示文件版本與對應系統版本。
+
 ## 課程入口
 
 開啟 `index.html`，即可由課程系列目錄進入各階段教材。
@@ -10,13 +13,15 @@
 
 正式課程檔案為：
 
-1. `00_VisoLink_Overview.html`
-2. `01_Runtime_Operation.html`
-3. `02_Studio_Basics.html`
-4. `03_DataBinding_and_DataBrowser.html`
-5. `04_Calculation_and_Variables.html`
-6. `05_DataSource_Management.html`
-7. `06_Admin_and_Governance.html`
+1. `00_VisoLink_Overview.html`：產品家族概觀（VisoLink、DataGateway、Agent、備份中心）與共同語言；先備章節 `00_TimeSeries_Fundamentals.html`
+2. `01_Runtime_Operation.html`：Runtime 操作、分析、手機與平板 RWD、班別切換、設備回寫、網址參數、維護中畫面
+3. `02_Studio_Basics.html`：Studio 畫面設計、Display／Symbol 樣本、底板、新圖庫與智慧圖形、RWD 版面
+4. `03_DataBinding_and_DataBrowser.html`：資料瀏覽與綁定、即時與歷史、替換 DataBinding、匯出入、回寫表單設定
+5. `04_Calculation_and_Variables.html`：Variable 與 Calculation
+6. `05_DataSource_Management.html`：資料來源（含 Oracle、引導式設定、VisoLink DataGateway 歷史）、DataGateway 即時與配對碼
+7. `06_Admin_and_Governance.html`：權限與有效權限預覽、圖庫管理、Client 設定、授權點數、運作中／維護中、備份與備份中心
+
+DataGateway／Agent 與備份中心的專屬課程另行提供；課程上線前請先參考操作手冊。
 
 ## 簡報操作
 
@@ -30,8 +35,10 @@
 
 - 共用視覺樣式：`assets/training.css`
 - 翻頁與全螢幕功能：`assets/training.js`
-- 課程圖片放在 `img/`，部分沿用 `../ProductIntroduction/assets/img/` 的產品圖；早期版本簡報已移到 `archive/`
+- 截圖：優先直接引用操作手冊的畫面 `../OperationManual/img/...`，手冊更新截圖時教材同步更新；`img/` 只剩少數手冊沒有對應畫面的早期版本截圖（圖說會註明）；早期版本簡報已移到 `archive/`
 - 新增投影片時請延續 `id="s數字"`，並填寫 `data-title`
+- 每頁 `<head>` 要有 `<meta name="doc-systems" content="對應系統版本">` 並載入 `../assets/doc-version.js`
+- 公開網站：不放帳密、配對碼、Token、內部主機位址或客戶資料
 
 ## 授課建議
 

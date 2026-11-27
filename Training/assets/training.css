@@ -36,9 +36,9 @@
 .syllabus{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;counter-reset:unit;list-style:none;padding:0;margin-top:26px}.syllabus li{counter-increment:unit;min-height:76px;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;font-size:13px;font-weight:700}.syllabus li::before{content:counter(unit,decimal-leading-zero);display:block;color:var(--blue);font-size:10px;margin-bottom:5px}@media(max-width:900px){.syllabus{grid-template-columns:repeat(2,1fr)}}
 
 /* Course 06 layout fixes */
-#s15 .cache-flow .fan span{color:var(--ink)}
-#s20>.grid-3{margin-top:26px}
-#s20>.flow{margin-top:24px}
+[data-cache-role] .cache-flow .fan span{color:var(--ink)}
+[data-backup]>.grid-3{margin-top:26px}
+[data-backup]>.flow{margin-top:24px}
 
 /* Time-series foundation module */
 .timeseries-module #s2 .production-flow,
@@ -49,3 +49,23 @@
 .timeseries-module #s8>.grid-4{margin-top:28px}
 .timeseries-module .production-flow .production-result{border-color:#9ed9c4;background:#eaf8f2}
 .timeseries-module .timeseries-record{margin-top:0}
+
+/* VisoLink 1.4 training additions */
+.deck{padding-bottom:96px}
+.deck-footer{flex-wrap:wrap;height:auto;min-height:56px;padding:8px 0 6px;align-content:center}
+.deck-footer .doc-version{color:#9fb3c6}
+.shot-wide{margin-top:18px}
+.shot-wide img{width:100%;height:auto;max-height:340px;object-fit:contain;background:var(--soft)}
+.shot.contain img{object-fit:contain;background:var(--soft)}
+.number-list.row{grid-template-columns:repeat(4,1fr);margin-top:14px}
+.number-list.row.three{grid-template-columns:repeat(3,1fr)}
+.shot-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.shot-pair .shot img{max-height:260px;object-fit:contain;background:var(--soft)}
+.version-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:12px;background:#e8f2ff;color:#1559b7;font-size:11px;font-weight:800;vertical-align:middle}
+.dark .version-badge{background:rgba(34,211,238,.14);color:#a5eff5}
+.family-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.family-grid article{border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:13px;padding:20px;background:#fff}
+.family-grid article:nth-child(2){border-top-color:var(--teal)}.family-grid article:nth-child(3){border-top-color:var(--green)}.family-grid article:nth-child(4){border-top-color:#7143a9}
+.family-grid h3{font-size:18px;color:var(--navy2)}.family-grid small{display:block;color:var(--blue);font-weight:800;font-size:11px;margin:4px 0 8px}.family-grid p{color:var(--muted);font-size:13px;margin:0}
+.course-link .new-badge{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:10px;background:rgba(34,211,238,.18);color:#9cecf4;font-size:10px;letter-spacing:.06em}
+@media(max-width:900px){.number-list.row,.number-list.row.three,.shot-pair,.family-grid{grid-template-columns:1fr}}
