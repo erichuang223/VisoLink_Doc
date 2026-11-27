@@ -1,8 +1,8 @@
 # VisoLink 教育訓練課程系列
 
-本目錄以 HTML 簡報取代傳統 PPT。三類受訓對象形成學習路徑，教材則拆成 Course 00–06 七個可獨立授課的主題模組。
+本目錄以 HTML 簡報取代傳統 PPT。四類受訓對象形成學習路徑，教材則拆成 Course 00–08 九個可獨立授課的主題模組。
 
-- 對應系統版本：VisoLink 1.4.0-beta（Course 00 另含 DataGateway・Agent 0.4.0-beta、備份中心 0.1.0 的產品家族概觀）。
+- 對應系統版本：Course 00–06 對應 VisoLink 1.4.0-beta（Course 00 另含 DataGateway・Agent 0.4.0-beta、備份中心 0.1.0 的產品家族概觀）；Course 07 對應 DataGateway／Agent 0.4.0-beta；Course 08 對應備份中心 0.1.0。
 - 每頁頁尾會自動顯示文件版本與對應系統版本。
 
 ## 課程入口
@@ -20,8 +20,8 @@
 5. `04_Calculation_and_Variables.html`：Variable 與 Calculation
 6. `05_DataSource_Management.html`：資料來源（含 Oracle、引導式設定、VisoLink DataGateway 歷史）、DataGateway 即時與配對碼
 7. `06_Admin_and_Governance.html`：權限與有效權限預覽、圖庫管理、Client 設定、授權點數、運作中／維護中、備份與備份中心
-
-DataGateway／Agent 與備份中心的專屬課程另行提供；課程上線前請先參考操作手冊。
+8. `07_DataGateway_and_Agent.html`：Agent 接 Modbus TCP／OPC UA 設備、DataGateway 核准 Agent、Tag 管理與保存政策、即時與歷史查詢、配對碼交給 VisoLink、回寫與寫入安全規則、暫存與維護中、事件排查
+9. `08_BackupCenter.html`：備份中心的備份密碼、存放位置、受管主機、備份模式、手動備份與排程、備份紀錄、還原規則與事前檢查、原機／換機／局部還原、TagData
 
 ## 簡報操作
 
@@ -44,5 +44,6 @@ DataGateway／Agent 與備份中心的專屬課程另行提供；課程上線前
 
 - 全體及一般監看人員：Course 00 → 01。
 - Studio 設計人員：Course 00 → 01 → 02 → 03 → 04。
-- 系統管理員：Course 00 → 01（理解）→ 05 → 06。
+- 系統管理員：Course 00 → 01（理解）→ 05 → 06 → 08。
+- 資料整合與 OT 管理員：Course 00 → 07 → 05（DataGateway 即時與回寫）。
 - 每門課均應依 `CURRICULUM.md` 擴寫概念、介面、操作、情境、實作與驗收頁。

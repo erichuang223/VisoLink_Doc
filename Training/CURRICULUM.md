@@ -1,20 +1,20 @@
 # VisoLink 教育訓練完整課綱
 
-- 對應系統版本：VisoLink 1.4.0-beta（Course 00 另含 DataGateway・Agent 0.4.0-beta、備份中心 0.1.0 的概觀）
-- 事實來源：`../OperationManual/`（前台、後台、DataGateway、Agent 手冊）與 `../ProductIntroduction/source/PRODUCT_FACTS.md`；手冊沒有寫的功能，教材不寫。
+- 對應系統版本：Course 00–06 對應 VisoLink 1.4.0-beta（Course 00 另含 DataGateway・Agent 0.4.0-beta、備份中心 0.1.0 的概觀）；Course 07 對應 DataGateway／Agent 0.4.0-beta；Course 08 對應備份中心 0.1.0
+- 事實來源：`../OperationManual/`（前台、後台、DataGateway、Agent、備份中心手冊）與 `../ProductIntroduction/source/PRODUCT_FACTS.md`；手冊沒有寫的功能，教材不寫。
 - 截圖：優先引用操作手冊已拍好的畫面（`../OperationManual/img/...`）；手冊沒有對應畫面的少數投影片保留早期版本截圖，並在圖說註明。
 
 ## 一、課程架構原則
 
 本訓練採「角色學習路徑 × 主題課程模組」設計：
 
-- 三類受訓對象決定必修範圍、學習深度及實作標準。
-- Course 00–06 是可獨立授課、重複選修及持續擴充的教材。
+- 四類受訓對象決定必修範圍、學習深度及實作標準。
+- Course 00–08 是可獨立授課、重複選修及持續擴充的教材。
 - 同一功能依角色採不同深度：使用者會操作、設計者會建構、管理員會配置與排查。
 - 每門課均包含概念說明、介面導覽、操作示範、情境練習及課後驗收。
-- DataGateway／Agent 與備份中心的詳細操作另有專屬課程（另行提供）；本系列只在 Course 00 概述，並在 Course 05、06 說明 VisoLink 與它們的接點。
+- 各產品分開授課：Course 00 概述產品家族；Course 01–06 是 VisoLink；Course 07 是 DataGateway 與 Agent；Course 08 是備份中心。Course 05、06 說明 VisoLink 端與它們的接點，Course 07、08 說明各產品自己的操作。
 
-## 二、三類受訓對象與完成標準
+## 二、四類受訓對象與完成標準
 
 ### A. 全體人員與一般監看人員
 
@@ -76,6 +76,7 @@
 2. Course 01｜Runtime Operation（理解使用者情境）
 3. Course 05｜DataSource Management
 4. Course 06｜Admin and Governance
+5. Course 08｜備份中心（BackupCenter）
 
 應具備能力：
 
@@ -87,9 +88,32 @@
 - 理解 Cache 的資料緩衝、共用與多設備負荷分流角色。
 - 理解授權以裝置點數計算，能查看點數使用與釋放點數。
 - 使用運作中／維護中；執行備份回復演練，說明何時改用備份中心。
+- 在備份中心登記受管主機、設定存放位置與備份密碼、建立手動備份與排程，並在還原前完成停工、版本與密碼的事前檢查。
 - 判讀 Dashboard、稽核及變更紀錄。
 
-完成標準：可完成低風險日常管理；高影響變更前能提出影響評估、備份、回復及驗證方案。
+完成標準：可完成低風險日常管理；高影響變更前能提出影響評估、備份、回復及驗證方案；每台受管主機都有可用的備份與排程。
+
+### D. 資料整合與 OT 管理員
+
+學習目標：把現場設備資料安全地接進 DataGateway，只保存需要的 Tag，交給 VisoLink 使用，並能在受控條件下回寫設備。
+
+必修課程：
+
+1. Course 00｜VisoLink 產品家族概觀
+2. Course 07｜DataGateway 與 Agent
+3. Course 05｜DataSource Management（DataGateway 歷史、DataGateway 即時與回寫的 VisoLink 端單元）
+
+應具備能力：
+
+- 說明 Agent、DataGateway、VisoLink 的分工：Agent 只做取得、推送、接收、回寫；Tag、保存政策與查詢在 DataGateway。
+- 把 Agent 連到 DataGateway（連線 URL、Enrollment token、DG 公開憑證），由 DataGateway 核准並確認 Online。
+- 建立 Modbus TCP（Scan Group、Read Block、從讀取結果建立 Tag）與 OPC UA（資料群組、節點樹、批次命名）連線與 Tag；理解連線占用的授權點數。
+- 在 DataGateway 管理 Tag 與來源；以保存額度、保存規則、保存分類與資料點指派決定哪些 Tag 保存。
+- 以 Current Values、History 確認資料；以 WebAPI 交給 VisoLink 讀歷史、以配對碼交給 VisoLink 即時與回寫。
+- 開啟連線回寫、建立寫入安全規則、指定可寫 Tag，追蹤 DataGateway 需求紀錄與 Agent Write Logs。
+- 理解 DataGateway 維護中時 Agent 暫存、恢復後補傳，以及暫存上限；以 Data Flow Logs 與資訊診斷排查。
+
+完成標準：在測試環境把一台設備接到 VisoLink 畫面並完成一次範圍內的回寫，只保存指定的 Tag，機密連線資訊未外流。
 
 ## 三、Course 00｜VisoLink 產品家族概觀
 
@@ -99,8 +123,8 @@
 
 1. 產品家族：VisoLink（工業資料視覺化平台）、DataGateway（設備資料中樞）、DataGateway Agent（現場資料取得）、VisoLink 備份中心（中央備份與還原）各自的定位；各自獨立運作。
 2. 如何搭配：設備 → Agent → DataGateway → VisoLink；回寫方向相反。VisoLink 以「VisoLink DataGateway」資料來源讀歷史、以「DataGateway 即時」（配對碼）讀即時值與回寫；既有資料庫由 VisoLink 直接連接。
-3. DataGateway 與 Agent 的管理畫面與使用者；詳細課程另行提供（預留連結：DataGateway、Agent 操作手冊）。
-4. 備份：各產品自己能手動備份；備份中心提供中央管理、排程、原機與換機還原；還原期間受管主機進入維護中。詳細課程另行提供。
+3. DataGateway 與 Agent 的管理畫面與使用者；詳細課程見 Course 07。
+4. 備份：各產品自己能手動備份；備份中心提供中央管理、排程、原機與換機還原；還原期間受管主機進入維護中。詳細課程見 Course 08。
 5. 時序資料先備章節：生產結果與生產過程。
 6. VisoLink 的時間條件：Realtime 即時與 History 歷史、全域時間 Filter。
 7. 四個工作區：Display Library、Studio、Runtime、Administration。
@@ -253,7 +277,98 @@
 
 實作：建立測試身分與權限並以有效權限預覽驗證；上傳 SVG、新增班別條件；判讀 Dashboard、Cache 與授權點數情境；切換維護中再切回；建立備份並說明備份中心的接法；從稽核紀錄重建異常並完成閉環報告。
 
-## 十、教材製作標準
+## 十、Course 07｜DataGateway 與 Agent
+
+建議時間：180 分鐘。適用：資料整合與 OT 管理員。先備：Course 00；VisoLink 端操作搭配 Course 05。對應：DataGateway／Agent 0.4.0-beta。
+
+### 產品決定（授課時照講）
+
+- Agent 只做取得、推送、接收、回寫；Agent 不保存歷史，保存政策與歷史查詢都在 DataGateway。
+- 沒有指定保存政策的 Tag 不保存，只有即時值；保存額度不足時新進 Tag 也只更新即時值。
+- DataGateway 維護中時，Agent 把資料暫存在本機，DataGateway 切回運作中後自動補傳；Agent 自己切到維護中時，維護期間不收集資料。
+- Tag 屬於 DataGateway：Agent 新增的點自動建立 Tag（「Agent.連線.點」）；改名、更換來源、Agent 解除註冊，歷史都留在同一個 Tag。
+
+### 單元細節
+
+1. 分工：設備 → Agent → DataGateway → VisoLink；回寫方向相反、以 Tag 為目標。
+2. 兩個管理畫面與登入：DataGateway（VisoLink 管理員或 DG 本機帳號）、Agent 本機帳號；救援登入只能建立或重設本機帳密。
+3. 第一次使用順序：取得連線資訊 → Agent 連上 DataGateway → 核准 → 設備連線與 Tag → 保存 → 交給 VisoLink。
+4. DataGateway 連線資訊：Agent 連線（URL、Enrollment token、DG 公開憑證）、加值開發 WebAPI、VisoLink 配對碼；三者都等同密碼。
+5. Agent「DG 連線設定」：位址與憑證名稱相同、不可用 localhost；註冊狀態與 Uplink。
+6. Agent Registry：核准、拒絕並刪除、解除離線 Agent 的註冊、重新申請註冊；Heartbeat 與 Offline 判定。
+7. 設備連線與授權點數：每條連線 1 點、開回寫 2 點；停用仍占點，刪除才釋放；刪除連線後 Tag 變無來源、歷史保留。
+8. Modbus TCP：連線參數與位元組順序、Scan Group、Read Block（Function、Base 0）、從讀取結果建立 Tag、手動／進階設定。
+9. OPC UA：Endpoint、安全性與登入、測試連線、資料群組、節點樹選取、批次命名、Sampling interval 與 Publishing interval。
+10. DataGateway Tag 管理：來源狀態、先建 Tag 再接來源、改名、改連結、移除來源、刪除 Tag（連同歷史）。
+11. 歷史保存：保存額度（1 點 100 個 Tag）、四種保存政策、保存規則與試算、保存分類、資料點指派、保存目的端與資料保護、歷史保存總開關。
+12. 資料查詢：Current Values（品質、逾時）、History 三步驟與限制（31 天、10,000 筆）。
+13. 交給 VisoLink：歷史走 WebAPI（「VisoLink DataGateway」資料來源），即時與回寫走配對碼（「DataGateway 即時」）；重新產生配對碼的影響。
+14. 回寫：Agent 連線回寫開關、寫入安全規則、ReadWrite Tag、測試寫入；DataGateway 新增回寫與需求紀錄；從 VisoLink 回寫的四道關卡；以設備讀回為準。
+15. 暫存與維護中：DataGateway 與 Agent 各自維護中的差異、暫存上限（預設 7 天、2 GB）、刪除暫存、Agent 端解除註冊會刪除暫存。
+16. 監看與排查：服務狀態、Data Flow Logs（S、D、E、G）、Agent Logs 與資訊診斷、常見狀況。
+17. 系統維運：系統設定的儲存與套用、登入方式切換、授權（含離線啟用）、Contract 相容、各自的設定備份與備份中心。
+
+### 實作（學員在自己的測試環境）
+
+1. Agent 接設備：依 DataGateway「Agent 連線」卡設定並啟用 DG 連線；建立一條 Modbus TCP 連線（Scan Group、Read Block、從讀取結果建立 Tag）或 OPC UA 連線（節點樹選 Tag、批次命名），至少 3 個 Tag。
+2. DataGateway 核准與保存：在 Agent Registry 核准，確認 Online；Tag 管理確認來源狀態正常；調整保存額度、建立保存規則與分類，只指派 2 個 Tag；以 Current Values 與 History 確認有保存政策的 Tag 有歷史、未指派的只有即時值。
+3. VisoLink 接即時值與回寫：Agent 開啟連線回寫、建立寫入安全規則、把 1 個 Tag 設為 ReadWrite；VisoLink 以配對碼建立即時來源、即時 View 與即時 DataBinding（Course 05）；在 Runtime 看即時值並送出一次範圍內的回寫；在 DataGateway 需求紀錄與 Agent Write Logs 核對結果與讀回值。
+
+### 驗收標準
+
+- Agent Registry 顯示 Trusted、Online；Tag 來源狀態正常。
+- 指派保存政策的 Tag 查得到歷史，未指派的只有即時值，學員能說明原因。
+- VisoLink Runtime 顯示即時值；回寫成功且讀回值相符。
+- 學員能說出回寫的四道關卡、DataGateway 維護中時 Agent 的暫存與補傳，以及 S、D、E、G 事件的意思。
+- Enrollment token、WebAPI 密碼、配對碼未出現在作業紀錄或截圖。
+
+## 十一、Course 08｜備份中心（BackupCenter）
+
+建議時間：150 分鐘。適用：系統管理員。先備：Course 00；VisoLink 自己的備份與 Backup API Token 見 Course 06。對應：備份中心 0.1.0。
+
+### 產品決定（授課時照講）
+
+- 備份＝定時快照：還原回到備份當時的狀態，之後的資料、Agent 緩衝與在途資料不在還原範圍。
+- 備份中心獨立：VisoLink、DataGateway、Agent 自己也能手動備份與還原；備份中心加上集中管理、排程與自動化，兩者並存。
+- 還原時所有受管主機停工：切到維護中，停止收集、接收、寫入與修改，結束或失敗後切回原本的模式。
+- 版本不同不允許還原：主機目前的產品版本必須與備份版本相同；授權不在備份內，換機後向原廠重新申請。
+
+### 單元細節
+
+1. 四個原則與產品自己的備份頁。
+2. 第一次使用順序：改帳密 → 備份密碼 → 存放位置 → 受管主機 → 手動備份 → 排程。
+3. 登入與帳號：初始帳密只用於第一次登入與救援；登入失敗鎖定；最近操作紀錄。
+4. 工作狀態：整體狀態、需要處理、執行中、排隊中、最近結果、重新切回運作中。
+5. 備份密碼：AES-256-GCM 加密、只存驗證資料、遺失無法還原、變更只套用到新備份。
+6. 存放位置：主機本機資料夾（不能換機還原）、SMB／NFS、FTP／FTPS／SFTP、測試連線、容量、掃描既有備份。
+7. 受管主機：登記 VL、DG、Agent（Backup API Token、管理金鑰）、實體主機、連線狀態、停用與刪除。
+8. 備份內容：完整、快速設定、自訂；相依類型；換機必要；不在備份中的資料（授權、Tag 歷史值、Agent 緩衝、加密金鑰）。
+9. 手動備份與追蹤：選對象、模式、存放位置、備註；確認紀錄、明細與最後成功備份。
+10. 排程與保留：四種頻率、預覽、保留份數、立即執行與停用。
+11. 執行控制：佇列規則、觸發順序（DG → Agent → VL）、單一工作的資源限制。
+12. 備份紀錄：篩選、明細（版本、使用哪一天設定的備份密碼）、刪除手動備份、DG 安裝設定包。
+13. 還原：四條規則、事前檢查、原機還原、換機還原、局部還原、衝突策略、還原期間的維護中切換。
+14. TagData：DG 內建 TimescaleDB 完整／差異與排程、InfluxDB 初始化與排程、還原與失敗處理。
+15. 備份中心自己的設定同步與新機器還原。
+16. 日常巡檢。
+
+### 實作（學員在自己的測試環境）
+
+1. 登記受管主機：以測試用憑證登記 VisoLink、DataGateway、Agent 各一台，連線顯示「正常」並帶出版本。
+2. 設定存放位置與備份密碼：新增一個存放位置並測試連線；設定備份密碼並以受管控方式保管。
+3. 手動備份：對三台主機各做一次快速設定備份，在工作狀態追蹤到成功。
+4. 看紀錄：在備份紀錄找到這三筆並核對明細；建立一個每天執行、保留 7 份的排程並預覽接下來 3 次。
+5. 還原的事前檢查：在還原頁選一台主機與剛才的備份，走到確認步驟，完成停工、版本、密碼、主機連線的檢查表；講師同意時才在測試環境按「開始還原」。
+
+### 驗收標準
+
+- 工作狀態「全部正常」，三台受管主機連線正常。
+- 備份紀錄有三筆手動備份，學員能逐項說明明細。
+- 排程已建立且預覽時間正確，保留份數有理由。
+- 還原事前檢查表每一項都有依據；學員能說明還原後為什麼會少一段資料、為什麼所有主機都停工、升級後舊版本備份為什麼不能還原。
+- Backup API Token、管理金鑰、備份密碼未出現在作業紀錄或截圖。
+
+## 十二、教材製作標準
 
 每門 HTML 課程應包含：
 
