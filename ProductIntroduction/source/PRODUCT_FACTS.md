@@ -1,9 +1,9 @@
 # VisoLink 對外產品事實
 
 - 文件角色：業務版與技術版產品介紹的共同事實來源
-- 基準日期：2026-11-26
+- 基準日期：2026-11-28
 - 對應系統版本：VisoLink（VL）1.4.0-beta、VisoLink DataGateway（DG）與 DataGateway Agent 0.4.0-beta、VisoLink 備份中心（BackupCenter，BC）0.1.0
-- 主要驗證來源：`OperationManual/`、`Training/`、各產品發行紀錄（CHANGELOG）
+- 主要驗證來源：`OperationManual/`、`Training/`、各產品發行紀錄（CHANGELOG）；資料來源類型另以 VisoLink 原始碼核對，安裝方式以各產品的打包與安裝說明核對（2026-11-28）
 
 ## 0. 產品家族
 
@@ -13,13 +13,14 @@ VisoLink 產品家族由四個可各自部署、各自運作的產品組成。�
 |---|---|---|
 | VisoLink（VL） | 工業資料視覺化平台（主軸） | 把既有資料變成可設計、可分析、可治理的監控畫面。 |
 | VisoLink DataGateway（DG） | 設備資料中樞 | 集中管理 Tag，接收現場資料，依保存政策保存歷史，提供即時、歷史查詢與設備回寫。 |
-| DataGateway Agent（Agent） | 現場資料取得 | 部署在設備旁，以 Modbus TCP、OPC UA 讀取設備資料推送給 DG，並執行回寫；設計精簡，可在小型設備上執行。 |
+| DataGateway Agent（Agent） | 現場資料取得 | 部署在設備旁，以 Modbus TCP、OPC UA 讀取設備資料推送給 DG，並執行回寫；設計精簡，可放在現場小型設備。 |
 | VisoLink 備份中心（BackupCenter，BC） | 中央備份與還原 | 統一排程備份 VL、DG、Agent，並可還原到原機或在新機器上換機還原。 |
 
 搭配原則（對外必須一致）：
 
 - **各自獨立運作**：VisoLink 不需要 DataGateway 也能使用，直接以自己的連接器讀取既有資料庫與時序資料庫；DataGateway 也能單獨運作。
-- **整合點明確**：VisoLink 以「DataGateway 資料來源」讀取 DG 的即時值與歷史，並透過 DG 回寫設備；連線以 DG 提供的配對碼完成。
+- **整合點明確**：VisoLink 接 DataGateway 是兩條分開設定的連線。即時值與回寫走 VisoLink 後台「DataGateway 即時」，貼上 DG 總覽提供的配對碼；歷史走資料來源類型「VisoLink DataGateway」，使用 DG 總覽「加值開發 WebAPI」提供的位址與唯讀帳密。兩者都不需要交換 DG 管理員帳密，都由 VisoLink Server 連到 DG，使用者瀏覽器只連 VisoLink。
+- **外部程式用 API Token**：VisoLink、DataGateway、Agent 都可在管理畫面建立 API Token（可設到期、可撤銷、只開放備份與運作模式等必要範圍），供備份中心等外部程式使用；備份中心登記受管主機時填入在各產品畫面建立的 Token。
 - **資料流**：設備 → Agent → DataGateway → VisoLink 畫面；回寫方向相反，由 VisoLink 操作表單經 DG、Agent 寫回設備。
 - **產品自己就能備份**：VL、DG 都能在自己的管理畫面手動備份與還原；備份中心再加上中央管理、排程與換機還原。
 - **備份是定時快照**：還原回到備份當時的狀態；還原期間所有受管主機切換為「維護中」，結束後恢復運作。
@@ -67,9 +68,14 @@ VisoLink 的 **VISO** 代表四個產品核心：
 
 ### 資料與整合
 
-- 建立及測試 DataSource 連線；支援 InfluxDB、PostgreSQL、MySQL、MariaDB、SQL Server、Oracle Database（19c 以上）與 VisoLink DataGateway。
+- 建立及測試 DataSource 連線。支援類型（依後台「選擇 DataSource 類型」分組）：
+  - 關聯式資料庫：MySQL（8.0 以上；MariaDB 10.6 以上也以 MySQL 類型連線）、Oracle Database（19c 以上）、PostgreSQL、SQL Server。
+  - 時序資料庫：InfluxDB Flux、InfluxDB InfluxQL。
+  - 工業歷史資料庫：easyPI WebAPI、IIoTFab PIES、VisoLink DataGateway。
+  - 另有內建模擬資料類型，供開發與展示使用，不作為對外賣點。
 - 關聯式資料庫提供引導式設定、標準查詢、時間區間彙整、Tag Pivot 與進階 SQL；資料查詢以唯讀方式執行。
-- DataGateway 資料來源以配對碼連線，可讀取設備目前值與歷史，並設定即時讀取與回寫權限。
+- 「VisoLink DataGateway」資料來源以 DG 的 WebAPI 位址與唯讀帳密連線，讀取 DG 保存的歷史與目前 Tag 資料；View 可選紀錄或內插模式。
+- 後台「DataGateway 即時」以 DG 配對碼建立即時來源，在畫面顯示設備目前值並經 DG 回寫；即時 DataBinding 的使用權限與寫入權限分開設定。
 - 建立 View、欄位映射與結果預覽。
 - 以 DataBinding 將來源整理成可供 Studio 使用的資料資產。
 - Data Browser 支援依分類瀏覽、搜尋及拖曳套用資料。
@@ -100,7 +106,7 @@ VisoLink 的 **VISO** 代表四個產品核心：
 ### 治理與維運
 
 - 圖面權限與資料權限分開管理。
-- 後台涵蓋 Users、Groups、Roles、DataSource、DataBindings、Data Permissions、Folders、Media Library、Localization、License、Audit Logs、Backup & Restore、API Token、System Settings 與 Cache Management。
+- 後台涵蓋 Dashboard、Users、Groups、Roles、DataSource、DataBindings、DataGateway 即時、Data Permissions、Folders、Media Library、圖庫管理、Localization、License、Audit Logs、Backup & Restore、API Token、System Settings 與 Cache Management（共 18 項，依 VisoLink 1.4.0-beta 後台手冊）。
 - 敏感連線資訊、身分驗證、稽核與備份屬於企業治理能力的一部分。
 - Cache 可管理節點、連線、狀態、Key、TTL Policy 與清除範圍，支援查詢共用及負荷分流情境。
 - 使用者管理可預覽有效權限：一次看到使用者對 Display、Folder、DataBinding 及系統功能的最終存取結果。
@@ -110,7 +116,7 @@ VisoLink 的 **VISO** 代表四個產品核心：
 ### 部署
 
 - 使用者前台、應用服務、管理後台與持久化資料分工部署。
-- 支援以 Docker Compose 在企業環境自行部署及維運；提供 Windows 與 Linux 安裝程式。
+- 支援以 Docker Compose 在企業環境自行部署及維運；提供 Windows（`.bat`）與 Linux（`.sh`）安裝程式及離線安裝包（內含容器映像檔），安裝在已備妥 Docker 的主機上。
 - PostgreSQL 保存畫面資產、設定、權限及稽核等持久資料。
 
 ## 2A. DataGateway 與 Agent 可描述的能力
@@ -124,19 +130,23 @@ VisoLink 的 **VISO** 代表四個產品核心：
 - **Agent 管理**：核准、拒絕或解除 Agent 註冊；DG 重建後 Agent 可重新申請並補傳資料。
 - **維運**：服務總覽與資料流程圖、資料流日誌、快取管理、歷史資料管理、系統設定中心（調整前預覽影響、可還原上次設定）、運作中／維護中總開關、手動備份與還原（設定與歷史資料，備份檔加密）。
 - **登入**：可使用 VisoLink 管理員帳號登入，也可使用 DG 本機管理員帳號獨立運作。
-- **與 VisoLink 整合**：首頁提供 VisoLink 配對碼，貼到 VisoLink 即完成即時讀取與回寫連線；可重新產生配對碼使舊碼失效。
+- **與 VisoLink 整合**：總覽提供兩組連線資訊。「VisoLink 即時與回寫」配對碼貼到 VisoLink 後台「DataGateway 即時」，完成即時讀取與回寫連線，可重新產生配對碼使舊碼失效；「加值開發 WebAPI」的位址與唯讀帳密填到 VisoLink 資料來源「VisoLink DataGateway」，讀取歷史。
+- **API Token**：系統設定下的 API Token 管理可建立 Backup API Token（可設到期、可撤銷，可勾選讀取與切換運作模式），供備份中心等外部程式使用；完整 Token 只在建立時顯示一次。
+- **安裝**：Windows 與 Linux 安裝程式加離線安裝包，以 Docker Compose 執行；安裝完成時列出開啟網址、登入資訊與給其他產品的連線資訊。
 
 ### DataGateway Agent
 
 - 支援多連線 Modbus TCP 與 OPC UA，依掃描群組讀取資料點並直接推送給 DG。
 - DG 連不上時才把資料暫存在本機，恢復後自動補傳；暫存保留天數與容量上限可調整，可查看與清理暫存。
 - 執行 DG 轉來的回寫；回寫走 Agent 連到 DG 的既有連線，Agent 在其他網段也能回寫。
-- 設計精簡：只做資料取得、推送、接收與回寫，不做複雜運算，可在小型設備上執行。
+- 設計精簡：只做資料取得、推送、接收與回寫，不做複雜運算，可放在現場小型設備。對外只寫這句，不寫具體型號或硬體規格（Eric 2026-11-28 決定；尚未在實機量測）。
 - 可在 Agent 網頁設定 DG 連線與信任憑證、申請或解除註冊；維護中時資料暫存在本機，切回運作中後補傳。
+- 系統管理下的 API Token 管理可建立 Backup API Token，每台 Agent 管自己的 Token，供備份中心等外部程式使用。
+- 安裝：Windows 與 Linux 安裝程式加離線安裝包，以 Docker 執行；同一台主機可安裝多個 Agent 實例，各有自己的資料與網頁 Port。
 
 ## 2B. 備份中心（BackupCenter）可描述的能力
 
-- **受管主機**：登記 VL、DG、Agent，定期檢查連線與版本。
+- **受管主機**：登記 VL、DG、Agent，填入在各產品「API Token 管理」建立的 Backup API Token；定期檢查連線與版本。
 - **存放位置**：本機資料夾、SMB、NFS、FTP、FTPS、SFTP；逐步測試連線與容量。
 - **備份**：手動備份與排程（多種頻率、完整／快速設定／自訂內容），依保留份數自動清理；同一台主機一次只做一個工作，排隊原因可見。
 - **加密**：備份檔以備份密碼加密，備份中心只保存驗證資料、不保存密碼本身；遺失備份密碼就無法還原。
@@ -144,6 +154,7 @@ VisoLink 的 **VISO** 代表四個產品核心：
 - **時序資料**：DG 內建 TimescaleDB 的完整／差異備份；InfluxDB v1／v2 備份與還原。
 - **自身設定**：備份中心的主機、存放位置、排程等設定同步到存放位置，新機器可從存放位置還原。
 - **登入**：單一組本機管理員帳號；初始帳密第一次登入強制修改，連續登入失敗會暫時鎖定。
+- **安裝**：Windows 與 Linux 安裝程式加離線安裝包，以 Docker Compose 執行；需能連到各受管主機與存放位置。
 
 ## 3. 文件量體基準
 
