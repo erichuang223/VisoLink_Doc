@@ -1,20 +1,40 @@
 # VisoLink 操作手冊製作規格書
 
-- 文件版本：1.0
-- 建立日期：2026-08-18
+- 文件版本：2.0（VisoLink 1.4.0-beta 改版，T0010／G0002）
+- 建立日期：2026-08-18；改版日期：2026-11-27
 - 適用範圍：前台操作手冊
-- 功能基準：`OperationManual/index.html` 的「前台功能」索引
+- 對應系統：VisoLink 1.4.0-beta（每頁 `<meta name="doc-systems" content="VisoLink 1.4.0-beta">`，頁尾由 `assets/doc-version.js` 顯示）
+- 功能基準：`OperationManual/index.html` 的「前台功能」索引（由各章節 `<section class="manual-function">` 一對一產生）
 - 製作順序：Display Library → Studio → Runtime
 
-後台製作範圍與階段 F 之後的執行狀態，另見 `BACKEND_PLAN.md`。
+後台製作範圍與狀態，另見 `BACKEND_PLAN.md`。
 
 ## 執行狀態
 
-- 階段 A：完成（前台分章、43 項固定錨點、首頁直達連結）
-- 階段 B：完成（Display Library 正式內容與操作圖片）
-- 階段 C：完成（Studio 19 項正式內容與操作圖片）
-- 階段 D：完成（Runtime 11 項正式內容與操作圖片）
-- 階段 E：完成（43 項功能、連結、錨點與圖片總驗證）
+- 1.2 版（2026-08-18）：階段 A～E 完成，43 項功能。
+- 1.4 版（2026-11-27，T0010）：依 DEV（VisoLink 1.4.0-beta）實際畫面改寫三章，共 67 項功能（新增 24 項）；改版畫面全部重拍為 JPG，舊 PNG 已刪除。
+- 截圖：前台 46 張（`img/frontend/<章節>/`）。截圖前只在瀏覽器畫面把主機 IP 換成示範網域；示範資料為虛構的「示範化工廠」。
+- 未附圖：Runtime「建立時間標記」「管理與比較時間標記」「時間範圍彙整」三項。DEV 當時 DataGateway 歷史保存沒有資料（View 預覽「此 View 未傳回任何欄位」），趨勢無法點選時間點，只保留文字。登入頁（保存登入）與維護中畫面因不登出、不切換維護中，只依原始碼文字撰寫。
+
+### VL-Client 選單新舊對照（1.2 → 1.4）
+
+| 位置 | 1.2 手冊 | 1.4 實際畫面 | 處理 |
+|---|---|---|---|
+| 上方導覽 | Display Library | 「Displays 清單」＋「Symbol 樣本」兩頁；右上新增「匯入」「匯出」 | 新增 `symbol-sample-library`、`display-export-import` |
+| 圖面庫 | 私有、格狀／表格 | 新增「底板」篩選、狀態卡（Display、授權・登入中、即時連線、資料來源）、卡片 RWD／底板／使用中標記、批次列「加入與變更底板」、載入失敗「重新載入」 | 新增 `display-list-status`、`display-base-layer-batch` |
+| 新增 Display | 名稱輸入框 | 「從 Display 樣本建立」（空白＋樣本，加入 Display 樣本、樣本選單編輯／編輯資訊／權限／刪除） | 改寫 `display-create`，新增 `display-samples` |
+| Display 設定 | 重新命名、轉換擁有者、另存為、權限 | 新增「可作為底板」 | 改寫 `display-metadata` |
+| Studio 標題列 | 預覽資料、Runtime、儲存 | 新增 Canvas／RWD 切換、Display 字典、替換 DataBinding、「?」 | 新增 `studio-rwd`、`studio-rwd-preview`、`studio-replace-binding` |
+| Studio 工具列 | 復原…群組 | 新增「存成 Symbol 樣本」「加入底板／更換底板」；貼上可跨分頁 | 新增 `studio-symbol-samples`、`studio-base-layer`、`studio-copy-paste` |
+| Studio 左側 | Symbols、圖庫、圖層、資料、計算、變數 | 新增「Symbol 樣本」「回寫」；資料標示 Realtime 即時／History 歷史 | 新增 `studio-writeback-form`、`studio-realtime-history` |
+| Symbols | 16 種 | 18 種（新增和弦圖；圓餅圖、進度等改中文名） | 新增 `studio-chord` |
+| 圖庫 | 舊版工業圖形分類 | 新圖庫（PID 管道智慧圖形、P&ID 常用、閥門…）；舊版圖庫已移除 | 改寫 `graphics-browse-search`，新增 `studio-smart-graphics`；舊圖庫說明已刪 |
+| 屬性面板 | 各元件不一 | 統一面板；數值 6 種版面、表格 7 種樣式；規則新增介於、包含、無值 | 新增 `studio-value-table-styles`、`studio-style-rules` |
+| Runtime 上方 | 介面語系、Editor、Displays 清單、授權 | 新增「查詢資訊」「?」網址參數、Canvas／RWD、即時狀態列 | 新增 `runtime-url-params`、`runtime-rwd`、`runtime-realtime-marks` |
+| Runtime 工具列 | 固定畫布、全畫面、移動… | 新增「回寫表單」「資料標籤」；工具列設定記憶 | 新增 `runtime-writeback`，改寫 `runtime-display-mode` |
+| 時間範圍 | 最近時間、日曆區間、自訂、擴充條件 | 擴充條件可由 Admin「Client 設定」設定班別 | 新增 `runtime-shift-switch` |
+| 登入／維護 | — | 登入頁「保存登入」；維護中畫面 | 新增 `runtime-login-remember`、`runtime-maintenance` |
+| 移除 | 舊版圖庫 | 不存在 | 手冊不再提及 |
 
 ---
 
@@ -65,7 +85,7 @@
 - Folder 授權與 Display 授權的繼承、覆寫及優先順序。
 - Folder 與 Display 授權在不同角色、群組及帳號下的實際結果。
 
-Studio 的 16 種 Symbol、資料拖曳相容性、Runtime 時間窗及 Data Analysis 設定已依正式介面確認並寫入手冊。
+Studio 的 18 種 Symbol、資料拖曳相容性、Runtime 時間窗及 Data Analysis 設定已依正式介面確認並寫入手冊。
 
 ---
 
@@ -183,13 +203,13 @@ img/frontend/runtime/
 使用功能錨點作為檔名基礎；同一功能有多張圖片時加入步驟編號：
 
 ```text
-folder-create-edit_01.png
-folder-create-edit_02.png
-display-permission_01.png
-symbol-data-binding_01.png
-time-marker-create_01.png
-time-marker-create_02.png
+folder-create-edit_01.jpg
+display-create_02.jpg
+rwd-editor.jpg
+writeback-form.jpg
 ```
+
+1.4 版起截圖存成 JPG（瀏覽器擷取原始格式）；新功能以功能內容命名。
 
 ### 6.3 圖片內容要求
 
@@ -205,78 +225,95 @@ time-marker-create_02.png
 
 ## 7. 前台功能製作矩陣
 
-狀態使用以下標記：
-
-- `待製作`：功能已列入索引，尚未開始。
-- `待確認`：必須先確認正式系統行為或名稱。
-- `撰寫中`：文字或 HTML 正在製作。
-- `待補圖`：文字已建立，但圖片尚未完成。
-- `待驗證`：內容與圖片完成，尚未實際操作驗證。
-- `完成`：內容、圖片、連結及實際操作均已驗證。
+狀態：`完成（1.4 新增）`＝1.4 新寫；`完成（1.4 更新）`＝沿用錨點、依 1.4 畫面改寫或重拍。圖片欄為該功能使用的檔名（`img/frontend/<章節>/`，JPG）。
 
 ### 7.1 Chapter 01 — Display Library 圖面庫
 
 目標檔案：`frontend/display-library.html`
 
-| 編號 | 功能名稱 | HTML 錨點 | 圖片基礎檔名 | 狀態 |
+| 編號 | 功能名稱 | HTML 錨點 | 圖片 | 狀態 |
 |---|---|---|---|---|
-| 1.1.1 | 瀏覽圖面庫 | `display-library-overview` | `display-library-overview` | 完成 |
-| 1.1.2 | 搜尋與篩選圖面 | `display-search-filter` | `display-search-filter` | 完成 |
-| 1.2.1 | 建立與編輯 Folder | `folder-create-edit` | `folder-create-edit` | 完成 |
-| 1.2.2 | 整理 Folder 與 Display | `folder-organize-display` | `folder-organize-display` | 完成 |
-| 1.2.3 | 刪除 Folder | `folder-delete` | `folder-delete` | 完成 |
-| 1.3.1 | 建立 Display | `display-create` | `display-create` | 完成 |
-| 1.3.2 | 開啟 Display | `display-open` | `display-open` | 完成 |
-| 1.3.3 | 複製 Display | `display-copy` | `display-copy` | 完成 |
-| 1.3.4 | 編輯圖面基本資料 | `display-metadata` | `display-metadata` | 完成 |
-| 1.3.5 | 刪除 Display | `display-delete` | `display-delete` | 完成 |
-| 1.4.1 | Display 授權設定 | `display-permission` | `display-permission` | 完成 |
-| 1.4.2 | Folder 授權設定 | `folder-permission` | `folder-permission` | 完成 |
-| 1.4.3 | 驗證授權結果 | `permission-validation` | `permission-validation` | 完成 |
+| 1.1.1 | 瀏覽圖面庫 | `display-library-overview` | `display-library-overview.jpg` | 完成（1.4 更新） |
+| 1.1.2 | 搜尋與篩選圖面 | `display-search-filter` | — | 完成（1.4 更新） |
+| 1.1.3 | 清單狀態卡、背景與重新載入 | `display-list-status` | — | 完成（1.4 新增） |
+| 1.2.1 | 建立與編輯 Folder | `folder-create-edit` | `folder-create-edit_01.jpg` | 完成（1.4 更新） |
+| 1.2.2 | 整理 Folder 與 Display | `folder-organize-display` | `folder-organize-display_01.jpg`、`display-batch-select.jpg` | 完成（1.4 更新） |
+| 1.2.3 | 刪除 Folder | `folder-delete` | — | 完成（1.4 更新） |
+| 1.3.1 | 建立 Display | `display-create` | `display-create_01.jpg`、`display-create_02.jpg` | 完成（1.4 更新） |
+| 1.3.2 | 開啟 Display | `display-open` | — | 完成（1.4 更新） |
+| 1.3.3 | 複製 Display | `display-copy` | `display-settings.jpg` | 完成（1.4 更新） |
+| 1.3.4 | 編輯圖面基本資料 | `display-metadata` | — | 完成（1.4 更新） |
+| 1.3.5 | 刪除 Display | `display-delete` | — | 完成（1.4 更新） |
+| 1.3.6 | 管理 Display 樣本 | `display-samples` | `display-sample-add.jpg`、`display-sample-manage.jpg` | 完成（1.4 新增） |
+| 1.3.7 | 匯出與匯入 Display | `display-export-import` | `display-export.jpg` | 完成（1.4 新增） |
+| 1.3.8 | 批次加入與變更底板 | `display-base-layer-batch` | `display-batch-select.jpg`、`base-layer-batch.jpg` | 完成（1.4 新增） |
+| 1.3.9 | Symbol 樣本頁 | `symbol-sample-library` | `symbol-sample-library.jpg` | 完成（1.4 新增） |
+| 1.4.1 | Display 授權設定 | `display-permission` | `display-settings.jpg` | 完成（1.4 更新） |
+| 1.4.2 | Folder 授權設定 | `folder-permission` | `folder-permission_01.jpg` | 完成（1.4 更新） |
+| 1.4.3 | 驗證授權結果 | `permission-validation` | — | 完成（1.4 更新） |
 
 ### 7.2 Chapter 02 — Studio 圖面編輯
 
 目標檔案：`frontend/studio.html`
 
-| 編號 | 功能名稱 | HTML 錨點 | 圖片基礎檔名 | 狀態 |
+| 編號 | 功能名稱 | HTML 錨點 | 圖片 | 狀態 |
 |---|---|---|---|---|
-| 2.1.1 | 認識 Studio 介面 | `studio-overview` | `studio-overview` | 完成 |
-| 2.1.2 | 畫布設定 | `canvas-settings` | `canvas-settings` | 完成 |
-| 2.1.3 | 選取與編輯物件 | `object-editing` | `object-editing` | 完成 |
-| 2.1.4 | 排列與圖層 | `alignment-layers` | `alignment-layers` | 完成 |
-| 2.1.5 | 復原與重做 | `undo-redo` | `undo-redo` | 完成 |
-| 2.2.1 | 加入 Symbol | `symbol-add` | `symbol-add` | 完成 |
-| 2.2.2 | Symbol 共通屬性 | `symbol-common-properties` | `symbol-common-properties` | 完成 |
-| 2.2.3 | 資料顯示元件 | `symbol-data-display` | `symbol-data-display` | 完成 |
-| 2.2.4 | 圖表與指示元件 | `symbol-chart-indicator` | `symbol-chart-indicator` | 完成 |
-| 2.3.1 | 瀏覽與搜尋圖形 | `graphics-browse-search` | `graphics-browse-search` | 完成 |
-| 2.3.2 | 將圖形加入畫布 | `graphics-add-canvas` | `graphics-add-canvas` | 完成 |
-| 2.4.1 | 瀏覽與搜尋資料 | `data-browser` | `data-browser` | 完成 |
-| 2.4.2 | 拖曳套用資料 | `data-drag-bind` | `data-browser` | 完成 |
-| 2.4.3 | Symbol 資料綁定 | `symbol-data-binding` | `symbol-data-binding` | 完成 |
-| 2.4.4 | 格式、單位與空值 | `display-format-null` | `symbol-common-properties` | 完成 |
-| 2.5.1 | Variable | `variables` | `variables` | 完成 |
-| 2.5.2 | Calculation | `calculations` | `calculations` | 完成 |
-| 2.6.1 | 儲存圖面 | `display-save` | `display-save` | 完成 |
-| 2.6.2 | 預覽圖面 | `display-preview` | `display-preview` | 完成 |
+| 2.1.1 | 認識 Studio 介面 | `studio-overview` | `studio-overview.jpg` | 完成（1.4 更新） |
+| 2.1.2 | 畫布設定 | `canvas-settings` | `canvas-settings.jpg` | 完成（1.4 更新） |
+| 2.1.3 | 選取與編輯物件 | `object-editing` | — | 完成（1.4 更新） |
+| 2.1.4 | 排列與圖層 | `alignment-layers` | `alignment-layers.jpg` | 完成（1.4 更新） |
+| 2.1.5 | 復原與重做 | `undo-redo` | — | 完成（1.4 更新） |
+| 2.1.6 | 跨分頁複製貼上 | `studio-copy-paste` | — | 完成（1.4 新增） |
+| 2.2.1 | 加入 Symbol | `symbol-add` | `symbol-add.jpg` | 完成（1.4 更新） |
+| 2.2.2 | Symbol 共通屬性 | `symbol-common-properties` | `symbol-common-properties.jpg` | 完成（1.4 更新） |
+| 2.2.3 | 資料顯示元件 | `symbol-data-display` | — | 完成（1.4 更新） |
+| 2.2.4 | 圖表與指示元件 | `symbol-chart-indicator` | — | 完成（1.4 更新） |
+| 2.2.5 | 數值與表格樣式 | `studio-value-table-styles` | `value-styles.jpg`、`table-styles.jpg` | 完成（1.4 新增） |
+| 2.2.6 | 和弦圖（Chord） | `studio-chord` | `chord.jpg` | 完成（1.4 新增） |
+| 2.2.7 | 樣式規則 | `studio-style-rules` | — | 完成（1.4 新增） |
+| 2.3.1 | 瀏覽與搜尋圖形 | `graphics-browse-search` | `graphics-browse-search.jpg` | 完成（1.4 更新） |
+| 2.3.2 | 將圖形加入畫布 | `graphics-add-canvas` | — | 完成（1.4 更新） |
+| 2.3.3 | 智慧圖形 | `studio-smart-graphics` | — | 完成（1.4 新增） |
+| 2.4.1 | 瀏覽與搜尋資料 | `data-browser` | `data-browser.jpg` | 完成（1.4 更新） |
+| 2.4.2 | 即時與歷史資料標示 | `studio-realtime-history` | — | 完成（1.4 新增） |
+| 2.4.3 | 拖曳套用資料 | `data-drag-bind` | — | 完成（1.4 更新） |
+| 2.4.4 | Symbol 資料綁定 | `symbol-data-binding` | `symbol-data-binding.jpg`、`trend-series.jpg` | 完成（1.4 更新） |
+| 2.4.5 | 格式、單位與空值 | `display-format-null` | — | 完成（1.4 更新） |
+| 2.4.6 | 替換 DataBinding | `studio-replace-binding` | `replace-databinding.jpg` | 完成（1.4 新增） |
+| 2.5.1 | Variable | `variables` | `variables.jpg` | 完成（1.4 更新） |
+| 2.5.2 | Calculation | `calculations` | `calculations.jpg` | 完成（1.4 更新） |
+| 2.6.1 | 儲存圖面 | `display-save` | `display-save.jpg` | 完成（1.4 更新） |
+| 2.6.2 | 預覽圖面 | `display-preview` | `studio-overview.jpg` | 完成（1.4 更新） |
+| 2.7.1 | Symbol 樣本 | `studio-symbol-samples` | `symbol-sample-save.jpg`、`symbol-sample-insert.jpg` | 完成（1.4 新增） |
+| 2.7.2 | Display 底板 | `studio-base-layer` | `base-layer-add.jpg`、`base-layer-runtime.jpg` | 完成（1.4 新增） |
+| 2.8.1 | RWD 版面編輯 | `studio-rwd` | `rwd-editor.jpg` | 完成（1.4 新增） |
+| 2.8.2 | RWD 預覽 | `studio-rwd-preview` | `rwd-preview.jpg` | 完成（1.4 新增） |
+| 2.9.1 | 回寫表單設定 | `studio-writeback-form` | `writeback-form-settings.jpg` | 完成（1.4 新增） |
 
 ### 7.3 Chapter 03 — Runtime 即時監看
 
 目標檔案：`frontend/runtime.html`
 
-| 編號 | 功能名稱 | HTML 錨點 | 圖片基礎檔名 | 狀態 |
+| 編號 | 功能名稱 | HTML 錨點 | 圖片 | 狀態 |
 |---|---|---|---|---|
-| 3.1.1 | 開啟 Runtime | `runtime-open` | `runtime-overview` | 完成 |
-| 3.1.2 | 認識 Runtime 畫面 | `runtime-overview` | `runtime-overview` | 完成 |
-| 3.1.3 | 顯示模式 | `runtime-display-mode` | `runtime-display-mode` | 完成 |
-| 3.2.1 | 全域時間 Filter | `global-time-filter` | `global-time-filter` | 完成 |
-| 3.2.2 | 互動式時間窗 | `interactive-time-window` | `interactive-time-window` | 完成 |
-| 3.3.1 | 開啟 Data Analysis | `data-analysis-open` | `data-analysis-open` | 完成 |
-| 3.3.2 | Quick Trend | `quick-trend` | `quick-trend` | 完成 |
-| 3.3.3 | 建立時間標記 | `time-marker-create` | `time-marker-create` | 完成 |
-| 3.3.4 | 管理與比較時間標記 | `time-marker-manage-compare` | `time-marker-manage-compare` | 完成 |
-| 3.3.5 | 時間範圍彙整 | `time-range-aggregation` | `time-range-aggregation` | 完成 |
-| 3.3.6 | 分析設定 | `analysis-settings` | `analysis-settings` | 完成 |
+| 3.1.1 | 登入與保存登入 | `runtime-login-remember` | — | 完成（1.4 新增） |
+| 3.1.2 | 開啟 Runtime | `runtime-open` | — | 完成（1.4 更新） |
+| 3.1.3 | 認識 Runtime 畫面 | `runtime-overview` | `runtime-overview.jpg` | 完成（1.4 更新） |
+| 3.1.4 | 即時與歷史資料標示 | `runtime-realtime-marks` | — | 完成（1.4 新增） |
+| 3.1.5 | 顯示模式與工具列記憶 | `runtime-display-mode` | `runtime-display-mode.jpg` | 完成（1.4 更新） |
+| 3.1.6 | 手機與平板 RWD 顯示 | `runtime-rwd` | `runtime-rwd.jpg` | 完成（1.4 新增） |
+| 3.1.7 | Runtime 網址參數與「?」說明 | `runtime-url-params` | `runtime-url-params.jpg` | 完成（1.4 新增） |
+| 3.1.8 | 維護中畫面 | `runtime-maintenance` | — | 完成（1.4 新增） |
+| 3.2.1 | 全域時間 Filter | `global-time-filter` | — | 完成（1.4 更新） |
+| 3.2.2 | 班別一鍵切換 | `runtime-shift-switch` | `global-time-filter.jpg` | 完成（1.4 新增） |
+| 3.2.3 | 互動式時間窗 | `interactive-time-window` | `interactive-time-window.jpg` | 完成（1.4 更新） |
+| 3.3.1 | 開啟 Data Analysis | `data-analysis-open` | `data-analysis-open.jpg` | 完成（1.4 更新） |
+| 3.3.2 | Quick Trend | `quick-trend` | `quick-trend.jpg` | 完成（1.4 更新） |
+| 3.3.3 | 建立時間標記 | `time-marker-create` | — | 完成（1.4 更新）；DEV 無歷史資料，未附圖 |
+| 3.3.4 | 管理與比較時間標記 | `time-marker-manage-compare` | — | 完成（1.4 更新）；DEV 無歷史資料，未附圖 |
+| 3.3.5 | 時間範圍彙整 | `time-range-aggregation` | — | 完成（1.4 更新）；DEV 無歷史資料，未附圖 |
+| 3.3.6 | 分析設定 | `analysis-settings` | `analysis-settings.jpg` | 完成（1.4 更新） |
+| 3.4.1 | 設備回寫表單 | `runtime-writeback` | `writeback-form.jpg` | 完成（1.4 新增） |
 
 ---
 

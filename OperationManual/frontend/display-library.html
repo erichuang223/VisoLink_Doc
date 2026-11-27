@@ -7,7 +7,7 @@
   <title>Display Library 圖面庫｜VisoLink 操作手冊</title>
   <link rel="stylesheet" href="../assets/manual.css">
   <script src="../assets/manual.js" defer></script>
-<meta name="doc-systems" content="VL 1.2.0"><script src="../../assets/doc-version.js" defer></script></head>
+<meta name="doc-systems" content="VisoLink 1.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
 <body>
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="topbar">
@@ -21,6 +21,7 @@
       <nav class="manual-nav" aria-label="Display Library 功能目錄">
         <a href="#display-library-overview">1.1.1 瀏覽圖面庫</a>
         <a href="#display-search-filter">1.1.2 搜尋與篩選</a>
+        <a href="#display-list-status">1.1.3 狀態卡與重新載入</a>
         <a href="#folder-create-edit">1.2.1 建立與編輯 Folder</a>
         <a href="#folder-organize-display">1.2.2 整理 Folder 與 Display</a>
         <a href="#folder-delete">1.2.3 刪除 Folder</a>
@@ -29,6 +30,10 @@
         <a href="#display-copy">1.3.3 複製 Display</a>
         <a href="#display-metadata">1.3.4 編輯基本資料</a>
         <a href="#display-delete">1.3.5 刪除 Display</a>
+        <a href="#display-samples">1.3.6 Display 樣本</a>
+        <a href="#display-export-import">1.3.7 匯出與匯入</a>
+        <a href="#display-base-layer-batch">1.3.8 批次底板</a>
+        <a href="#symbol-sample-library">1.3.9 Symbol 樣本頁</a>
         <a href="#display-permission">1.4.1 Display 授權</a>
         <a href="#folder-permission">1.4.2 Folder 授權</a>
         <a href="#permission-validation">1.4.3 驗證授權結果</a>
@@ -47,7 +52,7 @@
         <span class="function-number">1.1.1</span><h2>瀏覽圖面庫</h2>
         <p>圖面庫由左側瀏覽區、Folder 樹狀結構、上方操作列及 Display 顯示區組成。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>所有前台使用者</strong></div><div class="meta-item"><span>所需權限</span><strong>至少具有可檢視的 Display</strong></div><div class="meta-item"><span>功能位置</span><strong>登入後 → Display Library</strong></div></div>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/display-library-overview.png" alt="Display Library 圖面庫總覽"><figcaption>圖面庫總覽：左側可切換檢視範圍與 Folder，右側顯示目前範圍內的 Display。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-library-overview.jpg" alt="Display Library 圖面庫總覽"><figcaption>圖面庫總覽：上方切換「Displays 清單」與「Symbol 樣本」，右上有匯入、匯出與新增 Display；左側切換檢視範圍與資料夾；卡片標示 RWD、底板等狀態。圖為「示範化工廠」資料夾。</figcaption></figure>
         <h3>畫面區域</h3>
         <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>區域</th><th>用途</th></tr></thead><tbody>
           <tr><td>搜尋 Display</td><td>依 Display 名稱縮小目前結果。</td></tr>
@@ -56,6 +61,8 @@
           <tr><td>我的 Display</td><td>顯示目前帳號擁有的 Display。</td></tr>
           <tr><td>最近使用</td><td>顯示最近開啟過的 Display。</td></tr>
           <tr><td>資料夾</td><td>依 Folder 階層瀏覽 Display。</td></tr>
+          <tr><td>底板</td><td>只顯示勾選「可作為底板」的 Display。</td></tr>
+          <tr><td>卡片標記</td><td>「RWD」表示有手機／平板版面；「底板」表示可作為底板；「使用中 N」表示目前有 N 個 Runtime 開著。</td></tr>
           <tr><td>私有</td><td>切換是否顯示目前帳號有權限查看的私有 Display。</td></tr>
           <tr><td>格狀／表格</td><td>切換圖面卡片或表格檢視。</td></tr>
         </tbody></table></div>
@@ -71,13 +78,28 @@
         <p class="result-box"><strong>預期結果：</strong>Display 顯示區立即更新，只保留符合目前範圍與搜尋條件的圖面。</p>
       </section>
 
+      <section class="manual-function" id="display-list-status">
+        <span class="function-number">1.1.3</span><h2>清單狀態卡、背景與重新載入</h2>
+        <p>清單上方的四張狀態卡快速顯示目前使用情況；清單背景圖由管理者在 Admin 設定，連線短暫中斷時清單會自動重試。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>所有前台使用者</strong></div><div class="meta-item"><span>所需權限</span><strong>登入 Client</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library 上方</strong></div></div>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>狀態卡</th><th>說明</th></tr></thead><tbody>
+          <tr><td>Display</td><td>目前有人在 Runtime 開著的數量／我可看到的 Display 數。</td></tr>
+          <tr><td>授權・登入中</td><td>已使用點數／總點數；1 台登入中的裝置占 1 點。</td></tr>
+          <tr><td>即時連線</td><td>即時資料推送狀態，沒有 Runtime 接收即時資料時顯示「待命」。</td></tr>
+          <tr><td>資料來源</td><td>可供 Display 使用的資料來源數量與連線燈號。</td></tr>
+        </tbody></table></div>
+        <ol class="steps"><li>登入後查看上方狀態卡。</li><li>清單背景（深色、淺色主題各一張）由管理者在 Admin「系統設定 → Client 設定」更換，見 <a href="../backend/system-settings.html#client-settings">Client 設定</a>。</li><li>暫時連不上伺服器時，清單與 Runtime 會自動重試；仍失敗時顯示「Display 載入失敗，請稍後再試。」與「重新載入」按鈕，點按即可再試一次。</li></ol>
+        <p class="note-box"><strong>判讀：</strong>載入失敗不等於「沒有 Display」或「找不到 Display」；請稍後重新載入，或請管理者確認服務狀態。</p>
+      </section>
+
+
       <section class="manual-function" id="folder-create-edit">
         <span class="function-number">1.2.1</span><h2>建立與編輯 Folder</h2>
         <p>Folder 用來建立圖面分類階層。新 Folder 會建立在目前選取的 Folder 下方；選取「根目錄」時則建立於第一層。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者、圖面管理者</strong></div><div class="meta-item"><span>所需權限</span><strong>目的 Folder 至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 資料夾</strong></div></div>
         <h3>建立 Folder</h3>
         <ol class="steps"><li>在左側 Folder 樹狀結構選擇要建立子 Folder 的位置；建立第一層 Folder 時選擇「根目錄」。</li><li>點選「資料夾」標題右側的「＋」。</li><li>在「資料夾名稱」輸入名稱。</li><li>按下 Enter 建立；按下 Esc 或「×」則取消。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-create-edit_01.png" alt="在圖面庫左側輸入新 Folder 名稱"><figcaption>點選新增資料夾後，名稱輸入欄會出現在 Folder 樹狀結構上方。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-create-edit_01.jpg" alt="在圖面庫左側輸入新 Folder 名稱"><figcaption>點選新增資料夾後，名稱輸入欄會出現在 Folder 樹狀結構上方。</figcaption></figure>
         <h3>重新命名 Folder</h3>
         <ol class="steps"><li>選取要調整的 Folder。</li><li>點選 Folder 工具列中的齒輪「Folder 設定」。</li><li>修改「Folder 名稱」。</li><li>點選「重新命名」。</li></ol>
         <p class="result-box"><strong>預期結果：</strong>Folder 出現在指定階層中；重新命名後，左側 Folder 樹同步顯示新名稱。</p>
@@ -89,10 +111,10 @@
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面管理者</strong></div><div class="meta-item"><span>所需權限</span><strong>來源可移動、目的地至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 移動</strong></div></div>
         <h3>移動 Folder</h3>
         <ol class="steps"><li>在左側選取要移動的 Folder。</li><li>點選 Folder 工具列中的「⇄」。</li><li>在視窗中瀏覽 Folder 階層並選擇目的地。</li><li>確認「移動到」顯示正確位置後，點選「移動」。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-organize-display_01.png" alt="移動 Folder 的目的地選擇視窗"><figcaption>移動前先確認視窗下方的目的 Folder。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-organize-display_01.jpg" alt="移動 Folder 的目的地選擇視窗"><figcaption>移動前先確認視窗下方的目的 Folder。</figcaption></figure>
         <h3>移動 Display</h3>
-        <ol class="steps"><li>在 Display 卡片左下角點選「✓」；表格模式則勾選左側核取方塊。</li><li>需要時一次選取多個 Display。</li><li>點選上方「移動已選取」。</li><li>選擇目的 Folder，確認後點選「移動」。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-organize-display_02.png" alt="批次移動 Display 的目的地選擇視窗"><figcaption>視窗標題會顯示本次要移動的 Display 數量。</figcaption></figure>
+        <ol class="steps"><li>將滑鼠移到 Display 卡片，勾選縮圖左上角的核取方塊；表格模式則勾選左側核取方塊。</li><li>需要時一次選取多個 Display。</li><li>點選上方「移動已選取」。</li><li>選擇目的 Folder，確認後點選「移動」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-batch-select.jpg" alt="選取 Display 後出現的批次操作列"><figcaption>選取後上方顯示「已選 N 個」與「移動已選取」等批次操作。</figcaption></figure>
         <p class="note-box"><strong>權限規則：</strong>移動來源內容需要可移動權限，目的 Folder 需要 Editor 或更高權限。</p>
         <p class="result-box"><strong>預期結果：</strong>Folder 或 Display 從原位置移至指定目的地，圖面內容本身不會因此改變。</p>
       </section>
@@ -108,10 +130,11 @@
 
       <section class="manual-function" id="display-create">
         <span class="function-number">1.3.1</span><h2>建立 Display</h2>
-        <p>在目前選取的 Folder 中建立新的 Display，成功後系統會直接開啟 Studio。</p>
+        <p>在目前選取的 Folder 中建立新的 Display，可以從「空白」或 Display 樣本開始，成功後系統會直接開啟 Studio。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>目的 Folder 至少 Editor</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → ＋新增 Display</strong></div></div>
-        <ol class="steps"><li>先選取新 Display 要放置的 Folder；若要建立在第一層則選擇「根目錄」。</li><li>點選頁面上方「＋新增 Display」。</li><li>輸入「Display 名稱」。</li><li>點選「建立」或按下 Enter；要中止則點選「取消」或按下 Esc。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/display-create_01.png" alt="新增 Display 的名稱輸入欄"><figcaption>輸入 Display 名稱後，「建立」按鈕才會啟用。</figcaption></figure>
+        <ol class="steps"><li>先選取新 Display 要放置的 Folder；若要建立在第一層則選擇「根目錄」。</li><li>點選頁面上方「＋新增 Display」，開啟「從 Display 樣本建立」視窗。</li><li>點「空白」建立空白 Display，或點選一個 Display 樣本。</li><li>在「新增 Display」視窗輸入「Display 名稱」，確認「建立位置」。</li><li>點選「建立」；要中止則點選「取消」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-create_01.jpg" alt="從 Display 樣本建立視窗"><figcaption>「空白」與已加入的 Display 樣本並列；上方標籤依分類篩選。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-create_02.jpg" alt="新增 Display 名稱與建立位置"><figcaption>從樣本建立時，新 Display 帶入樣本的物件、版面、動畫設定、文字和底板；資料綁定是空的，需自己綁定。</figcaption></figure>
         <p class="result-box"><strong>預期結果：</strong>系統建立 Display，並直接進入該 Display 的 Studio 編輯畫面。</p>
       </section>
 
@@ -131,16 +154,17 @@
         <p>使用「另存為」建立一份內容相同、名稱不同的新 Display。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>Display 複製權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 設定 → 另存為</strong></div></div>
         <ol class="steps"><li>在 Display 卡片或表格操作區點選齒輪。</li><li>在「另存為」輸入新 Display 名稱。</li><li>點選「複製」。</li><li>關閉設定視窗後，在圖面庫確認新 Display。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/display-permission_01.png" alt="Display 設定視窗中的另存為欄位"><figcaption>Display 設定上方可重新命名、轉換擁有者或另存為新 Display。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-settings.jpg" alt="Display 設定視窗中的另存為欄位"><figcaption>Display 設定上方可重新命名、轉換擁有者或另存為新 Display。</figcaption></figure>
         <p class="result-box"><strong>預期結果：</strong>圖面庫出現使用新名稱建立的 Display，原 Display 保持不變。</p>
       </section>
 
       <section class="manual-function" id="display-metadata">
         <span class="function-number">1.3.4</span><h2>編輯圖面基本資料</h2>
-        <p>目前可在 Display 設定中調整名稱及重新指派擁有者；圖面內容則需進入 Studio 編輯。</p>
+        <p>在 Display 設定中可以調整名稱、重新指派擁有者、另存為新 Display，以及勾選「可作為底板」；圖面內容則需進入 Studio 編輯。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>重新命名或指派擁有者權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 卡片 → 齒輪</strong></div></div>
         <h3>重新命名</h3><ol class="steps"><li>開啟「Display 設定」。</li><li>修改「Display 名稱」。</li><li>點選「重新命名」。</li></ol>
         <h3>重新指派擁有者</h3><ol class="steps"><li>在「重新指派擁有者」選擇新的使用者。</li><li>確認指派對象後點選「轉換」。</li><li>確認設定視窗顯示成功訊息。</li></ol>
+        <h3>設為底板</h3><ol class="steps"><li>在 Display 設定勾選「可作為底板」。</li><li>點「儲存」；清單卡片出現「底板」標記，其他 Display 就能把它放成底板。</li></ol>
         <p class="note-box"><strong>注意：</strong>重新指派擁有者會改變資源管理責任。執行前應先確認新擁有者及原管理者後續所需權限。</p>
         <p class="result-box"><strong>預期結果：</strong>圖面庫顯示更新後的名稱或擁有者。</p>
       </section>
@@ -149,17 +173,62 @@
         <span class="function-number">1.3.5</span><h2>刪除 Display</h2>
         <p>Display 採選取後刪除的操作方式，可以一次刪除一個或多個具有刪除權限的圖面。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Manager／Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>每個 Display 都具有刪除權限</strong></div><div class="meta-item"><span>功能位置</span><strong>選取 Display → 刪除已選取</strong></div></div>
-        <ol class="steps"><li>在卡片左下角點選「✓」，或在表格模式勾選要刪除的 Display。</li><li>再次確認選取數量及圖面名稱。</li><li>點選上方「刪除已選取」。</li><li>在確認視窗中確認刪除；不確定時點選「取消」。</li></ol>
+        <ol class="steps"><li>勾選卡片縮圖左上角的核取方塊，或在表格模式勾選要刪除的 Display。</li><li>再次確認選取數量及圖面名稱。</li><li>點選上方「刪除已選取」。</li><li>在確認視窗中確認刪除；不確定時點選「取消」。</li></ol>
         <p class="note-box"><strong>重要：</strong>只有所有已選取 Display 都具備刪除權限時，「刪除已選取」才會啟用。刪除前應確認圖面是否仍被監看人員使用。</p>
         <p class="result-box"><strong>預期結果：</strong>已刪除的 Display 從目前圖面庫及我的最愛中移除。</p>
       </section>
+
+      <section class="manual-function" id="display-samples">
+        <span class="function-number">1.3.6</span><h2>管理 Display 樣本</h2>
+        <p>任何 Display 都可以加入成 Display 樣本，之後新增 Display 時直接套用樣本的版面與外觀，再綁定自己的資料。樣本可以分類、搜尋與設定權限。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>來源 Display 可讀取</strong></div><div class="meta-item"><span>功能位置</span><strong>＋新增 Display → 加入 Display 樣本</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-sample-add.jpg" alt="加入 Display 樣本視窗"><figcaption>步驟 1 選一張 Display，步驟 2 輸入樣本名稱與分類；資料綁定、變數、計算與回寫表單不會帶入。</figcaption></figure>
+        <h3>加入樣本</h3>
+        <ol class="steps"><li>點選頁面上方「＋新增 Display」。</li><li>在「從 Display 樣本建立」視窗右上點「加入 Display 樣本」。</li><li>在「1. 選一張 Display」搜尋並點選來源 Display。</li><li>在「2. Display 樣本名稱與分類」輸入名稱與分類（例如「示範版型」）。</li><li>點「加入」。</li></ol>
+        <h3>維護樣本</h3>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-sample-manage.jpg" alt="Display 樣本卡片的選單"><figcaption>樣本卡片右下「⋯」提供編輯、編輯資訊、權限與刪除；上方分類標籤可切換。</figcaption></figure>
+        <ol class="steps"><li>在「從 Display 樣本建立」視窗用上方分類標籤或搜尋框找到樣本。</li><li>點樣本卡片的「⋯」，選「編輯」修改樣本內容、「編輯資訊」修改名稱與分類、「權限」設定誰能使用。</li><li>不再需要時選「刪除」。</li></ol>
+        <p class="note-box"><strong>樣本與 Display 的關係：</strong>從樣本建立的 Display 是一份獨立副本；之後樣本再修改，已建立的 Display 不會跟著變。</p>
+      </section>
+
+      <section class="manual-function" id="display-export-import">
+        <span class="function-number">1.3.7</span><h2>匯出與匯入 Display</h2>
+        <p>可以把多張 Display 匯出成一個 .vldisplay 檔案，到另一套 VisoLink 匯入；資料依名稱自動對應，對應不到的之後再補上。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者、管理者</strong></div><div class="meta-item"><span>所需權限</span><strong>匯出：Display 可讀取；匯入：目的 Folder 可新增</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library 上方「匯出」「匯入」</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-export.jpg" alt="匯出 Display 視窗"><figcaption>匯出包含 Display（含變數、計算、回寫表單）、圖片、Display 字典、用到的 DataBinding 清單與非內建的圖庫圖形；不包含 DataBinding、View 與資料來源本身、權限、擁有者、公開設定與版本紀錄。</figcaption></figure>
+        <h3>匯出</h3>
+        <ol class="steps"><li>將滑鼠移到 Display 卡片，勾選左上角核取方塊；可一次選多張。</li><li>點上方「匯出 (N)」。</li><li>確認清單與檔名後點「下載」。</li></ol>
+        <h3>匯入</h3>
+        <ol class="steps"><li>在目標系統點上方「匯入」，選擇 .vldisplay 檔案。</li><li>勾選要匯入的 Display，選擇「匯入到資料夾」。</li><li>檢查 DataBinding 對應：這套系統有相同 ID 就沿用，沒有就找名稱完全相同的 DataBinding，都找不到則標為「未設定」，可手動指定。</li><li>檢查回寫目標、圖庫圖形與底板的處理方式後，點「匯入 N 張 Display」。</li><li>完成頁顯示「已建立 N 張 Display」與所在資料夾，點「完成」。</li></ol>
+        <p class="note-box"><strong>匯入規則：</strong>每張都建立成新的 Display，擁有者是匯入的人，不覆蓋現有的；資料夾中已有同名時自動加「 (2)」「 (3)」。未設定的資料在 Editor 用 <a href="studio.html#studio-replace-binding">替換 DataBinding</a> 補上，補上前這些位置顯示無資料。匯出檔來自較新的 VisoLink 時無法匯入，請先升級。</p>
+      </section>
+
+      <section class="manual-function" id="display-base-layer-batch">
+        <span class="function-number">1.3.8</span><h2>批次加入與變更底板</h2>
+        <p>底板是 Logo、標題、頁尾等固定框架，讓多張 Display 共用；修改底板後所有使用的頁面一起更新。圖面庫可以一次替多張 Display 加入或更換底板。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>每張 Display 可編輯</strong></div><div class="meta-item"><span>功能位置</span><strong>選取 Display → 加入與變更底板</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-batch-select.jpg" alt="選取 Display 後的批次操作列"><figcaption>選取 Display 後，上方出現「已選 N 個、移動已選取、刪除已選取、加入與變更底板、取消選取」，右上「匯出」顯示選取數。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/base-layer-batch.jpg" alt="加入與變更底板視窗"><figcaption>只列出勾選「可作為底板」的 Display；已有底板的頁面保留各頁原本的層次。</figcaption></figure>
+        <ol class="steps"><li>先準備底板：在底板 Display 的設定勾選「可作為底板」（見 <a href="#display-metadata">編輯圖面基本資料</a>），清單卡片會出現「底板」標記。</li><li>勾選要套用的 Display。</li><li>點上方「加入與變更底板」。</li><li>在「底板」搜尋並選擇底板，確認下方列出的頁面。</li><li>點「下一步」完成套用。</li></ol>
+        <p class="note-box"><strong>只看底板：</strong>上方「底板」按鈕可篩選出所有可作為底板的 Display；在 Studio 單張加入底板見 <a href="studio.html#studio-base-layer">Display 底板</a>。</p>
+      </section>
+
+      <section class="manual-function" id="symbol-sample-library">
+        <span class="function-number">1.3.9</span><h2>Symbol 樣本頁</h2>
+        <p>上方「Symbol 樣本」頁集中管理可在各 Display 重複使用的一組物件。Symbol 樣本只帶樣子、不帶資料，放到 Display 後再各自綁資料。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>樣本可讀取</strong></div><div class="meta-item"><span>功能位置</span><strong>上方「Symbol 樣本」</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-sample-library.jpg" alt="Symbol 樣本頁"><figcaption>左側切換全部 Symbol 樣本、我的 Symbol 樣本與資料夾；右上可依種類篩選、排序與切換檢視。</figcaption></figure>
+        <ol class="steps"><li>點上方「Symbol 樣本」。</li><li>用左側資料夾或搜尋框找到樣本；「＋」新增資料夾整理樣本。</li><li>點樣本卡片的「⋯」管理樣本（例如重新命名、權限或刪除）。</li><li>建立樣本請在 Studio 選取物件後「存成 Symbol 樣本」，見 <a href="studio.html#studio-symbol-samples">Symbol 樣本</a>。</li></ol>
+        <p class="note-box"><strong>RWD 版面樣本：</strong>在 RWD 編輯器存下的版面元件也列在這裡，從 RWD 編輯器的「RWD 版面樣本」頁籤拖出來用。刪除使用中的樣本時，畫面會列出使用的頁面，可一併解除繼承或改用其他樣本。</p>
+      </section>
+
 
       <section class="manual-function" id="display-permission">
         <span class="function-number">1.4.1</span><h2>Display 授權設定</h2>
         <p>可將使用者或群組加入 Display 存取清單，並分別設定 Viewer、Editor、Manager 或 Administrator。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Display Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>設定權限</strong></div><div class="meta-item"><span>功能位置</span><strong>Display 設定 → 設定權限</strong></div></div>
         <ol class="steps"><li>在 Display 卡片或表格操作區點選齒輪。</li><li>在左側搜尋使用者或群組，必要時使用「全部／使用者／群組」篩選。</li><li>選取 Identity，點選「›」加入右側存取清單。</li><li>在右側為該 Identity 選擇權限。</li><li>需要移除個別授權時，選取右側項目並點選「‹」。</li><li>完成後點選「儲存」。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/display-permission_01.png" alt="Display 設定與授權視窗"><figcaption>左側選擇使用者或群組，加入右側後設定權限等級。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/display-settings.jpg" alt="Display 設定與授權視窗"><figcaption>上方可重新命名、重新指派擁有者、另存為；「可作為底板」勾選框；下方左側選擇使用者或群組，加入右側後設定權限等級。</figcaption></figure>
         <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>權限</th><th>Display 可執行操作</th></tr></thead><tbody>
           <tr><td>Viewer</td><td>開啟並檢視 Display。</td></tr>
           <tr><td>Editor</td><td>包含 Viewer，並可編輯 Display 內容。</td></tr>
@@ -175,7 +244,7 @@
         <p>Folder 權限會向下影響子 Folder 及其 Display，適合用來統一管理一組圖面。</p>
         <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>Folder Administrator</strong></div><div class="meta-item"><span>所需權限</span><strong>設定權限</strong></div><div class="meta-item"><span>功能位置</span><strong>選取 Folder → Folder 設定</strong></div></div>
         <ol class="steps"><li>在左側選取要設定的 Folder。</li><li>點選 Folder 工具列中的齒輪。</li><li>在左側搜尋並選取使用者或群組，點選「›」加入存取清單。</li><li>在右側選擇 Viewer、Editor、Manager 或 Administrator。</li><li>完成後點選「儲存」。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-permission_01.png" alt="Folder 設定與授權視窗"><figcaption>Folder 設定包含重新命名、重新指派擁有者及權限設定。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/display-library/folder-permission_01.jpg" alt="Folder 設定與授權視窗"><figcaption>Folder 設定包含重新命名、重新指派擁有者及權限設定。</figcaption></figure>
         <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>權限</th><th>Folder 可執行操作</th></tr></thead><tbody>
           <tr><td>Viewer</td><td>檢視此 Folder、所有子 Folder 及其中的 Display；權限向下套用，擁有者不受限制。</td></tr>
           <tr><td>Editor</td><td>包含 Viewer，可建立 Display 與子 Folder，並編輯已授權 Display；不可重新命名、移動或刪除此 Folder。</td></tr>
@@ -205,6 +274,6 @@
       <nav class="chapter-end-nav" aria-label="章節導覽"><a href="index.html">← 返回前台目錄</a><a href="studio.html">下一章：Studio 圖面編輯 →</a></nav>
     </main>
   </div>
-  <footer class="page-footer">VisoLink Display Library 操作手冊 · 2026-08-18</footer>
+  <footer class="page-footer">VisoLink Display Library 操作手冊 · 2026-11-27</footer>
 </body>
 </html>

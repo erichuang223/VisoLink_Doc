@@ -4,131 +4,206 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="VisoLink Studio 圖面編輯操作手冊。"><title>Studio 圖面編輯｜VisoLink 操作手冊</title>
   <link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script>
-<meta name="doc-systems" content="VL 1.2.0"><script src="../../assets/doc-version.js" defer></script></head>
+<meta name="doc-systems" content="VisoLink 1.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
 <body>
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="topbar"><a class="brand" href="../index.html"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">前台操作手冊</span></a><nav class="top-actions"><a class="top-link" href="index.html">前台首頁</a><a class="top-link" href="display-library.html">上一章</a><a class="top-link" href="runtime.html">下一章</a></nav></header>
   <div class="manual-shell">
     <aside class="sidebar"><p class="sidebar-title">CHAPTER 02</p><nav class="manual-nav" aria-label="Studio 功能目錄">
-      <a href="#studio-overview">2.1.1 Studio 介面</a><a href="#canvas-settings">2.1.2 畫布設定</a><a href="#object-editing">2.1.3 編輯物件</a><a href="#alignment-layers">2.1.4 排列與圖層</a><a href="#undo-redo">2.1.5 復原與重做</a>
-      <a href="#symbol-add">2.2.1 加入 Symbol</a><a href="#symbol-common-properties">2.2.2 共通屬性</a><a href="#symbol-data-display">2.2.3 資料顯示元件</a><a href="#symbol-chart-indicator">2.2.4 圖表與指示元件</a>
-      <a href="#graphics-browse-search">2.3.1 瀏覽圖形</a><a href="#graphics-add-canvas">2.3.2 加入圖形</a>
-      <a href="#data-browser">2.4.1 瀏覽資料</a><a href="#data-drag-bind">2.4.2 拖曳套用資料</a><a href="#symbol-data-binding">2.4.3 資料綁定</a><a href="#display-format-null">2.4.4 格式與空值</a>
+      <a href="#studio-overview">2.1.1 Studio 介面</a><a href="#canvas-settings">2.1.2 畫布設定</a><a href="#object-editing">2.1.3 編輯物件</a><a href="#alignment-layers">2.1.4 排列與圖層</a><a href="#undo-redo">2.1.5 復原與重做</a><a href="#studio-copy-paste">2.1.6 跨分頁複製貼上</a>
+      <a href="#symbol-add">2.2.1 加入 Symbol</a><a href="#symbol-common-properties">2.2.2 共通屬性</a><a href="#symbol-data-display">2.2.3 資料顯示元件</a><a href="#symbol-chart-indicator">2.2.4 圖表與指示元件</a><a href="#studio-value-table-styles">2.2.5 數值與表格樣式</a><a href="#studio-chord">2.2.6 和弦圖</a><a href="#studio-style-rules">2.2.7 樣式規則</a>
+      <a href="#graphics-browse-search">2.3.1 瀏覽圖形</a><a href="#graphics-add-canvas">2.3.2 加入圖形</a><a href="#studio-smart-graphics">2.3.3 智慧圖形</a>
+      <a href="#data-browser">2.4.1 瀏覽資料</a><a href="#studio-realtime-history">2.4.2 即時與歷史標示</a><a href="#data-drag-bind">2.4.3 拖曳套用資料</a><a href="#symbol-data-binding">2.4.4 資料綁定</a><a href="#display-format-null">2.4.5 格式與空值</a><a href="#studio-replace-binding">2.4.6 替換 DataBinding</a>
       <a href="#variables">2.5.1 Variable</a><a href="#calculations">2.5.2 Calculation</a><a href="#display-save">2.6.1 儲存圖面</a><a href="#display-preview">2.6.2 預覽圖面</a>
+      <a href="#studio-symbol-samples">2.7.1 Symbol 樣本</a><a href="#studio-base-layer">2.7.2 Display 底板</a><a href="#studio-rwd">2.8.1 RWD 版面編輯</a><a href="#studio-rwd-preview">2.8.2 RWD 預覽</a><a href="#studio-writeback-form">2.9.1 回寫表單設定</a>
     </nav></aside>
     <main class="manual-content" id="main">
       <nav class="breadcrumb" aria-label="階層導覽"><a href="../index.html">操作手冊</a><span>›</span><a href="index.html">前台</a><span>›</span><strong>Studio</strong></nav>
-      <header class="manual-header"><span class="eyebrow">CHAPTER 02</span><h1>Studio 圖面編輯</h1><p>Studio 用來配置畫布、加入 Symbol、綁定資料並驗證圖面。完成編輯後儲存 Display，Runtime 才會使用最新內容。</p></header>
+      <header class="manual-header"><span class="eyebrow">CHAPTER 02</span><h1>Studio 圖面編輯</h1><p>Studio 用來配置畫布、加入 Symbol、綁定資料並驗證圖面；也可以另外製作手機與平板用的 RWD 版面、設定設備回寫表單。完成編輯後儲存 Display，Runtime 才會使用最新內容。本章示範畫面使用虛構的「示範化工廠」資料。</p></header>
 
-      <section class="manual-function" id="studio-overview"><span class="function-number">2.1.1</span><h2>認識 Studio 介面</h2><p>Studio 由左側功能面板、上方工具列、中央畫布、右側屬性面板及下方時間視窗組成。</p>
-        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>Display Editor 以上</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 鉛筆</strong></div></div>
-        <figure class="manual-shot"><img src="../img/frontend/studio/studio-overview.png" alt="Studio 圖面編輯器總覽"><figcaption>左側切換 Symbols、圖庫、圖層、資料、計算及變數；右側顯示所選 Symbol 的屬性。</figcaption></figure>
-        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>區域</th><th>用途</th></tr></thead><tbody><tr><td>左側面板</td><td>加入元件、瀏覽圖庫、管理圖層與資料物件。</td></tr><tr><td>上方工具列</td><td>儲存、復原、剪貼、排列、群組及進入 Runtime。</td></tr><tr><td>中央畫布</td><td>放置、選取與編排 Symbol。</td></tr><tr><td>右側屬性</td><td>設定所選 Symbol 的基本、外觀、資料與規則。</td></tr><tr><td>時間視窗</td><td>設定 Editor 預覽資料使用的時間範圍。</td></tr></tbody></table></div>
+      <section class="manual-function" id="studio-overview"><span class="function-number">2.1.1</span><h2>認識 Studio 介面</h2><p>Studio 由上方標題列、工具列、左側功能面板、中央畫布、右側屬性面板及下方時間列組成。</p>
+        <div class="function-meta"><div class="meta-item"><span>適用角色</span><strong>圖面設計者</strong></div><div class="meta-item"><span>所需權限</span><strong>Display Editor 以上</strong></div><div class="meta-item"><span>功能位置</span><strong>Display Library → 編輯</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/studio/studio-overview.jpg" alt="Studio 圖面編輯器總覽"><figcaption>「化工廠總覽」的編輯畫面：上方可切換 Canvas／RWD；左側切換 Symbols、圖庫、圖層、Symbol 樣本、資料、計算、變數與回寫；右側顯示所選物件的屬性。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>區域</th><th>用途</th></tr></thead><tbody><tr><td>標題列</td><td>Canvas／RWD 版面切換、預覽資料、Runtime、Display 字典、替換 DataBinding、儲存（含另外儲存）與「?」說明。</td></tr><tr><td>工具列</td><td>復原、重做、剪下、複製、貼上、刪除、排列、選取、群組、解散群組、存成 Symbol 樣本、加入底板、縮放與畫布設定。</td></tr><tr><td>左側面板</td><td>Symbols、圖庫、圖層、Symbol 樣本、資料、計算、變數、回寫。</td></tr><tr><td>中央畫布</td><td>放置、選取與編排物件。</td></tr><tr><td>右側屬性</td><td>依物件類型分成基本、外觀、資料、規則等分頁。</td></tr><tr><td>時間列</td><td>設定 Editor 預覽資料使用的時間範圍與時間視窗。</td></tr></tbody></table></div>
       </section>
 
       <section class="manual-function" id="canvas-settings"><span class="function-number">2.1.2</span><h2>畫布設定</h2><p>畫布設定控制 Display 的尺寸、背景、格線及貼齊方式。</p>
-        <div class="function-meta"><div class="meta-item"><span>功能位置</span><strong>Studio → ⚙ 畫布設定</strong></div><div class="meta-item"><span>所需權限</span><strong>Display Editor</strong></div><div class="meta-item"><span>影響範圍</span><strong>目前 Display</strong></div></div>
-        <ol class="steps"><li>點選右上方「⚙ 畫布設定」。</li><li>從 Size Presets 選擇常用尺寸，或直接輸入寬度與高度。</li><li>在背景設定顏色及透明度。</li><li>依編排需要開啟格線、貼齊並設定格線大小。</li><li>關閉設定面板，使用 1:1 或 Fit 檢查畫布。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/studio/canvas-settings.png" alt="Studio 畫布設定面板"><figcaption>畫布設定包含尺寸、背景顏色與透明度、格線顯示及貼齊。</figcaption></figure>
-        <p class="note-box"><strong>注意：</strong>畫布尺寸會影響 Runtime 的顯示比例；正式製作前先確認目標螢幕尺寸。</p>
+        <div class="function-meta"><div class="meta-item"><span>功能位置</span><strong>工具列最右側 ⚙</strong></div><div class="meta-item"><span>所需權限</span><strong>Display Editor</strong></div><div class="meta-item"><span>影響範圍</span><strong>目前 Display</strong></div></div>
+        <ol class="steps"><li>先點畫布空白處取消選取，再點工具列最右側的 ⚙。</li><li>在「尺寸」從「尺寸預設」選擇常用尺寸，或直接輸入寬度與高度；建議收到內容大小，Runtime 縮放時比較清楚。</li><li>在「背景」設定顏色與透明度，或點選預設顏色。</li><li>在「格線」設定顯示、貼齊與大小。</li><li>關閉面板，用「1:1」或「符合」檢查畫布。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/studio/canvas-settings.jpg" alt="Studio 畫布設定面板"><figcaption>右側 CANVAS 面板顯示目前尺寸，分成尺寸、背景、格線三區。</figcaption></figure>
+        <p class="note-box"><strong>注意：</strong>畫布尺寸會影響 Runtime 的顯示比例；正式製作前先確認目標螢幕尺寸。手機與平板請另外製作 <a href="#studio-rwd">RWD 版面</a>。</p>
       </section>
 
       <section class="manual-function" id="object-editing"><span class="function-number">2.1.3</span><h2>選取與編輯物件</h2><p>物件必須先被選取，才能移動、縮放、旋轉、剪貼或刪除。</p>
-        <ol class="steps"><li>啟用「選取」工具後點選物件；按住 Shift 或 Ctrl 可加入或移除多選項目。</li><li>拖曳物件本體移動位置；拖曳控制點調整尺寸。</li><li>需要精確位置時，在右側「位置與尺寸」輸入 X、Y、寬度與高度。</li><li>使用工具列的剪下、複製、貼上或刪除；也可使用 Ctrl+X、Ctrl+C、Ctrl+V、Delete。</li><li>方向鍵每次移動 1 px；Shift 加方向鍵每次移動 10 px。</li></ol>
-        <p class="note-box"><strong>比例控制：</strong>繪製、縮放或旋轉時按住 Shift，可使用等比例、水平／垂直或15度角度等限制。</p>
+        <ol class="steps"><li>啟用「選取」工具後點選物件；按住 Shift 或 Ctrl 可加入或移除多選項目；在畫布空白處拖曳可框選多個物件。</li><li>拖曳物件本體移動位置；拖曳控制點調整尺寸。移動圖片時會自動貼合其他物件的管口與邊緣，直管可以直接拉長；旋轉時即時顯示角度。</li><li>需要精確位置時，在右側「基本」分頁的「位置與尺寸」輸入 X、Y、寬度與高度。</li><li>使用工具列的剪下、複製、貼上或刪除；也可使用 Ctrl+X、Ctrl+C、Ctrl+V、Delete。</li><li>方向鍵每次移動 1 px；Shift 加方向鍵每次移動 10 px。</li></ol>
+        <p class="note-box"><strong>比例控制：</strong>繪製、縮放或旋轉時按住 Shift，可使用等比例、水平／垂直或 15 度角度等限制。只是點選物件不會讓「儲存」變成可按，真的修改後才會。</p>
       </section>
 
       <section class="manual-function" id="alignment-layers"><span class="function-number">2.1.4</span><h2>排列與圖層</h2><p>排列功能控制物件對齊、平均分布及前後順序；圖層面板可快速定位、隱藏或鎖定物件。</p>
-        <ol class="steps"><li>選取兩個以上物件，開啟「排列」。</li><li>選擇靠左、水平置中、靠右、靠上、垂直置中或靠下對齊。</li><li>選取三個以上物件時，可選擇水平或垂直平均分布。</li><li>使用置於最前、向前一層、向後一層或置於最後調整重疊順序。</li><li>需要一起移動時選取多個物件後點選「群組」；使用「解散群組」還原。</li><li>在「圖層」面板點選名稱定位物件，使用眼睛與鎖定控制顯示及編輯。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/studio/alignment-layers.png" alt="Studio 圖層面板"><figcaption>圖層面板依前後順序列出 Symbol，並提供顯示與鎖定控制。</figcaption></figure>
+        <ol class="steps"><li>選取兩個以上物件，開啟「排列」。</li><li>選擇靠左、水平置中、靠右、靠上、垂直置中或靠下對齊；三個以上物件可水平或垂直平均分布。</li><li>使用置於最前、向前一層、向後一層或置於最後調整重疊順序。</li><li>需要一起移動時選取多個物件後點選「群組」；使用「解散群組」還原。</li><li>在左側「圖層」點選名稱定位物件，使用眼睛與鎖頭控制顯示及編輯。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/studio/alignment-layers.jpg" alt="Studio 圖層面板"><figcaption>圖層面板依前後順序列出物件名稱與類型（TR 趨勢、IMG 圖片、T 文字、# 數值），並提供顯示與鎖定控制。</figcaption></figure>
       </section>
 
       <section class="manual-function" id="undo-redo"><span class="function-number">2.1.5</span><h2>復原與重做</h2><p>使用復原與重做回到上一個編輯狀態，適合修正誤移動、誤刪除或錯誤屬性調整。</p>
-        <ol class="steps"><li>操作後點選「↩ 復原」或按 Ctrl+Z。</li><li>需要重新套用剛才復原的操作時，點選「↪ 重做」、按 Ctrl+Y 或 Ctrl+Shift+Z。</li><li>按鈕停用代表目前沒有可復原或重做的動作。</li></ol>
+        <ol class="steps"><li>操作後點選「復原」或按 Ctrl+Z。</li><li>需要重新套用剛才復原的操作時，點選「重做」、按 Ctrl+Y 或 Ctrl+Shift+Z。</li><li>按鈕停用代表目前沒有可復原或重做的動作。</li></ol>
         <p class="note-box"><strong>注意：</strong>復原與重做只處理目前編輯階段的操作，不取代正式儲存或另外儲存。</p>
       </section>
 
-      <section class="manual-function" id="symbol-add"><span class="function-number">2.2.1</span><h2>加入 Symbol</h2><p>Symbols 面板提供16種正式元件。先選擇類型，再於畫布拖曳出放置範圍。</p>
+      <section class="manual-function" id="studio-copy-paste"><span class="function-number">2.1.6</span><h2>跨分頁複製貼上</h2><p>在 Editor 複製的物件，可以貼到同一個瀏覽器任何 Editor 分頁（包括其他 Display）。</p>
+        <ol class="steps"><li>在來源 Display 選取物件，點工具列「複製」（或 Ctrl+C）。</li><li>切換到目標 Display 的 Editor 分頁。</li><li>點工具列「貼上」。</li><li>調整位置並檢查資料綁定。</li></ol>
+        <p class="note-box"><strong>注意：</strong>游標停在右側屬性面板的輸入框時，Ctrl+V 會貼到輸入框，請改點工具列「貼上」。跨兩套 VisoLink 貼上時圖片不會跟著過來；要完整搬移請用 <a href="display-library.html#display-export-import">Display 匯出／匯入</a>。</p>
+      </section>
+
+      <section class="manual-function" id="symbol-add"><span class="function-number">2.2.1</span><h2>加入 Symbol</h2><p>Symbols 面板提供 18 種元件。先選擇類型，再於畫布拖曳出放置範圍。</p>
         <ol class="steps"><li>點選左側「Symbols」。</li><li>選擇圖形、文字與媒體或資料類 Symbol。</li><li>在畫布上按住滑鼠並拖曳，放開後建立元件。</li><li>選取新元件，在右側完成名稱、外觀與資料設定。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-add.png" alt="Studio Symbols 元件面板"><figcaption>Symbol 分為圖形、文字與媒體、資料三類。</figcaption></figure>
-        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>分類</th><th>Symbol</th></tr></thead><tbody><tr><td>圖形</td><td>矩形、橢圓、線段、弧線、多邊形</td></tr><tr><td>文字與媒體</td><td>文字、圖片、iFrame</td></tr><tr><td>資料</td><td>數值、趨勢、表格、狀態、儀表、長條圖、Pie、Sankey、進度</td></tr></tbody></table></div>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-add.jpg" alt="Studio Symbols 元件面板"><figcaption>Symbol 分為圖形、文字與媒體、資料三類；資料類新增和弦圖。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>分類</th><th>Symbol</th></tr></thead><tbody><tr><td>圖形</td><td>矩形、橢圓、線段、弧線、多邊形</td></tr><tr><td>文字與媒體</td><td>文字、圖片、iFrame</td></tr><tr><td>資料</td><td>數值、趨勢、表格、狀態、儀表、長條圖、圓餅圖、Sankey、和弦圖、進度</td></tr></tbody></table></div>
         <p class="note-box"><strong>更換類型：</strong>Symbol 類型建立後不直接轉換。需要更換時，建立新 Symbol、重新綁定及確認結果，再刪除舊 Symbol。</p>
       </section>
 
-      <section class="manual-function" id="symbol-common-properties"><span class="function-number">2.2.2</span><h2>Symbol 共通屬性</h2><p>選取單一 Symbol 後，右側屬性面板依元件提供基本、外觀、資料與規則分類。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-common-properties.png" alt="Value Symbol 屬性面板"><figcaption>共通設定包含名稱、鎖定、位置、尺寸、圖層順序、旋轉與翻轉；不同類型另有專屬設定。</figcaption></figure>
-        <ol class="steps"><li>在畫布或圖層面板選取 Symbol。</li><li>於「基本」設定名稱、鎖定、位置、尺寸及專屬內容。</li><li>於「外觀」設定色彩、字型、框線或其他視覺效果。</li><li>於「資料」檢查 DataBinding、Field、Calculation 或系列設定。</li><li>需要依資料改變外觀時，在「規則」建立條件樣式。</li></ol>
+      <section class="manual-function" id="symbol-common-properties"><span class="function-number">2.2.2</span><h2>Symbol 共通屬性</h2><p>選取單一 Symbol 後，右側屬性面板依元件提供分頁；各類元件的屬性面板操作方式一致。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-common-properties.jpg" alt="數值 Symbol 的基本分頁"><figcaption>「基本」分頁包含名稱、類型、鎖定、X／Y／寬度／高度、圖層順序與旋轉。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>屬性分頁</th></tr></thead><tbody><tr><td>數值</td><td>基本、外觀、資料、規則</td></tr><tr><td>文字</td><td>基本、內容、外觀、連結</td></tr><tr><td>圖片</td><td>基本、圖片、外觀、連結</td></tr><tr><td>趨勢</td><td>基本、系列、圖表</td></tr><tr><td>表格</td><td>基本、外觀、欄位、表格</td></tr><tr><td>儀表</td><td>基本、儀表、外觀、資料、規則</td></tr><tr><td>和弦圖</td><td>基本、資料流、外觀</td></tr></tbody></table></div>
+        <ol class="steps"><li>在畫布或圖層面板選取 Symbol。</li><li>於「基本」設定名稱、鎖定、位置與尺寸。</li><li>於「外觀」設定色彩、字型、框線或其他視覺效果；顏色欄可直接輸入色碼或選「無」。</li><li>於「資料」檢查 DataBinding、欄位、計算或系列設定。</li><li>需要依資料改變外觀時，在「規則」建立樣式規則。</li></ol>
         <p class="result-box"><strong>預期結果：</strong>屬性調整立即反映於 Editor 畫布；儲存後才成為 Runtime 的正式內容。</p>
       </section>
 
       <section class="manual-function" id="symbol-data-display"><span class="function-number">2.2.3</span><h2>資料顯示元件</h2><p>資料顯示元件負責呈現單值、趨勢、明細資料及狀態。</p>
-        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>主要用途</th><th>主要設定</th></tr></thead><tbody><tr><td>數值 Value</td><td>顯示單一欄位或計算結果。</td><td>標題、單位、小數位、空值文字、聚合、時間戳記。</td></tr><tr><td>趨勢 Trend</td><td>呈現一個或多個時間序列。</td><td>Series、時間欄位、線條、圖例與 Tooltip。</td></tr><tr><td>表格 Table</td><td>呈現多欄資料與時間分組。</td><td>欄位、分頁／虛擬捲動、篩選、彙整、時間分組。</td></tr><tr><td>狀態 State</td><td>依條件顯示文字、顏色或圖示狀態。</td><td>共用／各狀態資料、比對條件與樣式。</td></tr></tbody></table></div>
-        <ol class="steps"><li>建立所需元件。</li><li>從 Data Browser 將 Binding 或 Field 拖至相容的目標元件。</li><li>在資料分類確認欄位、系列或狀態條件。</li><li>開啟預覽資料確認時間與結果。</li></ol>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>主要用途</th><th>主要設定</th></tr></thead><tbody><tr><td>數值</td><td>顯示單一欄位或計算結果。</td><td>版面樣式、標題、單位、小數位數、空值文字、聚合、時間戳記。</td></tr><tr><td>趨勢</td><td>呈現一個或多個時間序列。</td><td>系列（名稱、DataBinding、欄位、Y 軸、繪製方式、顏色、線寬）、圖表。</td></tr><tr><td>表格</td><td>呈現多欄資料與時間分組。</td><td>欄位、表格樣式、分頁、篩選、彙整、時間分組。</td></tr><tr><td>狀態</td><td>依條件顯示文字、顏色或圖示狀態。</td><td>共用／各狀態資料、比對條件與樣式。</td></tr></tbody></table></div>
+        <ol class="steps"><li>建立所需元件。</li><li>在「資料」或「系列」「欄位」分頁指定 DataBinding 與欄位。</li><li>確認欄位、系列或狀態條件。</li><li>開啟預覽資料確認時間與結果。</li></ol>
       </section>
 
       <section class="manual-function" id="symbol-chart-indicator"><span class="function-number">2.2.4</span><h2>圖表與指示元件</h2><p>圖表與指示元件將資料轉換為比例、分布、流程或進度。</p>
-        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>用途</th></tr></thead><tbody><tr><td>儀表 Gauge</td><td>以刻度、範圍及指針呈現即時數值。</td></tr><tr><td>長條圖 Bar</td><td>比較分類或時間區間中的數值。</td></tr><tr><td>Pie</td><td>呈現各項目占比。</td></tr><tr><td>Sankey</td><td>呈現節點間的流向與量值關係。</td></tr><tr><td>進度 Progress</td><td>依最小值、最大值及目前值顯示完成比例。</td></tr></tbody></table></div>
-        <ol class="steps"><li>加入圖表或指示元件。</li><li>設定資料 Field、Series、Slice 或節點綁定。</li><li>設定範圍、標題、圖例、顏色及格式。</li><li>以預覽資料確認無空值、比例錯誤或時間不一致。</li></ol>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>用途</th></tr></thead><tbody><tr><td>儀表</td><td>以刻度、範圍及指針呈現即時數值。</td></tr><tr><td>長條圖</td><td>比較分類或時間區間中的數值。</td></tr><tr><td>圓餅圖</td><td>呈現各項目占比。</td></tr><tr><td>Sankey</td><td>呈現節點間的流向與量值關係。</td></tr><tr><td>和弦圖</td><td>以環狀弧帶呈現各項目之間的流量，見 <a href="#studio-chord">和弦圖</a>。</td></tr><tr><td>進度</td><td>依最小值、最大值及目前值顯示完成比例。</td></tr></tbody></table></div>
+        <ol class="steps"><li>加入圖表或指示元件。</li><li>設定資料欄位、系列、切片或節點綁定。</li><li>設定範圍、標題、圖例、顏色及格式；背景與填色類欄位可用漸層，文字、邊框與線條只能純色。</li><li>以預覽資料確認無空值、比例錯誤或時間不一致。</li></ol>
       </section>
 
-      <section class="manual-function" id="graphics-browse-search"><span class="function-number">2.3.1</span><h2>瀏覽與搜尋圖形</h2><p>Graphic Library 提供泵浦、閥件、槽體、管線、馬達、儀表、HVAC、輸送設備等工業圖形分類。</p>
-        <ol class="steps"><li>點選左側「圖庫」。</li><li>展開或收合分類。</li><li>在「搜尋圖形」輸入名稱，縮小結果。</li><li>將游標移至圖形，確認名稱與外觀。</li></ol>
-        <figure class="manual-shot"><img src="../img/frontend/studio/graphics-browse-search.png" alt="Studio Graphic Library 圖形庫"><figcaption>圖庫依設備類型分類，並提供關鍵字搜尋。</figcaption></figure>
+      <section class="manual-function" id="studio-value-table-styles"><span class="function-number">2.2.5</span><h2>數值與表格樣式</h2><p>數值 Symbol 有多種資訊版面，標題、數值、單位、時間可各自設定樣式；表格 Symbol 提供 7 種表格樣式。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/value-styles.jpg" alt="數值 Symbol 的外觀分頁"><figcaption>數值「外觀」分頁的「版面」可選樣式與對齊；下方分別設定標題、值、單位、時間戳記與文字。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/studio/table-styles.jpg" alt="表格 Symbol 的表格樣式"><figcaption>表格「外觀」分頁的樣式選「D 表頭色帶」；可再調整表頭底色、表頭文字、斑馬紋、列高、框線、字級與滑過列反白。</figcaption></figure>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>元件</th><th>可選樣式</th></tr></thead><tbody><tr><td>數值</td><td>A 標準直排、B 一行式、C 大數字 KPI 卡、D 精簡式、E 狀態色條卡、F 標題列卡</td></tr><tr><td>表格</td><td>A 預設、B 斑馬紋、C 緊湊、D 表頭色帶、E 無框線極簡、F 卡片式列、G 格線式</td></tr></tbody></table></div>
+        <ol class="steps"><li>選取數值或表格 Symbol，開啟「外觀」分頁。</li><li>在「樣式」選擇版面；數值可再選文字對齊（靠左／置中／靠右）。</li><li>依需要展開標題、值、單位、時間戳記等區塊調整字級、顏色與粗細。</li><li>表格可以直接在畫布上拖曳欄寬，雙擊表頭修改標題。</li></ol>
       </section>
 
-      <section class="manual-function" id="graphics-add-canvas"><span class="function-number">2.3.2</span><h2>將圖形加入畫布</h2><p>圖庫項目拖入畫布後會建立 Image Symbol，並依圖形內容比例設定初始範圍。</p>
-        <ol class="steps"><li>從 Graphic Library 找到圖形。</li><li>按住圖形並拖曳到畫布指定位置。</li><li>放開後選取新 Image Symbol，調整位置與尺寸。</li><li>需要依資料改變顯示時，在 Image Symbol 屬性設定相關規則。</li></ol>
-        <p class="result-box"><strong>預期結果：</strong>畫布新增使用圖庫內容的 Image Symbol，可與其他 Symbol 一起排列與分層。</p>
+      <section class="manual-function" id="studio-chord"><span class="function-number">2.2.6</span><h2>和弦圖（Chord）</h2><p>和弦圖以環狀弧帶呈現各項目之間的流量，適合看能源、物料在各單元之間的分配。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/chord.jpg" alt="和弦圖的資料流分頁"><figcaption>「資料流」分頁以節點樹設定：每個節點有名稱、父節點、節點顏色與 DataBinding Tag 序列；未綁定時使用子節點加總。所選時間區間內沒有正流量時，圖上會顯示提示。</figcaption></figure>
+        <ol class="steps"><li>在 Symbols 點「和弦圖」，於畫布拖曳放置。</li><li>開啟「資料流」分頁，點「新增第一個根節點」。</li><li>輸入節點名稱並選擇父節點；需要時再新增子節點。</li><li>開啟「DataBinding Tag 序列」，選擇 DataBinding、Tag／數值欄位、時間區間計算方式（例如合計）、單位與小數位數。</li><li>在「外觀」調整顏色與標籤；和弦節點只能純色或自動。</li></ol>
       </section>
 
-      <section class="manual-function" id="data-browser"><span class="function-number">2.4.1</span><h2>瀏覽與搜尋資料</h2><p>Data Browser 以「分類、標籤、已使用」三種模式提供目前帳號有權限使用的 DataBinding 與 Field。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/data-browser.png" alt="Studio Data Browser 分類模式"><figcaption>分類模式依資料分類階層顯示 Binding；使用中的 Binding 會有提示。</figcaption></figure>
-        <ol class="steps"><li>點選左側「資料」。</li><li>選擇「分類」依階層瀏覽、「標籤」依 Tag 瀏覽，或「已使用」只查看目前 Display 已引用資料。</li><li>使用搜尋欄查找 Binding、Field 或標籤。</li><li>開啟 Binding 查看 Field、資料型別、單位及目前引用次數。</li></ol>
+      <section class="manual-function" id="studio-style-rules"><span class="function-number">2.2.7</span><h2>樣式規則</h2><p>樣式規則依資料改變物件外觀，例如溫度過高時數值變紅。規則由上往下判斷，第一條符合的生效。</p>
+        <ol class="steps"><li>選取 Symbol，開啟「規則」分頁。</li><li>點「新增規則」或「新增第一條規則」。</li><li>選擇判斷方式並輸入條件值；判斷方式包含比較大小，以及「介於」、「包含」、「無值」等。</li><li>設定符合時要套用的顏色或樣式。</li><li>用上移／下移調整規則順序，開啟預覽資料確認效果。</li></ol>
       </section>
 
-      <section class="manual-function" id="data-drag-bind"><span class="function-number">2.4.2</span><h2>拖曳套用資料</h2><p>Data Browser 的拖曳動作用來把 Binding 或 Field 快速套用到既有相容 Symbol，不會在空白畫布自動建立元件。</p>
-        <ol class="steps"><li>先在畫布建立 Value、Trend、Table、State、Gauge、Bar、Pie 或 Progress 等相容元件。</li><li>在 Data Browser 找到 Binding 或 Field。</li><li>按住拖曳控制符號「⠿」，拖到目標 Symbol 上。</li><li>目標顯示可接受提示後放開。</li><li>在右側資料屬性確認自動加入的 Field、Series 或欄位。</li></ol>
-        <p class="note-box"><strong>相容性：</strong>圖片、文字、iFrame 與 Sankey 不接受一般 Binding／Field 快速套用；Calculation 只接受 Value、Shape、Gauge、State 與 Progress。</p>
+      <section class="manual-function" id="graphics-browse-search"><span class="function-number">2.3.1</span><h2>瀏覽與搜尋圖形</h2><p>圖庫由伺服器統一提供，所有使用者看到同一份。分類包含 PID 管道（智慧）、P&amp;ID 常用、閥門、泵浦、儲槽、儀表、建築設施等。舊版圖庫已移除，統一使用新圖庫。</p>
+        <ol class="steps"><li>點選左側「圖庫」。</li><li>在「搜尋名稱、別名、標籤」輸入關鍵字，例如「反應」「熱交換」。</li><li>用「全部收合／全部展開」整理分類，或切換「縮圖／含名稱」顯示方式。</li><li>標示「智慧」的圖形可在畫布上改變形狀，見 <a href="#studio-smart-graphics">智慧圖形</a>。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/studio/graphics-browse-search.jpg" alt="Studio 圖庫面板"><figcaption>圖庫依分類列出圖形；PID 管道分類的圖形標示「智慧」。管理者可點「管理圖庫」到 Admin 圖庫管理。</figcaption></figure>
+        <p class="note">要新增或整理圖形，由管理者在 Admin <a href="../backend/graphic-library.html">圖庫管理</a> 處理。</p>
       </section>
 
-      <section class="manual-function" id="symbol-data-binding"><span class="function-number">2.4.3</span><h2>Symbol 資料綁定</h2><p>資料綁定決定 Symbol 從哪一個 DataBinding 讀取哪些 Field，並依元件類型形成單值、欄位、Series 或 Slice。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-data-binding.png" alt="Data Browser 的 Binding 欄位清單"><figcaption>Field 清單顯示名稱、型別及目前 Display 中的引用次數。</figcaption></figure>
-        <ol class="steps"><li>選取 Symbol，開啟右側「資料」。</li><li>以拖曳快速套用，或在屬性中指定 DataBinding 與 Field。</li><li>多序列元件逐一新增、排序或移除 Series／欄位。</li><li>確認時間欄位及各資料來源的時間關係。</li><li>開啟預覽資料檢查結果。</li></ol>
-        <p class="note-box"><strong>找不到資料：</strong>先確認後台資料權限、DataBinding 是否啟用、Field 是否仍存在，以及目前帳號是否可使用。</p>
+      <section class="manual-function" id="graphics-add-canvas"><span class="function-number">2.3.2</span><h2>將圖形加入畫布</h2><p>圖庫項目拖入畫布後會建立圖片物件，並依圖形內容比例設定初始範圍。</p>
+        <ol class="steps"><li>從圖庫找到圖形。</li><li>按住圖形並拖曳到畫布指定位置。</li><li>放開後選取新物件，調整位置與尺寸；靠近其他設備時會自動貼合管口。</li><li>需要依資料改變顯示時，在物件屬性設定相關規則。</li></ol>
+        <p class="result-box"><strong>預期結果：</strong>畫布新增使用圖庫內容的物件，可與其他 Symbol 一起排列與分層。</p>
       </section>
 
-      <section class="manual-function" id="display-format-null"><span class="function-number">2.4.4</span><h2>格式、單位與空值</h2><p>資料顯示不只取決於綁定，還需要依元件設定聚合、單位、小數位及無資料狀態。</p>
-        <ol class="steps"><li>選取資料 Symbol。</li><li>設定標題與單位；Value、Gauge 等元件可沿用 Field metadata 的單位。</li><li>設定小數位及必要的數值格式。</li><li>依用途選擇最新值、最早值、平均值、中位數、最大值或最小值等聚合。</li><li>設定空值文字，例如「--」或「無資料」。</li><li>以有資料及無資料情境分別預覽。</li></ol>
+      <section class="manual-function" id="studio-smart-graphics"><span class="function-number">2.3.3</span><h2>智慧圖形</h2><p>智慧圖形（彎管、三通、箭頭與 PID 管道等）拖曳控制點即可改變形狀，端點會自動接上設備的管口。</p>
+        <ol class="steps"><li>從圖庫的「PID 管道」等分類拖曳標示「智慧」的圖形到畫布。</li><li>選取後拖曳黃色控制點調整長度、角度或分支位置。</li><li>把端點拖到設備管口附近，會自動接上。</li><li>在外觀設定單色或漸層顏色；多選多個智慧圖形後可以一次換色。</li></ol>
+      </section>
+
+      <section class="manual-function" id="data-browser"><span class="function-number">2.4.1</span><h2>瀏覽與搜尋資料</h2><p>資料面板以「分類、標籤、已使用」三種模式提供目前帳號有權限使用的 DataBinding 與欄位。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/data-browser.jpg" alt="Studio 資料面板分類模式"><figcaption>分類模式依節點階層列出 Bindings；每個 Binding 標示 Realtime 即時或 History 歷史，並以燈號顯示狀態。</figcaption></figure>
+        <ol class="steps"><li>點選左側「資料」。</li><li>選擇「分類」依階層瀏覽、「標籤」依標籤瀏覽，或「已使用」只查看目前 Display 已引用的資料。</li><li>使用搜尋欄查找 Binding、欄位或標籤。</li><li>點 Binding 右側「›」查看欄位、資料型別、單位及目前引用次數。</li></ol>
+      </section>
+
+      <section class="manual-function" id="studio-realtime-history"><span class="function-number">2.4.2</span><h2>即時與歷史資料標示</h2><p>VisoLink 同時處理兩種資料：DataGateway 即時（只顯示現在）與歷史資料（依時間範圍查詢）。Studio 與 Runtime 都會標示資料類型，避免混用。</p>
+        <div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>標示</th><th>來源</th><th>適合的元件</th></tr></thead><tbody><tr><td>Realtime 即時</td><td><a href="../backend/dg-realtime.html">DataGateway 即時</a> DataBinding</td><td>數值、狀態、儀表、進度等顯示目前值的元件；回寫表單。</td></tr><tr><td>History 歷史</td><td>一般 DataBinding（資料庫、VisoLink DataGateway 歷史等）</td><td>趨勢、表格、長條圖、和弦圖等依時間範圍彙整的元件。</td></tr></tbody></table></div>
+        <p class="note-box"><strong>Editor 預覽：</strong>「預覽資料」載入的是時間視窗內的歷史快照，即時資料在 Editor 預覽中顯示「無資料」屬正常；請開啟 Runtime 確認即時值。</p>
+      </section>
+
+      <section class="manual-function" id="data-drag-bind"><span class="function-number">2.4.3</span><h2>拖曳套用資料</h2><p>資料面板的拖曳動作用來把 Binding 或欄位快速套用到既有相容 Symbol，不會在空白畫布自動建立元件。</p>
+        <ol class="steps"><li>先在畫布建立數值、趨勢、表格、狀態、儀表、長條圖、圓餅圖或進度等相容元件。</li><li>在資料面板找到 Binding 或欄位。</li><li>按住拖曳控制符號「⠿」，拖到目標 Symbol 上。</li><li>目標顯示可接受提示後放開。</li><li>在右側資料屬性確認自動加入的欄位、系列或欄位清單。</li></ol>
+        <p class="note-box"><strong>相容性：</strong>圖片、文字、iFrame 與 Sankey 不接受一般 Binding／欄位快速套用；Calculation 只接受數值、圖形、儀表、狀態與進度。</p>
+      </section>
+
+      <section class="manual-function" id="symbol-data-binding"><span class="function-number">2.4.4</span><h2>Symbol 資料綁定</h2><p>資料綁定決定 Symbol 從哪一個 DataBinding 讀取哪些欄位，並依元件類型形成單值、欄位、系列或切片。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-data-binding.jpg" alt="數值 Symbol 的資料分頁"><figcaption>數值「資料」分頁：模式選 DataBinding，選擇 DataBinding、欄位（顯示「中文名稱 (欄位代碼)」）與聚合，再設定數值顯示。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/studio/trend-series.jpg" alt="趨勢 Symbol 的系列清單"><figcaption>趨勢「系列」分頁列出每條系列；點系列可設定名稱、DataBinding、欄位、Y 軸（左軸／右軸）、繪製方式（折線、散點、長條、面積）、顏色與線寬。</figcaption></figure>
+        <ol class="steps"><li>選取 Symbol，開啟右側「資料」（趨勢為「系列」、表格為「欄位」）。</li><li>模式選「DataBinding」（或「計算」），選擇 DataBinding 與欄位。未選欄位時提示「還沒選欄位，Runtime 會顯示空值文字」。</li><li>多序列元件點「＋新增系列」「新增欄位」逐一設定，可用「調整」排序。</li><li>確認時間欄位及各資料來源的時間關係。</li><li>開啟預覽資料或 Runtime 檢查結果。</li></ol>
+        <p class="note-box"><strong>找不到資料：</strong>先確認後台資料權限、DataBinding 是否啟用、欄位是否仍存在，以及目前帳號是否可使用；也可請管理者用 <a href="../backend/users.html#user-effective-permissions">有效權限預覽</a> 確認。</p>
+      </section>
+
+      <section class="manual-function" id="display-format-null"><span class="function-number">2.4.5</span><h2>格式、單位與空值</h2><p>資料顯示不只取決於綁定，還需要依元件設定聚合、單位、小數位及無資料狀態。</p>
+        <ol class="steps"><li>選取資料 Symbol。</li><li>設定標題與單位；數值、儀表等元件可沿用欄位的單位。</li><li>設定小數位數及必要的數值格式。</li><li>依用途選擇最新值、最早值、平均值、中位數、最大值或最小值等聚合。</li><li>設定空值文字，例如「--」或「無資料」；需要時開啟「顯示時間戳記」。</li><li>以有資料及無資料情境分別預覽。</li></ol>
         <p class="result-box"><strong>預期結果：</strong>資料以一致格式呈現，無資料時不會被誤認為零值。</p>
       </section>
 
-      <section class="manual-function" id="variables"><span class="function-number">2.5.1</span><h2>Variable</h2><p>Variable 將 DataBinding Field 與聚合結果命名為可重複使用的圖面變數。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/variables.png" alt="Studio Variable 面板"><figcaption>Variable 清單顯示名稱、來源 Binding、Field、聚合及引用次數。</figcaption></figure>
-        <ol class="steps"><li>點選左側「變數」。</li><li>點選「＋新增」，設定 Variable 名稱。</li><li>選擇 DataBinding、Field 與聚合方式。</li><li>儲存 Variable，確認清單顯示來源及引用次數。</li><li>將 Variable 用於 Calculation 或可接受變數的設定。</li></ol>
+      <section class="manual-function" id="studio-replace-binding"><span class="function-number">2.4.6</span><h2>替換 DataBinding</h2><p>一次更換整張 Display 使用的 DataBinding；用到它的圖元、樣式規則、圖表、變數、計算與回寫欄位會一起換好。適合複製畫面到另一條產線，或匯入後補上未設定的資料。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/replace-databinding.jpg" alt="替換 DataBinding 視窗"><figcaption>表格列出這張 Display 用到的 DataBinding、狀態與引用位置（圖元、回寫欄位、圖表數列）；在「替換為」選新的 DataBinding。</figcaption></figure>
+        <ol class="steps"><li>點標題列「替換 DataBinding」。</li><li>逐列查看狀態與引用位置；只想處理缺漏時勾「只看未設定」。</li><li>在「替換為」選擇新的 DataBinding；保持「— 不替換 —」代表不變。</li><li>檢查下方「未設定的回寫目標」；回寫目標未設定的表單在 Runtime 顯示「回寫目標未設定」，不能送出。</li><li>確認「待替換 N 筆」後點「套用」，再儲存 Display。</li></ol>
+      </section>
+
+      <section class="manual-function" id="variables"><span class="function-number">2.5.1</span><h2>Variable</h2><p>Variable 將 DataBinding 欄位與聚合結果命名為可重複使用的圖面變數，運算資料範圍由目前的時間視窗決定。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/variables.jpg" alt="Studio 變數面板"><figcaption>變數清單顯示名稱（Var. 開頭）、來源 DataBinding、欄位、函式及引用次數。</figcaption></figure>
+        <ol class="steps"><li>點選左側「變數」。</li><li>點選「＋新增」，輸入名稱（只能使用文字、數字或底線，且不能以數字開頭）。</li><li>點「選擇 DataBinding」，選擇 Binding 後在「Field」清單點選欄位。</li><li>選擇函式：Last（最後一筆有效值）、First、Min、Max、Avg 或 Sum。</li><li>確認下方預覽（例如 <code>Last(DataBinding.Field)</code>）後點「儲存」。</li></ol>
         <p class="note-box"><strong>命名：</strong>使用可辨識的業務名稱；變更或刪除前先查看引用次數，避免 Calculation 失效。</p>
       </section>
 
-      <section class="manual-function" id="calculations"><span class="function-number">2.5.2</span><h2>Calculation</h2><p>Calculation 使用 Variable、常數、運算子與函數形成衍生值，並可拖曳套用到相容 Symbol。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/calculations.png" alt="Studio Calculation 面板"><figcaption>Calculation 清單顯示公式、引用 Variable 及使用位置。</figcaption></figure>
-        <ol class="steps"><li>點選左側「計算」。</li><li>點選「＋新增」，輸入名稱與公式。</li><li>在公式中引用已建立的 Variable。</li><li>確認公式驗證成功後儲存。</li><li>將 Calculation 拖曳到 Value、Shape、Gauge、State 或 Progress。</li><li>開啟預覽，確認所有 Variable 已取得資料且結果合理。</li></ol>
+      <section class="manual-function" id="calculations"><span class="function-number">2.5.2</span><h2>Calculation</h2><p>Calculation 使用 Variable、常數、運算子與函數形成衍生值，並可套用到相容 Symbol。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/calculations.jpg" alt="Studio 計算設定"><figcaption>計算設定：名稱（Calc. 開頭）、可使用的 Variable（點「＋」插入公式）與公式；驗證通過時顯示「公式與 Variable 引用正確」。示範公式把攝氏換算為華氏。</figcaption></figure>
+        <ol class="steps"><li>點選左側「計算」。</li><li>點選「＋新增」，輸入名稱。</li><li>在公式中引用已建立的 Variable，例如 <code>Var.R101_Temp * 9 / 5 + 32</code>。</li><li>確認公式驗證成功後儲存。</li><li>在數值等 Symbol 的「資料」分頁把模式選「計算」並選擇這個 Calculation，或拖曳到數值、圖形、儀表、狀態或進度。</li><li>開啟預覽，確認所有 Variable 已取得資料且結果合理。</li></ol>
         <p class="note-box"><strong>異常訊息：</strong>若顯示 Variable 尚未就緒或 Calculation 不存在，先檢查名稱、引用關係、來源資料與時間範圍。</p>
       </section>
 
-      <section class="manual-function" id="display-save"><span class="function-number">2.6.1</span><h2>儲存圖面</h2><p>上方圓點表示有尚未儲存的變更；儲存完成後，Runtime 才會使用最新圖面設定。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/display-save.png" alt="Studio 儲存與另外儲存選單"><figcaption>直接儲存更新目前 Display；更多儲存選項提供「另外儲存」。</figcaption></figure>
-        <ol class="steps"><li>完成編輯後先以預覽資料檢查內容。</li><li>點選「儲存」更新目前 Display。</li><li>需要保留原版本時，開啟更多儲存選項並選擇「另外儲存」。</li><li>確認尚未儲存提示消失。</li></ol>
+      <section class="manual-function" id="display-save"><span class="function-number">2.6.1</span><h2>儲存圖面</h2><p>Display 名稱旁的圓點表示有尚未儲存的變更；儲存完成後，Runtime 才會使用最新圖面設定。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/display-save.jpg" alt="Studio 儲存與另外儲存選單"><figcaption>「儲存」更新目前 Display；右側「▾」提供「另外儲存」。</figcaption></figure>
+        <ol class="steps"><li>完成編輯後先以預覽資料檢查內容。</li><li>點選「儲存」更新目前 Display。</li><li>需要保留原版本時，點「儲存」右側「▾」並選擇「另外儲存」。</li><li>確認名稱旁的未儲存圓點消失。</li></ol>
         <p class="note-box"><strong>注意：</strong>離開 Studio 前先確認是否仍有尚未儲存提示；「另外儲存」會建立另一個 Display。</p>
       </section>
 
       <section class="manual-function" id="display-preview"><span class="function-number">2.6.2</span><h2>預覽圖面</h2><p>「預覽資料」在 Editor 中載入目前時間視窗的一筆資料快照，用於確認綁定、格式、規則與計算結果。</p>
-        <figure class="manual-shot"><img src="../img/frontend/studio/display-preview.png" alt="Studio 預覽資料狀態"><figcaption>預覽啟用後，畫布以所選時間視窗載入資料；無資料或計算錯誤會直接顯示。</figcaption></figure>
-        <ol class="steps"><li>在下方時間視窗選擇預覽範圍。</li><li>點選「預覽資料」。</li><li>等待快照載入完成。</li><li>逐一確認數值、圖表、狀態、空值及 Calculation。</li><li>需要完整互動與持續監看時，點選「▶ Runtime」。</li></ol>
+        <figure class="manual-shot"><img src="../img/frontend/studio/studio-overview.jpg" alt="Studio 預覽資料狀態"><figcaption>預覽開啟後標題列顯示「預覽就緒」，按鈕變成「重新整理」；畫布依所選時間視窗載入歷史資料，沒有資料的欄位顯示「無資料」。</figcaption></figure>
+        <ol class="steps"><li>在下方時間列選擇預覽範圍。</li><li>點選「預覽資料」，等待標題列顯示「預覽就緒」。</li><li>逐一確認數值、圖表、狀態、空值及 Calculation；需要更新時點「重新整理」。</li><li>需要完整互動、即時值與持續監看時，點選「Runtime」。</li></ol>
         <p class="result-box"><strong>預期結果：</strong>畫布顯示所選時間情境的資料結果；問題可在儲存前被發現。</p>
+      </section>
+
+      <section class="manual-function" id="studio-symbol-samples"><span class="function-number">2.7.1</span><h2>Symbol 樣本</h2><p>選取一組物件即可存成 Symbol 樣本，在其他 Display 重複使用。放入時可以「複製」成一般物件，或選擇「繼承」：樣本修改後，所有使用的地方一起更新，各自的資料與文字保留。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-sample-save.jpg" alt="存成 Symbol 樣本視窗"><figcaption>顯示已選取的物件數，輸入樣本名稱與資料夾；資料綁定不會帶入（只保留格式、單位、顏色規則的門檻、圖表數列與表格欄位），回寫表單也不會帶入。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/studio/symbol-sample-insert.jpg" alt="放入 Symbol 樣本時選擇繼承或複製"><figcaption>放入樣本時選擇「繼承」（預設，整組當一個物件，樣本改了這裡跟著變）或「複製」（成為一般物件群組，之後樣本再改不會變）。</figcaption></figure>
+        <h3>存成樣本</h3>
+        <ol class="steps"><li>在畫布框選或多選要重複使用的物件，例如一組反應器圖示與數值。</li><li>點工具列「存成 Symbol 樣本」。</li><li>輸入「Symbol 樣本名稱」，選擇資料夾。</li><li>點「存成 Symbol 樣本」，完成訊息顯示存到哪個資料夾。</li></ol>
+        <h3>放入樣本</h3>
+        <ol class="steps"><li>點左側「Symbol 樣本」，搜尋樣本。</li><li>把樣本拖到畫布上，或在樣本上按兩下。</li><li>在「放入 Symbol 樣本」視窗選「繼承」或「複製」，點「放入」。</li><li>選取放入的物件，逐一指定每個資料位置的 DataBinding。</li></ol>
+        <p class="note">樣本尺寸＝選取物件的外框；Symbol 樣本沒有頁面尺寸與背景，每次存檔自動重算。集中管理樣本請到 <a href="display-library.html#symbol-sample-library">Symbol 樣本頁</a>。</p>
+      </section>
+
+      <section class="manual-function" id="studio-base-layer"><span class="function-number">2.7.2</span><h2>Display 底板</h2><p>Logo、標題、頁尾等固定框架可以做成底板，讓多張 Display 共用；修改底板後，所有使用的頁面一起更新。</p>
+        <figure class="manual-shot"><img src="../img/frontend/studio/base-layer-add.jpg" alt="加入底板選單"><figcaption>「加入底板」列出所有可作為底板的 Display 與尺寸，可搜尋。</figcaption></figure>
+        <figure class="manual-shot"><img src="../img/frontend/studio/base-layer-runtime.jpg" alt="套用底板後的 Runtime 畫面"><figcaption>示範「能源 KPI 看板」套用「示範 底板」：上方標題列與下方頁尾來自底板，中間是本頁內容。</figcaption></figure>
+        <ol class="steps"><li>製作底板：建立一張 Display，放上標題列、Logo、頁尾等固定內容並儲存；在 Display 設定勾選「可作為底板」。</li><li>在要套用的 Display 點工具列「加入底板」，選擇底板。</li><li>底板出現在圖層最下方（標示「最下層」並鎖定），工具列按鈕變成「更換底板」。</li><li>需要換成其他底板時點「更換底板」。</li><li>儲存 Display。</li></ol>
+        <p class="note">要一次替多張 Display 加入或更換底板，請用圖面庫的 <a href="display-library.html#display-base-layer-batch">批次加入與變更底板</a>。修改底板內容請開啟底板本身的 Display 編輯。</p>
+      </section>
+
+      <section class="manual-function" id="studio-rwd"><span class="function-number">2.8.1</span><h2>RWD 版面編輯</h2><p>同一張 Display 可以另外製作 RWD 版面，手機與平板開啟時自動改用 RWD 版面顯示。RWD 編輯器提供面板、卡片、摺疊、頁籤等版面元件，內容可選擇上下排列、格子排列或彈性排列。</p>
+        <div class="function-meta"><div class="meta-item"><span>功能位置</span><strong>Studio 標題列 → RWD</strong></div><div class="meta-item"><span>所需權限</span><strong>Display Editor</strong></div><div class="meta-item"><span>影響</span><strong>手機與平板的顯示</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/studio/rwd-editor.jpg" alt="RWD 版面編輯器"><figcaption>上方切換裝置寬度（手機直向 xs、手機橫向 sm、平板直向 md、平板橫向／小筆電 lg、一般桌機 xl、大尺寸桌機 xxl）；左側是版面元件、內容元件與 Symbol；每一列（Row）分成 12 格。圖為用「從 Canvas 帶入」產生的示範版面。</figcaption></figure>
+        <ol class="steps"><li>在 Studio 標題列點「RWD」。</li><li>空白版面可選「從範例開始」、「從 Canvas 帶入」（沿用 Canvas 上的物件，部分圖形等會略過並提示數量），或「＋新增 row」自行排版。</li><li>從左側把卡片、面板、摺疊區塊、頁籤、輪播、區段標題列、分隔線、間距、警示橫幅等版面元件拖到 row 上；內容元件（清單、統計磚、流程圖嵌入）與 Symbol 拖進容器。</li><li>選取元件後在右側設定它在各裝置的位置、寬度（佔幾格）與顯示；每個裝置各自記住設定，沒設定過的裝置沿用比它小且最接近的裝置。</li><li>多個元件可用「建立自動排列」統一排列，「解除自動排列」還原。</li><li>常用的版面元件可存成「RWD 版面樣本」，從左側「RWD 版面樣本」拖出重複使用。</li><li>點「儲存」。清單卡片會出現「RWD」標記。</li></ol>
+      </section>
+
+      <section class="manual-function" id="studio-rwd-preview"><span class="function-number">2.8.2</span><h2>RWD 預覽</h2>
+        <figure class="manual-shot"><img src="../img/frontend/studio/rwd-preview.jpg" alt="RWD 預覽的手機外框"><figcaption>RWD 預覽以裝置外框顯示，右上標示內容寬度與縮小比例；可切換各裝置。</figcaption></figure>
+        <ol class="steps"><li>在 RWD 編輯器點標題列「預覽」。</li><li>上方切換手機、平板、桌機等裝置，檢查排版與文字是否被截斷。</li><li>點「回到編輯」修正，或點「Runtime」開啟實際畫面。</li></ol>
+        <p class="note">Runtime 中手機與平板自動使用 RWD 版面；桌機可用 Runtime 上方的「Canvas／RWD」切換，見 <a href="runtime.html#runtime-rwd">手機與平板 RWD 顯示</a>。</p>
+      </section>
+
+      <section class="manual-function" id="studio-writeback-form"><span class="function-number">2.9.1</span><h2>回寫表單設定</h2><p>回寫表單讓操作人員在 Runtime 把設定值送回設備（OPC UA、Modbus TCP）。表單沿用 Binding 的使用與寫入權限，設定隨 Display 保存；在 Studio 設定時不會送出任何設備命令。</p>
+        <div class="function-meta"><div class="meta-item"><span>功能位置</span><strong>Studio 左側「回寫」</strong></div><div class="meta-item"><span>操作前提</span><strong>已有可寫的即時 DataBinding</strong></div><div class="meta-item"><span>相關設定</span><strong>DataGateway 即時寫入權限</strong></div></div>
+        <figure class="manual-shot"><img src="../img/frontend/studio/writeback-form-settings.jpg" alt="回寫表單設定視窗"><figcaption>上方是表單分頁（示範表單「鍋爐與反應器設定」）；中間「欄位排版」以 12 格拖曳排序並可切換 xs～xxl 斷點；右側「欄位設定」選擇 DataBinding、Tag、輸入模式與範圍。</figcaption></figure>
+        <ol class="steps"><li>在 Studio 左側點「回寫」，開啟「回寫表單設定」。</li><li>點「＋」新增表單，輸入表單名稱並選擇「所屬 DG」（一張表單對應一套 DG；變更 DG 前請先移除欄位）。</li><li>點「＋ 新增欄位」，在右側設定顯示名稱、DataBinding 與 Tag；Tag 只列出同時可使用、可寫入且 DG 允許的欄位。</li><li>選擇輸入模式：Bool 為單選，數值為數字輸入；最小值、最大值與單位會自動帶入寫入安全規則，可再設定步進。</li><li>在「欄位排版」拖曳調整順序與寬度，切換 xs～xxl 檢查不同螢幕；可點「預覽彈窗」查看效果。</li><li>點「儲存至 Display」（顯示「表單設定已保存於 Display。」），回到 Editor 再儲存 Display。</li></ol>
+        <p class="note-box"><strong>權限：</strong>寫入權限預設拒絕，請在 Admin <a href="../backend/dg-realtime.html#dg-realtime-binding">即時 DataBinding</a> 授予。Runtime 送出流程見 <a href="runtime.html#runtime-writeback">設備回寫表單</a>。</p>
       </section>
 
       <nav class="chapter-end-nav"><a href="display-library.html">← 上一章：Display Library</a><a href="runtime.html">下一章：Runtime →</a></nav>
     </main>
   </div>
-  <footer class="page-footer">VisoLink Studio 操作手冊 · 2026-08-18</footer>
+  <footer class="page-footer">VisoLink Studio 操作手冊 · 2026-11-27</footer>
 </body>
 </html>
