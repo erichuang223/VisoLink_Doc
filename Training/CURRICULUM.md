@@ -88,7 +88,7 @@
 - 理解 Cache 的資料緩衝、共用與多設備負荷分流角色。
 - 理解授權以裝置點數計算，能查看點數使用與釋放點數。
 - 使用運作中／維護中；執行備份回復演練，說明何時改用備份中心。
-- 在備份中心登記受管主機、設定存放位置與備份密碼、建立手動備份與排程，並在還原前完成停工、版本與密碼的事前檢查。
+- 在 VisoLink、DataGateway、Agent 的畫面建立 Backup API Token，貼到備份中心登記受管主機；設定存放位置與備份密碼、建立手動備份與排程，並在還原前完成停工、版本與密碼的事前檢查。
 - 判讀 Dashboard、稽核及變更紀錄。
 
 完成標準：可完成低風險日常管理；高影響變更前能提出影響評估、備份、回復及驗證方案；每台受管主機都有可用的備份與排程。
@@ -112,6 +112,7 @@
 - 以 Current Values、History 確認資料；以 WebAPI 交給 VisoLink 讀歷史、以配對碼交給 VisoLink 即時與回寫。
 - 開啟連線回寫、建立寫入安全規則、指定可寫 Tag，追蹤 DataGateway 需求紀錄與 Agent Write Logs。
 - 理解 DataGateway 維護中時 Agent 暫存、恢復後補傳，以及暫存上限；以 Data Flow Logs 與資訊診斷排查。
+- 在 DataGateway 與 Agent 建立、查看與撤銷 API Token，交給備份中心等外部程式使用。
 
 完成標準：在測試環境把一台設備接到 VisoLink 畫面並完成一次範圍內的回寫，只保存指定的 Tag，機密連線資訊未外流。
 
@@ -287,6 +288,8 @@
 - 沒有指定保存政策的 Tag 不保存，只有即時值；保存額度不足時新進 Tag 也只更新即時值。
 - DataGateway 維護中時，Agent 把資料暫存在本機，DataGateway 切回運作中後自動補傳；Agent 自己切到維護中時，維護期間不收集資料。
 - Tag 屬於 DataGateway：Agent 新增的點自動建立 Tag（「Agent.連線.點」）；改名、更換來源、Agent 解除註冊，歷史都留在同一個 Tag。
+- 要不要保存、多久存一筆由 DataGateway 的保存規則決定：Agent Tag 上的「History interval」「保存重複值」與 DataGateway Tag 詳細的「保存間隔」是舊版保留欄位，不影響保存。
+- 外部程式（備份中心）一律用 DataGateway、Agent 畫面建立的 API Token 連線：完整 Token 只顯示一次，可設到期、可撤銷。
 
 ### 單元細節
 
@@ -294,10 +297,10 @@
 2. 兩個管理畫面與登入：DataGateway（VisoLink 管理員或 DG 本機帳號）、Agent 本機帳號；救援登入只能建立或重設本機帳密。
 3. 第一次使用順序：取得連線資訊 → Agent 連上 DataGateway → 核准 → 設備連線與 Tag → 保存 → 交給 VisoLink。
 4. DataGateway 連線資訊：Agent 連線（URL、Enrollment token、DG 公開憑證）、加值開發 WebAPI、VisoLink 配對碼；三者都等同密碼。
-5. Agent「DG 連線設定」：位址與憑證名稱相同、不可用 localhost；註冊狀態與 Uplink。
+5. Agent「DG 連線設定」：位址與憑證名稱相同、不可用只指向本機自己的名稱；註冊狀態與 Uplink。
 6. Agent Registry：核准、拒絕並刪除、解除離線 Agent 的註冊、重新申請註冊；Heartbeat 與 Offline 判定。
 7. 設備連線與授權點數：每條連線 1 點、開回寫 2 點；停用仍占點，刪除才釋放；刪除連線後 Tag 變無來源、歷史保留。
-8. Modbus TCP：連線參數與位元組順序、Scan Group、Read Block（Function、Base 0）、從讀取結果建立 Tag、手動／進階設定。
+8. Modbus TCP：連線參數與位元組順序、Scan Group、Read Block（Function、Base 0）、從讀取結果建立 Tag、手動／進階設定；「History interval」「保存重複值」不影響保存。
 9. OPC UA：Endpoint、安全性與登入、測試連線、資料群組、節點樹選取、批次命名、Sampling interval 與 Publishing interval。
 10. DataGateway Tag 管理：來源狀態、先建 Tag 再接來源、改名、改連結、移除來源、刪除 Tag（連同歷史）。
 11. 歷史保存：保存額度（1 點 100 個 Tag）、四種保存政策、保存規則與試算、保存分類、資料點指派、保存目的端與資料保護、歷史保存總開關。
@@ -307,11 +310,12 @@
 15. 暫存與維護中：DataGateway 與 Agent 各自維護中的差異、暫存上限（預設 7 天、2 GB）、刪除暫存、Agent 端解除註冊會刪除暫存。
 16. 監看與排查：服務狀態、Data Flow Logs（S、D、E、G）、Agent Logs 與資訊診斷、常見狀況。
 17. 系統維運：系統設定的儲存與套用、登入方式切換、授權（含離線啟用）、Contract 相容、各自的設定備份與備份中心。
+18. API Token 管理：DataGateway「系統設定 › API Token 管理」、Agent「系統管理 › API Token 管理」建立 Backup API Token（到期時間、讀取與切換運作模式）；完整 Token 只顯示一次；清單只顯示前綴、最後使用與到期提醒；撤銷的影響。
 
 ### 實作（學員在自己的測試環境）
 
 1. Agent 接設備：依 DataGateway「Agent 連線」卡設定並啟用 DG 連線；建立一條 Modbus TCP 連線（Scan Group、Read Block、從讀取結果建立 Tag）或 OPC UA 連線（節點樹選 Tag、批次命名），至少 3 個 Tag。
-2. DataGateway 核准與保存：在 Agent Registry 核准，確認 Online；Tag 管理確認來源狀態正常；調整保存額度、建立保存規則與分類，只指派 2 個 Tag；以 Current Values 與 History 確認有保存政策的 Tag 有歷史、未指派的只有即時值。
+2. DataGateway 核准與保存：在 Agent Registry 核准，確認 Online；Tag 管理確認來源狀態正常；調整保存額度、建立保存規則與分類，只指派 2 個 Tag；以 Current Values 與 History 確認有保存政策的 Tag 有歷史、未指派的只有即時值；在 DataGateway 與 Agent 各建立一把 Backup API Token，確認清單只顯示前綴，不用時撤銷（要接備份中心時留給 Course 08）。
 3. VisoLink 接即時值與回寫：Agent 開啟連線回寫、建立寫入安全規則、把 1 個 Tag 設為 ReadWrite；VisoLink 以配對碼建立即時來源、即時 View 與即時 DataBinding（Course 05）；在 Runtime 看即時值並送出一次範圍內的回寫；在 DataGateway 需求紀錄與 Agent Write Logs 核對結果與讀回值。
 
 ### 驗收標準
@@ -320,11 +324,13 @@
 - 指派保存政策的 Tag 查得到歷史，未指派的只有即時值，學員能說明原因。
 - VisoLink Runtime 顯示即時值；回寫成功且讀回值相符。
 - 學員能說出回寫的四道關卡、DataGateway 維護中時 Agent 的暫存與補傳，以及 S、D、E、G 事件的意思。
-- Enrollment token、WebAPI 密碼、配對碼未出現在作業紀錄或截圖。
+- 學員能說明保存由 DataGateway 保存規則決定，Agent 的「History interval」不影響保存。
+- DataGateway 與 Agent 各建立過一把 Backup API Token，學員能說明只顯示一次與撤銷的影響。
+- Enrollment token、WebAPI 密碼、配對碼、API Token 未出現在作業紀錄或截圖。
 
 ## 十一、Course 08｜備份中心（BackupCenter）
 
-建議時間：150 分鐘。適用：系統管理員。先備：Course 00；VisoLink 自己的備份與 Backup API Token 見 Course 06。對應：備份中心 0.1.0。
+建議時間：150 分鐘。適用：系統管理員。先備：Course 00；VisoLink 自己的備份見 Course 06，DataGateway／Agent 的 API Token 見 Course 07。對應：備份中心 0.1.0。
 
 ### 產品決定（授課時照講）
 
@@ -332,29 +338,30 @@
 - 備份中心獨立：VisoLink、DataGateway、Agent 自己也能手動備份與還原；備份中心加上集中管理、排程與自動化，兩者並存。
 - 還原時所有受管主機停工：切到維護中，停止收集、接收、寫入與修改，結束或失敗後切回原本的模式。
 - 版本不同不允許還原：主機目前的產品版本必須與備份版本相同；授權不在備份內，換機後向原廠重新申請。
+- 三套產品都用各自畫面建立的 Backup API Token 登記：VisoLink 後台「API Token 管理」、DataGateway「系統設定 › API Token 管理」、Agent「系統管理 › API Token 管理」；要勾「讀取與切換運作模式」，還原時才能切到維護中。
 
 ### 單元細節
 
 1. 四個原則與產品自己的備份頁。
-2. 第一次使用順序：改帳密 → 備份密碼 → 存放位置 → 受管主機 → 手動備份 → 排程。
+2. 第一次使用順序：改帳密 → 備份密碼 → 存放位置 → 建立 Backup API Token 並登記受管主機 → 手動備份 → 排程。
 3. 登入與帳號：初始帳密只用於第一次登入與救援；登入失敗鎖定；最近操作紀錄。
 4. 工作狀態：整體狀態、需要處理、執行中、排隊中、最近結果、重新切回運作中。
 5. 備份密碼：AES-256-GCM 加密、只存驗證資料、遺失無法還原、變更只套用到新備份。
 6. 存放位置：主機本機資料夾（不能換機還原）、SMB／NFS、FTP／FTPS／SFTP、測試連線、容量、掃描既有備份。
-7. 受管主機：登記 VL、DG、Agent（Backup API Token、管理金鑰）、實體主機、連線狀態、停用與刪除。
+7. 受管主機：在 VL、DG、Agent 畫面建立 Backup API Token（只顯示一次、遺失就建新的再撤銷舊的），貼到備份中心登記；實體主機、連線狀態（憑證錯誤＝Token 不完整、已撤銷或已過期）、編輯換 Token、停用與刪除。
 8. 備份內容：完整、快速設定、自訂；相依類型；換機必要；不在備份中的資料（授權、Tag 歷史值、Agent 緩衝、加密金鑰）。
 9. 手動備份與追蹤：選對象、模式、存放位置、備註；確認紀錄、明細與最後成功備份。
 10. 排程與保留：四種頻率、預覽、保留份數、立即執行與停用。
 11. 執行控制：佇列規則、觸發順序（DG → Agent → VL）、單一工作的資源限制。
 12. 備份紀錄：篩選、明細（版本、使用哪一天設定的備份密碼）、刪除手動備份、DG 安裝設定包。
-13. 還原：四條規則、事前檢查、原機還原、換機還原、局部還原、衝突策略、還原期間的維護中切換。
-14. TagData：DG 內建 TimescaleDB 完整／差異與排程、InfluxDB 初始化與排程、還原與失敗處理。
+13. 還原：四條規則、事前檢查、原機還原、換機還原（新機器建立 Backup API Token 後更新受管主機）、局部還原、衝突策略、還原期間的維護中切換。
+14. TagData：DG 內建 TimescaleDB 完整／差異與排程、InfluxDB 初始化與排程、還原與失敗處理；還原期間 Agent 在維護中不收集新資料，還原前已進 DG 佇列、以及 Agent 切到維護中之前已收集未送出的暫存資料，切回運作中後仍會寫入。
 15. 備份中心自己的設定同步與新機器還原。
-16. 日常巡檢。
+16. 日常巡檢（含 Token 到期前換新）。
 
 ### 實作（學員在自己的測試環境）
 
-1. 登記受管主機：以測試用憑證登記 VisoLink、DataGateway、Agent 各一台，連線顯示「正常」並帶出版本。
+1. 登記受管主機：在 VisoLink 後台、DataGateway、Agent 的「API Token 管理」各建立一把測試用 Backup API Token（勾選讀取與切換運作模式），複製後貼到備份中心登記三台主機，連線顯示「正常」並帶出版本。
 2. 設定存放位置與備份密碼：新增一個存放位置並測試連線；設定備份密碼並以受管控方式保管。
 3. 手動備份：對三台主機各做一次快速設定備份，在工作狀態追蹤到成功。
 4. 看紀錄：在備份紀錄找到這三筆並核對明細；建立一個每天執行、保留 7 份的排程並預覽接下來 3 次。
@@ -362,11 +369,11 @@
 
 ### 驗收標準
 
-- 工作狀態「全部正常」，三台受管主機連線正常。
+- 工作狀態「全部正常」，三台受管主機以 Backup API Token 登記且連線正常；學員能說出每把 Token 在哪個畫面取得、遺失時怎麼處理。
 - 備份紀錄有三筆手動備份，學員能逐項說明明細。
 - 排程已建立且預覽時間正確，保留份數有理由。
 - 還原事前檢查表每一項都有依據；學員能說明還原後為什麼會少一段資料、為什麼所有主機都停工、升級後舊版本備份為什麼不能還原。
-- Backup API Token、管理金鑰、備份密碼未出現在作業紀錄或截圖。
+- Backup API Token、備份密碼未出現在作業紀錄或截圖。
 
 ## 十二、教材製作標準
 
