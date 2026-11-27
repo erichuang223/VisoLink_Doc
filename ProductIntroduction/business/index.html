@@ -64,7 +64,7 @@
     <div class="family">
       <article class="prod"><div class="role">視覺化平台（主軸）</div><h3>VisoLink</h3><p>把既有資料變成可設計、可分析、可治理的監控畫面。</p><ul><li>連接關聯式、時序與工業資料來源</li><li>自由畫布 Studio、Runtime 分析</li><li>圖面與資料分層權限、稽核</li></ul><span class="ver">1.4.0-beta</span></article>
       <article class="prod dg"><div class="role">設備資料中樞</div><h3>VisoLink DataGateway</h3><p>集中管理 Tag，接收現場資料，依保存政策保存歷史，提供即時、歷史查詢與設備回寫。</p><ul><li>Tag 屬於 DataGateway，換來源歷史不斷</li><li>只保存需要的資料，額度可控</li><li>每筆回寫都有結果與讀回值</li></ul><span class="ver">0.4.0-beta</span></article>
-      <article class="prod agent"><div class="role">現場資料取得</div><h3>DataGateway Agent</h3><p>部署在設備旁，以 Modbus TCP、OPC UA 讀取設備資料推送給 DataGateway，並執行回寫。</p><ul><li>斷線時本機暫存，恢復後自動補傳</li><li>只做取得、推送與回寫，設計精簡</li><li>可放在現場小型設備</li></ul><span class="ver">0.4.0-beta</span></article>
+      <article class="prod agent"><div class="role">現場資料取得</div><h3>DataGateway Agent</h3><p>部署在設備旁，以 Modbus TCP、OPC UA 讀取設備資料推送給 DataGateway，並執行回寫。</p><ul><li>斷線時本機暫存，恢復後自動補傳</li><li>只做取得、推送與回寫，設計精簡</li><li>裝在已備妥 Docker 的主機，靠近設備</li></ul><span class="ver">0.4.0-beta</span></article>
       <article class="prod bc"><div class="role">中央備份與還原</div><h3>VisoLink 備份中心</h3><p>統一排程備份 VisoLink、DataGateway 與 Agent，可還原到原機，或在新機器上換機還原。</p><ul><li>多種存放位置，依保留份數自動清理</li><li>備份檔以備份密碼加密</li><li>換機後 Agent 不必改設定就自動連回</li></ul><span class="ver">0.1.0</span></article>
     </div>
     <div class="combo">
