@@ -10,12 +10,14 @@
 <section class="manual-function" id="bc-records-filter"><span class="function-number">6.1</span><h2>查詢與篩選備份紀錄</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「產品備份 › 備份紀錄」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
 <dl class="field-map"><dt>備份時間點</dt><dd>快照時間；標「掃描找回」表示從存放位置重建，標「檔案遺失」表示檔案已不在存放位置。</dd><dt>主機／來源</dt><dd>主機名稱；來源是「手動」或排程名稱，下方是備註。</dd><dt>備份模式與類型</dt><dd>模式與前幾項資料類型。</dd><dt>存放位置／保留</dt><dd>存放位置與大小；排程備份的保留規則。</dd></dl>
+<figure class="manual-shot"><img src="../img/bc/backup/records-list.jpg" alt="備份紀錄頁：搜尋框、主機、來源、產品與日期篩選，下方三筆手動備份與明細、還原、刪除、安裝設定包按鈕" loading="lazy"><figcaption>每列是一個備份時間點；DG 的紀錄多一個「安裝設定包」按鈕。</figcaption></figure>
 <ol class="steps"><li>用上方搜尋框找主機、來源或存放位置。</li><li>用下拉篩選主機、來源（排程／手動）、產品，或選開始與結束日期。</li><li>按「清除篩選」回到全部紀錄；下方可換頁與每頁筆數。</li></ol>
 <p class="result-box">找到要查看或還原的那一筆。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>沒有紀錄：還沒有備份，或重新安裝後尚未「掃描既有備份」（第 10 章）。</li></ul></div>
 </section>
 <section class="manual-function" id="bc-records-detail"><span class="function-number">6.2</span><h2>查看備份明細</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份紀錄 › 各列「明細」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/backup/records-detail.jpg" alt="備份明細視窗：主機示範廠 DG、時間點、版本 0.4.0-beta、來源、備份模式、存放位置與大小、備份密碼設定日期、包含的資料類型 10／10 項" loading="lazy"><figcaption>明細列出主機、時間點、版本、來源、備份模式、存放位置、用的是哪一天設定的備份密碼，以及包含的資料類型；可直接按「用這份還原」。</figcaption></figure>
 <ol class="steps"><li>按該列的「明細」。</li><li>核對主機、時間點、版本、來源、備份模式、存放位置與大小、使用哪一天設定的備份密碼。</li><li>下方列出包含的資料類型；自訂備份會標出「自動帶入」的類型。</li><li>要用這份還原時按「用這份還原」（第 7 章）。</li></ol>
 <p class="result-box">確認這份備份的內容與能不能換機還原。</p>
 <p class="note">明細的「版本」是備份當時的產品版本。還原時產品版本必須與備份版本相同，否則不允許還原。</p>

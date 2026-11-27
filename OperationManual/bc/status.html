@@ -25,6 +25,8 @@
 <section class="manual-function" id="bc-status-jobs"><span class="function-number">2.3</span><h2>查看執行中、排隊中與最近結果</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>工作狀態 ›「執行中」「排隊中」「最近結果」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>按「取消」會中止該工作</strong></div></div>
 <dl class="field-map"><dt>執行中</dt><dd>每個工作的對象、進度百分比、目前步驟；還原工作另外列出每台主機的運作中／維護中狀態。</dd><dt>排隊中</dt><dd>排隊順位與排隊原因（例如同一台實體主機已有工作、超過同時執行上限）。</dd><dt>最近結果</dt><dd>完成時間、對象、內容、來源（手動或排程名稱）、存放位置、大小、耗時、結果。</dd></dl>
+<figure class="manual-shot"><img src="../img/bc/status/status-running.jpg" alt="工作狀態頁的統計卡與執行中區塊：示範廠 VL 手動完整備份執行中 99%，列出各資料類型與寫入存放位置" loading="lazy"><figcaption>執行中顯示對象、來源與模式、進度百分比，以及每一類資料的進度；排隊中顯示等待原因。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/status/status-recent.jpg" alt="最近結果：示範廠 VL、示範廠 Agent A、示範廠 DG 三筆手動完整備份，存放位置示範本機備份區，結果成功" loading="lazy"><figcaption>完成後在「最近結果」看到完成時間、內容、來源、存放位置、大小、耗時與結果。</figcaption></figure>
 <ol class="steps"><li>在「執行中」看進度；需要中止時按該工作的「取消」。</li><li>在「排隊中」看排在第幾位與原因；不需要的工作可按「取消」。</li><li>在「最近結果」確認成功或失敗；按「全部備份紀錄」到第 6 章查看完整紀錄。</li></ol>
 <p class="result-box">能追蹤每個工作從排隊、執行到完成的狀態。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>工作一直排隊：看排隊原因；同一台實體主機一次只跑一個工作，或到第 11 章調整同時執行上限。</li><li>失敗：看結果欄的說明；常見原因是主機連不到、憑證錯誤或存放位置空間不足。</li></ul></div>

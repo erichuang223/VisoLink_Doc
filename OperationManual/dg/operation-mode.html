@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="維護中會暫停 DG 的資料接收、寫入、回寫、設定修改與查詢，用於還原或主機維護。Agent 的資料會暫存在 Agent 本機，切回運作中後自動補傳。"><title>運作中／維護中｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
 <body><a class="skip-link" href="#main">跳至主要內容</a>
 
-<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="license.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="license.html">上一章</a><a class="top-link" href="api-tokens.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
 
 <div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 14</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-maintenance-switch">14.1 切換</a><a href="#dg-maintenance-effects">14.2 影響</a></nav></aside>
 <main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 14</span><h1>運作中／維護中</h1><p>維護中會暫停 DG 的資料接收、寫入、回寫、設定修改與查詢，用於還原或主機維護。Agent 的資料會暫存在 Agent 本機，切回運作中後自動補傳。</p></header>
@@ -22,5 +22,5 @@
 <p class="warning">維護時間超過 Agent 暫存上限時，Agent 會刪除最舊的暫存資料。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>切回後資料沒有補齊：看 Agent Registry 的 BACKFILL 欄，以及「系統設定 › 診斷與補送」是否暫停補送。</li></ul></div>
 </section>
-<nav class="chapter-end-nav"><a href="license.html">← 授權管理</a><a href="../index.html">返回操作手冊首頁 →</a></nav></main></div>
+<nav class="chapter-end-nav"><a href="license.html">← 授權管理</a><a href="api-tokens.html">API Token 管理 →</a></nav></main></div>
 <footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 14 章 運作中／維護中</footer></body></html>

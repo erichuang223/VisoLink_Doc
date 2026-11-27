@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份 Agent 的設定（連線、Tag、規則等），不包含暫存的待送資料，也不會取代目前的 Agent 身分。"><title>備份與還原｜DataGateway Agent 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
 <body><a class="skip-link" href="#main">跳至主要內容</a>
 
-<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="agent-identity.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway Agent 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">Agent 手冊目錄</a><a class="top-link" href="agent-identity.html">上一章</a><a class="top-link" href="api-tokens.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
 
 <div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 12</p><nav class="manual-nav" aria-label="本章功能"><a href="#agent-backup-download">12.1 下載備份</a><a href="#agent-restore">12.2 還原</a><a href="#agent-backup-center">12.3 備份中心</a></nav></aside>
 <main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">Agent Manual · CHAPTER 12</span><h1>備份與還原</h1><p>備份 Agent 的設定（連線、Tag、規則等），不包含暫存的待送資料，也不會取代目前的 Agent 身分。</p></header>
@@ -23,10 +23,10 @@
 </section>
 <section class="manual-function" id="agent-backup-center"><span class="function-number">12.3</span><h2>用 VisoLink 備份中心排程備份</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>VisoLink 備份中心（另一套系統）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已安裝 VisoLink 備份中心</strong></div></div>
-<ol class="steps"><li>在備份中心登錄這台 Agent 所連的 DG 與 Agent。</li><li>設定排程統一備份；換機時在新機器還原。</li></ol>
+<ol class="steps"><li>在 Agent「系統管理 › API Token 管理」建立 Backup API Token（第 13 章）；DG 也在自己的「API Token 管理」建立。</li><li>在備份中心「受管主機」登錄這台 Agent 所連的 DG 與 Agent，貼上各自的 Token。</li><li>設定排程統一備份；換機時在新機器還原。</li></ol>
 <p class="result-box">換機還原後 Agent 不必改設定就會自動連回 DG；DG「點數使用狀況」中「等待還原」的權杖在還原後開始收集。</p>
 <p class="note">操作步驟請見 VisoLink 備份中心操作手冊。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>換機後沒有連回：確認新機器能連到 DG 的 7180 埠。</li></ul></div>
 </section>
-<nav class="chapter-end-nav"><a href="agent-identity.html">← Agent 資訊</a><a href="../index.html">返回操作手冊首頁 →</a></nav></main></div>
+<nav class="chapter-end-nav"><a href="agent-identity.html">← Agent 資訊</a><a href="api-tokens.html">API Token 管理 →</a></nav></main></div>
 <footer class="page-footer">VisoLink DataGateway Agent 操作手冊 · 第 12 章 備份與還原</footer></body></html>

@@ -1,36 +1,57 @@
 <!doctype html>
 <html lang="zh-Hant">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="登記要備份的 VL、DG、Agent。備份中心每 60 秒檢查一次連線與版本；同一台實體主機上的服務同時只跑一個備份工作。"><title>受管主機｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="登記要備份的 VL、DG、Agent。三套產品都用各自畫面建立的 Backup API Token 連線；備份中心每 60 秒檢查一次連線與版本，同一台實體主機上的服務同時只跑一個備份工作。"><title>受管主機｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
 <body><a class="skip-link" href="#main">跳至主要內容</a>
 
 <header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="tagdata.html">上一章</a><a class="top-link" href="storage.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
 
-<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 09</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-hosts-overview">9.1 主機清單</a><a href="#bc-host-add">9.2 登記主機</a><a href="#bc-host-status">9.3 連線狀態</a><a href="#bc-host-edit">9.4 編輯與停用</a></nav></aside>
-<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 09</span><h1>受管主機</h1><p>登記要備份的 VL、DG、Agent。備份中心每 60 秒檢查一次連線與版本；同一台實體主機上的服務同時只跑一個備份工作。</p></header>
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 09</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-hosts-overview">9.1 主機清單</a><a href="#bc-host-tokens">9.2 取得 API Token</a><a href="#bc-host-add">9.3 登記主機</a><a href="#bc-host-status">9.4 連線狀態</a><a href="#bc-host-edit">9.5 編輯與停用</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 09</span><h1>受管主機</h1><p>登記要備份的 VL、DG、Agent。三套產品都用各自畫面建立的 Backup API Token 連線；備份中心每 60 秒檢查一次連線與版本，同一台實體主機上的服務同時只跑一個備份工作。</p></header>
 <section class="manual-function" id="bc-hosts-overview"><span class="function-number">9.1</span><h2>查看受管主機清單</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「設定 › 受管主機」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
-<figure class="manual-shot"><img src="../img/bc/settings/hosts-empty.jpg" alt="受管主機頁：搜尋與篩選工具列、主機清單與新增按鈕" loading="lazy"><figcaption>清單依實體主機分組，顯示名稱、產品、位址、版本、連線、最後檢查與最後成功備份。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/settings/hosts-list.jpg" alt="受管主機頁：實體主機「示範主機 01」底下的示範廠 Agent A、示範廠 DG、示範廠 VL，連線都是正常" loading="lazy"><figcaption>清單依實體主機分組，顯示名稱、產品、位址、版本、連線、最後檢查與最後成功備份。</figcaption></figure>
 <ol class="steps"><li>用搜尋框找名稱、位址或實體主機；用下拉篩選產品與連線狀態。</li><li>按「最後成功備份」的時間可以跳到該主機的備份紀錄。</li></ol>
 <p class="result-box">知道每台主機能不能備份、上次成功是什麼時候。</p>
-<div class="note-box"><strong>失敗時先查</strong><ul><li>清單是空的：按「新增」登記主機（下一節）。</li></ul></div>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>清單是空的：先取得各產品的 API Token（下一節），再按「新增」登記主機。</li></ul></div>
 </section>
-<section class="manual-function" id="bc-host-add"><span class="function-number">9.2</span><h2>登記 VL、DG、Agent</h2>
-<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>受管主機 › 右上角「新增」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；產品端的備份憑證</strong></div></div>
-<dl class="field-map"><dt>產品</dt><dd>VisoLink（VL）、DataGateway（DG）或 DG-Agent；儲存後不能改。</dd><dt>名稱</dt><dd>在備份中心顯示的名稱，例如「示範廠 VL」。</dd><dt>位址</dt><dd>備份中心連得到的產品位址，格式 <code>http://主機:連接埠</code>。</dd><dt>實體主機</dt><dd>這個服務所在的機器名稱；同一台實體主機的服務依序備份。</dd><dt>Backup API Token（VL）</dt><dd>在 VL 後台建立的 Backup API Token。</dd><dt>管理金鑰（DG／Agent）</dt><dd>DG 或 Agent 安裝時設定的管理金鑰。</dd></dl>
-<ol class="steps"><li>按「新增」。</li><li>選「產品」，填「名稱」「位址」「實體主機」。</li><li>在憑證欄貼上該產品的 Backup API Token 或管理金鑰（向系統管理員取得，不要寫在文件或訊息裡）。</li><li>按「測試連線」，看到「正常」與回應時間。</li><li>按「儲存」。依序登記 VL、DG 與 Agent。</li></ol>
-<p class="result-box">清單出現這台主機，連線顯示「正常」並帶出產品版本。</p>
-<div class="note-box"><strong>失敗時先查</strong><ul><li>「連不到」：位址要用備份中心伺服器連得到的位址與連接埠，確認防火牆。</li><li>「憑證錯誤」：Token 或管理金鑰錯誤，或 VL 的 Token 沒有備份權限。</li><li>「產品尚未支援備份工作介面」：產品版本太舊，不能選來備份或還原。</li></ul></div>
+<section class="manual-function" id="bc-host-tokens"><span class="function-number">9.2</span><h2>取得 VL、DG、Agent 的 Backup API Token</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>VL 後台「API Token 管理」；DG「系統設定 › API Token 管理」；Agent「系統管理 › API Token 管理」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>VL 後台管理員、DG 管理員、Agent 本機管理帳號</strong></div></div>
+<p>備份中心對每台主機只需要一把憑證：在該產品畫面建立的 Backup API Token。完整 Token 只在建立當下顯示一次，請直接複製貼到備份中心，不要另外記在文件或訊息裡。</p>
+<h3>VL：在 VL 後台建立</h3>
+<figure class="manual-shot"><img src="../img/bc/settings/vl-token-create.jpg" alt="VL 後台 API Token 管理頁：名稱填示範廠備份中心、Token 類型備份 API、到期時間空白、已勾同時允許讀取與切換運作模式" loading="lazy"><figcaption>VL 後台「API Token 管理」：名稱、Token 類型「備份 API」、到期時間，並勾選「同時允許讀取與切換運作模式（運作中／維護中）」。</figcaption></figure>
+<ol class="steps"><li>登入 VL 後台，開左側「API Token 管理」。</li><li>「名稱」輸入用途，例如「示範廠備份中心」；「Token 類型」選「備份 API」；「到期時間」留空表示不過期。</li><li>確認勾選「同時允許讀取與切換運作模式（運作中／維護中）」：備份中心還原時要把 VL 切到維護中。</li><li>按「＋ 建立 Token」。</li><li>上方「立即複製此 Token」區塊顯示完整 Token（<code>vlk_</code> 開頭），按「複製」。</li></ol>
+<figure class="manual-shot"><img src="../img/bc/settings/vl-token-shown.jpg" alt="VL 建立 Token 後的立即複製此 Token 區塊，完整 Token 已遮蔽，右側複製按鈕" loading="lazy"><figcaption>「基於安全考量，完整 Token 僅顯示一次。」圖中 Token 已遮蔽。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/settings/vl-token-list.jpg" alt="VL API Token 清單：示範廠備份中心、範圍 backup.create 與 system.operation-mode、類型 Backup、前綴、建立時間、到期永不、狀態啟用中、撤銷按鈕" loading="lazy"><figcaption>清單只顯示前綴；範圍要有 <code>backup.create</code> 與 <code>system.operation-mode</code>。VL 的完整說明見 <a href="../backend/api-tokens.html#token-create">後台手冊第 16 章</a>。</figcaption></figure>
+<h3>DG：在 DG 管理畫面建立</h3>
+<ol class="steps"><li>登入 DG，開左側「系統設定 › API Token 管理」。</li><li>「名稱」輸入用途，「類型」為「Backup API（備份中心）」，保持勾選「同時允許讀取與切換運作模式（運作中／維護中）」，按「建立 Token」。</li><li>上方「「名稱」已建立」區塊顯示完整 Token（<code>dgk_</code> 開頭），按「複製」。</li></ol>
+<figure class="manual-shot"><img src="../img/dg/api-tokens/shown.jpg" alt="DG 建立 Token 後只顯示一次的區塊，完整 Token 已遮蔽，複製按鈕顯示已複製" loading="lazy"><figcaption>DG：「完整 Token 只顯示這一次，請現在複製並貼到備份中心。」詳細步驟見 <a href="../dg/api-tokens.html#dg-api-token-create">DataGateway 手冊第 15 章</a>。</figcaption></figure>
+<h3>Agent：在每台 Agent 的管理畫面建立</h3>
+<ol class="steps"><li>登入這台 Agent，開左側「系統管理 › API Token 管理」（每台 Agent 各自建立）。</li><li>同 DG 的步驟建立 Token，完整 Token 以 <code>dak_</code> 開頭，按「複製」。</li></ol>
+<figure class="manual-shot"><img src="../img/agent/api-tokens/shown.jpg" alt="Agent 建立 Token 後只顯示一次的區塊，完整 Token 已遮蔽" loading="lazy"><figcaption>Agent：每台 Agent 管自己的 Token。詳細步驟見 <a href="../agent/api-tokens.html#agent-api-token-create">Agent 手冊第 13 章</a>。</figcaption></figure>
+<p class="result-box">三套產品各有一把有效的 Backup API Token，已複製、準備貼到備份中心。</p>
+<p class="note">DG、Agent 伺服器上的管理金鑰是最高權限金鑰，維持不變、不在畫面顯示，也不用來登記備份中心。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>忘了複製、Token 遺失：完整 Token 無法再查看，在同一頁建立新的 Token，再撤銷舊的。</li><li>VL 沒有勾「讀取與切換運作模式」：備份可以做，但還原時無法把 VL 切到維護中；重新建立一把有勾選的 Token。</li></ul></div>
 </section>
-<section class="manual-function" id="bc-host-status"><span class="function-number">9.3</span><h2>連線狀態的意思</h2>
+<section class="manual-function" id="bc-host-add"><span class="function-number">9.3</span><h2>登記 VL、DG、Agent</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>受管主機 › 右上角「新增」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；已取得該產品的 Backup API Token（上一節）</strong></div></div>
+<dl class="field-map"><dt>產品</dt><dd>VisoLink（VL）、DataGateway（DG）或 DG-Agent；儲存後不能改。</dd><dt>名稱</dt><dd>在備份中心顯示的名稱，例如「示範廠 VL」。</dd><dt>位址</dt><dd>備份中心伺服器連得到的產品位址，格式 <code>http://主機:連接埠</code>，例如 <code>http://vl.example.local:6080</code>（VL 伺服器 API）、<code>http://dg.example.local:5180</code>（DG）、<code>http://agent.example.local:5181</code>（Agent）。</dd><dt>實體主機</dt><dd>這個服務所在的機器名稱，例如「示範主機 01」；同一台實體主機的服務依序備份。</dd><dt>Backup API Token</dt><dd>貼上 9.2 在該產品畫面建立的 Token；欄位會依產品提示 <code>vlk_…</code>、<code>dgk_…</code>、<code>dak_…</code>，輸入內容不顯示。</dd></dl>
+<figure class="manual-shot"><img src="../img/bc/settings/hosts-add-vl.jpg" alt="新增受管主機視窗：產品 VisoLink（VL）、名稱示範廠 VL、位址、實體主機示範主機 01、Backup API Token 已遮蔽，測試結果正常 已連上 VisoLink 1.4.0-beta" loading="lazy"><figcaption>VL：測試連線顯示「正常　已連上 VisoLink 1.4.0-beta（VisoLink）。」</figcaption></figure>
+<ol class="steps"><li>按「新增」。</li><li>選「產品」，填「名稱」「位址」「實體主機」。</li><li>在「Backup API Token」貼上該產品的 Token。</li><li>按「測試連線」，看到「正常　已連上 …」與回應時間。</li><li>按「儲存」，右下角出現「已儲存 名稱：正常」。依序登記 VL、DG 與 Agent。</li></ol>
+<figure class="manual-shot"><img src="../img/bc/settings/hosts-add-dg.jpg" alt="新增受管主機視窗：產品 DataGateway（DG）、名稱示範廠 DG，Token 欄提示在 DG 系統設定 API Token 管理建立，測試結果正常 已連上 DataGateway 0.4.0-beta" loading="lazy"><figcaption>DG：欄位下方提示「在 DG『系統設定 → API Token 管理』建立的 Backup API Token（勾選讀取與切換運作模式）」。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/settings/hosts-add-agent.jpg" alt="新增受管主機視窗：產品 DG-Agent、名稱示範廠 Agent A，測試結果正常 已連上 DataGatewayAgent 0.4.0-beta" loading="lazy"><figcaption>Agent：每台 Agent 各登記一筆，貼上該台 Agent 建立的 Token。</figcaption></figure>
+<p class="result-box">清單出現這台主機，連線顯示「正常」並帶出產品版本（9.1 的圖）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「連不到」：位址要用備份中心伺服器連得到的位址與連接埠，確認防火牆。VL 要填伺服器 API 的位址，不是後台或前台網頁。</li><li>「憑證錯誤」：Token 貼得不完整、已撤銷或已過期；回到產品的「API Token 管理」看狀態，必要時建立新的。</li><li>「產品尚未支援備份工作介面」：產品版本太舊，不能選來備份或還原。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-host-status"><span class="function-number">9.4</span><h2>連線狀態的意思</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>受管主機 ›「連線」欄</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
-<dl class="field-map"><dt>正常</dt><dd>可以備份與還原。</dd><dt>連不到</dt><dd>位址錯誤、服務沒開或網路不通。</dd><dt>憑證錯誤</dt><dd>Token 或管理金鑰錯誤。</dd><dt>產品尚未支援備份工作介面</dt><dd>產品版本不支援，不能選來備份或還原。</dd><dt>資料類型不一致</dt><dd>產品回報的資料類型與備份中心不同，請確認兩邊版本。</dd><dt>已停用</dt><dd>不檢查連線、不派工。</dd></dl>
+<dl class="field-map"><dt>正常</dt><dd>可以備份與還原。</dd><dt>連不到</dt><dd>位址錯誤、服務沒開或網路不通。</dd><dt>憑證錯誤</dt><dd>API Token 錯誤、已撤銷或已過期。</dd><dt>產品尚未支援備份工作介面</dt><dd>產品版本不支援，不能選來備份或還原。</dd><dt>資料類型不一致</dt><dd>產品回報的資料類型與備份中心不同，請確認兩邊版本。</dd><dt>已停用</dt><dd>不檢查連線、不派工。</dd></dl>
 <ol class="steps"><li>狀態每 60 秒自動更新，「最後檢查」顯示時間。</li></ol>
-<p class="result-box">依狀態決定要修正位址、憑證或產品版本。</p>
+<p class="result-box">依狀態決定要修正位址、Token 或產品版本。</p>
 </section>
-<section class="manual-function" id="bc-host-edit"><span class="function-number">9.4</span><h2>編輯、停用與刪除主機</h2>
+<section class="manual-function" id="bc-host-edit"><span class="function-number">9.5</span><h2>編輯、停用與刪除主機</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>受管主機 › 各列「編輯」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>停用後不檢查連線、不派工，排程會略過這台</strong></div></div>
-<ol class="steps"><li>按「編輯」修改名稱、位址、實體主機；憑證欄留空表示不變更。</li><li>勾「停用（不檢查連線、不派工）」暫停這台主機。</li><li>沒有備份紀錄的主機才能按「刪除」；有備份紀錄的只能停用。</li><li>按「儲存」。</li></ol>
-<p class="result-box">清單更新；換機後記得在這裡更新位址與憑證。</p>
+<ol class="steps"><li>按「編輯」修改名稱、位址、實體主機；「Backup API Token」留空表示不變更，換 Token 時貼上新的。</li><li>勾「停用（不檢查連線、不派工）」暫停這台主機。</li><li>沒有備份紀錄的主機才能按「刪除」；有備份紀錄的只能停用。</li><li>按「儲存」。</li></ol>
+<p class="result-box">清單更新；換機或 Token 到期前，記得在這裡更新位址與 Token。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>「刪除」不能按：這台主機有備份紀錄，只能停用。</li></ul></div>
 </section>
 <nav class="chapter-end-nav"><a href="tagdata.html">← TagData 資料庫</a><a href="storage.html">存放位置 →</a></nav></main></div>

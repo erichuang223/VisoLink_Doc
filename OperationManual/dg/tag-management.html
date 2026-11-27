@@ -24,7 +24,7 @@
 </section>
 <section class="manual-function" id="tag-edit-source"><span class="function-number">7.3</span><h2>改名、更換或移除來源</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 管理 › 該列「詳細」› Tag 詳細</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 DG；DG 為運作中</strong></div></div>
-<figure class="manual-shot"><img src="../img/dg/tag-management/tag-detail.jpg" alt="Tag 詳細視窗：名稱、型別、寫入來源與改連結、移除來源按鈕" loading="lazy"><figcaption>保存間隔與是否保存重複值跟著來源點，在 Agent 畫面設定。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/dg/tag-management/tag-detail.jpg" alt="Tag 詳細視窗：名稱、型別、寫入來源與改連結、移除來源按鈕" loading="lazy"><figcaption>視窗裡的「保存間隔」「保存重複值」來自 Agent 點的舊版欄位，DataGateway 0.4 不依它們保存；實際保存方式看第 8 章指派的保存規則。</figcaption></figure>
 <ol class="steps"><li>按該 Tag 的「詳細」。</li><li>改名：修改 Tag 名稱或顯示名稱，按「儲存名稱」。InfluxDB 資料名稱是唯讀，改名不影響已保存的歷史。</li><li>更換來源：按「改連結」，依序選 Agent、連線與點（只列出相同資料型別的點）後確認。若該點已連到另一個 Tag，會跳出「這個點已連到另一個 Tag」，確認後原 Tag 變成「無來源」。</li><li>移除來源：按「移除來源」，確認視窗「移除來源？」後確認。Tag 變成「無來源」，該點之後不會再自動建立 Tag。</li><li>按「關閉」離開。</li></ol>
 <p class="result-box">清單的來源欄與來源狀態更新；歷史資料保留在同一個 Tag 下。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>點選單是空的：該 Agent 沒有相同資料型別的點。</li></ul></div>

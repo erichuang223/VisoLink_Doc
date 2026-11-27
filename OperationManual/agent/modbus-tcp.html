@@ -32,9 +32,9 @@
 <section class="manual-function" id="modbus-tags-from-read"><span class="function-number">6.4</span><h2>從讀取結果建立 Tag</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Modbus 連線 ›「Tag 設定」›「從讀取結果建立」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已建立 Read Block；設備在線</strong></div></div>
 <figure class="manual-shot"><img src="../img/agent/modbus-tcp/modbus-tags.jpg" alt="Modbus Tag 設定：選擇建立方式與已建立的 Tags" loading="lazy"><figcaption>「從讀取結果建立」適合一般設定；「手動／進階設定」可離線指定。</figcaption></figure>
-<ol class="steps"><li>選「從讀取結果建立」，選擇 Read Block 與資料型別（例如 Float32 2 registers），按「讀取並預覽」。</li><li>表格列出每筆原始 Registers、HEX 與解碼值；在正確的那一列按「選取」。</li><li>右側顯示不同 Byte／Word Order 的解碼結果，可改選正確的組合。</li><li>填名稱、顯示名稱；可設定 Value Conversion、History interval（保存間隔）與是否保存重複值。</li><li>按「確認此值並建立 Tag」。</li></ol>
+<ol class="steps"><li>選「從讀取結果建立」，選擇 Read Block 與資料型別（例如 Float32 2 registers），按「讀取並預覽」。</li><li>表格列出每筆原始 Registers、HEX 與解碼值；在正確的那一列按「選取」。</li><li>右側顯示不同 Byte／Word Order 的解碼結果，可改選正確的組合。</li><li>填名稱、顯示名稱；需要時設定 Value Conversion。「History interval (seconds)」與「保存重複值」保持預設即可（見下方說明）。</li><li>按「確認此值並建立 Tag」。</li></ol>
 <p class="result-box">「已建立的 Tags」出現新 Tag，例如「holding:0 · Float32 · 每 60 秒保存」；Coil 會自動存成 Bool。</p>
-<p class="note">保存間隔與是否保存重複值跟著 Agent 的點；但要不要保存、怎麼保存，由 DG「歷史保存設定」決定。</p>
+<p class="note">Tag 上的「History interval」與「保存重複值」是舊版保留下來的欄位，Agent 只把它們隨資料送給 DG；DataGateway 0.4 不依這兩個欄位保存歷史，Tag 清單的「每 60 秒保存」也只是顯示這個欄位。要不要保存、多久存一筆、值沒變時存不存，一律由 DG「歷史保存設定」的保存規則決定（DataGateway 手冊第 8 章）；沒有指派保存規則的 Tag 只有即時值。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>解碼值不合理：改選其他 Byte／Word Order，或確認資料型別。</li></ul></div>
 </section>
 <section class="manual-function" id="modbus-tags-manual"><span class="function-number">6.5</span><h2>手動／進階設定 Tag</h2>

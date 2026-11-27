@@ -7,20 +7,21 @@
 
 ## 執行狀態
 
-- DG 手冊：14 章、54 項功能，完成。
-- Agent 手冊：12 章、39 項功能，完成。
-- 截圖：DG 25 張、Agent 19 張（`img/dg/<章節>/`、`img/agent/<章節>/`，JPG）。
+- DG 手冊：15 章、58 項功能（2026-11-28 新增第 15 章 API Token 管理）。
+- Agent 手冊：13 章、43 項功能（2026-11-28 新增第 13 章 API Token 管理）。
+- 截圖：DG 28 張、Agent 22 張（`img/dg/<章節>/`、`img/agent/<章節>/`，JPG）。
 - 首頁 `OperationManual/index.html`：新增 MANUAL 03／04 入口與「DataGateway／Agent 功能索引」，索引與章節錨點一對一。
 
 ## 撰寫規則
 
-1. 章節依實際左側選單由上而下；登入獨立成第 1 章。總覽頁內的 Agent Registry 因為是獨立工作（核准），DG 另立第 3 章；維護中切換位在系統設定，但獨立成第 14 章方便查找。
+1. 章節依實際左側選單由上而下；登入獨立成第 1 章。總覽頁內的 Agent Registry 因為是獨立工作（核准），DG 另立第 3 章；維護中切換位在系統設定，但獨立成第 14 章方便查找。API Token 管理（DG 在系統設定下、Agent 在系統管理下）是 0.4.0-beta 後加入的頁面，接在最後成 DG 第 15 章、Agent 第 13 章，既有章號與錨點不變。
 2. 每項功能固定寫：功能位置、前置條件與權限、操作步驟、完成判斷、失敗時先查；有不可復原的操作加「影響與風險」。
 3. 錨點用固定英文 id，首頁索引、章節頁側欄與本表三處一致；改名稱不改錨點。
 4. 按鈕與欄位名稱照畫面原文，用「」標示。不寫畫面上沒有的功能。
 5. 公開網站限制：不寫 AuthServer、License Center、價格、內部主機名或 IP、客戶資料。位址一律寫成 `<DG 位址>`。
 6. 截圖規則：截圖前只在瀏覽器畫面上把 DEV 主機 IP 換成 `dg.example.local`；Enrollment token、WebAPI 帳號與密碼、VisoLink 配對碼保持隱藏；憑證指紋、License Key、授權編號、客戶名稱在畫面上替換為遮蔽文字後再拍。只瀏覽、不改 DEV 設定。
-7. 產品決定照寫：沒有保存政策的 Tag 不保存；Agent 只做取得、推送、接收、回寫；DG 維護中時 Agent 暫存、恢復後補傳（Agent 自己維護中則不收集）。
+7. 產品決定照寫：沒有保存政策的 Tag 不保存；Agent 只做取得、推送、接收、回寫；DG 維護中時 Agent 暫存、恢復後補傳（Agent 自己維護中則不收集）。Agent Tag 上的「History interval」「保存重複值」是舊版保留欄位，DG 0.4 不依它們保存（`HistoryPolicyIntake.cs`：只經保存規則保存，沒有退回 Tag 舊設定），手冊寫成「保持預設，保存方式在 DG 歷史保存設定」。
+8. API Token 章：Token 截圖前把完整值改成假字串、前綴改成 xxxxxxxx，只留本次建立的示範 Token 列（其他開發用 Token 從畫面上隱藏）；帳號名改成 manager。
 
 ## DataGateway 章節對照
 
@@ -40,6 +41,7 @@
 | 12. 備份與還原 | 系統設定 › 備份與還原 | `dg/backup-restore.html` | 12.1 建立設定備份（`#dg-backup-config`）<br>12.2 還原設定備份（`#dg-restore-config`）<br>12.3 備份 TagData 與 InfluxDB 資料（`#dg-backup-tagdata`）<br>12.4 用 VisoLink 備份中心排程備份（`#dg-backup-center`） |
 | 13. 授權管理 | 授權管理（管理員） | `dg/license.html` | 13.1 查看授權狀態與 License Key（`#dg-license-overview`）<br>13.2 新增 License Key（`#dg-license-add`）<br>13.3 離線啟用（`#dg-license-offline`）<br>13.4 查看點數使用狀況（`#dg-license-usage`）<br>13.5 查看授權使用歷史（`#dg-license-history`） |
 | 14. 運作中／維護中 | 系統設定 › 系統概覽「運作狀態」 | `dg/operation-mode.html` | 14.1 切到維護中與切回運作中（`#dg-maintenance-switch`）<br>14.2 維護中的影響（`#dg-maintenance-effects`） |
+| 15. API Token 管理 | 系統設定 › API Token 管理 | `dg/api-tokens.html` | 15.1 建立 Backup API Token（`#dg-api-token-create`）<br>15.2 複製只顯示一次的 Token，貼到備份中心（`#dg-api-token-copy`）<br>15.3 查看已建立的 Token 與到期提醒（`#dg-api-token-list`）<br>15.4 撤銷 Token（`#dg-api-token-revoke`） |
 
 ## Agent 章節對照
 
@@ -57,6 +59,7 @@
 | 10. 帳號設定 | 系統管理 › 帳號設定 | `agent/account.html` | 10.1 修改本機帳號與密碼（`#agent-account`） |
 | 11. Agent 資訊 | 系統管理 › Agent 資訊 | `agent/agent-identity.html` | 11.1 修改 Agent 名稱（`#agent-name`）<br>11.2 查看版本資訊（`#agent-version`） |
 | 12. 備份與還原 | 系統管理 › 備份與還原 | `agent/backup-restore.html` | 12.1 下載設定備份（`#agent-backup-download`）<br>12.2 安全還原設定（`#agent-restore`）<br>12.3 用 VisoLink 備份中心排程備份（`#agent-backup-center`） |
+| 13. API Token 管理 | 系統管理 › API Token 管理 | `agent/api-tokens.html` | 13.1 建立 Backup API Token（`#agent-api-token-create`）<br>13.2 複製只顯示一次的 Token，貼到備份中心（`#agent-api-token-copy`）<br>13.3 查看已建立的 Token 與到期提醒（`#agent-api-token-list`）<br>13.4 撤銷 Token（`#agent-api-token-revoke`） |
 
 ## 沒有截圖的畫面
 

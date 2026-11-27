@@ -31,7 +31,7 @@
 </section>
 <section class="manual-function" id="dg-backup-center"><span class="function-number">12.4</span><h2>用 VisoLink 備份中心排程備份</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>VisoLink 備份中心（另一套系統）</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已安裝 VisoLink 備份中心</strong></div></div>
-<ol class="steps"><li>在備份中心登錄這台 DG 與連線的 Agent。</li><li>設定排程，統一備份 DG 與 Agent。</li><li>需要時還原到原機，或在新機器上換機還原。</li></ol>
+<ol class="steps"><li>在 DG「系統設定 › API Token 管理」建立 Backup API Token（第 15 章），Agent 也在各自的「API Token 管理」建立。</li><li>在備份中心「受管主機」登錄這台 DG 與連線的 Agent，貼上各自的 Token。</li><li>設定排程，統一備份 DG 與 Agent。</li><li>需要時還原到原機，或在新機器上換機還原。</li></ol>
 <p class="result-box">DG 與 Agent 依排程自動備份；換機後 Agent 不必改設定就會自動連回。</p>
 <p class="note">操作步驟請見 VisoLink 備份中心操作手冊。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>換機後 Agent 沒連回：確認新 DG 的位址與憑證與原機一致。</li></ul></div>

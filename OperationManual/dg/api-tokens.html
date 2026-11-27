@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="在 DG 畫面建立給備份中心等外部程式用的 Backup API Token：權限只限備份用途、可設到期、可撤銷。伺服器上的管理金鑰維持不變、不在畫面顯示。"><title>API Token 管理｜DataGateway 操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="DataGateway／Agent 0.4.0-beta"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">DataGateway 操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">DG 手冊目錄</a><a class="top-link" href="operation-mode.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 15</p><nav class="manual-nav" aria-label="本章功能"><a href="#dg-api-token-create">15.1 建立 Token</a><a href="#dg-api-token-copy">15.2 複製並貼到備份中心</a><a href="#dg-api-token-list">15.3 清單與到期提醒</a><a href="#dg-api-token-revoke">15.4 撤銷</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">DataGateway Manual · CHAPTER 15</span><h1>API Token 管理</h1><p>在 DG 畫面建立給備份中心等外部程式用的 Backup API Token：權限只限備份用途、可設到期、可撤銷。伺服器上的管理金鑰維持不變、不在畫面顯示，日常串接一律用這裡建立的 Token。</p></header>
+<section class="manual-function" id="dg-api-token-create"><span class="function-number">15.1</span><h2>建立 Backup API Token</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「系統設定 › API Token 管理」›「建立 Token」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/api-tokens/create.jpg" alt="DG API Token 管理頁：建立 Token 區的名稱、類型、到期時間與讀取與切換運作模式勾選框" loading="lazy"><figcaption>名稱寫用途與使用的程式，例如「示範廠備份中心」；類型固定為 Backup API（備份中心）。</figcaption></figure>
+<dl class="field-map"><dt>名稱</dt><dd>必填，最多 200 字；用來辨認是哪個程式在用，例如「備份中心-主機房」。</dd><dt>類型</dt><dd>「Backup API（備份中心）」。</dd><dt>到期時間</dt><dd>留空＝永不過期；設定時必須在現在之後。</dd><dt>固定權限</dt><dd>備份中心的備份與還原、登記主機時的連線測試。其他管理功能一律不開放。</dd><dt>同時允許讀取與切換運作模式</dt><dd>預設勾選。備份中心還原時要把 DG 切到維護中，給備份中心用的 Token 請保持勾選。</dd></dl>
+<ol class="steps"><li>開啟「系統設定 › API Token 管理」。</li><li>在「名稱」輸入用途，例如「示範廠備份中心」。</li><li>需要到期時設定「到期時間」，不設就留空。</li><li>確認「同時允許讀取與切換運作模式（運作中／維護中）」已勾選。</li><li>按「建立 Token」。</li></ol>
+<p class="result-box">頁面上方出現「「名稱」已建立」的黃色區塊，顯示完整 Token（下一節），下方「已建立的 Token」清單多一筆，狀態「有效」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>名稱欄變紅「請輸入名稱」：名稱是必填。</li><li>「到期時間必須在現在之後」：改成未來的時間，或留空表示不過期。</li><li>出現「建立失敗」：目前登入的帳號不是 DG 管理員。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-api-token-copy"><span class="function-number">15.2</span><h2>複製只顯示一次的 Token，貼到備份中心</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>API Token 管理 › 建立後上方的「已建立」區塊</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>剛按下「建立 Token」</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/api-tokens/shown.jpg" alt="Token 建立後只顯示一次的區塊：完整 Token 欄位（已遮蔽）、複製按鈕與我已複製，關閉" loading="lazy"><figcaption>完整 Token 以 <code>dgk_</code> 開頭，只顯示這一次（圖中已遮蔽）。</figcaption></figure>
+<ol class="steps"><li>按欄位右邊的「複製」，按鈕變成「已複製」。</li><li>到備份中心「受管主機」新增或編輯這台 DG，把 Token 貼到「Backup API Token」欄（備份中心手冊 <a href="../bc/hosts.html#bc-host-tokens">9.2</a>）。</li><li>確認備份中心測試連線正常後，回到 DG 按「我已複製，關閉」。</li></ol>
+<p class="result-box">備份中心顯示「正常　已連上 DataGateway …」；DG 清單中這筆 Token 的「最後使用」開始顯示時間。</p>
+<p class="warning">完整 Token 只顯示這一次，DG 只保存前綴與驗證資料，之後無法再查看。忘了複製或遺失時，建立一個新的 Token，再撤銷舊的。不要把 Token 寫在文件、郵件或聊天訊息裡。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>按「複製」沒有變成「已複製」：瀏覽器不允許寫入剪貼簿，改用滑鼠選取欄位全文複製。</li><li>備份中心顯示「憑證錯誤」：貼上的內容不完整，或 Token 已撤銷、已過期。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-api-token-list"><span class="function-number">15.3</span><h2>查看已建立的 Token 與到期提醒</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>API Token 管理 ›「已建立的 Token」；總覽頁的 API Token 提醒</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div></div>
+<figure class="manual-shot"><img src="../img/dg/api-tokens/list.jpg" alt="已建立的 Token 清單：名稱與權限、前綴、建立、到期、最後使用時間、狀態與撤銷按鈕" loading="lazy"><figcaption>清單只顯示前綴，不顯示完整 Token。</figcaption></figure>
+<dl class="field-map"><dt>名稱與權限</dt><dd>名稱，以及「Backup API：備份與還原、運作模式」等權限。</dd><dt>前綴</dt><dd>Token 開頭的一段，用來核對備份中心用的是哪一把。</dd><dt>時間</dt><dd>建立、到期（永不過期或日期）、最後使用（還沒用過或時間）。</dd><dt>狀態</dt><dd>有效、已撤銷、已過期。</dd></dl>
+<ol class="steps"><li>看「最後使用」確認備份中心有在用這把 Token。</li><li>到「總覽」看提醒：沒有任何有效 Token 時顯示「尚未建立 API Token，備份中心無法用 Token 連線。」；有 Token 將在 7 天內到期時顯示「N 個 API Token 將在 7 天內到期。」，按「前往 API Token 管理」處理。</li></ol>
+<p class="result-box">知道每把 Token 是否有效、何時到期、最近有沒有被使用。</p>
+<p class="note">DG 的設定備份（第 12 章與備份中心）包含「API Token」資料類型，只存前綴與雜湊、不含 Token 本身；還原後原本的 Token 可以繼續使用。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>Token 快到期：先建立新的 Token 貼到備份中心，確認正常後再撤銷舊的。</li><li>「讀不到 Token 清單」：確認目前帳號是 DG 管理員、DG 服務正常。</li></ul></div>
+</section>
+<section class="manual-function" id="dg-api-token-revoke"><span class="function-number">15.4</span><h2>撤銷 Token</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>API Token 管理 ›「已建立的 Token」各列「撤銷」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>DG 管理員</strong></div><div class="meta-item"><span>影響</span><strong>使用這把 Token 的程式立刻無法連線</strong></div></div>
+<ol class="steps"><li>先確認用這把 Token 的程式已換成新的 Token（例如備份中心已更新）。</li><li>在該列按「撤銷」。</li><li>確認視窗「撤銷這個 Token？」按「撤銷」。</li></ol>
+<p class="result-box">狀態變成「已撤銷」，「撤銷」按鈕消失；備份中心該主機的連線變成「憑證錯誤」，直到換上新 Token。</p>
+<p class="warning">撤銷不能復原。伺服器上的管理金鑰不受影響，也不會在這頁顯示。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>撤銷後備份中心排程失敗：到備份中心「受管主機」編輯這台 DG，貼上新的 Token。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="operation-mode.html">← 運作中／維護中</a><a href="../index.html">返回操作手冊首頁 →</a></nav></main></div>
+<footer class="page-footer">VisoLink DataGateway 操作手冊 · 第 15 章 API Token 管理</footer></body></html>

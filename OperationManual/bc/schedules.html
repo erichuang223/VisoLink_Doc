@@ -9,7 +9,7 @@
 <main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 05</span><h1>排程與保留</h1><p>讓備份中心定時自動備份產品。最小單位為小時；每個排程各自設定保留份數，超過時從最舊的開始刪除。時間以備份中心時區顯示。TagData 的排程在第 8 章。</p></header>
 <section class="manual-function" id="bc-schedule-create"><span class="function-number">5.1</span><h2>新增產品備份排程</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「產品備份 › 排程」› 右上角「新增排程」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；已有存放位置與受管主機</strong></div></div>
-<figure class="manual-shot"><img src="../img/bc/backup/schedule-new.jpg" alt="新增產品備份排程視窗：名稱、狀態、對象、備份模式與頻率" loading="lazy"><figcaption>視窗依序填名稱與狀態、對象、備份模式與資料類型、頻率、存放位置與保留份數。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/backup/schedule-targets.jpg" alt="新增產品備份排程視窗：名稱示範每日備份、狀態停用、對象勾選示範廠 Agent A、示範廠 DG、示範廠 VL，備份模式完整備份" loading="lazy"><figcaption>視窗依序填名稱與狀態、對象、備份模式與資料類型、頻率、存放位置與保留份數。</figcaption></figure>
 <ol class="steps"><li>按「新增排程」。</li><li>填「名稱」（例：每日設定備份），「狀態」選「啟用」。</li><li>在「對象」勾選主機，或勾某產品的「全部（含之後新增的）」：之後新增的同產品主機會在下一次觸發時自動加入。</li><li>選「備份模式」與資料類型（同手動備份）。</li><li>設定「頻率」（見下一節），按「預覽接下來 3 次」確認時間。</li><li>選「存放位置」與「保留份數」，按「儲存」。</li></ol>
 <p class="result-box">排程出現在清單，顯示對象、備份模式、頻率、存放位置、保留份數與下次執行時間。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>儲存時顯示錯誤：名稱、對象、頻率或存放位置未填。</li><li>到點沒執行：尚未設定備份密碼，或排程是停用狀態。</li></ul></div>
@@ -17,6 +17,7 @@
 <section class="manual-function" id="bc-schedule-frequency"><span class="function-number">5.2</span><h2>設定頻率</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>排程視窗 ›「頻率」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
 <dl class="field-map"><dt>每 N 小時</dt><dd>選間隔與起始時刻。</dd><dt>每天指定時刻</dt><dd>可複選多個整點。</dd><dt>每週指定星期與時刻</dt><dd>可複選星期，再選時刻。</dd><dt>每月指定日期與時刻</dt><dd>1～28 日或「最後一天」，再選時刻。</dd></dl>
+<figure class="manual-shot"><img src="../img/bc/backup/schedule-frequency.jpg" alt="排程頻率：每天指定時刻，執行時刻選 02，預覽接下來 3 次，存放位置示範本機備份區，保留份數 14" loading="lazy"><figcaption>按「預覽接下來 3 次」確認時間；保留份數是每台主機各自保留的份數。</figcaption></figure>
 <ol class="steps"><li>在「頻率」下拉選一種。</li><li>依畫面選時刻或日期，下方「執行時間」會即時說明。</li><li>按「預覽接下來 3 次」確認。</li></ol>
 <p class="result-box">預覽顯示接下來 3 次的執行時間。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>預覽顯示「頻率設定不完整」：每天、每週至少要選一個時刻或星期。</li></ul></div>
@@ -29,6 +30,7 @@
 </section>
 <section class="manual-function" id="bc-schedule-run-now"><span class="function-number">5.4</span><h2>立即執行、編輯與停用排程</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>排程清單 › 各列「立即執行」「編輯」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/backup/schedule-list.jpg" alt="排程清單：示範每日備份，對象示範廠 DG、Agent A、VL，完整備份，每天 02:00，示範本機備份區，保留 14，狀態停用" loading="lazy"><figcaption>清單顯示對象、模式、頻率、存放位置、保留份數、下次執行與狀態；停用的排程「下次執行」顯示「—」。</figcaption></figure>
 <ol class="steps"><li>按「立即執行」：馬上依這個排程的設定排入一次工作（停用的排程不能按）。</li><li>按「編輯」修改內容；「狀態」改「停用」可暫停排程，不會刪除既有備份。</li><li>不再需要時在編輯視窗按「刪除」。</li></ol>
 <p class="result-box">清單的狀態與下次執行時間更新。</p>
 <p class="note">多個排程同時觸發時，工作會依第 11 章的規則排隊（同時觸發時依 DG → Agent → VL 的順序）。上一次同排程同主機還沒完成時，這次會略過並在「下次執行」欄記下原因。</p>

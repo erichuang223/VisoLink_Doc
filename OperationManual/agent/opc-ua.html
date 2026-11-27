@@ -47,7 +47,7 @@
 </section>
 <section class="manual-function" id="opc-ua-tags-manual"><span class="function-number">5.6</span><h2>手動／進階設定 Tag</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>Tag 設定 ›「手動／進階」</strong></div><div class="meta-item"><span>前置條件與權限</span><strong>已登入 Agent</strong></div></div>
-<ol class="steps"><li>切到「手動／進階」。</li><li>新增時直接輸入 NodeId 與名稱等欄位；修改時在 Tag 列按「編輯」。</li><li>可調整 Sampling interval、保存間隔、是否保存重複值，以及 Access Mode（ReadOnly／ReadWrite）。</li><li>按「儲存 OPC UA Tag」。</li></ol>
+<ol class="steps"><li>切到「手動／進階」。</li><li>新增時直接輸入 NodeId 與名稱等欄位；修改時在 Tag 列按「編輯」。</li><li>可調整 Sampling interval 與 Access Mode（ReadOnly／ReadWrite）。「History interval」與「保存重複值」是舊版保留欄位，DataGateway 0.4 不依它們保存，保持預設即可；保存方式在 DG「歷史保存設定」指定。</li><li>按「儲存 OPC UA Tag」。</li></ol>
 <p class="result-box">Tag 清單更新；改成 ReadWrite 時需同時指定 Write Policy（第 7 章）。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>儲存時提示「可寫 Tag 必須指定同一 Connection 中已啟用的 Write Policy」：先建立寫入安全規則。</li></ul></div>
 </section>

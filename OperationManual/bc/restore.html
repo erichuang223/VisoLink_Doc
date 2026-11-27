@@ -17,13 +17,15 @@
 </section>
 <section class="manual-function" id="bc-restore-same-host"><span class="function-number">7.2</span><h2>原機還原</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>還原 ›「還原到」選「原機還原」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；主機連得上</strong></div><div class="meta-item"><span>影響</span><strong>還原期間所有受管主機切到維護中</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/restore/restore-select.jpg" alt="還原頁步驟 1–2：選主機示範廠 DG、備份時間點 2026-11-28 完整備份，下方顯示來源、存放位置、大小、版本與備份密碼設定日期" loading="lazy"><figcaption>從備份紀錄按「還原」進來時，主機與備份時間點已帶好，步驟條停在「3 還原方式與內容」。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/restore/restore-content.jpg" alt="還原方式與內容：還原到原機還原、還原模式全面還原，DataGateway 包含 10／10 項資料類型" loading="lazy"><figcaption>選「原機還原」或「換機還原」、「全面還原」或「局部還原」。</figcaption></figure>
 <ol class="steps"><li>「還原到哪一台主機」選主機；「備份時間點」選要回到的那一份（也可從「備份紀錄」按「還原」直接帶入）。</li><li>「還原到」選「原機還原」（機器還在，把選的內容退回這個時間點）。</li><li>「還原模式」選「全面還原」或「局部還原」，「衝突策略」選「覆蓋」或「僅新增資料」（見下兩節）。</li><li>輸入「備份密碼」。</li><li>看「還原期間所有受管主機切到維護中」清單，確認每台主機都連得上。</li><li>按「開始還原」。</li></ol>
 <p class="result-box">畫面出現「還原進度」：每台主機的維護中狀態、進度與每一類資料的還原結果（完成、失敗、略過、筆數）；結束後主機切回原本的模式。</p>
 <div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「版本不同，不能還原」：主機版本與備份版本不一致。</li><li>顯示「主機還沒準備好」：主機連不到或憑證錯誤，到第 9 章確認。</li><li>某台主機「連不到」無法切到維護中：先恢復連線；「開始還原」要等全部確認後才能按。</li><li>結束後顯示「仍在維護中」：到工作狀態按「重新切回運作中」（第 2 章）。</li></ul></div>
 </section>
 <section class="manual-function" id="bc-restore-replace"><span class="function-number">7.3</span><h2>換機還原</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>還原 ›「還原到」選「換機還原」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；新機器已安裝相同版本的產品</strong></div><div class="meta-item"><span>影響</span><strong>新機器帶回原機身分；舊主機必須已停機</strong></div></div>
-<ol class="steps"><li>新機器沿用原機的 IP 或主機名稱。</li><li>依產品準備新機器：<br>VL：全新安裝 VL，到「受管主機」更新這台的位址與 Backup API Token。<br>DG：在還原頁按「下載安裝設定包」，解壓到新機器的 DG 安裝目錄後執行 DG 安裝程式，再到「受管主機」確認位址與管理金鑰。<br>Agent：全新安裝 Agent，到「受管主機」把位址與管理金鑰更新成新安裝的值。</li><li>回到還原頁，選主機與備份時間點，「還原到」選「換機還原」，確認畫面顯示「新 VL／新 DG／新 Agent 已連上」；不是時按「重新檢查」。</li><li>選還原模式與衝突策略，輸入備份密碼。</li><li>舊主機已停機而連不到時，在維護中清單勾「這台已停機」（會記入稽核）。</li><li>按「開始還原」。</li></ol>
+<ol class="steps"><li>新機器沿用原機的 IP 或主機名稱。</li><li>依產品準備新機器：<br>VL：全新安裝 VL，到「受管主機」更新這台的位址與 Backup API Token。<br>DG：在還原頁按「下載安裝設定包」，解壓到新機器的 DG 安裝目錄後執行 DG 安裝程式；在新 DG「系統設定 › API Token 管理」建立 Backup API Token，到「受管主機」更新位址與 Token。<br>Agent：全新安裝 Agent，在新 Agent「系統管理 › API Token 管理」建立 Backup API Token，到「受管主機」更新位址與 Token（第 9 章）。</li><li>回到還原頁，選主機與備份時間點，「還原到」選「換機還原」，確認畫面顯示「新 VL／新 DG／新 Agent 已連上」；不是時按「重新檢查」。</li><li>選還原模式與衝突策略，輸入備份密碼。</li><li>舊主機已停機而連不到時，在維護中清單勾「這台已停機」（會記入稽核）。</li><li>按「開始還原」。</li></ol>
 <p class="result-box">身分與設定帶回新機器：DG 換機後 Agent 不必改設定就會自動連回；Agent 換機後 DG 認得是同一台，即時值恢復更新。</p>
 <p class="warning">換機用的備份必須包含「換機必要」的類型（完整或快速設定備份都有），否則換機後其他機器要重新設定或重新註冊。授權不在備份內，換機後請向原廠為新機器重新申請授權。</p>
 <p class="note">DG 換機的順序：先還原 DG 產品備份，再到「TagData 資料庫」還原 TagData；換機時「歷史保存設定」預設不勾，由 TagData 帶回。Agent 換機還原後，連線會先停用，切回運作中並確認授權後才啟用，結果附在還原工作上。</p>
@@ -45,6 +47,7 @@
 </section>
 <section class="manual-function" id="bc-restore-maintenance"><span class="function-number">7.6</span><h2>還原期間的維護中切換</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>還原 ›「還原期間所有受管主機切到維護中」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>所有受管主機停止收集、接收、寫入與修改</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/restore/restore-precheck.jpg" alt="還原前檢查：衝突策略覆蓋、備份密碼欄、還原期間所有受管主機切到維護中清單（示範廠 VL、DG、Agent A 都是運作中）、授權提醒、開始還原按鈕" loading="lazy"><figcaption>開始前的檢查：每台受管主機目前的模式、備份密碼、授權提醒；備份密碼未填時「開始還原」不能按。</figcaption></figure>
 <ol class="steps"><li>開始前，清單列出每台受管主機目前是「運作中」或「維護中」；連不到的會標紅並寫原因，按「重新檢查」更新。</li><li>按「開始還原」後，備份中心依序把主機切到維護中，再執行還原。</li><li>還原完成或失敗後，備份中心把主機切回原本的模式。</li></ol>
 <p class="result-box">還原期間沒有任何主機收集或寫入資料；結束後恢復原狀。</p>
 <p class="warning">請勿在還原期間到產品管理畫面手動切回運作中。</p>

@@ -10,6 +10,8 @@
 <section class="manual-function" id="bc-backup-password"><span class="function-number">11.1</span><h2>設定與變更備份密碼</h2>
 <div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>執行控制與備份密碼 ›「備份密碼」›「設定備份密碼」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>沒有備份密碼前，所有備份與排程都不能執行</strong></div></div>
 <figure class="manual-shot"><img src="../img/bc/settings/control-password.jpg" alt="備份密碼區塊：未設定狀態、說明與設定備份密碼按鈕" loading="lazy"><figcaption>未設定時右上角顯示「未設定」，並提醒密碼遺失後所有既有備份都無法還原。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/settings/control-password-change.jpg" alt="變更備份密碼視窗：目前的備份密碼、新的備份密碼、再輸入一次三個欄位與務必另外保管提醒" loading="lazy"><figcaption>變更時要輸入目前的備份密碼；新密碼至少 12 字元。</figcaption></figure>
+<figure class="manual-shot"><img src="../img/bc/settings/control-password-set.jpg" alt="備份密碼區塊：右上角已設定，顯示目前使用的密碼設定日期與變更備份密碼按鈕" loading="lazy"><figcaption>設定完成後右上角顯示「已設定」與目前密碼的設定日期，系統不顯示密碼本身。</figcaption></figure>
 <ol class="steps"><li>按「設定備份密碼」。</li><li>輸入「新的備份密碼」（至少 12 字元）並「再輸入一次」，按「儲存」。</li><li>要變更時按「變更備份密碼」，先輸入「目前的備份密碼」再輸入新的。</li></ol>
 <p class="result-box">右上角顯示「已設定」與設定時間；工作狀態的「尚未設定備份密碼」消失。</p>
 <p class="warning">所有備份檔都用這組密碼加密（AES-256-GCM），設定裡的連線密碼也是。備份中心只存驗證資料，密碼遺失後所有既有備份都無法還原，也沒有任何方法找回，請務必另外保管。變更後只套用到之後的新備份；舊備份仍需要舊密碼。</p>
