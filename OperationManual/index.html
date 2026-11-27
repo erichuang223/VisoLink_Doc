@@ -6,7 +6,7 @@
   <meta name="description" content="VisoLink 正式操作手冊入口，依前台與後台功能分類說明。">
   <title>VisoLink 操作手冊</title>
   <link rel="stylesheet" href="assets/manual.css">
-<meta name="doc-systems" content="VisoLink 1.4.0-beta／DataGateway／Agent 0.4.0-beta"><script src="../assets/doc-version.js" defer></script></head>
+<meta name="doc-systems" content="VisoLink 1.4.0-beta／DataGateway／Agent 0.4.0-beta／備份中心 0.1.0"><script src="../assets/doc-version.js" defer></script></head>
 <body>
   <a class="skip-link" href="#main">跳至主要內容</a>
   <header class="topbar">
@@ -19,6 +19,7 @@
       <a class="top-link" href="backend/index.html">後台</a>
       <a class="top-link" href="dg/index.html">DataGateway</a>
       <a class="top-link" href="agent/index.html">Agent</a>
+      <a class="top-link" href="bc/index.html">備份中心</a>
     </nav>
   </header>
 
@@ -28,7 +29,7 @@
     <p>本手冊依前台與後台分類，說明功能在哪裡、如何設定，以及完成操作後應該看到什麼結果。</p>
     <div class="hero-meta">
       <span class="meta-chip">文件狀態：前台／後台正式版</span>
-      <span class="meta-chip">適用版本：VisoLink 1.4.0-beta／DataGateway・Agent 0.4.0-beta</span>
+      <span class="meta-chip">適用版本：VisoLink 1.4.0-beta／DataGateway・Agent 0.4.0-beta／備份中心 0.1.0</span>
       <span class="meta-chip">更新日期：2026-11-27</span>
     </div>
   </section>
@@ -89,6 +90,19 @@
           <li>暫存管理、Logs 與備份還原</li>
         </ul>
         <a class="button" href="agent/index.html">進入 Agent 手冊 <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="manual-card">
+        <span class="card-number">MANUAL 05</span>
+        <h2>備份中心操作手冊</h2>
+        <p>提供負責備份與還原的系統管理員使用，對應備份中心（BackupCenter）0.1.0。</p>
+        <ul>
+          <li>登記 VL、DG、Agent 與存放位置</li>
+          <li>備份密碼、手動備份與排程</li>
+          <li>備份紀錄、原機與換機還原</li>
+          <li>TagData 資料庫與新機器還原</li>
+        </ul>
+        <a class="button" href="bc/index.html">進入備份中心手冊 <span aria-hidden="true">→</span></a>
       </article>
     </div>
 
@@ -266,6 +280,33 @@
 <li><strong><a href="agent/backup-restore.html">12. 備份與還原</a></strong><ul><li><a href="agent/backup-restore.html#agent-backup-download">下載設定備份</a></li><li><a href="agent/backup-restore.html#agent-restore">安全還原設定</a></li><li><a href="agent/backup-restore.html#agent-backup-center">用 VisoLink 備份中心排程備份</a></li></ul></li>
           </ol>
           <a class="index-jump" href="agent/index.html">查看 Agent 章節 →</a>
+        </article>
+      </div>
+    </section>
+    <section class="index-section" aria-labelledby="bc-index-title">
+      <div class="section-heading">
+        <h2 id="bc-index-title">備份中心功能索引</h2>
+        <p>備份中心 13 章，對應備份中心 0.1.0；點選名稱可直達對應操作位置。</p>
+      </div>
+      <div class="index-columns">
+        <article class="index-panel">
+          <h3>備份中心功能</h3>
+          <ol class="function-tree">
+<li><strong><a href="bc/login.html">1. 登入與第一次設定</a></strong><ul><li><a href="bc/login.html#bc-login">登入備份中心管理畫面</a></li><li><a href="bc/login.html#bc-first-login">第一次登入：改成自己的帳號密碼</a></li><li><a href="bc/login.html#bc-recovery-login">忘記密碼：救援登入</a></li><li><a href="bc/login.html#bc-logout">登出與切換明暗主題</a></li></ul></li>
+<li><strong><a href="bc/status.html">2. 工作狀態</a></strong><ul><li><a href="bc/status.html#bc-status-overview">查看整體狀態與統計</a></li><li><a href="bc/status.html#bc-status-attention">處理「需要處理」清單</a></li><li><a href="bc/status.html#bc-status-jobs">查看執行中、排隊中與最近結果</a></li><li><a href="bc/status.html#bc-status-back-to-running">還原後主機沒切回運作中</a></li></ul></li>
+<li><strong><a href="bc/content.html">3. 備份內容</a></strong><ul><li><a href="bc/content.html#bc-content-modes">三種備份模式</a></li><li><a href="bc/content.html#bc-content-vl">VisoLink（VL）的資料類型</a></li><li><a href="bc/content.html#bc-content-dg">DataGateway（DG）的資料類型</a></li><li><a href="bc/content.html#bc-content-agent">DG-Agent 的資料類型</a></li></ul></li>
+<li><strong><a href="bc/manual-backup.html">4. 手動備份</a></strong><ul><li><a href="bc/manual-backup.html#bc-manual-backup">建立手動備份</a></li><li><a href="bc/manual-backup.html#bc-manual-backup-progress">追蹤備份進度</a></li><li><a href="bc/manual-backup.html#bc-manual-backup-check">確認備份已寫入存放位置</a></li></ul></li>
+<li><strong><a href="bc/schedules.html">5. 排程與保留</a></strong><ul><li><a href="bc/schedules.html#bc-schedule-create">新增產品備份排程</a></li><li><a href="bc/schedules.html#bc-schedule-frequency">設定頻率</a></li><li><a href="bc/schedules.html#bc-schedule-retention">保留份數與自動清理</a></li><li><a href="bc/schedules.html#bc-schedule-run-now">立即執行、編輯與停用排程</a></li></ul></li>
+<li><strong><a href="bc/records.html">6. 備份紀錄</a></strong><ul><li><a href="bc/records.html#bc-records-filter">查詢與篩選備份紀錄</a></li><li><a href="bc/records.html#bc-records-detail">查看備份明細</a></li><li><a href="bc/records.html#bc-records-delete">刪除手動備份</a></li><li><a href="bc/records.html#bc-install-pack">下載 DG 安裝設定包（換機用）</a></li></ul></li>
+<li><strong><a href="bc/restore.html">7. 還原</a></strong><ul><li><a href="bc/restore.html#bc-restore-rules">還原前先了解的規則</a></li><li><a href="bc/restore.html#bc-restore-same-host">原機還原</a></li><li><a href="bc/restore.html#bc-restore-replace">換機還原</a></li><li><a href="bc/restore.html#bc-restore-partial">局部還原</a></li><li><a href="bc/restore.html#bc-restore-conflict">衝突策略</a></li><li><a href="bc/restore.html#bc-restore-maintenance">還原期間的維護中切換</a></li></ul></li>
+<li><strong><a href="bc/tagdata.html">8. TagData 資料庫</a></strong><ul><li><a href="bc/tagdata.html#bc-tagdata-timescale-backup">DG 內建 TimescaleDB：立即備份</a></li><li><a href="bc/tagdata.html#bc-tagdata-timescale-schedule">DG 內建 TimescaleDB：排程與保留</a></li><li><a href="bc/tagdata.html#bc-tagdata-timescale-restore">DG 內建 TimescaleDB：還原</a></li><li><a href="bc/tagdata.html#bc-tagdata-influx-init">InfluxDB：備份初始化與立即備份</a></li><li><a href="bc/tagdata.html#bc-tagdata-influx-schedule">InfluxDB：排程</a></li><li><a href="bc/tagdata.html#bc-tagdata-influx-restore">InfluxDB：還原</a></li></ul></li>
+<li><strong><a href="bc/hosts.html">9. 受管主機</a></strong><ul><li><a href="bc/hosts.html#bc-hosts-overview">查看受管主機清單</a></li><li><a href="bc/hosts.html#bc-host-add">登記 VL、DG、Agent</a></li><li><a href="bc/hosts.html#bc-host-status">連線狀態的意思</a></li><li><a href="bc/hosts.html#bc-host-edit">編輯、停用與刪除主機</a></li></ul></li>
+<li><strong><a href="bc/storage.html">10. 存放位置</a></strong><ul><li><a href="bc/storage.html#bc-storage-local">新增主機本機資料夾</a></li><li><a href="bc/storage.html#bc-storage-network">新增網路共用資料夾（SMB、NFS）</a></li><li><a href="bc/storage.html#bc-storage-ftp">新增 FTP、FTPS、SFTP</a></li><li><a href="bc/storage.html#bc-storage-test">測試連線、容量與編輯</a></li><li><a href="bc/storage.html#bc-storage-scan">掃描既有備份</a></li></ul></li>
+<li><strong><a href="bc/control.html">11. 執行控制與備份密碼</a></strong><ul><li><a href="bc/control.html#bc-backup-password">設定與變更備份密碼</a></li><li><a href="bc/control.html#bc-queue-rules">佇列規則</a></li><li><a href="bc/control.html#bc-resource-limits">單一工作的資源限制</a></li></ul></li>
+<li><strong><a href="bc/new-machine.html">12. 自身設定同步與新機器還原</a></strong><ul><li><a href="bc/new-machine.html#bc-self-sync">同步備份中心自己的設定</a></li><li><a href="bc/new-machine.html#bc-new-machine-restore">在新機器還原備份中心</a></li><li><a href="bc/new-machine.html#bc-new-machine-check">還原後的確認</a></li></ul></li>
+<li><strong><a href="bc/account.html">13. 帳號</a></strong><ul><li><a href="bc/account.html#bc-account-change">變更帳號密碼</a></li><li><a href="bc/account.html#bc-account-audit">查看最近操作紀錄</a></li></ul></li>
+          </ol>
+          <a class="index-jump" href="bc/index.html">查看備份中心章節 →</a>
         </article>
       </div>
     </section>

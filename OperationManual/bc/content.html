@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="列出 VL、DG、Agent 各自可以備份的資料類型。手動備份、排程與還原都從這些類型中選。本頁只能查看，不能修改。"><title>備份內容｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="status.html">上一章</a><a class="top-link" href="manual-backup.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 03</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-content-modes">3.1 備份模式</a><a href="#bc-content-vl">3.2 VL</a><a href="#bc-content-dg">3.3 DG</a><a href="#bc-content-agent">3.4 Agent</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 03</span><h1>備份內容</h1><p>列出 VL、DG、Agent 各自可以備份的資料類型。手動備份、排程與還原都從這些類型中選。本頁只能查看，不能修改。</p></header>
+<section class="manual-function" id="bc-content-modes"><span class="function-number">3.1</span><h2>三種備份模式</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「產品備份 › 備份內容」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/backup/content-vl.jpg" alt="備份內容頁：產品分頁與 VisoLink 的資料類型表" loading="lazy"><figcaption>上方分頁切換 VisoLink、DataGateway、DG-Agent；表格列出每一類資料、所在位置、是否屬於快速設定與相依類型。</figcaption></figure>
+<dl class="field-map"><dt>完整備份</dt><dd>全部資料類型。</dd><dt>快速設定備份</dt><dd>只含設定類（表中「快速」打勾），不含紀錄。</dd><dt>自訂</dt><dd>逐項勾選；「勾選時自動帶入」欄的相依類型會一起包含。</dd></dl>
+<ol class="steps"><li>開啟「備份內容」，按上方分頁選產品。</li><li>看表格的「快速」「勾選時自動帶入」「換機必要」三欄，決定要用哪一種模式。</li></ol>
+<p class="result-box">知道每一種模式會包含哪些資料。</p>
+<p class="note">要能換機還原，備份必須包含標示「換機必要」的類型；完整與快速設定備份都有。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>自訂時少了某些類型：相依類型會自動帶入，不能單獨取消。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-content-vl"><span class="function-number">3.2</span><h2>VisoLink（VL）的資料類型</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份內容 › VisoLink 分頁</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>資料類型</th><th>包含什麼</th><th>快速設定</th><th>勾選時自動帶入</th><th>換機必要</th></tr></thead><tbody><tr><td>使用者、角色與權限</td><td>使用者、角色、群組、權限</td><td>✓</td><td>—</td><td></td></tr><tr><td>系統設定</td><td>系統參數、登入政策</td><td>✓</td><td>—</td><td></td></tr><tr><td>快取設定與密碼</td><td>快取連線與密碼</td><td>✓</td><td>—</td><td></td></tr><tr><td>語系字典</td><td>多語系字典</td><td>✓</td><td>—</td><td></td></tr><tr><td>資料來源與密碼</td><td>DG／資料庫連線、View</td><td>✓</td><td>使用者、角色與權限</td><td></td></tr><tr><td>Displays、資料綁定與分類節點</td><td>畫面、Binding、資料夾、快照、收藏</td><td></td><td>使用者、角色與權限、資料來源與密碼、媒體檔案、快取設定與密碼</td><td></td></tr><tr><td>媒體檔案</td><td>畫面用的圖片與影片</td><td></td><td>使用者、角色與權限</td><td></td></tr><tr><td>API Tokens</td><td>外部系統呼叫用的 Token</td><td>✓</td><td>使用者、角色與權限</td><td></td></tr><tr><td>稽核紀錄</td><td>操作與登入稽核（紀錄類）</td><td></td><td>—</td><td></td></tr></tbody></table></div>
+<p class="note">完整 9 項、快速設定 6 項。<strong>不在備份中：</strong>授權（已安裝授權、安裝識別碼、使用紀錄）、安裝設定與加密金鑰（重新安裝即有；密碼在備份時解開、整包改用備份密碼加密）。</p>
+</section>
+<section class="manual-function" id="bc-content-dg"><span class="function-number">3.3</span><h2>DataGateway（DG）的資料類型</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份內容 › DataGateway 分頁</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>資料類型</th><th>包含什麼</th><th>快速設定</th><th>勾選時自動帶入</th><th>換機必要</th></tr></thead><tbody><tr><td>帳號與登入設定</td><td>登入模式、本機帳號</td><td>✓</td><td>—</td><td></td></tr><tr><td>系統設定</td><td>系統參數</td><td>✓</td><td>—</td><td></td></tr><tr><td>安裝設定與憑證</td><td>安裝設定（各種金鑰、資料庫密碼）與 gRPC 憑證</td><td>✓</td><td>—</td><td>✓</td></tr><tr><td>Agent 註冊與信任</td><td>已註冊的 Agent 與信任狀態</td><td>✓</td><td>安裝設定與憑證</td><td>✓</td></tr><tr><td>與 VL 的配對</td><td>配對的 VL 與讀取權限</td><td>✓</td><td>安裝設定與憑證</td><td>✓</td></tr><tr><td>保存目的端與密碼</td><td>TimescaleDB／InfluxDB 目的端連線與寫入政策</td><td>✓</td><td>—</td><td></td></tr><tr><td>歷史保存設定</td><td>Tag、寫入來源連結、保存分類、保存政策、序列名稱</td><td>✓</td><td>保存目的端與密碼</td><td></td></tr><tr><td>回寫需求與紀錄</td><td>回寫送出與結果（紀錄類）</td><td></td><td>Agent 註冊與信任</td><td></td></tr><tr><td>稽核紀錄</td><td>Agent 信任、指令、歷史資料操作紀錄（紀錄類）</td><td></td><td>—</td><td></td></tr></tbody></table></div>
+<p class="note">完整 9 項、快速設定 7 項。<strong>不在備份中：</strong>授權、DG 的資料保護金鑰（改用備份密碼加密）、Tag 歷史值與最新值（屬 TagData，第 8 章另外備份）。</p>
+</section>
+<section class="manual-function" id="bc-content-agent"><span class="function-number">3.4</span><h2>DG-Agent 的資料類型</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份內容 › DG-Agent 分頁</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<div class="reference-table-wrap"><table class="reference-table"><thead><tr><th>資料類型</th><th>包含什麼</th><th>快速設定</th><th>勾選時自動帶入</th><th>換機必要</th></tr></thead><tbody><tr><td>連線與 Tag 設定</td><td>設備連線、Tag、寫入設定與密碼</td><td>✓</td><td>OPC UA 憑證與信任清單</td><td></td></tr><tr><td>上傳設定</td><td>DG 位址與鎖定的 DG 憑證</td><td>✓</td><td>Agent 身分</td><td>✓</td></tr><tr><td>緩衝政策</td><td>斷線時的緩衝上限與保留方式</td><td>✓</td><td>—</td><td></td></tr><tr><td>本機帳號與 Agent 資料</td><td>管理介面帳號、名稱與描述</td><td>✓</td><td>—</td><td></td></tr><tr><td>OPC UA 憑證與信任清單</td><td>OPC UA 用戶端憑證與信任的伺服器</td><td>✓</td><td>—</td><td></td></tr><tr><td>Agent 身分</td><td>Agent ID、DG 發的註冊憑證、註冊狀態</td><td>✓</td><td>—</td><td>✓</td></tr><tr><td>回寫需求紀錄</td><td>DG 送來的回寫與執行結果（紀錄類）</td><td></td><td>連線與 Tag 設定</td><td></td></tr><tr><td>稽核紀錄</td><td>指令與登入稽核（紀錄類）</td><td></td><td>—</td><td></td></tr></tbody></table></div>
+<p class="note">完整 8 項、快速設定 6 項。<strong>不在備份中：</strong>授權、Agent 的緩衝資料（Tag 值都送進 DG，不在 Agent 保存）、加密金鑰（改用備份密碼加密）。</p>
+</section>
+<nav class="chapter-end-nav"><a href="status.html">← 工作狀態</a><a href="manual-backup.html">手動備份 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 3 章 備份內容</footer></body></html>

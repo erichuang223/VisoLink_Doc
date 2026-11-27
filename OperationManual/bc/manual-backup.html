@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="立即對一台或多台主機做一次備份。備份是「這個時間點的快照」，檔案直接寫到選的存放位置，並用備份密碼加密。"><title>手動備份｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="content.html">上一章</a><a class="top-link" href="schedules.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 04</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-manual-backup">4.1 建立手動備份</a><a href="#bc-manual-backup-progress">4.2 追蹤進度</a><a href="#bc-manual-backup-check">4.3 確認結果</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 04</span><h1>手動備份</h1><p>立即對一台或多台主機做一次備份。備份是「這個時間點的快照」，檔案直接寫到選的存放位置，並用備份密碼加密。</p></header>
+<section class="manual-function" id="bc-manual-backup"><span class="function-number">4.1</span><h2>建立手動備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>「工作狀態」右上角「手動備份」，或「受管主機」該列的「手動備份」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；已設定備份密碼、已有存放位置與受管主機</strong></div><div class="meta-item"><span>影響</span><strong>備份執行期間會使用產品主機的 I/O 與記憶體</strong></div></div>
+<ol class="steps"><li>在「工作狀態」按右上角「手動備份」（或在「受管主機」該列按「手動備份」，對象會先勾好）。</li><li>在「對象」勾選要備份的主機；連不到或產品尚未支援備份工作介面的主機不能選。</li><li>在「備份模式」選「完整備份」「快速設定備份」或「自訂」；自訂時在「資料類型」逐項勾選，相依類型會自動包含。</li><li>在「存放位置」選要寫入的位置；需要時在「備註」寫用途（最多 200 字）。</li><li>按「開始備份」。</li></ol>
+<p class="result-box">工作排入佇列，畫面回到工作狀態，在「排隊中」或「執行中」看到這個工作。</p>
+<p class="warning">手動備份不受排程保留份數影響，不會自動刪除，需要時到「備份紀錄」自行刪除（第 6 章）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「開始備份」後出現錯誤：尚未設定備份密碼、沒有選對象或存放位置。</li><li>對象不能勾：到「受管主機」看該主機的連線狀態（第 9 章）。</li><li>Tag 歷史值不在這裡：請到「TagData 資料庫」備份（第 8 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-manual-backup-progress"><span class="function-number">4.2</span><h2>追蹤備份進度</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>工作狀態 ›「執行中」「排隊中」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>在「排隊中」看排隊原因；手動備份預設排在等待中的排程工作前面。</li><li>開始執行後在「執行中」看進度百分比與步驟。</li><li>完成後在「最近結果」看到成功、大小與耗時。</li></ol>
+<p class="result-box">「最近結果」出現這次備份，結果為「成功」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>一直排隊：同一台實體主機上的 VL、DG、Agent 依序執行；或已達全系統同時執行上限。</li><li>失敗並顯示逾時：到第 11 章調整「逾時」，或確認存放位置的寫入速度。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-manual-backup-check"><span class="function-number">4.3</span><h2>確認備份已寫入存放位置</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>「備份紀錄」、「受管主機」的「最後成功備份」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>到「備份紀錄」，來源顯示「手動」的就是這次備份。</li><li>按「明細」核對主機、時間點、版本、備份模式與包含的資料類型。</li><li>回到「受管主機」，該主機的「最後成功備份」更新為這個時間。</li></ol>
+<p class="result-box">紀錄與明細正確，之後可以用這份備份還原（第 7 章）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>明細提示「不能直接用來換機還原」：這份備份缺少換機必要的類型，只能原機還原。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="content.html">← 備份內容</a><a href="schedules.html">排程與保留 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 4 章 手動備份</footer></body></html>

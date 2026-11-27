@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份檔要存放的地方。支援主機本機資料夾、網路共用資料夾（SMB、NFS）、FTP、FTPS、SFTP。要能換機還原，備份必須放在機器以外。只有備份中心存取存放位置，VL、DG、Agent 只要能連到備份中心。"><title>存放位置｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="hosts.html">上一章</a><a class="top-link" href="control.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 10</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-storage-local">10.1 本機資料夾</a><a href="#bc-storage-network">10.2 SMB／NFS</a><a href="#bc-storage-ftp">10.3 FTP／FTPS／SFTP</a><a href="#bc-storage-test">10.4 測試與容量</a><a href="#bc-storage-scan">10.5 掃描既有備份</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 10</span><h1>存放位置</h1><p>備份檔要存放的地方。支援主機本機資料夾、網路共用資料夾（SMB、NFS）、FTP、FTPS、SFTP。要能換機還原，備份必須放在機器以外。只有備份中心存取存放位置，VL、DG、Agent 只要能連到備份中心。</p></header>
+<section class="manual-function" id="bc-storage-local"><span class="function-number">10.1</span><h2>新增主機本機資料夾</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「設定 › 存放位置」› 右上角「新增存放位置」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/settings/storage-new-local.jpg" alt="新增存放位置視窗：類型選主機本機資料夾、路徑與測試成功結果" loading="lazy"><figcaption>本機資料夾填子資料夾名稱即可；測試連線會依序打開資料夾、寫入 1 KB 測試檔、讀回比對、刪除測試檔並顯示容量。</figcaption></figure>
+<ol class="steps"><li>按「新增存放位置」。</li><li>填「名稱」（例：示範本機備份區），「類型」選「主機本機資料夾」。</li><li>「路徑」填子資料夾名稱，例如 <code>demo-backup</code>；實際位置在備份中心安裝目錄的 <code>storage/local</code> 底下。</li><li>保持「啟用」勾選，按「測試連線」，看到「測試成功」與容量。</li><li>按「儲存」。</li></ol>
+<p class="result-box">清單出現這個位置，顯示類型、路徑、容量與「不能換機還原」標示。</p>
+<p class="warning">本機資料夾會跟機器一起損壞，存在這裡的備份只適合原機還原，也不能用來同步備份中心自己的設定。正式環境請另外設定網路存放位置。</p>
+</section>
+<section class="manual-function" id="bc-storage-network"><span class="function-number">10.2</span><h2>新增網路共用資料夾（SMB、NFS）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>新增存放位置 ›「類型」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；共用資料夾的帳號</strong></div></div>
+<dl class="field-map"><dt>SMB 路徑</dt><dd><code>\\主機\共用名稱\子資料夾</code>；由備份中心以 SMB 3.0 掛載。</dd><dt>SMB 帳號／密碼／網域</dt><dd>有寫入權限的帳號；網域選填。</dd><dt>NFS 路徑</dt><dd><code>主機:/匯出路徑</code>；由備份中心掛載。</dd></dl>
+<ol class="steps"><li>「類型」選「網路共用資料夾（SMB）」或「網路共用資料夾（NFS）」。</li><li>填路徑；SMB 另填帳號、密碼與網域。</li><li>按「測試連線」確認可寫入，按「儲存」。</li></ol>
+<p class="result-box">清單顯示「可寫入」與容量；帳號旁的密碼一律遮罩顯示。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>測試失敗：確認共用資料夾路徑、帳號的寫入權限與防火牆。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-storage-ftp"><span class="function-number">10.3</span><h2>新增 FTP、FTPS、SFTP</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>新增存放位置 ›「類型」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；伺服器帳號</strong></div></div>
+<dl class="field-map"><dt>主機／Port</dt><dd>伺服器名稱或位址，例如 <code>nas.example.local</code>；Port 留空用預設值。</dd><dt>伺服器上的資料夾</dt><dd>從伺服器根目錄算起，例如 <code>/backup</code>，不存在時自動建立。</dd><dt>帳號／密碼</dt><dd>SFTP 也可以貼私鑰登入，私鑰密語選填。</dd><dt>信任自簽憑證（FTPS）</dt><dd>第一次連線記下憑證指紋，之後指紋不同就拒絕連線。</dd><dt>主機金鑰指紋（SFTP）</dt><dd>按「測試連線」顯示這次看到的指紋，儲存後記下；之後不同就拒絕連線。</dd></dl>
+<ol class="steps"><li>「類型」選 FTP、FTPS（明確 TLS）或 SFTP。</li><li>填主機、Port、資料夾、帳號與密碼（或 SFTP 私鑰）。</li><li>按「測試連線」，核對畫面顯示的指紋是否為你的伺服器，再按「儲存」。</li></ol>
+<p class="result-box">上傳先放在備份中心暫存，完成後才傳到伺服器；還原時先下載回備份中心。</p>
+<p class="warning">FTP 的帳密未加密，會以明文送出（備份檔本身已用備份密碼加密）；可以的話請改用 FTPS 或 SFTP。伺服器確實換過金鑰或憑證時，才在編輯視窗按「清除指紋」。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>連線被拒並提示指紋不同：伺服器金鑰或憑證變了；確認是正常更換後才清除指紋。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-storage-test"><span class="function-number">10.4</span><h2>測試連線、容量與編輯</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>存放位置 › 卡片上的「測試連線」「編輯」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/settings/storage-list.jpg" alt="存放位置清單：示範本機備份區卡片，顯示類型、路徑、容量與按鈕" loading="lazy"><figcaption>每個位置一張卡片：狀態標示、類型、路徑、使用中的排程、容量與「編輯」「測試連線」「掃描既有備份」。</figcaption></figure>
+<dl class="field-map"><dt>可寫入／可連線</dt><dd>測試通過。</dd><dt>連不到</dt><dd>連線失敗，滑鼠移到標示上看原因。</dd><dt>不能換機還原</dt><dd>本機資料夾。</dd><dt>已停用</dt><dd>不能選來備份。</dd><dt>容量</dt><dd>已用／總量與百分比；75% 以上變黃、90% 以上變紅。</dd></dl>
+<ol class="steps"><li>按卡片上的「測試連線」重新檢查。</li><li>按「編輯」修改設定；密碼留空表示不變更；取消「啟用」可暫停使用。</li></ol>
+<p class="result-box">確認位置可寫入且空間足夠。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「容量：無法取得」：伺服器不提供容量查詢，不影響備份。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-storage-scan"><span class="function-number">10.5</span><h2>掃描既有備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>存放位置 › 卡片上的「掃描既有備份」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>按「掃描既有備份」。</li><li>按「掃描備份並重建紀錄」：列出這個位置上所有產品備份與 TagData 備份點的說明檔，資料庫沒有的加入並標「掃描找回」，檔案不在的標「檔案遺失」，對不到受管主機的標「未登記的主機」。</li><li>若找到備份中心自己的設定，請改走第 12 章的新機器還原。</li></ol>
+<p class="result-box">畫面顯示新增、重新對應主機、未登記主機與檔案遺失的筆數；到「備份紀錄」與「TagData 資料庫」查看。</p>
+</section>
+<nav class="chapter-end-nav"><a href="hosts.html">← 受管主機</a><a href="control.html">執行控制與備份密碼 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 10 章 存放位置</footer></body></html>

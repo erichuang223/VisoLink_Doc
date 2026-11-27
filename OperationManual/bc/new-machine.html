@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份中心自己的設定（受管主機、存放位置、排程、執行控制與備份密碼的驗證資料）可以同步到存放位置。備份中心所在的機器損壞時，在新機器重新安裝備份中心，就能從存放位置找回設定與備份紀錄。"><title>自身設定同步與新機器還原｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="control.html">上一章</a><a class="top-link" href="account.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 12</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-self-sync">12.1 同步設定</a><a href="#bc-new-machine-restore">12.2 新機器還原</a><a href="#bc-new-machine-check">12.3 還原後確認</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 12</span><h1>自身設定同步與新機器還原</h1><p>備份中心自己的設定（受管主機、存放位置、排程、執行控制與備份密碼的驗證資料）可以同步到存放位置。備份中心所在的機器損壞時，在新機器重新安裝備份中心，就能從存放位置找回設定與備份紀錄。</p></header>
+<section class="manual-function" id="bc-self-sync"><span class="function-number">12.1</span><h2>同步備份中心自己的設定</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>執行控制與備份密碼 ›「備份中心自己的設定」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；已設定備份密碼、已有網路存放位置</strong></div></div>
+<ol class="steps"><li>在「同步保存到」選一個網路存放位置（本機資料夾不能選）。</li><li>之後每次異動，1 分鐘內自動存一份到該位置的 <code>_backupcenter/</code>，用備份密碼加密，保留最近 30 份。</li><li>需要時按「立即同步」。</li></ol>
+<p class="result-box">右上角顯示「已同步」與最後同步時間、檔名。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「同步失敗」：看最近一次失敗的原因，確認存放位置可寫入。</li><li>選單沒有可選的位置：只有本機資料夾，請先新增網路存放位置（第 10 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-new-machine-restore"><span class="function-number">12.2</span><h2>在新機器還原備份中心</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>存放位置 ›「掃描既有備份」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入新安裝的備份中心；原備份密碼</strong></div><div class="meta-item"><span>影響</span><strong>會覆蓋目前的受管主機、存放位置、執行控制與備份密碼</strong></div></div>
+<ol class="steps"><li>在新機器安裝備份中心並完成第一次登入（第 1 章）。</li><li>到「存放位置」新增原本同步設定用的存放位置（同樣的類型、路徑與帳號）。</li><li>按該位置的「掃描既有備份」，畫面顯示「找到備份中心設定」、份數、最新時間與使用哪一天設定的備份密碼。</li><li>輸入原備份密碼，按「預覽」，核對會帶回的受管主機、存放位置、排程與執行控制。</li><li>按「確認覆蓋目前設定」。</li></ol>
+<p class="result-box">主機清單、存放位置、排程與執行控制回來，這份設定的備份密碼成為目前使用的備份密碼；接著自動掃描產品備份，備份紀錄也會回來。</p>
+<p class="warning">覆蓋後目前在新機器上的設定會被取代。存放位置的帳密由設定帶回，請確認各位置測試連線正常。</p>
+</section>
+<section class="manual-function" id="bc-new-machine-check"><span class="function-number">12.3</span><h2>還原後的確認</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>受管主機、排程、備份紀錄</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>到「受管主機」確認每台主機連線「正常」。</li><li>到「排程」確認排程與啟用狀態和原本一致。</li><li>到「備份紀錄」確認紀錄都回來；標「檔案遺失」的表示檔案已不在存放位置。</li><li>到「工作狀態」確認沒有「需要處理」。</li></ol>
+<p class="result-box">備份中心恢復運作，排程依原設定執行。</p>
+</section>
+<nav class="chapter-end-nav"><a href="control.html">← 執行控制與備份密碼</a><a href="account.html">帳號 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 12 章 自身設定同步與新機器還原</footer></body></html>

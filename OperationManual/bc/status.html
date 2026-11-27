@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="工作狀態是備份中心的首頁：看整體是否正常、有哪些事要處理、哪些工作正在跑或排隊，以及最近的結果。各產品在自己的後端執行備份，進度每 3 秒回報到這裡。"><title>工作狀態｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="login.html">上一章</a><a class="top-link" href="content.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 02</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-status-overview">2.1 整體狀態</a><a href="#bc-status-attention">2.2 需要處理</a><a href="#bc-status-jobs">2.3 工作與結果</a><a href="#bc-status-back-to-running">2.4 重新切回運作中</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 02</span><h1>工作狀態</h1><p>工作狀態是備份中心的首頁：看整體是否正常、有哪些事要處理、哪些工作正在跑或排隊，以及最近的結果。各產品在自己的後端執行備份，進度每 3 秒回報到這裡。</p></header>
+<section class="manual-function" id="bc-status-overview"><span class="function-number">2.1</span><h2>查看整體狀態與統計</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「監控 › 工作狀態」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/status/status-attention.jpg" alt="工作狀態頁：整體狀態、需要處理與統計卡" loading="lazy"><figcaption>整體狀態橫幅顯示「全部正常」或「有 N 件事需要處理」；右上角是版本與更新時間。</figcaption></figure>
+<dl class="field-map"><dt>整體狀態</dt><dd>綠色「全部正常」；黃色或紅色表示有事情要處理，件數寫在標題。</dd><dt>執行中</dt><dd>正在執行的工作數與全系統同時執行上限。</dd><dt>排隊中</dt><dd>等待執行的工作數。</dd><dt>近 24 小時完成／失敗</dt><dd>近 24 小時完成的備份與還原數、失敗數。</dd></dl>
+<ol class="steps"><li>從左側選「工作狀態」，或按左上角 Logo 回到首頁。</li><li>先看整體狀態橫幅，再看下方統計卡。</li></ol>
+<p class="result-box">知道目前是否有異常、工作量多少。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>數字不更新：頁面每 3 秒自動更新；若一直停在「讀取中…」，重新整理頁面或確認備份中心服務是否正常。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-status-attention"><span class="function-number">2.2</span><h2>處理「需要處理」清單</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>工作狀態 ›「需要處理」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>逐項看「需要處理」的標題與說明，例如「尚未設定備份密碼：所有備份與排程都不能執行」。</li><li>按右邊的按鈕（例如「前往設定備份密碼」）到對應的頁面處理。</li><li>處理完回到工作狀態，該項目會消失。</li></ol>
+<p class="result-box">「需要處理」清空，整體狀態變成「全部正常」。</p>
+<p class="note">第一次安裝後一定會看到「尚未設定備份密碼」。請先完成第 11 章的備份密碼設定。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>項目一直在：確認對應頁面已儲存成功；主機連線類的問題要等下一次檢查（每 60 秒）。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-status-jobs"><span class="function-number">2.3</span><h2>查看執行中、排隊中與最近結果</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>工作狀態 ›「執行中」「排隊中」「最近結果」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>按「取消」會中止該工作</strong></div></div>
+<dl class="field-map"><dt>執行中</dt><dd>每個工作的對象、進度百分比、目前步驟；還原工作另外列出每台主機的運作中／維護中狀態。</dd><dt>排隊中</dt><dd>排隊順位與排隊原因（例如同一台實體主機已有工作、超過同時執行上限）。</dd><dt>最近結果</dt><dd>完成時間、對象、內容、來源（手動或排程名稱）、存放位置、大小、耗時、結果。</dd></dl>
+<ol class="steps"><li>在「執行中」看進度；需要中止時按該工作的「取消」。</li><li>在「排隊中」看排在第幾位與原因；不需要的工作可按「取消」。</li><li>在「最近結果」確認成功或失敗；按「全部備份紀錄」到第 6 章查看完整紀錄。</li></ol>
+<p class="result-box">能追蹤每個工作從排隊、執行到完成的狀態。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>工作一直排隊：看排隊原因；同一台實體主機一次只跑一個工作，或到第 11 章調整同時執行上限。</li><li>失敗：看結果欄的說明；常見原因是主機連不到、憑證錯誤或存放位置空間不足。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-status-back-to-running"><span class="function-number">2.4</span><h2>還原後主機沒切回運作中</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>工作狀態 ›「需要處理」›「重新切回運作中」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>主機恢復收集、接收、寫入與修改</strong></div></div>
+<ol class="steps"><li>還原結束後，若某台主機沒能切回原本的模式，「需要處理」會列出該主機與原因。</li><li>確認主機連線正常後，按「重新切回運作中」。</li></ol>
+<p class="result-box">主機回到運作中，項目從清單消失。</p>
+<p class="warning">TagData 還原失敗時，DG 會刻意維持維護中且不提供「重新切回運作中」，請再還原一次（第 8 章）。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>按了仍失敗：到第 9 章確認該主機的位址與憑證，或到產品自己的管理畫面切換。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="login.html">← 登入與第一次設定</a><a href="content.html">備份內容 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 2 章 工作狀態</footer></body></html>

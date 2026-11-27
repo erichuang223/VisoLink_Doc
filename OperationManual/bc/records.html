@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="每一筆紀錄是某台主機在某個時間點的快照。可以篩選、看明細、從這裡開始還原；只有手動備份可以在這裡刪除，排程備份依保留份數自動清理。"><title>備份紀錄｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="schedules.html">上一章</a><a class="top-link" href="restore.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 06</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-records-filter">6.1 查詢紀錄</a><a href="#bc-records-detail">6.2 明細</a><a href="#bc-records-delete">6.3 刪除手動備份</a><a href="#bc-install-pack">6.4 DG 安裝設定包</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 06</span><h1>備份紀錄</h1><p>每一筆紀錄是某台主機在某個時間點的快照。可以篩選、看明細、從這裡開始還原；只有手動備份可以在這裡刪除，排程備份依保留份數自動清理。</p></header>
+<section class="manual-function" id="bc-records-filter"><span class="function-number">6.1</span><h2>查詢與篩選備份紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>左側「產品備份 › 備份紀錄」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<dl class="field-map"><dt>備份時間點</dt><dd>快照時間；標「掃描找回」表示從存放位置重建，標「檔案遺失」表示檔案已不在存放位置。</dd><dt>主機／來源</dt><dd>主機名稱；來源是「手動」或排程名稱，下方是備註。</dd><dt>備份模式與類型</dt><dd>模式與前幾項資料類型。</dd><dt>存放位置／保留</dt><dd>存放位置與大小；排程備份的保留規則。</dd></dl>
+<ol class="steps"><li>用上方搜尋框找主機、來源或存放位置。</li><li>用下拉篩選主機、來源（排程／手動）、產品，或選開始與結束日期。</li><li>按「清除篩選」回到全部紀錄；下方可換頁與每頁筆數。</li></ol>
+<p class="result-box">找到要查看或還原的那一筆。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>沒有紀錄：還沒有備份，或重新安裝後尚未「掃描既有備份」（第 10 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-records-detail"><span class="function-number">6.2</span><h2>查看備份明細</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份紀錄 › 各列「明細」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>按該列的「明細」。</li><li>核對主機、時間點、版本、來源、備份模式、存放位置與大小、使用哪一天設定的備份密碼。</li><li>下方列出包含的資料類型；自訂備份會標出「自動帶入」的類型。</li><li>要用這份還原時按「用這份還原」（第 7 章）。</li></ol>
+<p class="result-box">確認這份備份的內容與能不能換機還原。</p>
+<p class="note">明細的「版本」是備份當時的產品版本。還原時產品版本必須與備份版本相同，否則不允許還原。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>明細提示「不能直接用來換機還原」：缺少換機必要的類型，只能原機還原。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-records-delete"><span class="function-number">6.3</span><h2>刪除手動備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份紀錄 › 手動備份列「刪除」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>存放位置上的備份檔與說明檔一起刪除，無法復原</strong></div></div>
+<ol class="steps"><li>在來源為「手動」的列按「刪除」。</li><li>確認視窗寫出主機、時間與存放位置，核對後按「確認刪除」。</li></ol>
+<p class="result-box">紀錄與檔案一起移除。</p>
+<p class="warning">排程備份沒有「刪除」按鈕，依排程的保留份數自動清理。</p>
+</section>
+<section class="manual-function" id="bc-install-pack"><span class="function-number">6.4</span><h2>下載 DG 安裝設定包（換機用）</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>備份紀錄 › DG 備份列「安裝設定包」；還原 › 換機還原步驟</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；需要輸入備份密碼</strong></div><div class="meta-item"><span>影響</span><strong>設定包含有 DG 憑證與各種金鑰</strong></div></div>
+<ol class="steps"><li>在包含「安裝設定與憑證」的 DG 備份列按「安裝設定包」。</li><li>輸入備份密碼，按「下載」。</li><li>設定包內容是 DG 的安裝設定、gRPC 憑證與說明檔；zip 用同一組備份密碼加密（AES-256），請用 7-Zip 解壓。</li><li>換機時把內容放進新機器的 DG 安裝目錄（Windows 預設 <code>C:\ProgramData\DataGateway</code>），再執行 DG 安裝程式。</li></ol>
+<p class="result-box">新 DG 沿用原本的設定與憑證，Agent 與 VL 不用改設定就能連回。</p>
+<p class="warning">設定包含有金鑰，放好後請刪除下載的檔案，不要寄送或放在共用資料夾。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>下載失敗：備份密碼錯誤；請輸入這份備份當時使用的備份密碼。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="schedules.html">← 排程與保留</a><a href="restore.html">還原 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 6 章 備份紀錄</footer></body></html>

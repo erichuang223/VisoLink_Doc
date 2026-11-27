@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份會大量使用 I/O 與記憶體，這裡決定工作的先後順序與資源限制；也在這裡設定所有備份檔共用的備份密碼。產品備份與 TagData 共用同一個佇列。"><title>執行控制與備份密碼｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="storage.html">上一章</a><a class="top-link" href="new-machine.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 11</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-backup-password">11.1 備份密碼</a><a href="#bc-queue-rules">11.2 佇列規則</a><a href="#bc-resource-limits">11.3 資源限制</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 11</span><h1>執行控制與備份密碼</h1><p>備份會大量使用 I/O 與記憶體，這裡決定工作的先後順序與資源限制；也在這裡設定所有備份檔共用的備份密碼。產品備份與 TagData 共用同一個佇列。</p></header>
+<section class="manual-function" id="bc-backup-password"><span class="function-number">11.1</span><h2>設定與變更備份密碼</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>執行控制與備份密碼 ›「備份密碼」›「設定備份密碼」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div><div class="meta-item"><span>影響</span><strong>沒有備份密碼前，所有備份與排程都不能執行</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/settings/control-password.jpg" alt="備份密碼區塊：未設定狀態、說明與設定備份密碼按鈕" loading="lazy"><figcaption>未設定時右上角顯示「未設定」，並提醒密碼遺失後所有既有備份都無法還原。</figcaption></figure>
+<ol class="steps"><li>按「設定備份密碼」。</li><li>輸入「新的備份密碼」（至少 12 字元）並「再輸入一次」，按「儲存」。</li><li>要變更時按「變更備份密碼」，先輸入「目前的備份密碼」再輸入新的。</li></ol>
+<p class="result-box">右上角顯示「已設定」與設定時間；工作狀態的「尚未設定備份密碼」消失。</p>
+<p class="warning">所有備份檔都用這組密碼加密（AES-256-GCM），設定裡的連線密碼也是。備份中心只存驗證資料，密碼遺失後所有既有備份都無法還原，也沒有任何方法找回，請務必另外保管。變更後只套用到之後的新備份；舊備份仍需要舊密碼。</p>
+<p class="note">到了新機器，只要有存放位置與這組密碼就能還原。</p>
+</section>
+<section class="manual-function" id="bc-queue-rules"><span class="function-number">11.2</span><h2>佇列規則</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>執行控制與備份密碼 ›「佇列規則」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/settings/control-queue.jpg" alt="佇列規則與單一工作的資源限制設定" loading="lazy"><figcaption>上半部是佇列規則，下半部是單一工作的資源限制，兩者一起按「儲存執行控制」。</figcaption></figure>
+<dl class="field-map"><dt>全系統同時執行上限</dt><dd>1～4 個，超過的工作排隊等候。</dd><dt>同一台實體主機</dt><dd>固定同時 1 個；同主機上的 VL、DG、多個 Agent 依序執行。</dd><dt>同一個存放位置</dt><dd>同時 1 或 2 個，避免多個工作同時寫入拖慢 NAS。</dd><dt>手動備份排在等待中的排程工作前面</dt><dd>勾選後手動備份優先。</dd><dt>同時觸發時依 DG → Agent → VL 的順序</dt><dd>與整套還原的順序一致。</dd></dl>
+<ol class="steps"><li>調整欄位。</li><li>按頁面下方「儲存執行控制」（佇列規則與資源限制一起儲存）。</li></ol>
+<p class="result-box">之後的工作依新規則排隊。</p>
+</section>
+<section class="manual-function" id="bc-resource-limits"><span class="function-number">11.3</span><h2>單一工作的資源限制</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>執行控制與備份密碼 ›「單一工作的資源限制」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<dl class="field-map"><dt>寫入速度上限</dt><dd>不限制、50、20 或 5 MB/s。</dd><dt>執行優先權</dt><dd>一般，或低（不影響產品運作）。</dd><dt>逾時</dt><dd>1、3、6、12 小時；超過時間視為失敗，釋放名額給下一個工作。</dd><dt>連不到主機時重試</dt><dd>不重試，或 3 次、每次間隔 5 分鐘。</dd></dl>
+<ol class="steps"><li>依產品主機的負荷調整欄位。</li><li>按「儲存執行控制」。</li></ol>
+<p class="result-box">各產品執行備份時套用這些限制。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>備份拖慢產品：降低寫入速度上限，或把執行優先權改成「低」。</li><li>大型備份逾時失敗：把逾時調長。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="storage.html">← 存放位置</a><a href="new-machine.html">自身設定同步與新機器還原 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 11 章 執行控制與備份密碼</footer></body></html>

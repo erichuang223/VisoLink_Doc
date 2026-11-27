@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="備份中心只有一組本機帳號。在這裡變更帳號與密碼，並查看最近的登入與帳號操作紀錄。"><title>帳號｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="new-machine.html">上一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 13</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-account-change">13.1 變更帳號密碼</a><a href="#bc-account-audit">13.2 操作紀錄</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 13</span><h1>帳號</h1><p>備份中心只有一組本機帳號。在這裡變更帳號與密碼，並查看最近的登入與帳號操作紀錄。</p></header>
+<section class="manual-function" id="bc-account-change"><span class="function-number">13.1</span><h2>變更帳號密碼</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>右上角帳號選單 ›「變更帳號密碼」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；目前密碼</strong></div><div class="meta-item"><span>影響</span><strong>變更後所有已登入的視窗都會登出</strong></div></div>
+<figure class="manual-shot"><img src="../img/bc/account/account.jpg" alt="變更帳號密碼頁：左邊帳號密碼表單，右邊最近操作紀錄" loading="lazy"><figcaption>左邊變更帳號密碼，右邊是最近 50 筆操作紀錄。</figcaption></figure>
+<ol class="steps"><li>按右上角帳號名稱，選「變更帳號密碼」。</li><li>輸入「目前密碼」、「新帳號」（3～100 字元）、「新密碼」（至少 12 字元）與「確認新密碼」。</li><li>按「儲存」，再用新的帳號密碼重新登入。</li></ol>
+<p class="result-box">新帳密生效，其他瀏覽器的登入全部失效。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>顯示「兩次輸入的新密碼不一致」：重新輸入確認新密碼。</li><li>忘記目前密碼：改用救援登入（第 1 章）。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-account-audit"><span class="function-number">13.2</span><h2>查看最近操作紀錄</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>變更帳號密碼頁 ›「最近操作紀錄」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<dl class="field-map"><dt>時間／動作／帳號</dt><dd>登入、救援登入、變更帳號密碼等動作與帳號。</dd><dt>來源位址</dt><dd>操作來自哪個位址。</dd><dt>結果</dt><dd>成功，或失敗與原因。</dd></dl>
+<ol class="steps"><li>在右邊表格查看最近 50 筆紀錄。</li></ol>
+<p class="result-box">可以確認是否有不明的登入或失敗嘗試。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>看到大量失敗：同一來源連續 5 次失敗會鎖 5 分鐘；如非本人操作，請立即變更密碼。</li></ul></div>
+</section>
+<nav class="chapter-end-nav"><a href="new-machine.html">← 自身設定同步與新機器還原</a><a href="index.html">BC 手冊目錄 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 13 章 帳號</footer></body></html>

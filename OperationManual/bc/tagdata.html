@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Tag 設定與歷史值存在 DG 的資料庫裡，和產品備份分開，用資料庫本身的方式做完整／差異備份：DG 內建 TimescaleDB 用 pgBackRest；InfluxDB 由 DG 一天一天讀出、在存放位置合併成完整。排程、保留與還原都獨立。"><title>TagData 資料庫｜備份中心操作手冊</title><link rel="stylesheet" href="../assets/manual.css"><script src="../assets/manual.js" defer></script><meta name="doc-systems" content="備份中心 0.1.0"><script src="../../assets/doc-version.js" defer></script></head>
+<body><a class="skip-link" href="#main">跳至主要內容</a>
+
+<header class="topbar"><a class="brand" href="../index.html" aria-label="回到 VisoLink 操作手冊首頁"><img src="../../logos/D_Logo.svg" alt="VisoLink"><span class="brand-label">備份中心操作手冊</span></a><nav class="top-actions" aria-label="主要導覽"><a class="top-link" href="index.html">BC 手冊目錄</a><a class="top-link" href="restore.html">上一章</a><a class="top-link" href="hosts.html">下一章</a><a class="top-link" href="../index.html">手冊首頁</a></nav></header>
+
+<div class="manual-shell"><aside class="sidebar"><p class="sidebar-title">CHAPTER 08</p><nav class="manual-nav" aria-label="本章功能"><a href="#bc-tagdata-timescale-backup">8.1 TimescaleDB 備份</a><a href="#bc-tagdata-timescale-schedule">8.2 TimescaleDB 排程</a><a href="#bc-tagdata-timescale-restore">8.3 TimescaleDB 還原</a><a href="#bc-tagdata-influx-init">8.4 InfluxDB 初始化</a><a href="#bc-tagdata-influx-schedule">8.5 InfluxDB 排程</a><a href="#bc-tagdata-influx-restore">8.6 InfluxDB 還原</a></nav></aside>
+<main class="manual-content" id="main"><header class="manual-header"><span class="eyebrow">BackupCenter Manual · CHAPTER 08</span><h1>TagData 資料庫</h1><p>Tag 設定與歷史值存在 DG 的資料庫裡，和產品備份分開，用資料庫本身的方式做完整／差異備份：DG 內建 TimescaleDB 用 pgBackRest；InfluxDB 由 DG 一天一天讀出、在存放位置合併成完整。排程、保留與還原都獨立。</p></header>
+<section class="manual-function" id="bc-tagdata-timescale-backup"><span class="function-number">8.1</span><h2>DG 內建 TimescaleDB：立即備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>TagData 資料庫 ›「DG 內建 TimescaleDB」› 選 DG ›「概況」›「立即備份」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；已登記 DG</strong></div></div>
+<ol class="steps"><li>在左邊「資料庫」清單選一台 DG（每台 DG 一列，資料來自受管主機）。</li><li>「概況」顯示版本、大小、本機暫存區、最後完整、最後差異、存放位置。</li><li>按「立即備份」，「方式」選「完整」（整個資料庫）或「差異」（依附最近一次完整，只含之後的變動；還沒有完整時會改做完整）。</li><li>選「存放位置」，按「開始備份」。</li></ol>
+<p class="result-box">完成後在「備份點」分頁看到新的備份點。</p>
+<p class="note">DG 先把備份寫在自己機器上的暫存區，再經備份中心送到存放位置。一台 DG 的 TagData 只用一個存放位置，完整與差異要在同一個位置才接得上；換到別的位置後，之後的差異會改做完整。手動的 TagData 備份不受排程保留影響，需要自行刪除。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>清單沒有 DG：先到「受管主機」登記 DG（第 9 章）。</li><li>顯示無法使用：DG 的資料庫沒有掛備份區，或 DG 連不到。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-tagdata-timescale-schedule"><span class="function-number">8.2</span><h2>DG 內建 TimescaleDB：排程與保留</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>TagData 資料庫 › 選 DG ›「排程」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>新增 DG 時預設兩個排程：每週日 02:00 完整（保留 2 套）、每天 03:00 差異。</li><li>要調整時按「編輯」，或按「新增排程」：填名稱、狀態、方式（完整／差異）、頻率；完整排程選存放位置與保留套數，差異跟著所依附的完整。</li><li>按「儲存」；按「立即執行」可馬上跑一次。</li></ol>
+<p class="result-box">依排程自動備份；保留以完整為單位，刪除一套完整會連同依附它的差異一起刪除。</p>
+</section>
+<section class="manual-function" id="bc-tagdata-timescale-restore"><span class="function-number">8.3</span><h2>DG 內建 TimescaleDB：還原</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>TagData 資料庫 › 選 DG ›「概況」›「還原」，或「備份點」各列「還原」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；需要輸入備份密碼</strong></div><div class="meta-item"><span>影響</span><strong>整個 DG 資料庫退回備份點；還原期間所有受管主機切到維護中</strong></div></div>
+<ol class="steps"><li>按「還原」，選「備份點」；選差異時會用它依附的完整再套上這個差異。</li><li>閱讀說明：Tag 設定、保存分類與歷史值一起回到當時，之後的資料不會保留；DG 資料庫會重新啟動。</li><li>確認維護中清單每台主機都連得上，輸入備份密碼，按「開始還原」。</li></ol>
+<p class="result-box">完成後主機自動切回原本的模式。</p>
+<p class="warning">還原失敗時 DG 維持維護中，畫面顯示「DG 資料庫無法使用，請再還原一次」。版本不同、資料庫密碼不同、暫存區空間不足時，DG 會拒絕並說明原因，資料庫不會被動到。</p>
+<p class="note">換機時先還原 DG 產品備份，再還原 TagData；DG 必須用安裝設定包安裝（資料庫密碼要相同）。</p>
+</section>
+<section class="manual-function" id="bc-tagdata-influx-init"><span class="function-number">8.4</span><h2>InfluxDB：備份初始化與立即備份</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>TagData 資料庫 ›「InfluxDB（保存目的端）」› 選實體位置</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；DG 已設定 InfluxDB 保存目的端</strong></div></div>
+<ol class="steps"><li>在 DG 的歷史保存設定新增 InfluxDB 目的端後，這裡會一個實體位置一列（同一網址、bucket 或資料庫＋保留原則、measurement 算一個位置）。</li><li>選位置，「概況」顯示網址、組織、資料庫、使用它的目的端、最近完整與差異、帳號權限。</li><li>第一次使用按「開始初始化」：從 InfluxDB 讀全部歷史，只在允許時段內分好幾個晚上做完，畫面顯示第幾天／共幾天。</li><li>初始化完成後可按「立即差異」（讀最近幾天，含回補 3 天）或「立即完整」（在存放位置合併上一套完整與這週的差異，不讀取 InfluxDB）。</li></ol>
+<p class="result-box">「備份點」分頁出現完整與差異備份點，保留最近 7 天。</p>
+<div class="note-box"><strong>失敗時先查</strong><ul><li>「開始初始化」不能按：InfluxDB 帳號沒有讀取權限。</li><li>清單是空的：DG 還沒有 InfluxDB 保存目的端，或 DG 連不到。</li></ul></div>
+</section>
+<section class="manual-function" id="bc-tagdata-influx-schedule"><span class="function-number">8.5</span><h2>InfluxDB：排程</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>InfluxDB › 選位置 ›「排程」›「新增 InfluxDB 排程」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入</strong></div></div>
+<ol class="steps"><li>填名稱、選實體位置、方式（完整或差異）、頻率。</li><li>差異要設定「允許時段」：只在這段時間讀取 InfluxDB；完整在存放位置合併，不受允許時段限制。</li><li>選存放位置與保留天數，按「儲存」。</li></ol>
+<p class="result-box">預設每天差異、每週在存放位置合併完整；依 InfluxDB 負載暫停讓路。</p>
+</section>
+<section class="manual-function" id="bc-tagdata-influx-restore"><span class="function-number">8.6</span><h2>InfluxDB：還原</h2>
+<div class="function-meta" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div class="meta-item"><span>功能位置</span><strong>InfluxDB › 選位置 ›「還原」，或「備份點」各列「還原」</strong></div><div class="meta-item"><span>所需權限與前置條件</span><strong>已登入；需要輸入備份密碼</strong></div><div class="meta-item"><span>影響</span><strong>這個 measurement 在備份點之後的資料會被刪除後重寫；所有受管主機切到維護中</strong></div></div>
+<ol class="steps"><li>選備份點；「還原範圍」選「全部」（換機、整個 InfluxDB 重建）或「從某天起」（只處理這天以後）。</li><li>看「還原前檢查」：連線與權限、欄位型別、保存期限、其他保留原則、估計空間；有錯誤不能開始，警告要勾選確認。</li><li>確認其他讀寫這個 InfluxDB 的系統已經停止並勾選，輸入備份密碼，按「開始還原」。</li></ol>
+<p class="result-box">一天一天寫回並核對點數，對不上就整天重寫（最多 3 次）；畫面顯示第幾天／共幾天與預估剩餘時間。</p>
+<p class="warning">中斷或失敗時 DG 維持維護中，畫面會寫出中斷在哪一天，請用「從這天起」再還原一次。還原開始前已進 DG 佇列的資料、維護中 Agent 暫存的資料，切回運作中後仍會寫入。</p>
+</section>
+<nav class="chapter-end-nav"><a href="restore.html">← 還原</a><a href="hosts.html">受管主機 →</a></nav></main></div>
+<footer class="page-footer">VisoLink 備份中心操作手冊 · 第 8 章 TagData 資料庫</footer></body></html>
